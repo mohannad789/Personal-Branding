@@ -8,13 +8,13 @@ Astro-powered personal brand site: shared layout, design tokens, a polished **ho
 - [@astrojs/vercel](https://docs.astro.build/en/guides/deploy/vercel/) adapter
 - Global styles in `src/styles/global.css`; copy and navigation data in `src/content/home.ts` and `src/navigation.ts`
 
-## Typography (Satoshi)
+## Typography (Satoshi + Fraunces)
 
 **Satoshi** is loaded from [Fontshare](https://www.fontshare.com/fonts/satoshi) in [`src/layouts/BaseLayout.astro`](src/layouts/BaseLayout.astro) (no font binaries in this repo). Follow Fontshare’s license for your use case.
 
-**Using your own font files instead:** add `.woff2` (and optional `.woff`) under `public/fonts/`, remove or replace the Fontshare `<link>`, and add `@font-face` rules in `src/styles/global.css` pointing at `/fonts/YourFont.woff2`. You can drag files into the Cursor project or paste a download link in chat; if you only describe a font name, I can only use a public CDN or Google Fonts where licensing allows.
+**Accent serif:** **Fraunces** (Google Fonts, open license) is used for headings and labels via `--font-accent` in `src/styles/global.css`.
 
-**Editor’s Note (accent serif):** [Editor’s Note](https://www.myfonts.com/collections/editors-note-font-jen-wagner) is a **commercial** typeface — there is no legal public CDN like Satoshi. The site uses `--font-accent` with `"Editor's Note"` first, then **Fraunces** (Google Fonts) as a free editorial stand-in. When you buy a webfont kit, add the `.woff2` files to `public/fonts/`, uncomment and edit the `@font-face` rules in [`src/styles/editor-note.css`](src/styles/editor-note.css), and set `font-family` in those rules to **exactly** the name your kit uses (check the vendor’s `stylesheet.css`).
+**Using your own font files instead:** add `.woff2` under `public/fonts/`, add `@font-face` in `src/styles/global.css`, and point `--font-accent` or `--font-sans` at that family.
 
 ## Local development
 
