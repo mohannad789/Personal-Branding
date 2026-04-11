@@ -1,0 +1,38 @@
+---
+import { showcase } from "../../content/showcase";
+---
+
+<section class="sc sc-social showcase-reveal" id="showcase-social" aria-labelledby="sc-social-h">
+  <div class="sc-inner">
+    <p class="eyebrow">Template · Quote wall</p>
+    <h2 id="sc-social-h" class="sc-title">{showcase.social.title}</h2>
+    <p class="sc-lead">{showcase.social.lead}</p>
+
+    <figure class="sc-pull">
+      <blockquote class="sc-pull-quote">
+        {showcase.social.quote}
+      </blockquote>
+      <figcaption class="sc-pull-cap">{showcase.social.attribution}</figcaption>
+    </figure>
+
+    <div class="sc-mini-grid">
+      {
+        showcase.social.cards.map((c) => (
+          <figure class="sc-mini-card">
+            <blockquote class="sc-mini-quote">{c.quote}</blockquote>
+            <figcaption>
+              <span class="sc-mini-who">{c.who}</span>
+              <span class="sc-mini-role">{c.role}</span>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+
+    <div class="sc-logo-strip" aria-label="Example logos">
+      {showcase.social.logos.map((name) => (
+        <span class="sc-logo-pill">{name}</span>
+      ))}
+    </div>
+  </div>
+</section>

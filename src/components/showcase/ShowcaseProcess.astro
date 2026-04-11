@@ -1,0 +1,28 @@
+---
+import { showcase } from "../../content/showcase";
+---
+
+<section class="sc sc-process showcase-reveal" id="showcase-process" aria-labelledby="sc-process-h">
+  <div class="sc-inner">
+    <p class="eyebrow">Template · Horizontal process</p>
+    <h2 id="sc-process-h" class="sc-title">{showcase.process.title}</h2>
+    <p class="sc-lead">{showcase.process.lead}</p>
+
+    <div class="sc-timeline">
+      <div class="sc-timeline-rail" aria-hidden="true">
+        <div class="sc-timeline-fill" />
+      </div>
+      <ol class="sc-timeline-steps">
+        {
+          showcase.process.steps.map((st) => (
+            <li class="sc-timeline-step">
+              <span class="sc-timeline-n">{st.n}</span>
+              <span class="sc-timeline-title">{st.title}</span>
+              <p class="sc-timeline-text">{st.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
