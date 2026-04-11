@@ -8,6 +8,12 @@ Astro-powered personal brand site: shared layout, design tokens, a polished **ho
 - [@astrojs/vercel](https://docs.astro.build/en/guides/deploy/vercel/) adapter
 - Global styles in `src/styles/global.css`; copy and navigation data in `src/content/home.ts` and `src/navigation.ts`
 
+## Typography (Satoshi)
+
+**Satoshi** is loaded from [Fontshare](https://www.fontshare.com/fonts/satoshi) in [`src/layouts/BaseLayout.astro`](src/layouts/BaseLayout.astro) (no font binaries in this repo). Follow Fontshare’s license for your use case.
+
+**Using your own font files instead:** add `.woff2` (and optional `.woff`) under `public/fonts/`, remove or replace the Fontshare `<link>`, and add `@font-face` rules in `src/styles/global.css` pointing at `/fonts/YourFont.woff2`. You can drag files into the Cursor project or paste a download link in chat; if you only describe a font name, I can only use a public CDN or Google Fonts where licensing allows.
+
 ## Local development
 
 ```bash
