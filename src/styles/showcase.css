@@ -11,7 +11,7 @@
 }
 
 .sc-title {
-  font-family: var(--font-accent);
+  font-family: var(--font-sans);
   font-size: clamp(1.65rem, 3.5vw, 2.35rem);
   font-weight: 600;
   letter-spacing: -0.03em;
@@ -536,7 +536,7 @@
 }
 
 .sc-bento-cell-title {
-  font-family: var(--font-accent);
+  font-family: var(--font-sans);
   font-size: 1.25rem;
   margin: 0 0 0.5rem;
   font-weight: 600;

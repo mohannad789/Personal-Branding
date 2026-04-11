@@ -12,7 +12,7 @@ Astro-powered personal brand site: shared layout, design tokens, a polished **ho
 
 **Satoshi** is loaded from [Fontshare](https://www.fontshare.com/fonts/satoshi) in [`src/layouts/BaseLayout.astro`](src/layouts/BaseLayout.astro) (no font binaries in this repo). Follow Fontshare’s license for your use case.
 
-**Accent serif:** **Fraunces** (Google Fonts, open license) is used for headings and labels via `--font-accent` in `src/styles/global.css`.
+**Accent serif:** **Fraunces** (Google Fonts, open license) is loaded as `--font-accent` for occasional editorial touches (e.g. hero tagline, large pull-quote). **All titles and headings use Satoshi** (`--font-sans`). Add the utility class `font-accent` on a specific element when you want Fraunces in copy.
 
 **Using your own font files instead:** add `.woff2` under `public/fonts/`, add `@font-face` in `src/styles/global.css`, and point `--font-accent` or `--font-sans` at that family.
 
