@@ -1,0 +1,22 @@
+/*
+ * Editor’s Note — commercial font (Jen Wagner Co., Fontspring / MyFonts / etc.).
+ * After you purchase a webfont kit, add the .woff2 files to public/fonts/ and
+ * uncomment + adjust the @font-face blocks so font-family matches your kit’s CSS
+ * (often "Editor's Note" or "Editors Note").
+ *
+@font-face {
+  font-family: "Editor's Note";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/editors-note-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Editor's Note";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/editors-note-semibold.woff2") format("woff2");
+}
+*/
