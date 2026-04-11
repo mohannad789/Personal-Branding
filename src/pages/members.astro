@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../content/home";
+---
+
+<BaseLayout
+  title="Members"
+  description={`Member area for ${site.name} — coming soon.`}
+  mainClass="main--narrow"
+>
+  <section class="placeholder-page" aria-labelledby="members-heading">
+    <h1 id="members-heading">Members</h1>
+    <p class="lede">
+      Login, protected lessons, and billing will connect here when you add auth (e.g. Clerk,
+      Supabase) and a database. Deploy stays on Vercel; upgrade from static output when you need
+      server routes.
+    </p>
+    <p class="prose">
+      <a class="card-link" href="/">← Back to home</a>
+    </p>
+  </section>
+</BaseLayout>

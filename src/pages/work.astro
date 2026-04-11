@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../content/home";
+---
+
+<BaseLayout title="Work" description={`Portfolio and case studies for ${site.name}.`} mainClass="main--narrow">
+  <section class="placeholder-page" aria-labelledby="work-heading">
+    <h1 id="work-heading">Work</h1>
+    <p class="lede">
+      Case studies and project deep-dives will live here. Highlights are previewed on the
+      <a href="/#work">home page</a>.
+    </p>
+    <p class="prose">
+      <a class="card-link" href="/">← Back to home</a>
+    </p>
+  </section>
+</BaseLayout>

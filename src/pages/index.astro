@@ -1,0 +1,68 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site, home } from "../content/home";
+
+const title = "Personal brand";
+---
+
+<BaseLayout title={title} description={site.defaultDescription}>
+  <section class="hero">
+    <p class="eyebrow">{home.eyebrow}</p>
+    <h1>
+      {home.headline}
+      <span class="accent">{home.headlineAccent}</span>.
+    </h1>
+    <p class="lede">{home.lede}</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/contact">Get in touch</a>
+      <a class="btn btn-ghost" href="/work">See what I do</a>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <h2>About</h2>
+    <div class="prose">
+      {home.about.paragraphs.map((p) => <p>{p}</p>)}
+    </div>
+    <p class="prose" style="margin-top: 1rem">
+      <a class="card-link" href="/about">Full about page →</a>
+    </p>
+  </section>
+
+  <section id="work" class="section section-alt">
+    <h2>{home.work.title}</h2>
+    <ul class="card-grid">
+      {
+        home.work.items.map((item) => (
+          <li class="card">
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+            <a href={item.href} class="card-link">
+              {item.linkLabel}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section id="contact" class="section">
+    <h2>Contact</h2>
+    <p class="contact-intro">{home.contact.intro}</p>
+    <ul class="contact-list">
+      {
+        home.contact.channels.map((c) => (
+          <li>
+            <span class="label">{c.label}</span>
+            <a href={c.href} rel="noopener noreferrer" target={c.href.startsWith("http") ? "_blank" : undefined}>
+              {c.text}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="prose" style="margin-top: 1rem">
+      <a class="card-link" href="/contact">Contact page →</a>
+    </p>
+  </section>
+</BaseLayout>
