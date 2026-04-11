@@ -12,6 +12,7 @@
   --header-bg: rgba(15, 17, 20, 0.78);
   --glow-a: rgba(94, 164, 252, 0.16);
   --glow-b: rgba(59, 130, 246, 0.09);
+  --chart-line: #a5b4fc;
   --radius: 12px;
   --font-sans: "Satoshi", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-accent: "Fraunces", Georgia, "Times New Roman", serif;
@@ -33,6 +34,7 @@
   --header-bg: rgba(255, 255, 255, 0.82);
   --glow-a: rgba(37, 99, 235, 0.11);
   --glow-b: rgba(59, 130, 246, 0.07);
+  --chart-line: #6366f1;
   --radius: 12px;
   --font-sans: "Satoshi", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-accent: "Fraunces", Georgia, "Times New Roman", serif;
@@ -449,6 +451,101 @@ main.main--narrow {
 
 .placeholder-page .lede {
   margin-bottom: 1.5rem;
+}
+
+/* --- Motion prototypes (SVG + CSS; optional tiny JS) --- */
+.motion-section .motion-intro {
+  max-width: 62ch;
+}
+
+.motion-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+}
+
+.motion-card {
+  margin: 0;
+  padding: 1.25rem 1.35rem 1.1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+}
+
+:root[data-theme="light"] .motion-card {
+  box-shadow: 0 8px 24px rgba(15, 20, 30, 0.06);
+}
+
+.motion-card-caption {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin: 0 0 0.75rem;
+  line-height: 1.35;
+}
+
+.motion-svg-wrap {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.motion-svg-wrap svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+.funnel-path {
+  transform-origin: center;
+  animation: funnel-breathe 5.5s ease-in-out infinite;
+}
+
+.funnel-glow {
+  stroke: rgba(255, 255, 255, 0.4);
+}
+
+:root[data-theme="light"] .funnel-glow {
+  stroke: rgba(15, 20, 30, 0.16);
+}
+
+.funnel-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  padding: 0 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.spark-line {
+  stroke: var(--chart-line);
+}
+
+.spark-axis {
+  stroke: var(--border);
+  stroke-width: 1;
+  stroke-dasharray: 4 6;
+}
+
+@keyframes funnel-breathe {
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .funnel-path {
+    animation: none;
+  }
 }
 
 @media (max-width: 640px) {

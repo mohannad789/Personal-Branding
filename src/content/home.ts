@@ -13,6 +13,13 @@ export const home = {
     "I help teams ship thoughtful products and clear stories. This site is the home for my work, ideas, and how to reach me.",
   /** Shown in Fraunces italic so the accent serif is easy to spot (swap for your own line). */
   pullQuote: "Small steps, clear narrative, room to grow.",
+  motion: {
+    title: "Charts in the browser (no Lottie)",
+    intro:
+      "Your references look like real analytics UIs (funnel + time series). Below are lightweight SVG prototypes: CSS motion on the funnel, SVG stroke animation on the line. Same techniques scale to your real data later (often with a small chart helper or hand-rolled SVG).",
+    funnelCaption: "Funnel-style flow — gradient ribbon with a subtle pulse (CSS only).",
+    sparkCaption: "Area + line — path “draws” once on load (SVG + a few lines of JS).",
+  },
   about: {
     paragraphs: [
       "Replace this paragraph with your positioning: who you serve, what you care about, and the outcomes you drive. Keep it tight — two or three sentences is enough for a first impression.",

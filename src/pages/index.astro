@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import FunnelDemo from "../components/FunnelDemo.astro";
+import SparklineDemo from "../components/SparklineDemo.astro";
 import { site, home } from "../content/home";
 
 const title = "Personal brand";
@@ -17,6 +19,21 @@ const title = "Personal brand";
     <div class="hero-actions">
       <a class="btn btn-primary" href="/contact">Get in touch</a>
       <a class="btn btn-ghost" href="/work">See what I do</a>
+    </div>
+  </section>
+
+  <section id="motion" class="section section-alt motion-section" aria-labelledby="motion-heading">
+    <h2 id="motion-heading">{home.motion.title}</h2>
+    <p class="lede motion-intro">{home.motion.intro}</p>
+    <div class="motion-grid">
+      <figure class="motion-card">
+        <figcaption class="motion-card-caption">{home.motion.funnelCaption}</figcaption>
+        <FunnelDemo />
+      </figure>
+      <figure class="motion-card">
+        <figcaption class="motion-card-caption">{home.motion.sparkCaption}</figcaption>
+        <SparklineDemo />
+      </figure>
     </div>
   </section>
 
