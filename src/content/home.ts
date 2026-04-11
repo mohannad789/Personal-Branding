@@ -11,6 +11,8 @@ export const home = {
   headlineAccent: site.name,
   lede:
     "I help teams ship thoughtful products and clear stories. This site is the home for my work, ideas, and how to reach me.",
+  /** Shown in Fraunces italic so the accent serif is easy to spot (swap for your own line). */
+  pullQuote: "Small steps, clear narrative, room to grow.",
   about: {
     paragraphs: [
       "Replace this paragraph with your positioning: who you serve, what you care about, and the outcomes you drive. Keep it tight — two or three sentences is enough for a first impression.",
