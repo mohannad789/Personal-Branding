@@ -1,10 +1,10 @@
 ---
-/** Smooth area chart — line draw via stroke-dashoffset (no Lottie). */
+/** Area chart: stroke draw + fill fade + moving marker along path (no Lottie). */
 ---
 
 <div class="motion-svg-wrap motion-svg-wrap--spark" aria-hidden="true">
   <svg viewBox="0 0 400 100" class="spark-svg" role="img">
-    <title>Performance-style area chart (decorative)</title>
+    <title>Area chart prototype (decorative)</title>
     <defs>
       <linearGradient id="spark-fill" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#818cf8" stop-opacity="0.38" />
@@ -22,32 +22,81 @@
       id="spark-demo-line"
       class="spark-line"
       fill="none"
-      stroke-width="2"
+      stroke-width="2.25"
       stroke-linecap="round"
       stroke-linejoin="round"
       d="M0,58 C40,72 60,28 100,38 C140,48 160,22 200,32 C240,42 260,18 300,28 C340,38 360,12 400,22"
     />
+    <circle id="spark-dot" class="spark-dot" r="4.5" opacity="0" />
   </svg>
 </div>
 
 <script is:inline>
   (function () {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     var line = document.getElementById("spark-demo-line");
     var area = document.getElementById("spark-demo-area");
-    if (!line) return;
+    var dot = document.getElementById("spark-dot");
+    if (!line || !dot) return;
+
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function placeDot(t) {
+      var len = line.getTotalLength();
+      var pt = line.getPointAtLength(t * len);
+      dot.setAttribute("cx", pt.x);
+      dot.setAttribute("cy", pt.y);
+    }
+
+    if (reduce) {
+      line.style.strokeDasharray = "none";
+      line.style.strokeDashoffset = "0";
+      if (area) area.style.opacity = "1";
+      placeDot(1);
+      dot.setAttribute("opacity", "0.95");
+      return;
+    }
+
     var len = line.getTotalLength();
     line.style.strokeDasharray = String(len);
     line.style.strokeDashoffset = String(len);
     if (area) area.style.opacity = "0";
+    placeDot(0);
+
     requestAnimationFrame(function () {
       line.style.transition =
-        "stroke-dashoffset 1.6s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.3s ease";
+        "stroke-dashoffset 1.55s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.3s ease";
       line.style.strokeDashoffset = "0";
       if (area) {
-        area.style.transition = "opacity 1s ease 0.35s";
+        area.style.transition = "opacity 1s ease 0.32s";
         area.style.opacity = "1";
       }
     });
+
+    var loopStart = null;
+    var markerStarted = false;
+    function startMarkerLoop() {
+      if (markerStarted) return;
+      markerStarted = true;
+      dot.setAttribute("opacity", "1");
+      loopStart = performance.now();
+      function tick(now) {
+        var dur = 4200;
+        var u = ((now - loopStart) % dur) / dur;
+        placeDot(u);
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    function onLineDone(e) {
+      if (e.propertyName !== "stroke-dashoffset") return;
+      line.removeEventListener("transitionend", onLineDone);
+      startMarkerLoop();
+    }
+    line.addEventListener("transitionend", onLineDone);
+    setTimeout(function () {
+      if (markerStarted) return;
+      line.removeEventListener("transitionend", onLineDone);
+      startMarkerLoop();
+    }, 2200);
   })();
 </script>

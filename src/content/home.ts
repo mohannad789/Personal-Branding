@@ -16,9 +16,20 @@ export const home = {
   motion: {
     title: "Charts in the browser (no Lottie)",
     intro:
-      "Your references look like real analytics UIs (funnel + time series). Below are lightweight SVG prototypes: CSS motion on the funnel, SVG stroke animation on the line. Same techniques scale to your real data later (often with a small chart helper or hand-rolled SVG).",
-    funnelCaption: "Funnel-style flow — gradient ribbon with a subtle pulse (CSS only).",
-    sparkCaption: "Area + line — path “draws” once on load (SVG + a few lines of JS).",
+      "Same idea as real analytics UIs: one chart per block can carry the motion while copy and images stay static. Below, each figure lists exactly which techniques run on that graphic.",
+    funnelCaption:
+      "Three-stage funnel — separate shapes with shared edges (cleaner than one blended blob).",
+    funnelAnims: [
+      "Staggered pulse: each stage animates opacity + brightness on a different delay (CSS @keyframes).",
+      "Hairline dividers between stages (static SVG strokes).",
+      "Pill labels are plain SVG shapes + text (easy to swap for your real numbers).",
+    ],
+    sparkCaption: "Area + line — same path drives draw, fill, and a moving marker.",
+    sparkAnims: [
+      "Line draw: stroke-dasharray / stroke-dashoffset matched to path length (tiny bit of JS to measure the path).",
+      "Fill fade: area path opacity transitions after the line starts moving.",
+      "Moving marker: circle position from getPointAtLength on a loop (requestAnimationFrame).",
+    ],
   },
   about: {
     paragraphs: [

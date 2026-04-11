@@ -29,10 +29,22 @@ const title = "Personal brand";
       <figure class="motion-card">
         <figcaption class="motion-card-caption">{home.motion.funnelCaption}</figcaption>
         <FunnelDemo />
+        <p class="motion-anim-heading">Animations on this chart</p>
+        <ul class="motion-anim-list">
+          {home.motion.funnelAnims.map((line) => (
+            <li>{line}</li>
+          ))}
+        </ul>
       </figure>
       <figure class="motion-card">
         <figcaption class="motion-card-caption">{home.motion.sparkCaption}</figcaption>
         <SparklineDemo />
+        <p class="motion-anim-heading">Animations on this chart</p>
+        <ul class="motion-anim-list">
+          {home.motion.sparkAnims.map((line) => (
+            <li>{line}</li>
+          ))}
+        </ul>
       </figure>
     </div>
   </section>

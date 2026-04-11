@@ -1,39 +1,39 @@
 ---
-/** SaaS-style funnel ribbon — SVG + CSS (no Lottie). */
-const gid = "funnel-grad";
+/** Three-stage conversion ribbon — aligned segments + pills (no Lottie). */
 ---
 
 <div class="motion-svg-wrap motion-svg-wrap--funnel" aria-hidden="true">
-  <svg viewBox="0 0 640 120" class="funnel-svg" role="img">
-    <title>Funnel-style flow diagram (decorative)</title>
-    <defs>
-      <linearGradient id={gid} x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#6d28d9" />
-        <stop offset="48%" stop-color="#2563eb" />
-        <stop offset="100%" stop-color="#14b8a6" />
-      </linearGradient>
-    </defs>
+  <svg viewBox="0 0 560 92" class="funnel-svg funnel-svg--ribbon" role="img">
+    <title>Three-stage funnel ribbon (decorative)</title>
     <path
-      class="funnel-path"
-      fill={`url(#${gid})`}
-      d="M 0 28
-         C 120 28, 200 42, 320 52
-         C 440 62, 520 68, 638 76
-         L 640 88
-         C 520 82, 440 78, 320 72
-         C 200 66, 120 58, 0 52
-         Z"
+      class="funnel-seg funnel-seg--1"
+      d="M 10 18 L 198 20 L 184 64 L 10 66 Z"
+      fill="#6d28d9"
     />
     <path
-      class="funnel-glow"
-      fill="none"
-      stroke-width="1.2"
-      d="M 8 40 C 140 38, 220 50, 320 58 C 420 66, 520 72, 632 78"
+      class="funnel-seg funnel-seg--2"
+      d="M 198 20 L 348 26 L 334 58 L 184 64 Z"
+      fill="#2563eb"
     />
+    <path
+      class="funnel-seg funnel-seg--3"
+      d="M 348 26 L 548 31 L 548 55 L 334 58 Z"
+      fill="#0d9488"
+    />
+    <path class="funnel-divider" d="M 198 20 L 184 64" />
+    <path class="funnel-divider" d="M 348 26 L 334 58" />
+
+    <g class="funnel-pill" transform="translate(62, 36)">
+      <rect class="funnel-pill-bg" x="-44" y="-14" width="88" height="28" rx="14" />
+      <text class="funnel-pill-text" text-anchor="middle" x="0" y="5">1,979 · 100%</text>
+    </g>
+    <g class="funnel-pill" transform="translate(266, 38)">
+      <rect class="funnel-pill-bg" x="-40" y="-14" width="80" height="28" rx="14" />
+      <text class="funnel-pill-text" text-anchor="middle" x="0" y="5">273 · 14%</text>
+    </g>
+    <g class="funnel-pill" transform="translate(448, 40)">
+      <rect class="funnel-pill-bg" x="-34" y="-14" width="68" height="28" rx="14" />
+      <text class="funnel-pill-text" text-anchor="middle" x="0" y="5">5 · 0.3%</text>
+    </g>
   </svg>
-  <div class="funnel-labels">
-    <span>1,979</span>
-    <span>273</span>
-    <span>5</span>
-  </div>
 </div>

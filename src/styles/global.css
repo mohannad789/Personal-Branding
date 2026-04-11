@@ -491,6 +491,11 @@ main.main--narrow {
   overflow: hidden;
 }
 
+.motion-svg-wrap--funnel {
+  overflow: visible;
+  padding-bottom: 0.25rem;
+}
+
 .motion-svg-wrap svg {
   display: block;
   width: 100%;
@@ -498,32 +503,59 @@ main.main--narrow {
   vertical-align: middle;
 }
 
-.funnel-path {
+.funnel-seg {
+  transform-box: fill-box;
   transform-origin: center;
-  animation: funnel-breathe 5.5s ease-in-out infinite;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.28));
+  animation: funnel-seg-breathe 3.2s ease-in-out infinite;
 }
 
-.funnel-glow {
-  stroke: rgba(255, 255, 255, 0.4);
+.funnel-seg--1 {
+  animation-delay: 0s;
 }
 
-:root[data-theme="light"] .funnel-glow {
-  stroke: rgba(15, 20, 30, 0.16);
+.funnel-seg--2 {
+  animation-delay: 0.45s;
 }
 
-.funnel-labels {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 0.5rem;
-  padding: 0 0.25rem;
-  font-size: 0.75rem;
+.funnel-seg--3 {
+  animation-delay: 0.9s;
+}
+
+.funnel-divider {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.28);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+:root[data-theme="light"] .funnel-divider {
+  stroke: rgba(255, 255, 255, 0.5);
+}
+
+.funnel-pill-bg {
+  fill: rgba(255, 255, 255, 0.22);
+  stroke: rgba(255, 255, 255, 0.42);
+  stroke-width: 1;
+}
+
+.funnel-pill-text {
+  font-family: var(--font-sans);
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  fill: rgba(255, 255, 255, 0.96);
 }
 
 .spark-line {
   stroke: var(--chart-line);
+}
+
+.spark-dot {
+  fill: var(--bg-elevated);
+  stroke: var(--chart-line);
+  stroke-width: 2;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
 }
 
 .spark-axis {
@@ -532,18 +564,41 @@ main.main--narrow {
   stroke-dasharray: 4 6;
 }
 
-@keyframes funnel-breathe {
+.motion-anim-heading {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-dim);
+  margin: 1rem 0 0.35rem;
+}
+
+.motion-anim-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.motion-anim-list li {
+  margin: 0.2rem 0;
+}
+
+@keyframes funnel-seg-breathe {
   0%,
   100% {
-    opacity: 0.9;
+    opacity: 1;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.28)) brightness(1) saturate(1);
   }
   50% {
-    opacity: 1;
+    opacity: 0.94;
+    filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.32)) brightness(1.08) saturate(1.1);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .funnel-path {
+  .funnel-seg {
     animation: none;
   }
 }
