@@ -6,7 +6,7 @@ Astro-powered site: the **home** route is a long-form **landing** (copy in [`src
 
 - [Astro](https://astro.build/) (static output)
 - [@astrojs/vercel](https://docs.astro.build/en/guides/deploy/vercel/) adapter
-- Global styles in `src/styles/global.css`; copy and navigation data in `src/content/home.ts` and `src/navigation.ts`
+- Global styles in `src/styles/global.css`; site label in `src/content/home.ts` (`site.name`, `logoInitials`); full nav in `src/navigation.ts`
 
 ## Typography (Satoshi + Fraunces)
 
