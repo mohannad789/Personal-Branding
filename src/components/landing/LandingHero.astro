@@ -1,6 +1,7 @@
 ---
 import { landing } from "../../content/landing";
 import LandingIconCheck from "./LandingIconCheck.astro";
+import VizInboundChart from "./viz/VizInboundChart.astro";
 const h = landing.hero;
 ---
 
@@ -45,18 +46,8 @@ const h = landing.hero;
     </div>
 
     <div class="lp-hero-visual">
-      <div class="lp-hero-img-frame">
-        <img
-          src={landing.visuals.hero}
-          alt=""
-          width="960"
-          height="820"
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-          class="lp-hero-img"
-        />
-        <div class="lp-hero-img-overlay" aria-hidden="true"></div>
+      <div class="lp-hero-chart-frame">
+        <VizInboundChart />
       </div>
       <div class="lp-hero-stat-row">
         <div class="lp-hero-stat">

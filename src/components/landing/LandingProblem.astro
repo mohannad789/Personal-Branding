@@ -1,5 +1,6 @@
 ---
 import { landing } from "../../content/landing";
+import VizReputationBrand from "./viz/VizReputationBrand.astro";
 const s = landing.problem;
 const [first, second, ...rest] = s.paragraphs;
 ---
@@ -17,12 +18,17 @@ const [first, second, ...rest] = s.paragraphs;
       <p>"You're the best-kept secret in your industry. And that's not the compliment it sounds like."</p>
     </blockquote>
 
-    <div class="lp-two-col-prose">
-      <p class="lp-prose-lead">{first}</p>
-      <div class="lp-prose-stack">
-        <p>{second}</p>
-        {rest.map((p) => <p>{p}</p>)}
+    <div class="lp-problem-split">
+      <div class="lp-two-col-prose">
+        <p class="lp-prose-lead">{first}</p>
+        <div class="lp-prose-stack">
+          <p>{second}</p>
+          {rest.map((p) => <p>{p}</p>)}
+        </div>
       </div>
+      <aside class="lp-problem-aside" aria-label="Illustrative chart">
+        <VizReputationBrand />
+      </aside>
     </div>
   </div>
 </section>

@@ -1,0 +1,42 @@
+---
+/** Position value compounding over quarters — process / compound step. */
+---
+<div class="lp-viz lp-chart-compound" data-viz>
+  <div class="lp-viz-head">
+    <p class="lp-viz-kicker">After the build</p>
+    <p class="lp-viz-title">Market position value (illustrative)</p>
+    <p class="lp-viz-note">
+      Personal brands compound: each quarter refines perception; the asset appreciates like equity rather than resetting after a “campaign”.
+    </p>
+  </div>
+  <div class="lp-viz-surface lp-viz-surface--light" role="img" aria-label="Area chart climbing over four quarters">
+    <svg class="lp-viz-svg" viewBox="0 0 480 180" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <linearGradient id="lp-compound-fill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(37, 99, 235, 0.2)"></stop>
+          <stop offset="100%" stop-color="rgba(37, 99, 235, 0)"></stop>
+        </linearGradient>
+      </defs>
+      <g class="lp-viz-grid" stroke="var(--border)" stroke-width="1">
+        <line x1="44" y1="44" x2="440" y2="44"></line>
+        <line x1="44" y1="92" x2="440" y2="92"></line>
+        <line x1="44" y1="140" x2="440" y2="140"></line>
+      </g>
+      <text x="48" y="168" fill="var(--text-muted)" font-size="11" font-family="system-ui,sans-serif">Q1</text>
+      <text x="168" y="168" fill="var(--text-muted)" font-size="11" font-family="system-ui,sans-serif">Q2</text>
+      <text x="288" y="168" fill="var(--text-muted)" font-size="11" font-family="system-ui,sans-serif">Q3</text>
+      <text x="400" y="168" fill="var(--text-muted)" font-size="11" font-family="system-ui,sans-serif">Q4</text>
+      <path
+        class="lp-viz-area"
+        fill="url(#lp-compound-fill)"
+        d="M 48 148 L 140 130 L 232 96 L 324 62 L 416 38 L 416 148 L 48 148 Z"></path>
+      <path
+        class="lp-viz-line"
+        fill="none"
+        stroke="var(--accent)"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        d="M 48 148 L 140 130 L 232 96 L 324 62 L 416 38"></path>
+    </svg>
+  </div>
+</div>

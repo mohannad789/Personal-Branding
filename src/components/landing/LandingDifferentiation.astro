@@ -1,5 +1,6 @@
 ---
 import { landing } from "../../content/landing";
+import VizActivityVsOutcome from "./viz/VizActivityVsOutcome.astro";
 const s = landing.differentiation;
 ---
 
@@ -15,6 +16,9 @@ const s = landing.differentiation;
         <div class="lp-diff-card">
           <span class="lp-diff-card-label">What you won't get elsewhere</span>
           {s.paragraphs.slice(1).map((p) => <p>{p}</p>)}
+        </div>
+        <div class="lp-diff-viz-wrap">
+          <VizActivityVsOutcome />
         </div>
       </div>
     </div>

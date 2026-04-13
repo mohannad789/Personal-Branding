@@ -1,5 +1,6 @@
 ---
 import { landing } from "../../content/landing";
+import VizAuthorityStack from "./viz/VizAuthorityStack.astro";
 const s = landing.services;
 ---
 
@@ -11,6 +12,10 @@ const s = landing.services;
         <h2 id="lp-services-h" class="lp-editorial-h2">{s.title}</h2>
       </div>
       <p class="lp-services-intro-text">{s.intro}</p>
+    </div>
+
+    <div class="lp-services-viz-wrap">
+      <VizAuthorityStack />
     </div>
 
     <ol class="lp-services-list" role="list">

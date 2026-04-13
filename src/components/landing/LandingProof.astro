@@ -1,34 +1,64 @@
 ---
 import { landing } from "../../content/landing";
+
 const s = landing.proof;
+
+function initialsFromAttribution(attribution: string) {
+  return attribution
+    .split("·")
+    .map((p) => p.trim().charAt(0))
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+}
 ---
 
-<section class="lp-band lp-band--dim lp-proof" aria-labelledby="lp-proof-h">
+<section
+  class="lp-band lp-band--dim lp-proof"
+  id="testimonials"
+  aria-labelledby="lp-proof-h"
+>
   <div class="lp-container">
     <div class="lp-proof-header">
-      <span class="lp-rule-label">Client outcomes</span>
+      <span class="lp-rule-label">Testimonials</span>
       <h2 id="lp-proof-h" class="lp-editorial-h2">{s.title}</h2>
+      <p class="lp-proof-intro-callout">
+        <strong>Placeholder quotes</strong> — {s.intro} Each card includes an illustrative before/after bar
+        pair tied to the story (not real data). Replace quotes, labels, and numbers when you have real outcomes.
+      </p>
     </div>
 
     <div class="lp-testimonial-grid">
       {
         s.placeholderCards.map((card) => (
-          <figure class="lp-testimonial">
+          <figure class="lp-testimonial" data-viz>
             <div class="lp-testimonial-qmark" aria-hidden="true">&ldquo;</div>
             <blockquote class="lp-testimonial-quote">
-              <p>{card.quote.replace(/^"|"$/g, "")}</p>
+              <p>{card.quote}</p>
             </blockquote>
-            <figcaption class="lp-testimonial-fig">
-              <div class="lp-testimonial-avatar">
-                <img
-                  src={card.image}
-                  alt=""
-                  width="48"
-                  height="48"
-                  loading="lazy"
-                  decoding="async"
-                />
+            <div class="lp-mini-chart" aria-label={`${card.chart.label}: before ${card.chart.before} percent, after ${card.chart.after} percent`}>
+              <span class="lp-mini-chart-label">{card.chart.label}</span>
+              <div class="lp-mini-chart-rows">
+                <div class="lp-mini-row">
+                  <span class="lp-mini-tag">Before</span>
+                  <div class="lp-mini-track">
+                    <div class="lp-mini-fill lp-mini-fill--before" style={`--w: ${card.chart.before}%`} />
+                  </div>
+                  <span class="lp-mini-val">{card.chart.before}%</span>
+                </div>
+                <div class="lp-mini-row">
+                  <span class="lp-mini-tag">After</span>
+                  <div class="lp-mini-track">
+                    <div class="lp-mini-fill lp-mini-fill--after" style={`--w: ${card.chart.after}%`} />
+                  </div>
+                  <span class="lp-mini-val">{card.chart.after}%</span>
+                </div>
               </div>
+            </div>
+            <figcaption class="lp-testimonial-fig">
+              <span class="lp-testimonial-initials" aria-hidden="true">
+                {initialsFromAttribution(card.attribution)}
+              </span>
               <span class="lp-testimonial-by">{card.attribution}</span>
             </figcaption>
           </figure>
