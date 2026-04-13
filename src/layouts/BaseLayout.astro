@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import ThemeSwitch from "../components/ThemeSwitch.astro";
 import { mainNav } from "../navigation";
 import { site } from "../content/home";
 
@@ -7,9 +8,21 @@ interface Props {
   title: string;
   description?: string;
   mainClass?: string;
+  /** `landing` = logo + single CTA only (theme toggle moves to footer). */
+  navMode?: "full" | "landing";
+  ctaHref?: string;
+  ctaLabel?: string;
 }
 
-const { title, description = site.defaultDescription, mainClass } = Astro.props;
+const {
+  title,
+  description = site.defaultDescription,
+  mainClass,
+  navMode = "full",
+  ctaHref = "/contact",
+  ctaLabel = "Let's talk",
+} = Astro.props;
+
 const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
 const pageTitle = `${title} — ${site.name}`;
 ---
@@ -34,51 +47,50 @@ const pageTitle = `${title} — ${site.name}`;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <title>{pageTitle}</title>
-    <!-- Satoshi via Fontshare (free license on fontshare.com). Self-host: put .woff2 in public/fonts/ and use @font-face in global.css. -->
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
     <link
       href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,900&display=swap"
       rel="stylesheet"
     />
-    <!-- Accent serif: Fraunces (Google Fonts, OFL). -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&display=swap"
       rel="stylesheet"
     />
-    <!-- Analytics: add env-gated snippet in a future phase (e.g. Plausible, Fathom). -->
-    <!-- Forms: POST to a Vercel serverless route, Astro server endpoint, or a third-party form action URL. -->
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <nav class="nav" aria-label="Primary">
+      <nav class:list={["nav", navMode === "landing" && "nav--landing"]} aria-label="Primary">
         <a class="logo" href="/">{site.logoInitials}</a>
-        <div class="nav-menu">
-          <ul class="nav-links">
-            {
-              mainNav.map(({ href, label }) => {
-                const normalized = href === "/" ? "/" : href.replace(/\/$/, "");
-                const isCurrent =
-                  normalized === "/"
-                    ? pathname === "/"
-                    : pathname === normalized || pathname.startsWith(`${normalized}/`);
-                return (
-                  <li>
-                    <a href={href} aria-current={isCurrent ? "page" : undefined}>
-                      {label}
-                    </a>
-                  </li>
-                );
-              })
-            }
-          </ul>
-          <div class="theme-switch" role="group" aria-label="Color theme">
-            <button type="button" data-theme-pick="light">Light</button>
-            <button type="button" data-theme-pick="dark">Dark</button>
-          </div>
-        </div>
+        {
+          navMode === "landing" ? (
+            <a class="btn btn-primary nav-cta" href={ctaHref}>
+              {ctaLabel}
+            </a>
+          ) : (
+            <div class="nav-menu">
+              <ul class="nav-links">
+                {mainNav.map(({ href, label }) => {
+                  const normalized = href === "/" ? "/" : href.replace(/\/$/, "");
+                  const isCurrent =
+                    normalized === "/"
+                      ? pathname === "/"
+                      : pathname === normalized || pathname.startsWith(`${normalized}/`);
+                  return (
+                    <li>
+                      <a href={href} aria-current={isCurrent ? "page" : undefined}>
+                        {label}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+              <ThemeSwitch />
+            </div>
+          )
+        }
       </nav>
     </header>
 
@@ -90,12 +102,13 @@ const pageTitle = `${title} — ${site.name}`;
       <div class="footer-inner">
         <p>
           © {new Date().getFullYear()}
-          {site.name}. Built for personal branding.
+          {site.name}
         </p>
         <nav class="footer-legal" aria-label="Legal">
           <a href="/legal/privacy">Privacy</a>
           <a href="/legal/terms">Terms</a>
         </nav>
+        {navMode === "landing" && <ThemeSwitch />}
       </div>
     </footer>
     <script is:inline>

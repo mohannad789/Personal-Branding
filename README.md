@@ -1,6 +1,6 @@
 # Personal branding site
 
-Astro-powered personal brand site: shared layout, design tokens, a polished **home** page, and placeholder routes for future features. Deployed to **Vercel**.
+Astro-powered site: the **home** route is a long-form **landing** (copy in [`src/content/landing.ts`](src/content/landing.ts), layout in [`src/styles/landing.css`](src/styles/landing.css) + [`src/components/landing/`](src/components/landing/)) with **minimal nav** (logo + one CTA). Other routes still use the full header from [`src/navigation.ts`](src/navigation.ts). Deployed to **Vercel**.
 
 ## Stack
 

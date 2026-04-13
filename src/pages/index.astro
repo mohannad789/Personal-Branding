@@ -1,160 +1,33 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import FunnelDemo from "../components/FunnelDemo.astro";
-import SparklineDemo from "../components/SparklineDemo.astro";
-import ShowcaseMetrics from "../components/showcase/ShowcaseMetrics.astro";
-import ShowcaseSplit from "../components/showcase/ShowcaseSplit.astro";
-import ShowcaseSocial from "../components/showcase/ShowcaseSocial.astro";
-import ShowcaseProcess from "../components/showcase/ShowcaseProcess.astro";
-import ShowcaseBento from "../components/showcase/ShowcaseBento.astro";
-import { site, home } from "../content/home";
-import "../styles/showcase.css";
+import LandingHero from "../components/landing/LandingHero.astro";
+import LandingMirror from "../components/landing/LandingMirror.astro";
+import LandingIndictment from "../components/landing/LandingIndictment.astro";
+import LandingOffer from "../components/landing/LandingOffer.astro";
+import LandingAvatars from "../components/landing/LandingAvatars.astro";
+import LandingProof from "../components/landing/LandingProof.astro";
+import LandingAbout from "../components/landing/LandingAbout.astro";
+import LandingClose from "../components/landing/LandingClose.astro";
+import { landing } from "../content/landing";
+import "../styles/landing.css";
 
-const title = "Personal brand";
+const title = "Home";
 ---
 
-<BaseLayout title={title} description={site.defaultDescription}>
-  <section class="hero">
-    <p class="eyebrow">{home.eyebrow}</p>
-    <h1>
-      {home.headline}
-      <span class="accent">{home.headlineAccent}</span>.
-    </h1>
-    <p class="lede">{home.lede}</p>
-    <p class="hero-pull" aria-label="Tagline">{home.pullQuote}</p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="/contact">Get in touch</a>
-      <a class="btn btn-ghost" href="/work">See what I do</a>
-    </div>
-  </section>
-
-  <section id="motion" class="section section-alt motion-section" aria-labelledby="motion-heading">
-    <h2 id="motion-heading">{home.motion.title}</h2>
-    <p class="lede motion-intro">{home.motion.intro}</p>
-    <div class="motion-grid">
-      <figure class="motion-card">
-        <figcaption class="motion-card-caption">{home.motion.funnelCaption}</figcaption>
-        <FunnelDemo />
-        <p class="motion-anim-heading">Animations on this chart</p>
-        <ul class="motion-anim-list">
-          {home.motion.funnelAnims.map((line) => (
-            <li>{line}</li>
-          ))}
-        </ul>
-      </figure>
-      <figure class="motion-card">
-        <figcaption class="motion-card-caption">{home.motion.sparkCaption}</figcaption>
-        <SparklineDemo />
-        <p class="motion-anim-heading">Animations on this chart</p>
-        <ul class="motion-anim-list">
-          {home.motion.sparkAnims.map((line) => (
-            <li>{line}</li>
-          ))}
-        </ul>
-      </figure>
-    </div>
-  </section>
-
-  <ShowcaseMetrics />
-  <ShowcaseSplit />
-  <ShowcaseSocial />
-  <ShowcaseProcess />
-  <ShowcaseBento />
-
-  <section id="about" class="section">
-    <h2>About</h2>
-    <div class="prose">
-      {home.about.paragraphs.map((p) => <p>{p}</p>)}
-    </div>
-    <p class="prose" style="margin-top: 1rem">
-      <a class="card-link" href="/about">Full about page →</a>
-    </p>
-  </section>
-
-  <section id="work" class="section section-alt">
-    <h2>{home.work.title}</h2>
-    <ul class="card-grid">
-      {
-        home.work.items.map((item) => (
-          <li class="card">
-            <h3>{item.title}</h3>
-            <p>{item.description}</p>
-            <a href={item.href} class="card-link">
-              {item.linkLabel}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-
-  <section id="contact" class="section">
-    <h2>Contact</h2>
-    <p class="contact-intro">{home.contact.intro}</p>
-    <ul class="contact-list">
-      {
-        home.contact.channels.map((c) => (
-          <li>
-            <span class="label">{c.label}</span>
-            <a href={c.href} rel="noopener noreferrer" target={c.href.startsWith("http") ? "_blank" : undefined}>
-              {c.text}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-    <p class="prose" style="margin-top: 1rem">
-      <a class="card-link" href="/contact">Contact page →</a>
-    </p>
-  </section>
-
-  <script is:inline>
-    (function () {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        document.querySelectorAll("[data-countup]").forEach(function (el) {
-          var t = el.getAttribute("data-target") || "0";
-          var s = el.getAttribute("data-suffix") || "";
-          el.textContent = t + s;
-        });
-        document.querySelectorAll(".showcase-reveal").forEach(function (el) {
-          el.classList.add("is-visible");
-        });
-        return;
-      }
-      function easeOutCubic(t) {
-        return 1 - Math.pow(1 - t, 3);
-      }
-      function runCountups(section) {
-        section.querySelectorAll("[data-countup]").forEach(function (el) {
-          if (el.getAttribute("data-count-done")) return;
-          el.setAttribute("data-count-done", "1");
-          var target = parseFloat(el.getAttribute("data-target") || "0", 10);
-          var suffix = el.getAttribute("data-suffix") || "";
-          var start = performance.now();
-          var dur = 1150;
-          function tick(now) {
-            var u = Math.min(1, (now - start) / dur);
-            var v = Math.round(target * easeOutCubic(u));
-            el.textContent = v + suffix;
-            if (u < 1) requestAnimationFrame(tick);
-          }
-          requestAnimationFrame(tick);
-        });
-      }
-      var io = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (en) {
-            if (!en.isIntersecting) return;
-            en.target.classList.add("is-visible");
-            if (en.target.id === "showcase-metrics") runCountups(en.target);
-            io.unobserve(en.target);
-          });
-        },
-        { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
-      );
-      document.querySelectorAll(".showcase-reveal").forEach(function (el) {
-        io.observe(el);
-      });
-    })();
-  </script>
+<BaseLayout
+  title={title}
+  description={landing.metaDescription}
+  navMode="landing"
+  ctaHref="/contact"
+  ctaLabel="Let's talk"
+  mainClass="main--landing"
+>
+  <LandingHero />
+  <LandingMirror />
+  <LandingIndictment />
+  <LandingOffer />
+  <LandingAvatars />
+  <LandingProof />
+  <LandingAbout />
+  <LandingClose />
 </BaseLayout>

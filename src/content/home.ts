@@ -1,8 +1,8 @@
 export const site = {
-  name: "Your Name",
-  logoInitials: "YN",
+  name: "Clear Authority",
+  logoInitials: "CA",
   defaultDescription:
-    "Personal site — portfolio, writing, and contact.",
+    "Authority infrastructure for founders and operators. Dubai · DACH · global.",
 } as const;
 
 export const home = {
