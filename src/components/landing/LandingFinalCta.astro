@@ -1,0 +1,15 @@
+---
+import { landing } from "../../content/landing";
+const s = landing.finalCta;
+---
+
+<section class="lp-final lp-band lp-band--hero" aria-labelledby="lp-final-h">
+  <div class="lp-hero-inner lp-hero-inner--wide">
+    <h2 id="lp-final-h" class="lp-close-headline">{s.headline}</h2>
+    <p class="lp-hero-sub lp-hero-sub--final">{s.body}</p>
+    <div class="lp-hero-ctas">
+      <a class="btn btn-primary lp-close-btn" href={s.ctaHref}>{s.ctaLabel}</a>
+    </div>
+    <p class="lp-final-support">{s.supportingLine}</p>
+  </div>
+</section>

@@ -4,13 +4,14 @@ const h = landing.hero;
 ---
 
 <section class="lp-hero lp-band lp-band--hero" aria-labelledby="lp-hero-h">
-  <div class="lp-hero-inner">
-    <h1 id="lp-hero-h" class="lp-hero-headline">{h.headlineEn}</h1>
-    <p class="lp-hero-de" lang="de">{h.headlineDe}</p>
-    <p class="lp-hero-sub">{h.subEn}</p>
+  <div class="lp-hero-inner lp-hero-inner--wide">
+    <h1 id="lp-hero-h" class="lp-hero-headline">{h.headline}</h1>
+    <p class="lp-hero-sub lp-hero-sub--hero">{h.sub}</p>
+    <ul class="lp-advantages" role="list">
+      {h.advantages.map((line) => <li>{line}</li>)}
+    </ul>
     <div class="lp-hero-ctas">
-      <a class="btn btn-primary" href={h.ctaHref}>{h.ctaEn}</a>
-      <a class="btn btn-ghost lp-hero-cta-ghost" href={h.ctaHref} lang="de">{h.ctaDe}</a>
+      <a class="btn btn-primary" href={h.ctaHref}>{h.ctaLabel}</a>
     </div>
   </div>
 </section>

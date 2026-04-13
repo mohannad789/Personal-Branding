@@ -1,0 +1,15 @@
+---
+import { landing } from "../../content/landing";
+const s = landing.differentiation;
+---
+
+<section class="lp-band lp-band--paper" aria-labelledby="lp-diff-h">
+  <div class="lp-section-inner">
+    <h2 id="lp-diff-h" class="lp-section-title">{s.title}</h2>
+    <div class="lp-prose lp-prose--wide">
+      {s.paragraphs.map((p) => (
+        <p>{p}</p>
+      ))}
+    </div>
+  </div>
+</section>

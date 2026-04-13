@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { site } from "../../content/home";
+---
+
+<BaseLayout title="Imprint" description={`Imprint — ${site.name}.`} mainClass="main--narrow">
+  <section class="placeholder-page" aria-labelledby="imprint-heading">
+    <h1 id="imprint-heading">Imprint</h1>
+    <p class="lede">
+      Placeholder page. Add company details, registration, and representative as required for your
+      jurisdiction.
+    </p>
+    <p class="prose">
+      <a class="card-link" href="/">← Back to home</a>
+    </p>
+  </section>
+</BaseLayout>

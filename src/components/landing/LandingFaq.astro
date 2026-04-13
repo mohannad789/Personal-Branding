@@ -1,0 +1,18 @@
+---
+import { landing } from "../../content/landing";
+const s = landing.faq;
+---
+
+<section class="lp-band lp-band--dim lp-faq-section" aria-labelledby="lp-faq-h">
+  <div class="lp-section-inner lp-section-inner--wide">
+    <h2 id="lp-faq-h" class="lp-section-title">{s.title}</h2>
+    <div class="lp-faq-list">
+      {s.items.map((item) => (
+        <details class="lp-faq-item" name="landing-faq">
+          <summary class="lp-faq-q">{item.q}</summary>
+          <p class="lp-faq-a">{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

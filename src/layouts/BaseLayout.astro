@@ -12,6 +12,13 @@ interface Props {
   navMode?: "full" | "landing";
   ctaHref?: string;
   ctaLabel?: string;
+  /** When set (e.g. home landing), footer shows contact + imprint row. */
+  footerContact?: {
+    email: string;
+    phoneDisplay: string;
+    phoneTel: string;
+    location: string;
+  };
 }
 
 const {
@@ -21,6 +28,7 @@ const {
   navMode = "full",
   ctaHref = "/contact",
   ctaLabel = "Let's talk",
+  footerContact,
 } = Astro.props;
 
 const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
@@ -98,16 +106,39 @@ const pageTitle = `${title} — ${site.name}`;
       <slot />
     </main>
 
-    <footer class="site-footer">
+    <footer class:list={["site-footer", footerContact && "site-footer--contact"]}>
       <div class="footer-inner">
-        <p>
+        <p class="footer-copy">
           © {new Date().getFullYear()}
           {site.name}
         </p>
+        {
+          footerContact && (
+            <div class="footer-contact" aria-label="Contact">
+              <a href={`mailto:${footerContact.email}`}>{footerContact.email}</a>
+              <span class="footer-contact-sep" aria-hidden="true">
+                ·
+              </span>
+              <a href={`tel:${footerContact.phoneTel}`}>{footerContact.phoneDisplay}</a>
+            </div>
+          )
+        }
         <nav class="footer-legal" aria-label="Legal">
-          <a href="/legal/privacy">Privacy</a>
-          <a href="/legal/terms">Terms</a>
+          {
+            footerContact ? (
+              <>
+                <a href="/legal/privacy">Privacy Policy</a>
+                <a href="/legal/imprint">Imprint</a>
+              </>
+            ) : (
+              <>
+                <a href="/legal/privacy">Privacy</a>
+                <a href="/legal/terms">Terms</a>
+              </>
+            )
+          }
         </nav>
+        {footerContact && <p class="footer-locations">{footerContact.location}</p>}
         {navMode === "landing" && <ThemeSwitch />}
       </div>
     </footer>

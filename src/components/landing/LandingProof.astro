@@ -1,23 +1,11 @@
 ---
 import { landing } from "../../content/landing";
-const p = landing.proof;
+const s = landing.proof;
 ---
 
-<section class="lp-proof lp-band lp-band--paper" aria-labelledby="lp-proof-h">
-  <div class="lp-proof-inner">
-    <h2 id="lp-proof-h" class="lp-section-label">Credibility</h2>
-    <p class="lp-proof-opener">{p.openerEn}</p>
-    <figure class="lp-testimonial">
-      <blockquote class="lp-testimonial-quote font-accent">{p.quoteEn}</blockquote>
-      <figcaption class="lp-testimonial-cap">— {p.attribution}</figcaption>
-    </figure>
-    <div class="lp-fact-grid" role="list">
-      {p.facts.map((f) => (
-        <div class="lp-fact" role="listitem">
-          {f.text}
-        </div>
-      ))}
-    </div>
-    <p class="lp-position-line">{p.lineEn}</p>
+<section class="lp-band lp-band--paper" aria-labelledby="lp-proof-h">
+  <div class="lp-section-inner">
+    <h2 id="lp-proof-h" class="lp-section-title">{s.title}</h2>
+    <p class="lp-proof-placeholder">{s.placeholder}</p>
   </div>
 </section>

@@ -1,0 +1,19 @@
+---
+import { landing } from "../../content/landing";
+const s = landing.services;
+---
+
+<section class="lp-band lp-band--dim" aria-labelledby="lp-services-h">
+  <div class="lp-section-inner lp-section-inner--wide">
+    <h2 id="lp-services-h" class="lp-section-title">{s.title}</h2>
+    <p class="lp-services-intro">{s.intro}</p>
+    <ul class="lp-service-pillars" role="list">
+      {s.pillars.map((pillar) => (
+        <li class="lp-service-pillar">
+          <h3 class="lp-service-pillar-title">{pillar.title}</h3>
+          <p class="lp-service-pillar-body">{pillar.body}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
