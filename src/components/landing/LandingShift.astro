@@ -1,35 +1,26 @@
 ---
 import { landing } from "../../content/landing";
 const s = landing.shift;
-const img = landing.visuals.shift;
+const [first, ...rest] = s.paragraphs;
 ---
 
-<section class="lp-band lp-band--dim" aria-labelledby="lp-shift-h">
+<section class="lp-band lp-band--ink lp-shift" aria-labelledby="lp-shift-h">
   <div class="lp-container">
-    <div class="lp-split lp-split--img-right">
-      <div class="lp-split-body">
-        <p class="lp-eyebrow">The shift</p>
-        <h2 id="lp-shift-h" class="lp-section-title">{s.title}</h2>
-        <div class="lp-prose lp-prose--wide lp-prose--sectioned">
-          {s.paragraphs.map((p, i) => <p class:list={[i === 0 && "lp-prose-lead"]}>{p}</p>)}
-        </div>
-        <p class="lp-section-cta lp-section-cta--left">
-          <a class="btn btn-primary" href={s.ctaHref}>{s.ctaLabel}</a>
-        </p>
+    <div class="lp-shift-header">
+      <span class="lp-rule-label lp-rule-label--light">The shift</span>
+      <h2 id="lp-shift-h" class="lp-shift-headline">{s.title}</h2>
+    </div>
+
+    <div class="lp-shift-body">
+      <p class="lp-shift-lead">{first}</p>
+      <div class="lp-shift-cols">
+        {rest.map((p) => <p>{p}</p>)}
       </div>
-      <figure class="lp-split-media">
-        <div class="lp-photo-frame">
-          <img
-            src={img}
-            alt=""
-            width="640"
-            height="800"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <figcaption class="lp-photo-caption">Placeholder — workspace or city context.</figcaption>
-      </figure>
+    </div>
+
+    <div class="lp-shift-cta-row">
+      <a class="btn btn-primary lp-btn-ink" href={s.ctaHref}>{s.ctaLabel}</a>
+      <span class="lp-shift-cta-note">30-minute call · No pitch deck</span>
     </div>
   </div>
 </section>

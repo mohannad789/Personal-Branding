@@ -1,38 +1,22 @@
 ---
 import { landing } from "../../content/landing";
 const s = landing.differentiation;
-const img = landing.visuals.differentiation;
-const [first, ...rest] = s.paragraphs;
 ---
 
-<section class="lp-band lp-band--paper" aria-labelledby="lp-diff-h">
+<section class="lp-band lp-band--ink lp-diff" aria-labelledby="lp-diff-h">
   <div class="lp-container">
-    <div class="lp-split lp-split--img-right lp-split--tight">
-      <div class="lp-split-body">
-        <p class="lp-eyebrow">Differentiation</p>
-        <h2 id="lp-diff-h" class="lp-section-title">{s.title}</h2>
-        <div class="lp-callout lp-callout--accent">
-          <p class="lp-callout-text">{first}</p>
-        </div>
-        <div class="lp-prose lp-prose--wide lp-prose--sectioned">
-          {rest.map((p) => (
-            <p>{p}</p>
-          ))}
+    <div class="lp-diff-grid">
+      <div class="lp-diff-left">
+        <span class="lp-rule-label lp-rule-label--light">Differentiation</span>
+        <h2 id="lp-diff-h" class="lp-diff-headline">{s.title}</h2>
+        <p class="lp-diff-crossed">{s.paragraphs[0]}</p>
+      </div>
+      <div class="lp-diff-right">
+        <div class="lp-diff-card">
+          <span class="lp-diff-card-label">What you won't get elsewhere</span>
+          {s.paragraphs.slice(1).map((p) => <p>{p}</p>)}
         </div>
       </div>
-      <figure class="lp-split-media">
-        <div class="lp-photo-frame">
-          <img
-            src={img}
-            alt=""
-            width="700"
-            height="780"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <figcaption class="lp-photo-caption">Placeholder — detail or texture.</figcaption>
-      </figure>
     </div>
   </div>
 </section>

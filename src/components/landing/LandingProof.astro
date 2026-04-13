@@ -3,27 +3,37 @@ import { landing } from "../../content/landing";
 const s = landing.proof;
 ---
 
-<section class="lp-band lp-band--paper" aria-labelledby="lp-proof-h">
+<section class="lp-band lp-band--dim lp-proof" aria-labelledby="lp-proof-h">
   <div class="lp-container">
-    <div class="lp-section-head lp-section-head--center">
-      <p class="lp-eyebrow">Proof</p>
-      <h2 id="lp-proof-h" class="lp-section-title lp-section-title--center">{s.title}</h2>
-      <p class="lp-proof-intro">{s.intro}</p>
+    <div class="lp-proof-header">
+      <span class="lp-rule-label">Client outcomes</span>
+      <h2 id="lp-proof-h" class="lp-editorial-h2">{s.title}</h2>
     </div>
-    <ul class="lp-testimonial-grid" role="list">
+
+    <div class="lp-testimonial-grid">
       {
         s.placeholderCards.map((card) => (
-          <li class="lp-testimonial-card">
-            <div class="lp-testimonial-top">
+          <figure class="lp-testimonial">
+            <div class="lp-testimonial-qmark" aria-hidden="true">&ldquo;</div>
+            <blockquote class="lp-testimonial-quote">
+              <p>{card.quote.replace(/^"|"$/g, "")}</p>
+            </blockquote>
+            <figcaption class="lp-testimonial-fig">
               <div class="lp-testimonial-avatar">
-                <img src={card.image} alt="" width="64" height="64" loading="lazy" decoding="async" />
+                <img
+                  src={card.image}
+                  alt=""
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
-              <p class="lp-testimonial-quote">“{card.quote}”</p>
-            </div>
-            <p class="lp-testimonial-by">{card.attribution}</p>
-          </li>
+              <span class="lp-testimonial-by">{card.attribution}</span>
+            </figcaption>
+          </figure>
         ))
       }
-    </ul>
+    </div>
   </div>
 </section>

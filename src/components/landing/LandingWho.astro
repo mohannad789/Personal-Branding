@@ -1,28 +1,50 @@
 ---
 import { landing } from "../../content/landing";
 const s = landing.who;
-const img = landing.visuals.who;
 ---
 
-<section class="lp-band lp-band--paper" aria-labelledby="lp-who-h">
+<section class="lp-band lp-band--paper lp-who" aria-labelledby="lp-who-h">
   <div class="lp-container">
-    <div class="lp-panel lp-panel--lift">
-      <div class="lp-panel-banner">
-        <img
-          src={img}
-          alt=""
-          width="1200"
-          height="520"
-          loading="lazy"
-          decoding="async"
-          class="lp-panel-banner-img"
-        />
+    <div class="lp-who-header">
+      <span class="lp-rule-label">Who this is for</span>
+      <h2 id="lp-who-h" class="lp-editorial-h2">{s.title}</h2>
+    </div>
+
+    <div class="lp-who-features">
+      <div class="lp-who-feature">
+        <div class="lp-who-feature-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+        </div>
+        <div>
+          <p class="lp-who-feature-title">You've already proven you can build.</p>
+          <p class="lp-who-feature-body">{s.paragraphs[0]}</p>
+        </div>
       </div>
-      <div class="lp-panel-body">
-        <p class="lp-eyebrow">Who this is for</p>
-        <h2 id="lp-who-h" class="lp-section-title lp-section-title--in-panel">{s.title}</h2>
-        <div class="lp-prose lp-prose--wide lp-prose--sectioned">
-          {s.paragraphs.map((p, i) => <p class:list={[i === 0 && "lp-prose-lead"]}>{p}</p>)}
+      <div class="lp-who-feature">
+        <div class="lp-who-feature-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div>
+          <p class="lp-who-feature-title">Trust is the transaction.</p>
+          <p class="lp-who-feature-body">{s.paragraphs[1]}</p>
+        </div>
+      </div>
+      <div class="lp-who-feature">
+        <div class="lp-who-feature-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+        </div>
+        <div>
+          <p class="lp-who-feature-title">You've been burned before.</p>
+          <p class="lp-who-feature-body">{s.paragraphs[2]}</p>
+        </div>
+      </div>
+      <div class="lp-who-feature">
+        <div class="lp-who-feature-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div>
+          <p class="lp-who-feature-title">You measure in revenue.</p>
+          <p class="lp-who-feature-body">{s.paragraphs[3]}</p>
         </div>
       </div>
     </div>
