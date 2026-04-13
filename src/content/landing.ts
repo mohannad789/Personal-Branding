@@ -3,6 +3,22 @@ export const landing = {
   metaDescription:
     "Strategic personal branding for entrepreneurs who have outgrown word of mouth. Dubai-based, DACH focused. Book a strategy call.",
 
+  /** Placeholder photos (picsum.photos seeds). Swap for your own assets. */
+  visuals: {
+    hero: "https://picsum.photos/seed/pb-hero/960/820",
+    problem: "https://picsum.photos/seed/pb-problem/640/840",
+    shift: "https://picsum.photos/seed/pb-shift/640/800",
+    who: "https://picsum.photos/seed/pb-who/800/520",
+    differentiation: "https://picsum.photos/seed/pb-diff/700/780",
+    services: [
+      "https://picsum.photos/seed/pb-svc-1/720/420",
+      "https://picsum.photos/seed/pb-svc-2/720/420",
+      "https://picsum.photos/seed/pb-svc-3/720/420",
+      "https://picsum.photos/seed/pb-svc-4/720/420",
+    ],
+    finalCta: "https://picsum.photos/seed/pb-close/1200/600",
+  },
+
   hero: {
     headline: "Your expertise closes deals. Your brand should open them.",
     sub:
@@ -115,8 +131,28 @@ export const landing = {
 
   proof: {
     title: "Don't take our word for it. (That would rather defeat the point.)",
-    placeholder:
-      "Client testimonials go here — 2–3 short quotes from founders or entrepreneurs, ideally referencing commercial outcomes: deals closed, inbound increase, time-to-close reduction, investor traction. Keep them specific and unadorned. No superlatives.",
+    intro:
+      "Replace these with real quotes when you have them — short, specific, outcome-led (pipeline, time-to-close, inbound, fundraising).",
+    placeholderCards: [
+      {
+        quote:
+          "Placeholder: inbound qualified conversations roughly doubled within a quarter after we tightened positioning and narrative.",
+        attribution: "Founder · Professional services",
+        image: "https://picsum.photos/seed/pb-t1/160/160",
+      },
+      {
+        quote:
+          "Placeholder: enterprise deals stopped stalling in legal review once our authority assets matched how the firm actually shows up in the room.",
+        attribution: "Managing partner · Advisory",
+        image: "https://picsum.photos/seed/pb-t2/160/160",
+      },
+      {
+        quote:
+          "Placeholder: we cut average time-to-close by leaning on a single sharp point of view instead of a generic content calendar.",
+        attribution: "CEO · B2B SaaS",
+        image: "https://picsum.photos/seed/pb-t3/160/160",
+      },
+    ],
   },
 
   faq: {

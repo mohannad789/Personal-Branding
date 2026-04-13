@@ -4,8 +4,26 @@ const s = landing.proof;
 ---
 
 <section class="lp-band lp-band--paper" aria-labelledby="lp-proof-h">
-  <div class="lp-section-inner">
-    <h2 id="lp-proof-h" class="lp-section-title">{s.title}</h2>
-    <p class="lp-proof-placeholder">{s.placeholder}</p>
+  <div class="lp-container">
+    <div class="lp-section-head lp-section-head--center">
+      <p class="lp-eyebrow">Proof</p>
+      <h2 id="lp-proof-h" class="lp-section-title lp-section-title--center">{s.title}</h2>
+      <p class="lp-proof-intro">{s.intro}</p>
+    </div>
+    <ul class="lp-testimonial-grid" role="list">
+      {
+        s.placeholderCards.map((card) => (
+          <li class="lp-testimonial-card">
+            <div class="lp-testimonial-top">
+              <div class="lp-testimonial-avatar">
+                <img src={card.image} alt="" width="64" height="64" loading="lazy" decoding="async" />
+              </div>
+              <p class="lp-testimonial-quote">“{card.quote}”</p>
+            </div>
+            <p class="lp-testimonial-by">{card.attribution}</p>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>

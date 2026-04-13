@@ -1,15 +1,30 @@
 ---
 import { landing } from "../../content/landing";
 const s = landing.who;
+const img = landing.visuals.who;
 ---
 
 <section class="lp-band lp-band--paper" aria-labelledby="lp-who-h">
-  <div class="lp-section-inner">
-    <h2 id="lp-who-h" class="lp-section-title">{s.title}</h2>
-    <div class="lp-prose lp-prose--wide">
-      {s.paragraphs.map((p) => (
-        <p>{p}</p>
-      ))}
+  <div class="lp-container">
+    <div class="lp-panel lp-panel--lift">
+      <div class="lp-panel-banner">
+        <img
+          src={img}
+          alt=""
+          width="1200"
+          height="520"
+          loading="lazy"
+          decoding="async"
+          class="lp-panel-banner-img"
+        />
+      </div>
+      <div class="lp-panel-body">
+        <p class="lp-eyebrow">Who this is for</p>
+        <h2 id="lp-who-h" class="lp-section-title lp-section-title--in-panel">{s.title}</h2>
+        <div class="lp-prose lp-prose--wide lp-prose--sectioned">
+          {s.paragraphs.map((p, i) => <p class:list={[i === 0 && "lp-prose-lead"]}>{p}</p>)}
+        </div>
+      </div>
     </div>
   </div>
 </section>

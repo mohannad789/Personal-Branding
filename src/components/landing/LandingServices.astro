@@ -1,19 +1,41 @@
 ---
 import { landing } from "../../content/landing";
 const s = landing.services;
+const imgs = landing.visuals.services;
 ---
 
 <section class="lp-band lp-band--dim" aria-labelledby="lp-services-h">
-  <div class="lp-section-inner lp-section-inner--wide">
-    <h2 id="lp-services-h" class="lp-section-title">{s.title}</h2>
-    <p class="lp-services-intro">{s.intro}</p>
+  <div class="lp-container">
+    <div class="lp-section-head lp-section-head--center">
+      <p class="lp-eyebrow">What we do</p>
+      <h2 id="lp-services-h" class="lp-section-title lp-section-title--center">{s.title}</h2>
+      <p class="lp-services-intro">{s.intro}</p>
+    </div>
     <ul class="lp-service-pillars" role="list">
-      {s.pillars.map((pillar) => (
-        <li class="lp-service-pillar">
-          <h3 class="lp-service-pillar-title">{pillar.title}</h3>
-          <p class="lp-service-pillar-body">{pillar.body}</p>
-        </li>
-      ))}
+      {
+        s.pillars.map((pillar, i) => (
+          <li class="lp-service-pillar">
+            <div class="lp-service-pillar-visual">
+              <img
+                src={imgs[i]}
+                alt=""
+                width="720"
+                height="420"
+                loading="lazy"
+                decoding="async"
+                class="lp-service-pillar-img"
+              />
+            </div>
+            <div class="lp-service-pillar-copy">
+              <span class="lp-service-pillar-index" aria-hidden="true">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 class="lp-service-pillar-title">{pillar.title}</h3>
+              <p class="lp-service-pillar-body">{pillar.body}</p>
+            </div>
+          </li>
+        ))
+      }
     </ul>
   </div>
 </section>

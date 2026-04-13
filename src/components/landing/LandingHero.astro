@@ -1,17 +1,49 @@
 ---
 import { landing } from "../../content/landing";
+import LandingIconCheck from "./LandingIconCheck.astro";
 const h = landing.hero;
+const img = landing.visuals.hero;
 ---
 
 <section class="lp-hero lp-band lp-band--hero" aria-labelledby="lp-hero-h">
-  <div class="lp-hero-inner lp-hero-inner--wide">
-    <h1 id="lp-hero-h" class="lp-hero-headline">{h.headline}</h1>
-    <p class="lp-hero-sub lp-hero-sub--hero">{h.sub}</p>
-    <ul class="lp-advantages" role="list">
-      {h.advantages.map((line) => <li>{line}</li>)}
-    </ul>
-    <div class="lp-hero-ctas">
-      <a class="btn btn-primary" href={h.ctaHref}>{h.ctaLabel}</a>
+  <div class="lp-container lp-hero-shell">
+    <div class="lp-hero-grid">
+      <div class="lp-hero-copy">
+        <p class="lp-eyebrow lp-eyebrow--on-dark">Authority · Position · Revenue</p>
+        <h1 id="lp-hero-h" class="lp-hero-headline">{h.headline}</h1>
+        <p class="lp-hero-sub lp-hero-sub--hero">{h.sub}</p>
+        <ul class="lp-advantage-cards" role="list">
+          {
+            h.advantages.map((line) => (
+              <li class="lp-advantage-card">
+                <span class="lp-advantage-card-icon">
+                  <LandingIconCheck />
+                </span>
+                <span class="lp-advantage-card-text">{line}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="lp-hero-ctas">
+          <a class="btn btn-primary" href={h.ctaHref}>{h.ctaLabel}</a>
+        </div>
+      </div>
+      <figure class="lp-hero-photo">
+        <div class="lp-photo-frame lp-photo-frame--hero">
+          <img
+            src={img}
+            alt=""
+            width="960"
+            height="820"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </div>
+        <figcaption class="lp-photo-caption lp-photo-caption--dark">
+          Placeholder image — replace with your photography or brand visual.
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>

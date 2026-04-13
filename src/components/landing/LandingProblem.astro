@@ -1,15 +1,32 @@
 ---
 import { landing } from "../../content/landing";
 const s = landing.problem;
+const img = landing.visuals.problem;
 ---
 
 <section class="lp-band lp-band--paper" aria-labelledby="lp-problem-h">
-  <div class="lp-section-inner">
-    <h2 id="lp-problem-h" class="lp-section-title">{s.title}</h2>
-    <div class="lp-prose lp-prose--wide">
-      {s.paragraphs.map((p) => (
-        <p>{p}</p>
-      ))}
+  <div class="lp-container">
+    <div class="lp-split lp-split--img-left">
+      <figure class="lp-split-media">
+        <div class="lp-photo-frame">
+          <img
+            src={img}
+            alt=""
+            width="640"
+            height="840"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <figcaption class="lp-photo-caption">Placeholder — editorial or team image.</figcaption>
+      </figure>
+      <div class="lp-split-body">
+        <p class="lp-eyebrow">The problem</p>
+        <h2 id="lp-problem-h" class="lp-section-title">{s.title}</h2>
+        <div class="lp-prose lp-prose--wide lp-prose--sectioned">
+          {s.paragraphs.map((p, i) => <p class:list={[i === 0 && "lp-prose-lead"]}>{p}</p>)}
+        </div>
+      </div>
     </div>
   </div>
 </section>

@@ -1,10 +1,16 @@
 ---
 import { landing } from "../../content/landing";
 const s = landing.finalCta;
+const bg = landing.visuals.finalCta;
 ---
 
-<section class="lp-final lp-band lp-band--hero" aria-labelledby="lp-final-h">
-  <div class="lp-hero-inner lp-hero-inner--wide">
+<section class="lp-final lp-band lp-band--hero lp-band--cta" aria-labelledby="lp-final-h">
+  <div class="lp-final-bg" aria-hidden="true">
+    <img src={bg} alt="" width="1200" height="600" loading="lazy" decoding="async" />
+  </div>
+  <div class="lp-final-scrim" aria-hidden="true"></div>
+  <div class="lp-container lp-final-inner">
+    <p class="lp-eyebrow lp-eyebrow--on-dark">Next step</p>
     <h2 id="lp-final-h" class="lp-close-headline">{s.headline}</h2>
     <p class="lp-hero-sub lp-hero-sub--final">{s.body}</p>
     <div class="lp-hero-ctas">

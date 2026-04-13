@@ -3,21 +3,22 @@ import { landing } from "../../content/landing";
 const s = landing.process;
 ---
 
-<section class="lp-band lp-band--dim" aria-labelledby="lp-process-h">
-  <div class="lp-section-inner lp-section-inner--wide">
-    <h2 id="lp-process-h" class="lp-section-title">{s.title}</h2>
-    <ol class="lp-process-steps">
-      {s.steps.map((step, i) => (
-        <li class="lp-process-step">
-          <span class="lp-process-step-num" aria-hidden="true">
-            {i + 1}
-          </span>
-          <div class="lp-process-step-body">
+<section class="lp-band lp-band--dim lp-process-band" aria-labelledby="lp-process-h">
+  <div class="lp-container">
+    <div class="lp-section-head lp-section-head--center">
+      <p class="lp-eyebrow">Process</p>
+      <h2 id="lp-process-h" class="lp-section-title lp-section-title--center">{s.title}</h2>
+    </div>
+    <ol class="lp-process-track" role="list">
+      {
+        s.steps.map((step, i) => (
+          <li class="lp-process-card">
+            <span class="lp-process-step-num">{i + 1}</span>
             <h3 class="lp-process-step-title">{step.title}</h3>
-            <p>{step.body}</p>
-          </div>
-        </li>
-      ))}
+            <p class="lp-process-step-text">{step.body}</p>
+          </li>
+        ))
+      }
     </ol>
   </div>
 </section>
