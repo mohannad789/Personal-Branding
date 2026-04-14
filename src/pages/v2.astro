@@ -1,0 +1,1039 @@
+---
+import { site } from "../content/home";
+import { landing } from "../content/landing";
+const fc = landing.footer;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Strategic Personal Branding — Version B</title>
+  <meta name="description" content="Strategic personal branding for entrepreneurs who've outgrown word of mouth." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & Tokens ─────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0C0F14;
+      --bg2:     #12151B;
+      --bg3:     #1A1D24;
+      --text:    #F7F5F2;
+      --dim:     #2A2A2A;
+      --muted:   #6B6B6B;
+      --gold:    #C9A96E;
+      --gold-g:  rgba(201,169,110,0.28);
+      --steel:   #4A6FA5;
+      --fh:      "Fraunces", Georgia, serif;
+      --fb:      "Inter", system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: auto; overflow-x: hidden; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--fb);
+      font-size: 1rem;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ── Nav ── */
+    #v2-nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: color-mix(in srgb, var(--bg) 55%, transparent);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(201,169,110,0.1);
+    }
+    .v2-logo { font-family: var(--fh); font-size: 1.125rem; font-weight: 600; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+    .v2-nav-right { display: flex; align-items: center; gap: 1.5rem; }
+    .v2-ver-link { font-size: 0.8125rem; color: var(--muted); text-decoration: none; border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; padding: 0.4rem 1rem; transition: color 0.2s, border-color 0.2s; }
+    .v2-ver-link:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+    .v2-cta { font-size: 0.875rem; font-weight: 600; color: var(--gold); border: 1px solid var(--gold); border-radius: 999px; padding: 0.5rem 1.25rem; text-decoration: none; transition: background 0.25s, color 0.25s; }
+    .v2-cta:hover { background: var(--gold); color: var(--bg); }
+
+    /* ── Scene base ── */
+    .v2-scene { width: 100%; position: relative; }
+    .v2-sticky { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+    .v2-eyebrow { font-family: var(--fb); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 1.75rem; }
+
+    /* ── Grain overlay ── */
+    body::after {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      opacity: 0.6;
+    }
+
+    /* ══════════════════════════════════
+       SCENE 1 — Carousel
+    ══════════════════════════════════ */
+    #s1 { height: 100vh; }
+    .s1-inner { position: relative; width: 100%; height: 100%; }
+    .s1-slide {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 2rem;
+      opacity: 0; transition: opacity 1.2s ease;
+    }
+    .s1-slide.active { opacity: 1; }
+    .s1-stat {
+      font-family: var(--fh); font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 700;
+      color: var(--gold); line-height: 1; margin-bottom: 1rem;
+      text-shadow: 0 0 60px var(--gold-g);
+    }
+    .s1-label { font-family: var(--fb); font-size: clamp(0.9375rem, 1.5vw, 1.125rem); color: rgba(247,245,242,0.55); max-width: 38ch; }
+    .s1-badge {
+      position: absolute; bottom: 2.5rem; left: 3rem;
+      font-family: var(--fb); font-size: 0.6875rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
+    }
+    .s1-progress { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: rgba(201,169,110,0.15); }
+    .s1-progress-bar { height: 100%; background: var(--gold); width: 0; transition: width 4s linear; }
+
+    /* ══════════════════════════════════
+       SCENE 2 — Qualifier
+    ══════════════════════════════════ */
+    #s2 { height: 50vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem; }
+    .s2-text {
+      font-family: var(--fb); font-size: clamp(0.6875rem, 1.1vw, 0.8125rem);
+      font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold);
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .s2-text.in { opacity: 1; transform: none; }
+
+    /* ══════════════════════════════════
+       SCENE 3 — Scroll Words
+    ══════════════════════════════════ */
+    #s3 { height: 520vh; }
+    .s3-sticky { padding: 2rem; }
+    .s3-words { display: flex; flex-direction: column; align-items: center; gap: 0.125rem; }
+    .s3-word {
+      font-family: var(--fh); font-weight: 700;
+      font-size: clamp(3.5rem, 9vw, 8.5rem); line-height: 1.05;
+      letter-spacing: -0.04em; color: var(--dim);
+      transition: color 0.5s ease, text-shadow 0.5s ease;
+    }
+    .s3-word.on { color: var(--text); }
+    .s3-word.on-gold { color: var(--gold); text-shadow: 0 0 40px var(--gold-g); }
+    .s3-sub {
+      font-family: var(--fb); font-size: clamp(1rem, 1.5vw, 1.125rem);
+      color: var(--muted); text-align: center; max-width: 44ch;
+      margin-top: 3rem;
+      opacity: 0; transform: translateY(12px);
+      transition: opacity 0.5s ease 0.1s, transform 0.5s ease 0.1s;
+    }
+    .s3-sub.on { opacity: 1; transform: none; }
+    .s3-actions {
+      margin-top: 2.5rem; display: flex; flex-direction: column; align-items: center; gap: 1rem;
+      opacity: 0; transform: translateY(12px);
+      transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+    }
+    .s3-actions.on { opacity: 1; transform: none; }
+    .s3-avail { font-size: 0.8125rem; color: var(--gold); letter-spacing: 0.05em; }
+
+    /* ══════════════════════════════════
+       SCENE 4 — Collision
+    ══════════════════════════════════ */
+    #s4 { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem; overflow: hidden; }
+    .s4-inner { max-width: 800px; }
+    .s4-top {
+      font-family: var(--fh); font-weight: 700;
+      font-size: clamp(2.25rem, 5vw, 4.25rem); line-height: 1.1;
+      letter-spacing: -0.03em; color: var(--text);
+      opacity: 0; transform: translateY(-60px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .s4-bottom {
+      font-family: var(--fh); font-weight: 700;
+      font-size: clamp(2.25rem, 5vw, 4.25rem); line-height: 1.1;
+      letter-spacing: -0.03em; color: var(--gold);
+      margin-top: 0.125em;
+      opacity: 0; transform: translateY(60px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.12s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.12s;
+    }
+    .s4-body {
+      font-family: var(--fb); font-size: 1.0625rem; color: var(--muted); max-width: 40ch;
+      margin: 2.25rem auto 0;
+      opacity: 0; transition: opacity 0.5s ease 0.5s;
+    }
+    #s4.collide .s4-top { opacity: 1; transform: none; }
+    #s4.collide .s4-bottom { opacity: 1; transform: none; }
+    #s4.collide .s4-body { opacity: 1; }
+    #s4.shake { animation: v2-shake 0.18s ease; }
+    @keyframes v2-shake {
+      0%,100% { transform: none; }
+      25% { transform: translateX(-3px); }
+      75% { transform: translateX(3px); }
+    }
+
+    /* ══════════════════════════════════
+       SCENE 5 — Pain Slides
+    ══════════════════════════════════ */
+    #s5 { height: 400vh; }
+    .s5-sticky { padding: 2rem; }
+    .s5-label { font-family: var(--fb); font-size: 0.625rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: #c0392b; margin-bottom: 2.5rem; }
+    .s5-slide-wrap { position: relative; width: 100%; max-width: 700px; }
+    .s5-slide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; text-align: center; opacity: 0; transition: opacity 0.5s ease; pointer-events: none; }
+    .s5-slide.active { opacity: 1; position: relative; pointer-events: auto; }
+    .s5-quote { font-family: var(--fh); font-style: italic; font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 400; line-height: 1.35; color: var(--text); margin-bottom: 1.75rem; }
+    .s5-body { font-family: var(--fb); font-size: 1.0625rem; line-height: 1.7; color: var(--muted); max-width: 40ch; }
+    .s5-progress { position: fixed; bottom: 0; left: 0; right: 0; height: 2px; background: rgba(201,169,110,0.15); z-index: 100; }
+    .s5-bar { height: 100%; background: var(--gold); transition: width 0.4s ease; }
+
+    /* ══════════════════════════════════
+       SCENE 6 — Diagnosis
+    ══════════════════════════════════ */
+    #s6 { height: 400vh; }
+    .s6-sticky { text-align: center; padding: 2rem; }
+    .s6-line {
+      display: block; font-family: var(--fh); font-weight: 700;
+      font-size: clamp(2.25rem, 5.5vw, 5rem); line-height: 1.12;
+      letter-spacing: -0.04em; color: var(--dim);
+      transition: color 0.6s ease, text-shadow 0.6s ease;
+    }
+    .s6-line.on { color: var(--text); }
+    .s6-line-gold.on { color: var(--gold); text-shadow: 0 0 48px var(--gold-g); }
+    .s6-line-gold { font-size: clamp(2.75rem, 6vw, 6rem); }
+
+    /* ══════════════════════════════════
+       SCENE 7 / 10 / 15 — Chat Bubbles
+    ══════════════════════════════════ */
+    .v2-chat { max-width: 560px; width: 100%; display: flex; flex-direction: column; gap: 1.25rem; padding: 2rem; }
+    .v2-scene--chat { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--bg2); }
+    .chat-right, .chat-left { max-width: 78%; opacity: 0; }
+    .chat-right {
+      align-self: flex-end;
+      background: #2C2C2E; color: var(--text);
+      border-radius: 18px 18px 4px 18px; padding: 1rem 1.25rem;
+      font-family: var(--fb); font-size: 0.9375rem; line-height: 1.6;
+      transform: translateX(24px); transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .chat-left {
+      align-self: flex-start;
+      background: var(--bg3); color: var(--text);
+      border-radius: 18px 18px 18px 4px; padding: 1rem 1.25rem;
+      font-family: var(--fb); font-size: 0.9375rem; line-height: 1.6;
+      transform: translateX(-24px); transition: opacity 0.5s ease 1.8s, transform 0.5s ease 1.8s;
+    }
+    .chat-dots {
+      align-self: flex-start;
+      background: var(--bg3); border-radius: 18px; padding: 0.75rem 1rem;
+      display: flex; gap: 5px; align-items: center;
+      opacity: 0; transition: opacity 0.3s ease 0.6s;
+    }
+    .chat-dots span {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--muted);
+      animation: dot-pulse 1.2s ease-in-out infinite;
+    }
+    .chat-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .chat-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes dot-pulse { 0%,60%,100% { opacity: 0.3; transform: scale(0.8); } 30% { opacity: 1; transform: scale(1); } }
+    .v2-chat.fired .chat-right { opacity: 1; transform: none; }
+    .v2-chat.fired .chat-dots { opacity: 1; }
+    .v2-chat.fired .chat-left { opacity: 1; transform: none; }
+
+    /* ══════════════════════════════════
+       SCENE 8 — Answer Lines
+    ══════════════════════════════════ */
+    #s8 { height: 700vh; }
+    .s8-sticky { text-align: center; padding: 2rem; max-width: 700px; }
+    .s8-line {
+      display: block; font-family: var(--fb);
+      font-size: clamp(1.125rem, 2vw, 1.5rem); line-height: 1.55;
+      color: var(--dim); margin-bottom: 0.25rem;
+      transition: color 0.5s ease;
+    }
+    .s8-line.on { color: var(--muted); }
+    .s8-line.on-bright { color: var(--text); }
+    .s8-big {
+      font-family: var(--fh); font-weight: 700;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.15; letter-spacing: -0.03em; color: var(--gold);
+      text-shadow: 0 0 40px var(--gold-g);
+      margin: 1rem 0;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .s8-big.on { opacity: 1; transform: none; }
+
+    /* ══════════════════════════════════
+       SCENE 9 — Strike-through Pairs
+    ══════════════════════════════════ */
+    #s9 { min-height: 100vh; padding: 8rem 2rem; }
+    .s9-inner { max-width: 860px; margin: 0 auto; }
+    .s9-eyebrow-wrap { text-align: center; margin-bottom: 4rem; }
+    .s9-headline { font-family: var(--fh); font-weight: 700; font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.15; letter-spacing: -0.03em; text-align: center; margin-bottom: 4rem; }
+    .s9-pair { margin-bottom: 5rem; text-align: center; }
+    .s9-wrong-wrap { position: relative; display: inline-block; margin-bottom: 1.5rem; }
+    .s9-wrong {
+      font-family: var(--fh); font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      color: var(--text); font-weight: 600; line-height: 1.3;
+      transition: color 0.4s ease 0.9s;
+    }
+    .s9-strike {
+      position: absolute; left: 0; top: 50%; height: 2px;
+      background: var(--gold); width: 0; transform: translateY(-50%);
+      transition: width 0.8s ease 0.15s;
+    }
+    .s9-pair.fired .s9-wrong { color: var(--muted); }
+    .s9-pair.fired .s9-strike { width: 100%; }
+    .s9-right {
+      font-family: var(--fh); font-size: clamp(1.375rem, 2.8vw, 2rem);
+      color: var(--gold); font-weight: 600; line-height: 1.3;
+      opacity: 0; transform: translateX(20px);
+      transition: opacity 0.5s ease 1s, transform 0.5s ease 1s;
+    }
+    .s9-pair.fired .s9-right { opacity: 1; transform: none; }
+    .s9-note {
+      font-family: var(--fb); font-size: 0.9375rem; color: var(--muted);
+      margin-top: 0.75rem; max-width: 44ch; margin-inline: auto;
+      opacity: 0; transition: opacity 0.5s ease 1.3s;
+    }
+    .s9-pair.fired .s9-note { opacity: 1; }
+    .s9-flash {
+      position: fixed; inset: 0; background: var(--gold); z-index: 998;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    .s9-flash.on { opacity: 1; }
+
+    /* ══════════════════════════════════
+       SCENE 11 — Split Screen
+    ══════════════════════════════════ */
+    #s11 { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+    @media (max-width: 768px) { #s11 { grid-template-columns: 1fr; } }
+    .s11-col { padding: clamp(4rem, 8vw, 7rem) clamp(2rem, 5vw, 4rem); display: flex; flex-direction: column; }
+    .s11-left { background: var(--bg); }
+    .s11-right { background: var(--bg2); }
+    .s11-col-head { font-family: var(--fb); font-size: 0.625rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 2.5rem; }
+    .s11-head-gold { color: var(--gold); }
+    .s11-head-muted { color: var(--muted); }
+    .s11-item {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      font-family: var(--fb); font-size: 0.9375rem; line-height: 1.55;
+      margin-bottom: 1.25rem;
+      opacity: 0; transform: translateX(-20px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    .s11-right .s11-item { transform: translateX(20px); }
+    .s11-item.in { opacity: 1; transform: none; }
+    .s11-item-gold { color: var(--text); }
+    .s11-item-muted { color: var(--muted); }
+    .s11-arrow { color: var(--gold); flex-shrink: 0; }
+    .s11-x { color: var(--muted); flex-shrink: 0; }
+    .s11-center { grid-column: 1 / -1; text-align: center; padding: 3rem; background: var(--bg); border-top: 1px solid rgba(201,169,110,0.12); }
+    .s11-tagline { font-family: var(--fh); font-style: italic; font-size: clamp(1.25rem, 2.5vw, 1.75rem); color: var(--gold); text-shadow: 0 0 30px var(--gold-g); }
+
+    /* ══════════════════════════════════
+       SCENE 12 — Service Cards
+    ══════════════════════════════════ */
+    #s12 { min-height: 100vh; padding: 8rem 2rem; }
+    .s12-inner { max-width: 860px; margin: 0 auto; }
+    .s12-headline { font-family: var(--fh); font-weight: 700; font-size: clamp(2.25rem, 4.5vw, 3.5rem); line-height: 1.12; letter-spacing: -0.03em; text-align: center; margin-bottom: 5rem; }
+    .s12-card {
+      border: 1px solid rgba(201,169,110,0.18); border-radius: 16px;
+      padding: clamp(2rem, 4vw, 3rem); margin-bottom: 2rem;
+      background: var(--bg2);
+      opacity: 0; transform: scale(0.96) translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.4s;
+    }
+    .s12-card.in { opacity: 1; transform: none; }
+    .s12-card.in { border-color: rgba(201,169,110,0.35); }
+    .s12-num { font-family: var(--fb); font-size: 0.625rem; font-weight: 700; letter-spacing: 0.18em; color: var(--gold); margin-bottom: 1rem; }
+    .s12-title { font-family: var(--fh); font-weight: 600; font-size: clamp(1.375rem, 2.5vw, 1.75rem); color: var(--text); margin-bottom: 1rem; letter-spacing: -0.02em; }
+    .s12-body { font-family: var(--fb); font-size: 1rem; line-height: 1.7; color: var(--muted); }
+
+    /* ══════════════════════════════════
+       SCENE 13 — Manifesto
+    ══════════════════════════════════ */
+    #s13 { height: 700vh; background: #080A0F; }
+    .s13-sticky { text-align: center; padding: 2rem; }
+    .s13-line {
+      display: block; font-family: var(--fh);
+      font-size: clamp(2rem, 5vw, 4.5rem);
+      font-weight: 400; line-height: 1.2; letter-spacing: -0.03em;
+      color: var(--dim); transition: color 0.5s ease;
+    }
+    .s13-line.on { color: var(--text); }
+    .s13-line-gold { color: var(--dim) !important; font-weight: 600; }
+    .s13-line-gold.on { color: var(--gold) !important; text-shadow: 0 0 50px var(--gold-g); }
+    .s13-break { display: block; height: clamp(1rem, 3vw, 2rem); }
+
+    /* ══════════════════════════════════
+       SCENE 14 — Counter Strip
+    ══════════════════════════════════ */
+    #s14 { background: var(--bg2); padding: clamp(4rem, 8vw, 7rem) 2rem; border-top: 1px solid rgba(201,169,110,0.1); border-bottom: 1px solid rgba(201,169,110,0.1); }
+    .s14-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
+    @media (max-width: 768px) { .s14-grid { grid-template-columns: repeat(2, 1fr); } }
+    .s14-num { font-family: var(--fh); font-weight: 700; font-size: clamp(3rem, 6vw, 5.5rem); color: var(--gold); display: block; letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.75rem; text-shadow: 0 0 40px var(--gold-g); }
+    .s14-label { font-family: var(--fb); font-size: 0.875rem; color: var(--muted); line-height: 1.5; }
+
+    /* ══════════════════════════════════
+       SCENE 16 — Testimonials
+    ══════════════════════════════════ */
+    #s16 { padding: 8rem 2rem; background: var(--bg2); }
+    .s16-inner { max-width: 740px; margin: 0 auto; text-align: center; }
+    .s16-headline { font-family: var(--fh); font-weight: 700; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.03em; margin-bottom: 4rem; }
+    .s16-card { border: 1px solid rgba(201,169,110,0.15); border-radius: 16px; padding: 2.5rem; margin-bottom: 2rem; background: var(--bg); text-align: left; }
+    .s16-metric { font-family: var(--fh); font-size: 1.5rem; color: var(--gold); font-weight: 600; margin-bottom: 1.25rem; }
+    .s16-quote { font-family: var(--fh); font-style: italic; font-size: clamp(1rem, 1.8vw, 1.25rem); color: var(--text); line-height: 1.65; margin-bottom: 1.5rem; }
+    .s16-attr { font-family: var(--fb); font-size: 0.8125rem; color: var(--muted); }
+
+    /* ══════════════════════════════════
+       SCENE 17 — Funnel
+    ══════════════════════════════════ */
+    #s17 { padding: 8rem 2rem; }
+    .s17-inner { max-width: 600px; margin: 0 auto; text-align: center; }
+    .s17-title { font-family: var(--fh); font-weight: 700; font-size: clamp(1.75rem, 3.5vw, 2.5rem); letter-spacing: -0.03em; margin-bottom: 3.5rem; }
+    .s17-row { margin-bottom: 0.75rem; display: flex; justify-content: center; }
+    .s17-track { background: rgba(255,255,255,0.05); border-radius: 6px; height: 64px; overflow: hidden; position: relative; }
+    .s17-row-1 .s17-track { width: 100%; }
+    .s17-row-2 .s17-track { width: 70%; }
+    .s17-row-3 .s17-track { width: 42%; }
+    .s17-fill {
+      height: 100%; width: 0; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--fh); font-weight: 700; font-size: 1.25rem; color: #0C0F14;
+      transition: width 1.2s cubic-bezier(0.25,0.1,0.25,1);
+    }
+    .s17-fill-gold { background: linear-gradient(90deg, #C9A96E, #D4B87A); }
+    .s17-fill-steel { background: var(--steel); }
+    .s17-fill-gold-strong { background: linear-gradient(90deg, #C9A96E, #E0C48A); }
+    .s17-row.fired .s17-fill-1 { width: 70%; }
+    .s17-row.fired .s17-fill-2 { width: 80%; }
+    .s17-row.fired .s17-fill-3 { width: 100%; }
+    .s17-label { font-family: var(--fb); font-size: 0.8125rem; color: var(--muted); margin-top: 0.625rem; }
+
+    /* ══════════════════════════════════
+       SCENE 18 — Final CTA
+    ══════════════════════════════════ */
+    #s18 { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8rem 2rem; background: var(--bg); }
+    .s18-inner { max-width: 680px; }
+    .s18-headline {
+      font-family: var(--fh); font-weight: 700;
+      font-size: clamp(2.5rem, 6vw, 5.5rem); line-height: 1.08; letter-spacing: -0.04em; color: var(--text); margin-bottom: 2.5rem;
+    }
+    .s18-body { font-family: var(--fb); font-size: 1.0625rem; line-height: 1.75; color: var(--muted); max-width: 40ch; margin: 0 auto 1.5rem; }
+    .s18-gold {
+      font-family: var(--fh); font-weight: 700;
+      font-size: clamp(1.75rem, 4vw, 3rem); letter-spacing: -0.03em;
+      color: var(--gold); text-shadow: 0 0 40px var(--gold-g);
+      margin-bottom: 3rem; display: block;
+    }
+    .s18-btn {
+      display: inline-block; padding: 1.125rem 3rem;
+      font-family: var(--fb); font-size: 1rem; font-weight: 600;
+      background: var(--gold); color: var(--bg); border: none;
+      border-radius: 999px; text-decoration: none; cursor: pointer;
+      box-shadow: 0 0 40px var(--gold-g);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .s18-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 48px var(--gold-g); }
+    .s18-note { font-family: var(--fb); font-size: 0.8125rem; color: var(--muted); margin-top: 1.25rem; }
+
+    /* ══════════════════════════════════
+       SCENE 19 — Footer
+    ══════════════════════════════════ */
+    #s19 { background: #06080C; padding: 2.5rem 3rem; border-top: 1px solid rgba(255,255,255,0.05); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+    .s19-logo { font-family: var(--fh); font-size: 1rem; font-weight: 600; color: rgba(247,245,242,0.35); text-decoration: none; }
+    .s19-contact { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .s19-contact a { font-family: var(--fb); font-size: 0.8125rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .s19-contact a:hover { color: var(--gold); }
+    .s19-legal { display: flex; gap: 1.25rem; }
+    .s19-legal a { font-family: var(--fb); font-size: 0.8125rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .s19-legal a:hover { color: var(--gold); }
+
+    /* ── CTA Button global ── */
+    .v2-cta-btn {
+      display: inline-block; padding: 0.875rem 2rem;
+      font-family: var(--fb); font-size: 0.9375rem; font-weight: 600;
+      color: var(--gold); border: 1px solid var(--gold); border-radius: 999px;
+      text-decoration: none; transition: background 0.25s, color 0.25s;
+    }
+    .v2-cta-btn:hover { background: var(--gold); color: var(--bg); }
+
+    /* ── Transitions ── */
+    .v2-fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .v2-fade-in.in { opacity: 1; transform: none; }
+  </style>
+</head>
+
+<body>
+
+<!-- ── NAV ───────────────────────────────────────────────────── -->
+<nav id="v2-nav">
+  <a href="/" class="v2-logo">{site.logoInitials}</a>
+  <div class="v2-nav-right">
+    <a href="/" class="v2-ver-link">← Version A</a>
+    <a href="/contact" class="v2-cta">Book a Strategy Call</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCENE 1 — Opening Carousel
+══════════════════════════════════════════════════════════════ -->
+<section id="s1" class="v2-scene">
+  <div class="s1-inner">
+    <div class="s1-slide active" data-slide="0">
+      <div class="s1-stat">82%</div>
+      <div class="s1-label">of B2B buyers trust founder-led brands over corporate ones</div>
+    </div>
+    <div class="s1-slide" data-slide="1">
+      <div class="s1-stat">70%</div>
+      <div class="s1-label">of the purchase decision is made before first contact</div>
+    </div>
+    <div class="s1-slide" data-slide="2">
+      <div class="s1-stat">3.2×</div>
+      <div class="s1-label">higher engagement on founder content vs. brand content</div>
+    </div>
+    <div class="s1-slide" data-slide="3">
+      <div class="s1-stat">€M+</div>
+      <div class="s1-label">inbound pipeline generated for clients in DACH and the Gulf</div>
+    </div>
+  </div>
+  <div class="s1-badge">Strategic Personal Branding | Dubai</div>
+  <div class="s1-progress"><div class="s1-progress-bar" id="s1-bar"></div></div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCENE 2 — Qualifier Tag
+══════════════════════════════════════════════════════════════ -->
+<section id="s2" class="v2-scene">
+  <p class="s2-text" data-trigger>
+    For Entrepreneurs and Founders in DACH and the Gulf<br>who've outgrown word of mouth
+  </p>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCENE 3 — Scroll-Animated Title
+══════════════════════════════════════════════════════════════ -->
+<section id="s3" class="v2-scene">
+  <div class="v2-sticky s3-sticky">
+    <div class="s3-words">
+      <span class="s3-word" data-i="0">We</span>
+      <span class="s3-word" data-i="1">Build</span>
+      <span class="s3-word" data-i="2">Personal Brand</span>
+      <span class="s3-word" data-i="3">Positions</span>
+      <span class="s3-word" data-i="4">That Generate</span>
+      <span class="s3-word s3-word--gold" data-i="5">Revenue.</span>
+    </div>
+    <p class="s3-sub" id="s3-sub">Not followers. Not impressions. Not visibility for its own sake. <strong style="color:var(--gold)">Revenue.</strong></p>
+    <div class="s3-actions" id="s3-actions">
+      <a href="/contact" class="v2-cta-btn">Book a Strategy Call</a>
+      <span class="s3-avail">↑ Now accepting Q3 engagements.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCENE 4 — Collision
+══════════════════════════════════════════════════════════════ -->
+<section id="s4" class="v2-scene" data-trigger>
+  <div class="s4-inner">
+    <span class="v2-eyebrow">The Invisible Authority Trap</span>
+    <h2 class="s4-top">You've Built A Business That<br>Proves You're Exceptional.</h2>
+    <h2 class="s4-bottom">Your Market Hasn't<br>Noticed Yet.</h2>
+    <p class="s4-body">Your track record should be doing the selling.<br>Instead, you're still the one doing the explaining.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCENE 5 — Pain Point Slides
+══════════════════════════════════════════════════════════════ -->
+<section id="s5" class="v2-scene">
+  <div class="v2-sticky s5-sticky">
+    <p class="s5-label">Your Current Reality</p>
+    <div class="s5-slide-wrap" id="s5-wrap">
+      <div class="s5-slide active" data-s5="0">
+        <p class="s5-quote">"Every major client I have came through a personal introduction."</p>
+        <p class="s5-body">That's not a business model. That's a dependency with a ceiling the exact size of your personal network.</p>
+      </div>
+      <div class="s5-slide" data-s5="1">
+        <p class="s5-quote">"I post content regularly. The leads are lukewarm and the brand sounds like everyone else's."</p>
+        <p class="s5-body">Activity without architecture. You're feeding the algorithm. The algorithm is not feeding you back.</p>
+      </div>
+      <div class="s5-slide" data-s5="2">
+        <p class="s5-quote">"I keep losing deals to founders with half my track record but twice my visibility."</p>
+        <p class="s5-body">The market doesn't reward the most qualified. It rewards the most legible. Right now, you're illegible.</p>
+      </div>
+      <div class="s5-slide" data-s5="3">
+        <p class="s5-quote">"People who work with me are blown away. People who haven't don't know I exist."</p>
+        <p class="s5-body">Your reputation is locked behind a door that only opens from the inside.</p>
+      </div>
+    </div>
+  </div>
+  <div class="s5-progress"><div class="s5-bar" id="s5-bar"></div></div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCENE 6 — Diagnosis Lines
+══════════════════════════════════════════════════════════════ -->
+<section id="s6" class="v2-scene">
+  <div class="v2-sticky s6-sticky">
+    <span class="s6-line" data-s6="0">You don't have</span>
+    <span class="s6-line" data-s6="1">a marketing problem.</span>
+    <span class="s6-line" data-s6="2" style="margin-top:0.5em">You have</span>
+    <span class="s6-line" data-s6="3">a positioning problem.</span>
+    <span class="s6-line s6-line-gold" data-s6="4" style="margin-top:0.5em">And it's costing you more than you think.</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCENE 7 — Chat Bubble 1
+══════════════════════════════════════════════════════════════ -->
+<section class="v2-scene v2-scene--chat">
+  <div class="v2-chat" data-chat>
+    <div class="chat-right">"Sounds compelling. But I've heard this before. The last agency gave me a content calendar and called it strategy. 🤔"</div>
+    <div class="chat-dots"><span></span><span></span><span></span></div>
+    <div class="chat-left">"We know. And we know why."</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCENE 8 — The Answer
+══════════════════════════════════════════════════════════════ -->
+<section id="s8" class="v2-scene">
+  <div class="v2-sticky s8-sticky">
+    <span class="s8-line" data-s8="0">Most agencies sell activity</span>
+    <span class="s8-line" data-s8="1">because activity is easy to deliver</span>
+    <span class="s8-line" data-s8="2">and easy to report on.</span>
+    <span class="s8-line" data-s8="3" style="margin-top:1em">"We posted 12 times this week"</span>
+    <span class="s8-line" data-s8="4">sounds productive.</span>
+    <span class="s8-line" data-s8="5">It is also completely disconnected from revenue.</span>
+    <span class="s8-line" data-s8="6" style="margin-top:1em">Here's the question they never asked you:</span>
+    <span class="s8-big" data-s8-big="7">What specific perception does your market need to hold about you for revenue to follow?</span>
+    <span class="s8-line" data-s8="8" style="margin-top:1em">Not "what should we post." Not "which platforms."</span>
+    <span class="s8-line" data-s8="9">That's where we start.</span>
+    <span class="s8-line" data-s8="10">Everything else is built to serve that answer.</span>
+    <div style="margin-top:2.5rem;opacity:0;transition:opacity 0.5s ease" data-s8-cta>
+      <a href="/contact" class="v2-cta-btn">Book a Strategy Call</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCENE 9 — Wrong / Right
+══════════════════════════════════════════════════════════════ -->
+<section id="s9" class="v2-scene">
+  <div class="s9-inner">
+    <div class="s9-eyebrow-wrap"><span class="v2-eyebrow">The Position-First Method</span></div>
+    <h2 class="s9-headline">Why Most Personal Brands<br>Fail Before They Start.</h2>
+
+    <div class="s9-pair" data-s9-pair>
+      <div class="s9-wrong-wrap">
+        <p class="s9-wrong">Start by creating content.</p>
+        <div class="s9-strike"></div>
+      </div>
+      <p class="s9-right">Start by defining the perception that drives revenue.</p>
+      <p class="s9-note">The blueprint. Without it, everything else is decoration.</p>
+    </div>
+    <div class="s9-pair" data-s9-pair>
+      <div class="s9-wrong-wrap">
+        <p class="s9-wrong">Build a presence on every platform.</p>
+        <div class="s9-strike"></div>
+      </div>
+      <p class="s9-right">Build authority in the rooms that matter.</p>
+      <p class="s9-note">Your ideal client isn't everywhere. They're in specific rooms. We engineer your entry.</p>
+    </div>
+    <div class="s9-pair" data-s9-pair>
+      <div class="s9-wrong-wrap">
+        <p class="s9-wrong">Post consistently and hope for compounding.</p>
+        <div class="s9-strike"></div>
+      </div>
+      <p class="s9-right">Architect a system where every asset serves the position.</p>
+      <p class="s9-note">Nothing is filler. Nothing is "keeping the feed alive." Each asset is a brick in a structure.</p>
+    </div>
+    <div class="s9-pair" data-s9-pair>
+      <div class="s9-wrong-wrap">
+        <p class="s9-wrong">Measure followers, impressions, and engagement.</p>
+        <div class="s9-strike"></div>
+      </div>
+      <p class="s9-right">Measure inbound leads, deal velocity, and pipeline source.</p>
+      <p class="s9-note">If it doesn't move revenue, it doesn't survive the next quarter.</p>
+    </div>
+  </div>
+  <div class="s9-flash" id="s9-flash"></div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCENE 10 — Chat Bubble 2
+══════════════════════════════════════════════════════════════ -->
+<section class="v2-scene v2-scene--chat">
+  <div class="v2-chat" data-chat>
+    <div class="chat-right">"Personal branding still sounds like self-promotion. The work should speak for itself. 😐"</div>
+    <div class="chat-dots"><span></span><span></span><span></span></div>
+    <div class="chat-left">"It should. And in a perfect market, it would."</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCENE 11 — Velvet Rope
+══════════════════════════════════════════════════════════════ -->
+<section id="s11" class="v2-scene">
+  <div class="s11-col s11-left">
+    <p class="s11-col-head s11-head-gold">Who We Work With</p>
+    <div class="s11-item s11-item-gold" data-trigger-side="left"><span class="s11-arrow">→</span><span>Founders and entrepreneurs, 40+, revenue €1M+</span></div>
+    <div class="s11-item s11-item-gold" data-trigger-side="left"><span class="s11-arrow">→</span><span>Established in their field, invisible outside their network</span></div>
+    <div class="s11-item s11-item-gold" data-trigger-side="left"><span class="s11-arrow">→</span><span>Based in DACH or the Gulf</span></div>
+    <div class="s11-item s11-item-gold" data-trigger-side="left"><span class="s11-arrow">→</span><span>Tired of agencies that delivered activity, not outcomes</span></div>
+    <div class="s11-item s11-item-gold" data-trigger-side="left"><span class="s11-arrow">→</span><span>Ready to invest at the level the outcome requires</span></div>
+  </div>
+  <div class="s11-col s11-right">
+    <p class="s11-col-head s11-head-muted">Who We Don't</p>
+    <div class="s11-item s11-item-muted" data-trigger-side="right"><span class="s11-x">×</span><span>Looking for a social media manager with a strategy title</span></div>
+    <div class="s11-item s11-item-muted" data-trigger-side="right"><span class="s11-x">×</span><span>Measuring success in followers and likes</span></div>
+    <div class="s11-item s11-item-muted" data-trigger-side="right"><span class="s11-x">×</span><span>Wanting to "go viral"</span></div>
+    <div class="s11-item s11-item-muted" data-trigger-side="right"><span class="s11-x">×</span><span>Businesses without a proven offer</span></div>
+  </div>
+  <div class="s11-center" data-trigger>
+    <p class="s11-tagline v2-fade-in">Virality is a lottery ticket. Positioning is a pension.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCENE 12 — Service Cards
+══════════════════════════════════════════════════════════════ -->
+<section id="s12" class="v2-scene">
+  <div class="s12-inner">
+    <div class="v2-eyebrow" style="text-align:center">What We Build</div>
+    <h2 class="s12-headline">The Architecture Behind Authority.</h2>
+    <div class="s12-card" data-trigger><p class="s12-num">01</p><h3 class="s12-title">Commercial Positioning</h3><p class="s12-body">We define how your market should perceive you — and for what commercial purpose. Not a brand deck. A revenue strategy with your name on it.</p></div>
+    <div class="s12-card" data-trigger><p class="s12-num">02</p><h3 class="s12-title">Narrative Architecture</h3><p class="s12-body">The story the market tells about you. We make sure it's the right one. Sharp frameworks, thought leadership angles, and a point of view worth having.</p></div>
+    <div class="s12-card" data-trigger><p class="s12-num">03</p><h3 class="s12-title">Strategic Visibility</h3><p class="s12-body">The right content, aimed at the right rooms. Every asset earns its place. Nothing ships that doesn't serve the position.</p></div>
+    <div class="s12-card" data-trigger><p class="s12-num">04</p><h3 class="s12-title">Revenue Infrastructure</h3><p class="s12-body">The bridge between "I've heard your name" and "I want to hire you." The invisible machinery that turns recognition into business.</p></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCENE 13 — Manifesto
+══════════════════════════════════════════════════════════════ -->
+<section id="s13" class="v2-scene">
+  <div class="v2-sticky s13-sticky">
+    <span class="s13-line" data-s13="0">The market</span>
+    <span class="s13-line" data-s13="1">is not</span>
+    <span class="s13-line" data-s13="2">rational.</span>
+    <span class="s13-break"></span>
+    <span class="s13-line" data-s13="3">It is</span>
+    <span class="s13-line" data-s13="4">perceptual.</span>
+    <span class="s13-break"></span>
+    <span class="s13-line" data-s13="5">People don't choose</span>
+    <span class="s13-line" data-s13="6">the most qualified expert.</span>
+    <span class="s13-break"></span>
+    <span class="s13-line" data-s13="7">They choose</span>
+    <span class="s13-line" data-s13="8">the one</span>
+    <span class="s13-line" data-s13="9">they already trust.</span>
+    <span class="s13-break"></span>
+    <span class="s13-line" data-s13="10">Trust is not earned</span>
+    <span class="s13-line" data-s13="11">in the meeting.</span>
+    <span class="s13-break"></span>
+    <span class="s13-line" data-s13="12">It is engineered</span>
+    <span class="s13-line" data-s13="13">before the meeting</span>
+    <span class="s13-line" data-s13="14">ever happens.</span>
+    <span class="s13-break" style="height:2rem"></span>
+    <span class="s13-line s13-line-gold" data-s13="15">That's what</span>
+    <span class="s13-line s13-line-gold" data-s13="16">we build.</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCENE 14 — Counter Strip
+══════════════════════════════════════════════════════════════ -->
+<section id="s14" class="v2-scene" data-trigger>
+  <div class="s14-grid">
+    <div><span class="s14-num" data-count="8" data-suffix="+">0+</span><p class="s14-label">Years of strategic advisory</p></div>
+    <div><span class="s14-num" data-count="12">0</span><p class="s14-label">Markets across DACH &amp; Gulf</p></div>
+    <div><span class="s14-num" data-count="94" data-suffix="%">0%</span><p class="s14-label">Client retention</p></div>
+    <div><span class="s14-num" data-count="3" data-suffix="×" data-float>0×</span><p class="s14-label">Average inbound increase in 12 months</p></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCENE 15 — Chat Bubble 3
+══════════════════════════════════════════════════════════════ -->
+<section class="v2-scene v2-scene--chat">
+  <div class="v2-chat" data-chat>
+    <div class="chat-right">"How do I know this actually delivers ROI? 🤨"</div>
+    <div class="chat-dots"><span></span><span></span><span></span></div>
+    <div class="chat-left">"Because we only measure what you'd measure."</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCENE 16 — Testimonials
+══════════════════════════════════════════════════════════════ -->
+<section id="s16" class="v2-scene">
+  <div class="s16-inner">
+    <div class="v2-eyebrow" style="text-align:center">Client Outcomes</div>
+    <h2 class="s16-headline">There's A Reason Founders Stay.</h2>
+    <div class="s16-card v2-fade-in" data-trigger>
+      <p class="s16-metric">Placeholder — 3.2× inbound increase</p>
+      <p class="s16-quote">"Replace with a real testimonial from a founder focusing on a specific commercial outcome: deals closed, inbound increase, or time-to-close reduction. Short. Specific. Unadorned."</p>
+      <p class="s16-attr">SaaS Founder, Munich</p>
+    </div>
+    <div class="s16-card v2-fade-in" data-trigger>
+      <p class="s16-metric">Placeholder — 47% shorter sales cycle</p>
+      <p class="s16-quote">"Second testimonial here. Ideally references a specific deal closed or a market position shift within a defined timeframe."</p>
+      <p class="s16-attr">Managing Partner, Dubai</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCENE 17 — Funnel Infographic
+══════════════════════════════════════════════════════════════ -->
+<section id="s17" class="v2-scene" data-trigger>
+  <div class="s17-inner">
+    <h2 class="s17-title">What happens<br>before the handshake.</h2>
+    <div class="s17-row s17-row-1"><div class="s17-track"><div class="s17-fill s17-fill-gold s17-fill-1">70%</div></div></div>
+    <p class="s17-label">of the decision is made before first contact</p>
+    <div style="height:1.5rem"></div>
+    <div class="s17-row s17-row-2"><div class="s17-track"><div class="s17-fill s17-fill-steel s17-fill-2"></div></div></div>
+    <p class="s17-label">Based on content, media presence, and peer perception</p>
+    <div style="height:1.5rem"></div>
+    <div class="s17-row s17-row-3"><div class="s17-track"><div class="s17-fill s17-fill-gold-strong s17-fill-3">Your brand</div></div></div>
+    <p class="s17-label" style="color:var(--gold)">is doing the selling</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCENE 18 — Final CTA
+══════════════════════════════════════════════════════════════ -->
+<section id="s18" class="v2-scene">
+  <div class="s18-inner">
+    <div class="v2-eyebrow">For Future Market Leaders Only</div>
+    <h2 class="s18-headline">Your Next Client<br>Is Forming An Opinion<br>About You<br>Right Now.</h2>
+    <p class="s18-body">Not tomorrow. Now. They're Googling your name. Reading your LinkedIn. Asking a colleague what they know about you.</p>
+    <span class="s18-gold">Make sure the answer<br>isn't silence.</span>
+    <div>
+      <a href="/contact" class="s18-btn">Book Your Strategy Call</a>
+    </div>
+    <p class="s18-note">Dubai-based. Serving the DACH region and the Gulf.<br>We take on a limited number of clients per quarter.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCENE 19 — Footer
+══════════════════════════════════════════════════════════════ -->
+<footer id="s19">
+  <a href="/" class="s19-logo">{site.logoInitials}</a>
+  <div class="s19-contact">
+    <a href={`mailto:${fc.email}`}>{fc.email}</a>
+    <a href={`tel:${fc.phoneTel}`}>{fc.phoneDisplay}</a>
+    <span style="color:var(--muted)">Dubai, UAE</span>
+  </div>
+  <nav class="s19-legal">
+    <a href="/legal/privacy">Privacy Policy</a>
+    <a href="/legal/imprint">Imprint</a>
+  </nav>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════════════
+     ALL JAVASCRIPT
+══════════════════════════════════════════════════════════════ -->
+<script is:inline>
+(function () {
+
+  /* ── Scene 1: Auto-carousel ───────────────────────────────── */
+  var slides = document.querySelectorAll('.s1-slide');
+  var bar = document.getElementById('s1-bar');
+  var cur = 0;
+  function nextSlide() {
+    slides[cur].classList.remove('active');
+    cur = (cur + 1) % slides.length;
+    slides[cur].classList.add('active');
+    bar.style.width = '0';
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        bar.style.width = '100%';
+      });
+    });
+  }
+  bar.style.width = '100%';
+  setInterval(nextSlide, 4000);
+
+  /* ── IntersectionObserver factory ───────────────────────────── */
+  function onEnter(selector, cb, options) {
+    var els = typeof selector === 'string' ? document.querySelectorAll(selector) : [selector];
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { cb(e.target); io.unobserve(e.target); }
+      });
+    }, Object.assign({ threshold: 0.2 }, options || {}));
+    els.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ── Scene 2: Qualifier fade ─────────────────────────────── */
+  onEnter('.s2-text', function (el) { el.classList.add('in'); });
+
+  /* ── Scene 3: Scroll-driven words ───────────────────────────── */
+  var s3 = document.getElementById('s3');
+  var s3words = s3.querySelectorAll('.s3-word');
+  var s3sub = document.getElementById('s3-sub');
+  var s3act = document.getElementById('s3-actions');
+  var TOTAL = s3words.length + 2; // words + sub + cta
+  function updateS3() {
+    var rect = s3.getBoundingClientRect();
+    var scrollable = s3.offsetHeight - window.innerHeight;
+    var pct = Math.max(0, Math.min(1, -rect.top / scrollable));
+    s3words.forEach(function (w, i) {
+      var t = (i + 1) / TOTAL;
+      var isGold = w.classList.contains('s3-word--gold');
+      if (pct >= t) {
+        w.classList.add(isGold ? 'on-gold' : 'on');
+      } else {
+        w.classList.remove('on', 'on-gold');
+      }
+    });
+    s3sub.classList.toggle('on', pct >= s3words.length / TOTAL);
+    s3act.classList.toggle('on', pct >= (s3words.length + 1) / TOTAL);
+  }
+  window.addEventListener('scroll', updateS3, { passive: true });
+
+  /* ── Scene 4: Collision ───────────────────────────────────── */
+  onEnter('#s4', function (el) {
+    setTimeout(function () {
+      el.classList.add('collide');
+      setTimeout(function () { el.classList.add('shake'); }, 120);
+    }, 200);
+  }, { threshold: 0.4 });
+
+  /* ── Scene 5: Pain slides ─────────────────────────────────── */
+  var s5 = document.getElementById('s5');
+  var s5slides = s5.querySelectorAll('.s5-slide');
+  var s5bar = document.getElementById('s5-bar');
+  function updateS5() {
+    var rect = s5.getBoundingClientRect();
+    var scrollable = s5.offsetHeight - window.innerHeight;
+    var pct = Math.max(0, Math.min(1, -rect.top / scrollable));
+    var idx = Math.min(s5slides.length - 1, Math.floor(pct * s5slides.length));
+    s5slides.forEach(function (sl, i) { sl.classList.toggle('active', i === idx); });
+    s5bar.style.width = (((idx + 1) / s5slides.length) * 100) + '%';
+  }
+  window.addEventListener('scroll', updateS5, { passive: true });
+
+  /* ── Scene 6: Diagnosis ───────────────────────────────────── */
+  var s6 = document.getElementById('s6');
+  var s6lines = s6.querySelectorAll('.s6-line');
+  var S6TOTAL = s6lines.length;
+  function updateS6() {
+    var rect = s6.getBoundingClientRect();
+    var scrollable = s6.offsetHeight - window.innerHeight;
+    var pct = Math.max(0, Math.min(1, -rect.top / scrollable));
+    s6lines.forEach(function (l, i) {
+      var t = (i + 1) / S6TOTAL;
+      l.classList.toggle(l.classList.contains('s6-line-gold') ? 'on' : 'on', pct >= t);
+    });
+  }
+  window.addEventListener('scroll', updateS6, { passive: true });
+
+  /* ── Chat bubbles ────────────────────────────────────────── */
+  onEnter('[data-chat]', function (el) { el.classList.add('fired'); }, { threshold: 0.35 });
+
+  /* ── Scene 8: Answer scroll ──────────────────────────────── */
+  var s8 = document.getElementById('s8');
+  if (s8) {
+    var s8lines = s8.querySelectorAll('[data-s8]');
+    var s8bigs = s8.querySelectorAll('[data-s8-big]');
+    var s8cta = s8.querySelector('[data-s8-cta]');
+    var S8TOTAL = s8lines.length + 2;
+    function updateS8() {
+      var rect = s8.getBoundingClientRect();
+      var scrollable = s8.offsetHeight - window.innerHeight;
+      var pct = Math.max(0, Math.min(1, -rect.top / scrollable));
+      s8lines.forEach(function (l, i) {
+        var t = (i + 1) / S8TOTAL;
+        var isLate = parseInt(l.getAttribute('data-s8'), 10) >= 8;
+        l.classList.toggle(isLate ? 'on-bright' : 'on', pct >= t);
+      });
+      s8bigs.forEach(function (b) { b.classList.toggle('on', pct >= 0.5); });
+      if (s8cta) s8cta.style.opacity = pct >= 0.9 ? '1' : '0';
+    }
+    window.addEventListener('scroll', updateS8, { passive: true });
+  }
+
+  /* ── Scene 9: Strike-through pairs ───────────────────────── */
+  var s9pairs = document.querySelectorAll('[data-s9-pair]');
+  var s9flash = document.getElementById('s9-flash');
+  var lastPair = s9pairs[s9pairs.length - 1];
+  onEnter('[data-s9-pair]', function (el) { el.classList.add('fired'); }, { threshold: 0.4 });
+  if (lastPair) {
+    onEnter(lastPair, function () {
+      setTimeout(function () {
+        if (s9flash) {
+          s9flash.classList.add('on');
+          setTimeout(function () { s9flash.classList.remove('on'); }, 500);
+        }
+      }, 1200);
+    }, { threshold: 0.8 });
+  }
+
+  /* ── Scene 11: Split items ────────────────────────────────── */
+  onEnter('[data-trigger-side]', function (el) { el.classList.add('in'); }, { threshold: 0.15 });
+
+  /* ── Scene 11 tagline + Scene 12 cards + Scene 16 cards ───── */
+  onEnter('[data-trigger]', function (el) {
+    el.classList.add('in');
+    /* funnel fills */
+    if (el.id === 's17') {
+      el.querySelectorAll('.s17-row').forEach(function (r) { r.classList.add('fired'); });
+    }
+    /* counter strip */
+    if (el.id === 's14') {
+      el.querySelectorAll('[data-count]').forEach(function (num) {
+        var target = parseFloat(num.getAttribute('data-count'));
+        var suf = num.getAttribute('data-suffix') || '';
+        var start = performance.now();
+        var dur = 2000;
+        (function tick(now) {
+          var p = Math.min((now - start) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          num.textContent = Math.round(target * eased) + suf;
+          if (p < 1) requestAnimationFrame(tick);
+        })(start);
+      });
+    }
+  }, { threshold: 0.2 });
+
+  /* s12 cards individually */
+  onEnter('.s12-card', function (el) { el.classList.add('in'); }, { threshold: 0.2 });
+  onEnter('.v2-fade-in', function (el) { el.classList.add('in'); }, { threshold: 0.2 });
+
+  /* ── Scene 13: Manifesto scroll ──────────────────────────── */
+  var s13 = document.getElementById('s13');
+  if (s13) {
+    var s13lines = s13.querySelectorAll('[data-s13]');
+    var S13TOTAL = s13lines.length;
+    function updateS13() {
+      var rect = s13.getBoundingClientRect();
+      var scrollable = s13.offsetHeight - window.innerHeight;
+      var pct = Math.max(0, Math.min(1, -rect.top / scrollable));
+      s13lines.forEach(function (l, i) {
+        var t = (i + 1) / (S13TOTAL + 1);
+        l.classList.toggle('on', pct >= t);
+      });
+    }
+    window.addEventListener('scroll', updateS13, { passive: true });
+  }
+
+  /* ── Nav opacity on scroll ───────────────────────────────── */
+  var nav = document.getElementById('v2-nav');
+  window.addEventListener('scroll', function () {
+    var solid = window.scrollY > 80;
+    nav.style.background = solid
+      ? 'color-mix(in srgb, #0C0F14 85%, transparent)'
+      : 'color-mix(in srgb, #0C0F14 55%, transparent)';
+  }, { passive: true });
+
+})();
+</script>
+</body>
+</html>
