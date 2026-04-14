@@ -81,8 +81,12 @@ main.main--landing {
   background: var(--bg);
   color: var(--t1);
   min-height: 100vh;
-  overflow-x: hidden;
   font-family: var(--fB);
+}
+
+:root[data-theme="dark"] body:has(main.main--landing),
+:root[data-theme="light"] body:has(main.main--landing) {
+  overflow-x: hidden;
 }
 
 /* ── CONTAINER ── */
@@ -381,6 +385,7 @@ main.main--landing {
 
 /* Hero uses full viewport width — NOT constrained by .lc */
 .hero-inner {
+  box-sizing: border-box;       /* key: padding doesn't expand beyond viewport */
   max-width: 1440px;
   width: 100%;
   margin-inline: auto;
@@ -405,8 +410,116 @@ main.main--landing {
   .hero-cta { justify-content: center; }
 }
 
-.hero-content {
-  max-width: none;
+.hero-content { max-width: none; }
+
+/* CSS orbital diagram */
+.hd-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.hd {
+  position: relative;
+  width: min(100%, 480px);
+  aspect-ratio: 1;
+  flex-shrink: 0;
+}
+
+.hd-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  border-radius: 50%;
+  border: 1px solid var(--accentRim);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.hd-ring--1 { width: 44%; height: 44%; }
+.hd-ring--2 { width: 64%; height: 64%; opacity: 0.7; }
+.hd-ring--3 { width: 86%; height: 86%; opacity: 0.4; }
+.hd-ring-dash {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 44%; height: 44%;
+  border-radius: 50%;
+  border: 1px dashed var(--accent);
+  opacity: 0.25;
+  transform: translate(-50%, -50%);
+  animation: ring-spin 35s linear infinite;
+}
+@keyframes ring-spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+.hd-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 55%; height: 55%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accentSoft) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.hd-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--accentSoft);
+  border: 1.5px solid var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2;
+}
+
+.hd-center::after {
+  content: '';
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* SVG lines layer — fills the diagram, lines only */
+.hd-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.hd-line { stroke: var(--accent); stroke-opacity: 0.18; stroke-width: 0.75; fill: none; }
+
+/* Node pills */
+.hd-node {
+  position: absolute;
+  left: var(--nx);
+  top: var(--ny);
+  transform: translate(-50%, -50%);
+  font-family: var(--fB);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--t1);
+  text-align: center;
+  line-height: 1.4;
+  background: var(--bg2);
+  border: 1px solid var(--accentRim);
+  border-radius: 999px;
+  padding: 5px 14px;
+  white-space: nowrap;
+  z-index: 3;
+}
+
+.hd-dot {
+  position: absolute;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  left: var(--nx);
+  top: var(--ny);
+  transform: translate(-50%, -50%);
+  z-index: 3;
 }
 
 .hero-headline { margin-bottom: 1.5rem; }
@@ -977,6 +1090,9 @@ main.main--landing {
   border: 1px solid var(--strikeClr);
   color: var(--strikeClr);
   font-size: 0.75rem;
+  /* Prevent text-decoration line-through from the parent from painting over this icon */
+  display: inline-flex;
+  text-decoration: none;
 }
 
 .diff-marker--yes {

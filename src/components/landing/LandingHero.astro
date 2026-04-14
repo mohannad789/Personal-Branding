@@ -2,9 +2,9 @@
   <div class="hero-mesh" aria-hidden="true"></div>
   <div class="hero-dots" aria-hidden="true"></div>
 
-  <!-- hero-inner deliberately NOT inside .lc — uses its own wide padding -->
+  <!-- hero-inner has its own padding — does NOT use .lc -->
   <div class="hero-inner">
-    <!-- Text content -->
+    <!-- Left: text content -->
     <div class="hero-content">
       <span class="eyebrow hero-el" style="--d:0s">Strategic Personal Branding</span>
 
@@ -47,84 +47,48 @@
       </div>
     </div>
 
-    <!-- Orbital brand diagram — uses explicit CSS vars with fallbacks on each element -->
+    <!-- Right: CSS orbital diagram — reliable rendering, no CSS-var-in-SVG issues -->
     <div class="hero-visual-wrap hero-el" style="--d:0.18s" aria-hidden="true">
-      <svg class="orbit-svg" viewBox="0 0 480 480">
-        <defs>
-          <radialGradient id="hero-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#4F8FF7" stop-opacity="0.3"/>
-            <stop offset="100%" stop-color="#4F8FF7" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="hero-glow-l" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#2563EB" stop-opacity="0.18"/>
-            <stop offset="100%" stop-color="#2563EB" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
+      <div class="hd-wrap">
+        <div class="hd">
+          <!-- Ambient glow -->
+          <div class="hd-glow"></div>
 
-        <!-- Ambient glow -->
-        <circle cx="240" cy="240" r="190" fill="url(#hero-glow)" class="orbit-bg-fill"/>
+          <!-- Orbital rings -->
+          <div class="hd-ring hd-ring--1"></div>
+          <div class="hd-ring hd-ring--2"></div>
+          <div class="hd-ring hd-ring--3"></div>
+          <div class="hd-ring-dash"></div>
 
-        <!-- Orbital rings — accent colour, very subtle -->
-        <circle cx="240" cy="240" r="95" fill="none" style="stroke: var(--accentRim, rgba(37,99,235,0.22)); stroke-width:1"/>
-        <circle cx="240" cy="240" r="152" fill="none" style="stroke: var(--accentRim, rgba(37,99,235,0.22)); stroke-width:1; opacity:0.7"/>
-        <circle cx="240" cy="240" r="205" fill="none" style="stroke: var(--accentRim, rgba(37,99,235,0.22)); stroke-width:1; opacity:0.4"/>
+          <!-- SVG layer for connecting lines only -->
+          <svg class="hd-lines" viewBox="0 0 480 480" aria-hidden="true">
+            <!-- Center at (240,240). Node positions (% × 480):
+                 N1: 83%,50% = (398,240) — right, middle ring
+                 N2: 50%,85% = (240,408) — bottom, outer ring
+                 N3: 20%,32% = (96,154)  — top-left, middle ring
+                 N4: 78%,17% = (374,82)  — top-right, outer ring -->
+            <line x1="240" y1="240" x2="398" y2="240" class="hd-line"/>
+            <line x1="240" y1="240" x2="240" y2="408" class="hd-line"/>
+            <line x1="240" y1="240" x2="96"  y2="154" class="hd-line"/>
+            <line x1="240" y1="240" x2="374" y2="82"  class="hd-line"/>
+          </svg>
 
-        <!-- Dashed ring on inner -->
-        <circle cx="240" cy="240" r="95" fill="none" style="stroke: var(--accent, #2563EB); stroke-width:0.8; stroke-dasharray:5 18; opacity:0.35"/>
+          <!-- Center node -->
+          <div class="hd-center"></div>
 
-        <!-- Center node -->
-        <circle cx="240" cy="240" r="36" style="fill: var(--accentSoft, rgba(37,99,235,0.1)); stroke: var(--accent, #2563EB); stroke-width:1.5; stroke-opacity:0.5"/>
-        <circle cx="240" cy="240" r="20" style="fill: var(--accent, #2563EB); opacity:0.15"/>
-        <circle cx="240" cy="240" r="10" style="fill: var(--accent, #2563EB)"/>
+          <!-- Node dots (at line ends) -->
+          <div class="hd-dot" style="--nx:83%;--ny:50%"></div>
+          <div class="hd-dot" style="--nx:50%;--ny:85%"></div>
+          <div class="hd-dot" style="--nx:20%;--ny:32%"></div>
+          <div class="hd-dot" style="--nx:78%;--ny:17%"></div>
 
-        <!-- NODE 1: Strategic Positioning — inner ring r=95 -->
-        <g class="on1">
-          <line x1="240" y1="240" x2="335" y2="240" style="stroke: var(--accent, #2563EB); stroke-opacity:0.2; stroke-width:0.75; fill:none"/>
-          <circle cx="335" cy="240" r="6" style="fill: var(--accent, #2563EB)"/>
-          <g transform="translate(335,240)">
-            <g class="ol1">
-              <rect x="-68" y="-32" width="136" height="24" rx="12" style="fill: var(--bg2, #fff); stroke: var(--accentRim, rgba(37,99,235,0.22)); stroke-width:1"/>
-              <text x="0" y="-16" text-anchor="middle" style="fill: var(--t1, #080D28); font-family: Inter, system-ui, sans-serif; font-size:10.5px; font-weight:500">Strategic Positioning</text>
-            </g>
-          </g>
-        </g>
-
-        <!-- NODE 2: Narrative & Messaging — middle ring r=152 -->
-        <g class="on2">
-          <line x1="240" y1="240" x2="392" y2="240" style="stroke: var(--accent, #2563EB); stroke-opacity:0.18; stroke-width:0.75; fill:none"/>
-          <circle cx="392" cy="240" r="5.5" style="fill: var(--accent, #2563EB); opacity:0.8"/>
-          <g transform="translate(392,240)">
-            <g class="ol2">
-              <rect x="-72" y="-32" width="144" height="24" rx="12" style="fill: var(--bg2, #fff); stroke: var(--accentRim, rgba(37,99,235,0.22)); stroke-width:1"/>
-              <text x="0" y="-16" text-anchor="middle" style="fill: var(--t1, #080D28); font-family: Inter, system-ui, sans-serif; font-size:10.5px; font-weight:500">Narrative &amp; Messaging</text>
-            </g>
-          </g>
-        </g>
-
-        <!-- NODE 3: Visibility Architecture — middle ring r=152, offset -->
-        <g class="on3">
-          <line x1="240" y1="240" x2="392" y2="240" style="stroke: var(--accent, #2563EB); stroke-opacity:0.18; stroke-width:0.75; fill:none"/>
-          <circle cx="392" cy="240" r="5.5" style="fill: var(--accent, #2563EB); opacity:0.8"/>
-          <g transform="translate(392,240)">
-            <g class="ol3">
-              <rect x="-68" y="-32" width="136" height="24" rx="12" style="fill: var(--bg2, #fff); stroke: var(--accentRim, rgba(37,99,235,0.22)); stroke-width:1"/>
-              <text x="0" y="-16" text-anchor="middle" style="fill: var(--t1, #080D28); font-family: Inter, system-ui, sans-serif; font-size:10.5px; font-weight:500">Visibility Architecture</text>
-            </g>
-          </g>
-        </g>
-
-        <!-- NODE 4: Conversion Infrastructure — outer ring r=205 -->
-        <g class="on4">
-          <line x1="240" y1="240" x2="445" y2="240" style="stroke: var(--accent, #2563EB); stroke-opacity:0.15; stroke-width:0.75; fill:none"/>
-          <circle cx="445" cy="240" r="5" style="fill: var(--accent, #2563EB); opacity:0.65"/>
-          <g transform="translate(445,240)">
-            <g class="ol4">
-              <rect x="-76" y="-32" width="152" height="24" rx="12" style="fill: var(--bg2, #fff); stroke: var(--accentRim, rgba(37,99,235,0.22)); stroke-width:1"/>
-              <text x="0" y="-16" text-anchor="middle" style="fill: var(--t1, #080D28); font-family: Inter, system-ui, sans-serif; font-size:10.5px; font-weight:500">Conversion Infrastructure</text>
-            </g>
-          </g>
-        </g>
-      </svg>
+          <!-- Node label pills -->
+          <div class="hd-node" style="--nx:83%;--ny:50%">Strategic Positioning</div>
+          <div class="hd-node" style="--nx:50%;--ny:85%">Narrative &amp; Messaging</div>
+          <div class="hd-node" style="--nx:20%;--ny:32%">Visibility Architecture</div>
+          <div class="hd-node" style="--nx:78%;--ny:17%">Conversion Infrastructure</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -138,7 +102,6 @@
   animation: hero-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: var(--d, 0s);
 }
-
 @keyframes hero-in {
   to { opacity: 1; transform: none; }
 }
