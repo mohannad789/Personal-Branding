@@ -1,108 +1,225 @@
-<section class="hero sec">
-  <div class="hero-mesh" aria-hidden="true"></div>
-  <div class="hero-dots" aria-hidden="true"></div>
+<section class="lp-hero" id="hero">
 
-  <!-- hero-inner has its own padding — does NOT use .lc -->
-  <div class="hero-inner">
-    <!-- Left: text content -->
-    <div class="hero-content">
-      <span class="eyebrow hero-el" style="--d:0s">Strategic Personal Branding</span>
-
-      <h1 class="display hero-headline hero-el" style="--d:0.1s">
-        Your expertise<br>closes deals.<br>
-        <span class="hl-accent">Your brand</span><br>should open them.
-      </h1>
-
-      <p class="hero-sub hero-el" style="--d:0.22s">
-        Strategic personal branding for entrepreneurs who've outgrown word of mouth,
-        and need the market to catch up with what their clients already know.
-      </p>
-
-      <ul class="hero-adv hero-el" style="--d:0.32s" aria-label="Key advantages">
-        <li>
-          <span class="hero-adv-dot" aria-hidden="true"></span>
-          Inbound leads from markets that have never heard your name
-        </li>
-        <li>
-          <span class="hero-adv-dot" aria-hidden="true"></span>
-          A brand position that sells before you enter the room
-        </li>
-        <li>
-          <span class="hero-adv-dot" aria-hidden="true"></span>
-          Shorter sales cycles with prospects who arrive pre-sold
-        </li>
-        <li>
-          <span class="hero-adv-dot" aria-hidden="true"></span>
-          Authority that compounds like equity
-        </li>
-      </ul>
-
-      <div class="hero-cta hero-el" style="--d:0.42s">
-        <a href="/contact" class="btn btn--primary">
-          Book a Strategy Call
-          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
-            <path d="M2 7.5h11M8.5 3l4.5 4.5L8.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- Right: CSS orbital diagram — reliable rendering, no CSS-var-in-SVG issues -->
-    <div class="hero-visual-wrap hero-el" style="--d:0.18s" aria-hidden="true">
-      <div class="hd-wrap">
-        <div class="hd">
-          <!-- Ambient glow -->
-          <div class="hd-glow"></div>
-
-          <!-- Orbital rings -->
-          <div class="hd-ring hd-ring--1"></div>
-          <div class="hd-ring hd-ring--2"></div>
-          <div class="hd-ring hd-ring--3"></div>
-          <div class="hd-ring-dash"></div>
-
-          <!-- SVG layer for connecting lines only -->
-          <svg class="hd-lines" viewBox="0 0 480 480" aria-hidden="true">
-            <!-- Center at (240,240). Node positions (% × 480):
-                 N1: 83%,50% = (398,240) — right, middle ring
-                 N2: 50%,85% = (240,408) — bottom, outer ring
-                 N3: 20%,32% = (96,154)  — top-left, middle ring
-                 N4: 78%,17% = (374,82)  — top-right, outer ring -->
-            <line x1="240" y1="240" x2="398" y2="240" class="hd-line"/>
-            <line x1="240" y1="240" x2="240" y2="408" class="hd-line"/>
-            <line x1="240" y1="240" x2="96"  y2="154" class="hd-line"/>
-            <line x1="240" y1="240" x2="374" y2="82"  class="hd-line"/>
-          </svg>
-
-          <!-- Center node -->
-          <div class="hd-center"></div>
-
-          <!-- Node dots (at line ends) -->
-          <div class="hd-dot" style="--nx:83%;--ny:50%"></div>
-          <div class="hd-dot" style="--nx:50%;--ny:85%"></div>
-          <div class="hd-dot" style="--nx:20%;--ny:32%"></div>
-          <div class="hd-dot" style="--nx:78%;--ny:17%"></div>
-
-          <!-- Node label pills -->
-          <div class="hd-node" style="--nx:83%;--ny:50%">Strategic Positioning</div>
-          <div class="hd-node" style="--nx:50%;--ny:85%">Narrative &amp; Messaging</div>
-          <div class="hd-node" style="--nx:20%;--ny:32%">Visibility Architecture</div>
-          <div class="hd-node" style="--nx:78%;--ny:17%">Conversion Infrastructure</div>
-        </div>
-      </div>
-    </div>
+  <!-- Layered background: gradient mesh + dot grid -->
+  <div class="lp-hero-bg" aria-hidden="true">
+    <div class="lp-hero-mesh"></div>
+    <div class="lp-hero-dots"></div>
   </div>
 
-  <div class="hero-scroll" aria-hidden="true"></div>
+  <!-- Single centered content column -->
+  <div class="lp-hero-body">
+
+    <span class="lp-hero-eyebrow">Strategic Personal Branding</span>
+
+    <h1 class="lp-hero-h1">
+      Your expertise closes deals.<br>
+      <span class="lp-hero-h1-accent">Your brand should open them.</span>
+    </h1>
+
+    <p class="lp-hero-sub">
+      For entrepreneurs who've outgrown word of mouth, and need the market
+      to catch up with what their clients already know.
+    </p>
+
+    <ul class="lp-hero-adv" aria-label="Key advantages">
+      <li>Inbound leads from markets that have never heard your name</li>
+      <li>A brand position that sells before you enter the room</li>
+      <li>Shorter sales cycles with prospects who arrive pre-sold</li>
+      <li>Authority that compounds like equity</li>
+    </ul>
+
+    <a href="/contact" class="lp-hero-cta">
+      Book a Strategy Call
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+
+  </div>
+
+  <!-- Subtle scroll cue -->
+  <div class="lp-hero-cue" aria-hidden="true"></div>
+
 </section>
 
 <style>
-.hero-el {
-  opacity: 0;
-  transform: translateY(24px);
-  animation: hero-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: var(--d, 0s);
+/* ─── Hero — all styles self-contained, no class conflicts ───────────────── */
+
+.lp-hero {
+  /* Section fills body width. Body.is-landing has no max-width. */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100svh;
+  padding: clamp(7rem, 12vw, 11rem) clamp(1.5rem, 5vw, 3.5rem) clamp(5rem, 8vw, 8rem);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
 }
-@keyframes hero-in {
-  to { opacity: 1; transform: none; }
+
+/* Background layers */
+.lp-hero-bg { position: absolute; inset: 0; pointer-events: none; }
+
+.lp-hero-mesh {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 65% 55% at 80% 10%, var(--mesh1, rgba(79,143,247,0.22)) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 50% at 10% 85%, var(--mesh2, rgba(129,140,248,0.14)) 0%, transparent 60%);
+}
+
+.lp-hero-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--dot, rgba(79,143,247,0.06)) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.5;
+}
+
+/* Content column — max-width just controls line length, section is still 100% wide */
+.lp-hero-body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+  max-width: 860px;
+  width: 100%;
+  animation: lp-hero-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.05s;
+}
+
+@keyframes lp-hero-in {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Eyebrow */
+.lp-hero-eyebrow {
+  display: inline-block;
+  font-family: var(--fB, "Inter", sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent, #4F8FF7);
+}
+
+/* Main headline */
+.lp-hero-h1 {
+  font-family: var(--fH, "Satoshi", sans-serif);
+  font-weight: 800;
+  font-size: clamp(2.75rem, 6vw, 5.5rem);
+  line-height: 1.06;
+  letter-spacing: -0.04em;
+  color: var(--t1, #DCE4FF);
+  margin: 0;
+}
+
+.lp-hero-h1-accent {
+  color: var(--accent, #4F8FF7);
+}
+
+/* Sub headline */
+.lp-hero-sub {
+  font-family: var(--fB, "Inter", sans-serif);
+  font-size: clamp(1rem, 1.5vw, 1.175rem);
+  line-height: 1.75;
+  color: var(--t2, #7A8DB5);
+  max-width: 52ch;
+  margin: 0;
+}
+
+/* Advantages grid */
+.lp-hero-adv {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.625rem;
+  width: 100%;
+  max-width: 700px;
+  text-align: left;
+}
+
+@media (max-width: 560px) {
+  .lp-hero-adv { grid-template-columns: 1fr; }
+}
+
+.lp-hero-adv li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  font-family: var(--fB, "Inter", sans-serif);
+  font-size: 0.9rem;
+  color: var(--t2, #7A8DB5);
+  line-height: 1.55;
+  padding: 0.75rem 1rem;
+  background: var(--gBg, rgba(11,14,28,0.6));
+  border: 1px solid var(--gB, rgba(255,255,255,0.09));
+  border-radius: 12px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.lp-hero-adv li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent, #4F8FF7);
+  margin-top: 6px;
+  opacity: 0.75;
+}
+
+/* CTA button */
+.lp-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.0625rem 2.75rem;
+  font-family: var(--fB, "Inter", sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent, #4F8FF7);
+  border: none;
+  border-radius: 999px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.2s;
+  margin-top: 0.5rem;
+}
+
+.lp-hero-cta:hover {
+  background: var(--accentH, #6FA5FF);
+  transform: translateY(-2px);
+}
+
+/* Scroll cue */
+.lp-hero-cue {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, transparent, var(--accent, #4F8FF7), transparent);
+  animation: lp-cue-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes lp-cue-pulse {
+  0%, 100% { opacity: 0.15; }
+  50%       { opacity: 0.55; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-hero-body { animation: none; opacity: 1; transform: none; }
+  .lp-hero-cue  { animation: none; }
 }
 </style>
