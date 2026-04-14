@@ -1,30 +1,42 @@
----
-import { landing } from "../../content/landing";
-import InfographicTransform from "./infographics/InfographicTransform.astro";
+<section class="sec" id="who" aria-labelledby="who-h">
+  <div class="lc">
+    <div class="who-inner">
+      <!-- Left: copy -->
+      <div>
+        <span class="eyebrow rv">Who This Is For</span>
+        <h2 id="who-h" class="h2 rv" style="transition-delay:0.08s;margin-bottom:2rem">
+          Built for founders who measure in revenue, not reach.
+        </h2>
 
-const s = landing.who;
-const lastP = s.paragraphs[s.paragraphs.length - 1];
-const bodyPs = s.paragraphs.slice(0, -1);
----
-
-<section class="lp-section" aria-labelledby="lp-who-h">
-  <div class="lp-container">
-    <div class="lp-who-grid">
-      <div class="lp-who-left lp-anim--slide-left" data-anim>
-        <span class="lp-eyebrow">Who This Is For</span>
-        <h2 id="lp-who-h" class="lp-h2">{s.title}</h2>
+        <div class="body-lg rv" style="transition-delay:0.18s">
+          <p>
+            This is for entrepreneurs and business owners who've already proven they can build.
+            What they haven't built yet is the market position that matches their actual calibre.
+          </p>
+          <p>
+            You operate in sectors where trust isn't optional — it's the transaction. You don't need
+            someone to teach you LinkedIn. You need someone to make your market position so clear that
+            the right clients feel foolish going elsewhere.
+          </p>
+          <p>
+            We're not here to restore your faith in personal branding agencies. We're here to make the
+            distinction irrelevant by delivering something you can measure.
+          </p>
+        </div>
       </div>
 
-      <div class="lp-who-divider" aria-hidden="true"></div>
-
-      <div class="lp-who-right lp-body lp-anim--slide-right" data-anim>
-        {bodyPs.map((p) => (
-          <p>{p}</p>
-        ))}
-        <p class="lp-who-closing">{lastP}</p>
+      <!-- Right: criteria glass card -->
+      <div class="glass who-criteria rv rv--r" style="transition-delay:0.24s">
+        <p class="who-criteria-title">You may be a fit if</p>
+        <ul class="who-list">
+          <li class="who-item">You've built something real, but the market doesn't reflect it yet</li>
+          <li class="who-item">Your revenue comes from reputation, not inbound demand</li>
+          <li class="who-item">Competitors with less experience close deals you should be winning</li>
+          <li class="who-item">You've hired for content before and got posts instead of pipeline</li>
+          <li class="who-item">You operate where trust is the transaction, not a feature</li>
+          <li class="who-item">You measure results in revenue, not reach or follower counts</li>
+        </ul>
       </div>
     </div>
-
-    <InfographicTransform />
   </div>
 </section>

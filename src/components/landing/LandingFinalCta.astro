@@ -1,18 +1,28 @@
----
-import { landing } from "../../content/landing";
-const s = landing.finalCta;
----
+<section class="sec final-cta" aria-labelledby="cta-h">
+  <div class="final-cta-mesh" aria-hidden="true"></div>
 
-<section class="lp-section lp-final-cta" aria-labelledby="lp-final-h">
-  <div class="lp-final-cta-inner">
-    <span class="lp-eyebrow lp-anim" data-anim>Next Step</span>
-    <h2 id="lp-final-h" class="lp-h2 lp-anim" data-anim style="transition-delay: 0.15s;">{s.headline}</h2>
-    <div class="lp-body lp-anim" data-anim style="transition-delay: 0.3s;">
-      <p>{s.body}</p>
-    </div>
-    <div class="lp-anim" data-anim style="transition-delay: 0.45s;">
-      <a class="lp-btn-accent lp-btn-accent--lg lp-btn-pulse" href={s.ctaHref}>{s.ctaLabel}</a>
-      <p class="lp-final-support">{s.supportingLine}</p>
+  <div class="final-cta-inner lc">
+    <span class="eyebrow rv" style="color:rgba(79,143,247,0.7);transition-delay:0s">Next Step</span>
+
+    <h2 id="cta-h" class="final-cta-h2 rv" style="transition-delay:0.1s">
+      Your next client is forming an opinion about you right now.<br>
+      Make sure it's the right one.
+    </h2>
+
+    <p class="final-cta-body rv" style="transition-delay:0.2s">
+      A 30-minute strategy call. No pitch deck. No pressure. Just a clear-eyed look at where
+      your personal brand stands today, and what the gap between your reputation and your revenue
+      is actually costing you.
+    </p>
+
+    <div class="rv" style="transition-delay:0.3s">
+      <a href="/contact" class="btn btn--primary" style="font-size:1rem;padding:1.125rem 3rem">
+        Book Your Strategy Call
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M2 8h12M8.5 3.5L14 8l-5.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <p class="final-cta-support">Dubai-based. Serving the DACH region and the Gulf.</p>
     </div>
   </div>
 </section>

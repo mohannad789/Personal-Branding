@@ -1,26 +1,59 @@
----
-import { landing } from "../../content/landing";
-
-const s = landing.proof;
----
-
-<section class="lp-section" aria-labelledby="lp-proof-h">
-  <div class="lp-container">
-    <div class="lp-proof-header lp-anim" data-anim>
-      <span class="lp-eyebrow">Client Outcomes</span>
-      <h2 id="lp-proof-h" class="lp-h2" style="margin-inline: auto; max-width: 28ch; text-align: center;">{s.title}</h2>
+<section class="sec" aria-labelledby="proof-h">
+  <div class="lc">
+    <div class="proof-header">
+      <span class="eyebrow rv">Results</span>
+      <h2 id="proof-h" class="h2 rv" style="transition-delay:0.08s">
+        Don't take our word for it.<br>
+        <span style="opacity:0.45;font-weight:500;font-size:0.75em">(That would rather defeat the point.)</span>
+      </h2>
     </div>
 
-    <div class="lp-testimonials">
-      {s.placeholderCards.map((card, i) => (
-        <article class="lp-testimonial lp-anim" data-anim style={`transition-delay: ${i * 0.15}s;`}>
-          <blockquote class="lp-testimonial-quote">{card.quote}</blockquote>
-          <footer>
-            <span class="lp-testimonial-name">{card.attribution}</span>
-            <span class="lp-testimonial-role">{card.company}</span>
-          </footer>
-        </article>
-      ))}
+    <div class="proof-grid">
+
+      <article class="glass tcard rv rv--s" style="transition-delay:0.1s">
+        <p class="tcard-placeholder">
+          "Placeholder — founder testimonial focusing on a specific commercial outcome:
+          inbound pipeline increase, time-to-close reduction, or calibre of inbound enquiries."
+        </p>
+        <div class="tcard-person">
+          <div class="tcard-avatar" aria-hidden="true">A</div>
+          <div>
+            <span class="tcard-name">Founder Name</span>
+            <span class="tcard-role">CEO, Company · Industry</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="glass tcard rv rv--s" style="transition-delay:0.2s">
+        <p class="tcard-placeholder">
+          "Placeholder — second testimonial. Ideally references a specific deal closed,
+          an investor or partner relationship opened, or a market position shift that
+          happened within a defined timeframe."
+        </p>
+        <div class="tcard-person">
+          <div class="tcard-avatar" aria-hidden="true">B</div>
+          <div>
+            <span class="tcard-name">Founder Name</span>
+            <span class="tcard-role">Founder, Company · Industry</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="glass tcard rv rv--s" style="transition-delay:0.3s">
+        <p class="tcard-placeholder">
+          "Placeholder — third testimonial. Short, specific, unadorned. No superlatives.
+          Let the result speak: 'We closed three inbound deals in the first quarter.
+          None of them had heard of us six months prior.'"
+        </p>
+        <div class="tcard-person">
+          <div class="tcard-avatar" aria-hidden="true">C</div>
+          <div>
+            <span class="tcard-name">Founder Name</span>
+            <span class="tcard-role">Managing Partner, Company · Industry</span>
+          </div>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>

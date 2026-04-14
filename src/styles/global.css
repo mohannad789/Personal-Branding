@@ -153,59 +153,50 @@ body {
   color: var(--text);
 }
 
-.theme-switch {
+/* ── Global theme icon button (used outside landing) ── */
+.theme-icon-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
   border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 3px;
+  border-radius: 50%;
   background: var(--bg-elevated);
+  color: var(--text-muted);
+  cursor: pointer;
   flex-shrink: 0;
+  overflow: hidden;
+  transition: color 0.2s, border-color 0.2s;
 }
 
-.theme-switch--icons {
-  padding: 2px;
-  gap: 0;
-}
+.theme-icon-btn:hover { color: var(--text); }
 
-.theme-switch--icons button {
-  padding: 0.42rem;
-  min-width: 2.25rem;
-  min-height: 2.25rem;
-  display: inline-flex;
+.ti-icons {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.theme-switch--icons button svg {
-  display: block;
+.ti-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.7) rotate(-30deg);
+  transition: opacity 0.25s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
 }
 
-.theme-switch button {
-  border: none;
-  background: transparent;
-  padding: 0.4rem 0.85rem;
-  border-radius: 999px;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  line-height: 1.2;
-}
-
-.theme-switch button:hover {
-  color: var(--text);
-}
-
-.theme-switch button[aria-pressed="true"] {
-  background: var(--accent);
-  color: var(--on-accent);
-}
-
-.theme-switch button:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+.ti-icon.active {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
 }
 
 main {

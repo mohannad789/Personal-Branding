@@ -1,30 +1,53 @@
----
-import { landing } from "../../content/landing";
-import InfographicTrustGap from "./infographics/InfographicTrustGap.astro";
+<section class="sec" id="problem" aria-labelledby="problem-h">
+  <div class="lc">
+    <div class="problem-inner">
+      <!-- Left: copy -->
+      <div>
+        <span class="eyebrow rv">The Problem</span>
+        <h2 id="problem-h" class="h2 rv" style="transition-delay:0.08s;margin-bottom:2rem">
+          Two founders. Same problem.<br>Different disguise.
+        </h2>
 
-const s = landing.problem;
-const bodyParagraphs = s.paragraphs;
----
+        <div class="body-lg rv" style="transition-delay:0.16s">
+          <p>
+            You built something real. The product works, the clients stay, referrals trickle in.
+            But outside your existing circle? Silence. You're the best-kept secret in your industry,
+            and that's not the compliment it sounds like.
+          </p>
+          <p>
+            Or perhaps you're not invisible at all. You post. You publish. You show up. And yet the
+            leads are tepid, the deals take too long, and the people who find you don't understand
+            what you actually do. Activity without architecture is just noise with a content calendar.
+          </p>
+          <p>
+            That gap between what you've built and what the market sees? That's not a marketing problem.
+            That's a strategic one.
+          </p>
+        </div>
 
-<section class="lp-section" aria-labelledby="lp-problem-h">
-  <div class="lp-container">
-    <div class="lp-problem-grid">
-      <div class="lp-problem-left lp-anim--slide-left" data-anim>
-        <span class="lp-eyebrow">The Problem</span>
-        <h2 id="lp-problem-h" class="lp-h2">{s.title}</h2>
+        <blockquote class="problem-pull rv" style="transition-delay:0.28s">
+          You have a reputation, but not a brand. One requires proximity. The other works while you sleep.
+        </blockquote>
       </div>
-      <div class="lp-problem-right lp-body lp-anim--slide-right" data-anim>
-        {bodyParagraphs.map((p) => (
-          <p>{p}</p>
-        ))}
+
+      <!-- Right: data as typographic elements -->
+      <div class="problem-stats in-view" data-anim-stats>
+        <div class="p-stat rv" style="transition-delay:0.1s">
+          <span class="p-stat-num">82<span style="font-size:0.55em">%</span></span>
+          <p class="p-stat-label">of B2B buyers trust a founder's personal content over corporate marketing</p>
+        </div>
+        <div class="p-stat rv" style="transition-delay:0.2s">
+          <span class="p-stat-num">73<span style="font-size:0.55em">%</span></span>
+          <p class="p-stat-label">of B2B decisions are influenced by the seller's personal reputation</p>
+        </div>
+        <div class="p-stat rv" style="transition-delay:0.3s">
+          <span class="p-stat-num">65<span style="font-size:0.55em">%</span></span>
+          <p class="p-stat-label">of executives say thought leadership directly influenced a purchasing decision</p>
+        </div>
+        <p style="font-family:var(--fB);font-size:0.5625rem;color:var(--t3);margin-top:1.5rem">
+          Sources: Edelman Trust Barometer 2024 · LinkedIn B2B Thought Leadership Impact Study
+        </p>
       </div>
     </div>
-
-    <div class="lp-pull-quote lp-anim" data-anim>
-      <p>{s.pullQuote}</p>
-      <span class="lp-pull-quote-line" aria-hidden="true"></span>
-    </div>
-
-    <InfographicTrustGap />
   </div>
 </section>

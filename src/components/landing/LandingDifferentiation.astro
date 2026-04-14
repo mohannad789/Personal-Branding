@@ -1,21 +1,81 @@
----
-import { landing } from "../../content/landing";
-const s = landing.differentiation;
----
+<section class="sec" aria-labelledby="diff-h">
+  <div class="lc">
+    <div class="diff-inner">
+      <span class="eyebrow rv">Our Principles</span>
+      <h2 id="diff-h" class="h2 rv" style="transition-delay:0.08s;margin-bottom:0">
+        What you won't find here.
+      </h2>
 
-<section class="lp-section" aria-labelledby="lp-diff-h">
-  <div class="lp-container">
-    <span class="lp-eyebrow lp-anim" data-anim>The Difference</span>
+      <div class="diff-grid rv rv--s" style="transition-delay:0.2s">
+        <!-- What you WON'T find -->
+        <div>
+          <p class="diff-col-label diff-col-label--no">Won't find</p>
+          <ul class="diff-list">
+            <li class="diff-item diff-item--no">
+              <span class="diff-marker diff-marker--no" aria-hidden="true">×</span>
+              Templated strategies
+            </li>
+            <li class="diff-item diff-item--no">
+              <span class="diff-marker diff-marker--no" aria-hidden="true">×</span>
+              Recycled playbooks
+            </li>
+            <li class="diff-item diff-item--no">
+              <span class="diff-marker diff-marker--no" aria-hidden="true">×</span>
+              Junior teams handling senior accounts
+            </li>
+            <li class="diff-item diff-item--no">
+              <span class="diff-marker diff-marker--no" aria-hidden="true">×</span>
+              Retainers optimised for activity metrics
+            </li>
+            <li class="diff-item diff-item--no">
+              <span class="diff-marker diff-marker--no" aria-hidden="true">×</span>
+              Telling you what you want to hear
+            </li>
+            <li class="diff-item diff-item--no">
+              <span class="diff-marker diff-marker--no" aria-hidden="true">×</span>
+              Content calendars instead of strategy
+            </li>
+          </ul>
+        </div>
 
-    <div class="lp-diff-statements">
-      {s.negatives.map((stmt, i) => (
-        <p class="lp-diff-statement lp-anim" data-anim style={`transition-delay: ${i * 0.3}s;`}>{stmt}</p>
-      ))}
-    </div>
+        <!-- What you WILL find -->
+        <div>
+          <p class="diff-col-label diff-col-label--yes">Will find</p>
+          <ul class="diff-list">
+            <li class="diff-item diff-item--yes">
+              <span class="diff-marker diff-marker--yes" aria-hidden="true">✓</span>
+              Senior-led, deliberately small team
+            </li>
+            <li class="diff-item diff-item--yes">
+              <span class="diff-marker diff-marker--yes" aria-hidden="true">✓</span>
+              Strategy built around your commercial goals
+            </li>
+            <li class="diff-item diff-item--yes">
+              <span class="diff-marker diff-marker--yes" aria-hidden="true">✓</span>
+              Candour over comfort
+            </li>
+            <li class="diff-item diff-item--yes">
+              <span class="diff-marker diff-marker--yes" aria-hidden="true">✓</span>
+              Results measured in revenue, not reach
+            </li>
+            <li class="diff-item diff-item--yes">
+              <span class="diff-marker diff-marker--yes" aria-hidden="true">✓</span>
+              Obsessive attention to the invisible details
+            </li>
+            <li class="diff-item diff-item--yes">
+              <span class="diff-marker diff-marker--yes" aria-hidden="true">✓</span>
+              A position that appreciates like equity
+            </li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="lp-diff-positive lp-body lp-anim" data-anim>
-      <p>{s.positive}</p>
-      <p class="lp-diff-signature">{s.signature}</p>
+      <p class="diff-note rv" style="transition-delay:0.32s">
+        Dubai-based. DACH focused. A deliberately small, senior-led operation that treats your
+        brand position with the same precision you'd expect from any strategic investment.
+        Obsessive about the details that most people never see — because those are the ones
+        that do the real work.
+      </p>
     </div>
   </div>
 </section>

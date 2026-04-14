@@ -1,26 +1,102 @@
----
-import { landing } from "../../content/landing";
-const s = landing.services;
----
-
-<section class="lp-section" id="services" aria-labelledby="lp-services-h">
-  <div class="lp-container">
-    <div class="lp-services-header lp-anim" data-anim>
-      <span class="lp-eyebrow">What We Do</span>
-      <h2 id="lp-services-h" class="lp-h2" style="margin-inline: auto; max-width: 24ch; text-align: center;">{s.title}</h2>
-      <div class="lp-body">
-        <p>{s.intro}</p>
-      </div>
+<section class="sec" id="services" aria-labelledby="svc-h">
+  <div class="lc">
+    <div class="services-header">
+      <span class="eyebrow rv">What We Build</span>
+      <h2 id="svc-h" class="h2 rv" style="transition-delay:0.08s;margin-bottom:1rem">
+        The architecture behind authority.
+      </h2>
+      <p class="body-lg services-intro rv" style="transition-delay:0.16s">
+        Every engagement starts with strategy. Not templates. Not tactics. A clear-eyed
+        diagnosis of where you stand, where you should stand, and the shortest line between the two.
+      </p>
     </div>
 
-    <div class="lp-services-grid">
-      {s.pillars.map((pillar, i) => (
-        <article class="lp-service-card lp-anim" data-anim style={`transition-delay: ${i * 0.15}s;`}>
-          <span class="lp-service-num">0{i + 1}</span>
-          <h3 class="lp-service-title">{pillar.title}</h3>
-          <p class="lp-service-body">{pillar.body}</p>
-        </article>
-      ))}
+    <div class="services-grid">
+
+      <!-- 1: Strategic Positioning -->
+      <article class="glass svc-card rv rv--s" style="transition-delay:0.1s">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem">
+          <div class="svc-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="9"/>
+              <circle cx="11" cy="11" r="4"/>
+              <circle cx="11" cy="11" r="1" fill="currentColor"/>
+              <line x1="11" y1="2" x2="11" y2="5"/>
+              <line x1="11" y1="17" x2="11" y2="20"/>
+              <line x1="2" y1="11" x2="5" y2="11"/>
+              <line x1="17" y1="11" x2="20" y2="11"/>
+            </svg>
+          </div>
+          <span class="svc-num">01</span>
+        </div>
+        <h3 class="svc-title">Strategic Positioning</h3>
+        <p class="svc-body">
+          We define how you should be perceived, by whom, in what context, and to what end.
+          A commercial positioning exercise with one question at its centre: what does your brand
+          need to make true for revenue to follow?
+        </p>
+      </article>
+
+      <!-- 2: Narrative & Messaging -->
+      <article class="glass svc-card rv rv--s" style="transition-delay:0.18s">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem">
+          <div class="svc-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 3H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h5l3 3 3-3h3a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/>
+              <line x1="6" y1="8" x2="16" y2="8"/>
+              <line x1="6" y1="12" x2="12" y2="12"/>
+            </svg>
+          </div>
+          <span class="svc-num">02</span>
+        </div>
+        <h3 class="svc-title">Narrative & Messaging</h3>
+        <p class="svc-body">
+          Sharp messaging frameworks, thought leadership angles, and a point of view worth having.
+          The kind that makes people remember what you said at dinner, not just that you were there.
+          An actual edge.
+        </p>
+      </article>
+
+      <!-- 3: Visibility Architecture -->
+      <article class="glass svc-card rv rv--s" style="transition-delay:0.26s">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem">
+          <div class="svc-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="11,2 20,20 2,20"/>
+              <line x1="11" y1="8" x2="11" y2="14"/>
+              <line x1="11" y1="17" x2="11" y2="18"/>
+            </svg>
+          </div>
+          <span class="svc-num">03</span>
+        </div>
+        <h3 class="svc-title">Visibility Architecture</h3>
+        <p class="svc-body">
+          The right content, on the right platforms, aimed at the right rooms. Media placements,
+          keynote positioning, strategic publishing, LinkedIn done with intent. Every asset earns
+          its place or it doesn't exist.
+        </p>
+      </article>
+
+      <!-- 4: Conversion Infrastructure -->
+      <article class="glass svc-card rv rv--s" style="transition-delay:0.34s">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem">
+          <div class="svc-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 4h14l-3 7H7z"/>
+              <path d="M7 11l-2 7h12l-2-7"/>
+              <circle cx="11" cy="19" r="1" fill="currentColor"/>
+            </svg>
+          </div>
+          <span class="svc-num">04</span>
+        </div>
+        <h3 class="svc-title">Conversion Infrastructure</h3>
+        <p class="svc-body">
+          Visibility without conversion is vanity. We build the bridge between "I've seen your name"
+          and "I want to work with you" — from inbound funnels to the subtle signals that turn a
+          warm lead into a closed deal.
+        </p>
+      </article>
+
     </div>
   </div>
 </section>

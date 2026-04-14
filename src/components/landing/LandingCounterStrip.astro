@@ -1,17 +1,18 @@
----
-import { landing } from "../../content/landing";
-const counters = landing.counters;
----
-
-<section class="lp-section lp-counter-strip" aria-label="Key metrics">
-  <div class="lp-container">
-    <ul class="lp-counters lp-anim" data-anim data-counters>
-      {counters.map((c) => (
-        <li>
-          <span class="lp-counter-num" data-target={String(c.value)} data-suffix={c.suffix}>0</span>
-          <span class="lp-counter-label">{c.label}</span>
-        </li>
-      ))}
-    </ul>
+<div class="stats-strip" data-stat-strip>
+  <div class="lc">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <span class="stat-num" data-count="82" data-suffix="%">0%</span>
+        <p class="stat-label">of B2B buyers trust a founder's content over corporate marketing</p>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">3×</span>
+        <p class="stat-label">higher engagement on thought leadership vs. corporate brand content</p>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" data-count="47" data-suffix="%">0%</span>
+        <p class="stat-label">shorter sales cycle when buyers encounter thought leadership first</p>
+      </div>
+    </div>
   </div>
-</section>
+</div>

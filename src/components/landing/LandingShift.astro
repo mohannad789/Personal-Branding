@@ -1,25 +1,65 @@
----
-import { landing } from "../../content/landing";
-const s = landing.shift;
----
+<section class="sec" id="approach" aria-labelledby="shift-h">
+  <div class="lc">
+    <div class="shift-inner">
+      <span class="eyebrow rv">The Difference That Matters</span>
+      <h2 id="shift-h" class="h2 shift-h2 rv" style="transition-delay:0.08s">
+        Reputation gets you in the room.<br>Brand gets the room to come to you.
+      </h2>
 
-<section class="lp-section lp-shift" id="approach" aria-labelledby="lp-shift-h">
-  <div class="lp-container">
-    <div class="lp-anim" data-anim>
-      <span class="lp-eyebrow" style="text-align: center; display: block;">The Shift</span>
-      <h2 id="lp-shift-h" class="lp-h2" style="text-align: center; max-width: 22ch; margin-inline: auto;">{s.title}</h2>
-    </div>
+      <!-- Presence vs Position glass card -->
+      <div class="glass pvp-card rv rv--s" style="transition-delay:0.2s">
+        <div class="pvp-grid">
+          <!-- Presence column -->
+          <div>
+            <p class="pvp-col-label pvp-col-label--muted">Presence</p>
+            <ul class="pvp-items" aria-label="Presence characteristics">
+              <li class="pvp-item pvp-item--muted">Volume over signal</li>
+              <li class="pvp-item pvp-item--muted">More platforms</li>
+              <li class="pvp-item pvp-item--muted">Follower counts</li>
+              <li class="pvp-item pvp-item--muted">Campaign peaks</li>
+              <li class="pvp-item pvp-item--muted">Activity metrics</li>
+            </ul>
+          </div>
+          <!-- Divider -->
+          <div class="pvp-divider">
+            <div class="pvp-line"></div>
+          </div>
+          <!-- Position column -->
+          <div>
+            <p class="pvp-col-label pvp-col-label--active">Position</p>
+            <ul class="pvp-items" aria-label="Position characteristics">
+              <li class="pvp-item pvp-item--active">Precision over noise</li>
+              <li class="pvp-item pvp-item--active">Right markets</li>
+              <li class="pvp-item pvp-item--active">Revenue outcomes</li>
+              <li class="pvp-item pvp-item--active">Compound equity</li>
+              <li class="pvp-item pvp-item--active">Commercial results</li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-    <div class="lp-shift-key lp-anim--scale" data-anim>{s.keyPhrase}</div>
+      <div class="shift-body body-lg rv" style="transition-delay:0.3s">
+        <p>
+          Most agencies will build you a presence. We build you a position.
+          The kind that makes a prospect feel like they already know you before the first handshake.
+          The kind that shortens sales cycles, inflates deal sizes, and turns inbound enquiries from
+          strangers into conversations that sound like referrals.
+        </p>
+        <p>
+          We don't manufacture personas. We clarify what's already true about you,
+          then make sure the market can see it clearly. The result isn't a louder you.
+          It's a more legible one.
+        </p>
+      </div>
 
-    <div class="lp-body lp-anim" data-anim style="max-width: var(--lp-text-max); margin-inline: auto;">
-      {s.paragraphs.map((p) => (
-        <p>{p}</p>
-      ))}
-    </div>
-
-    <div class="lp-shift-cta lp-anim" data-anim style="text-align: center;">
-      <a class="lp-btn-accent" href={s.ctaHref}>{s.ctaLabel}</a>
+      <div class="shift-cta rv" style="transition-delay:0.38s">
+        <a href="/contact" class="btn btn--primary">
+          Book a Strategy Call
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+            <path d="M2 7.5h11M8.5 3l4.5 4.5L8.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
     </div>
   </div>
 </section>

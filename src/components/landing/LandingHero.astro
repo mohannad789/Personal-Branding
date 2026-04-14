@@ -1,28 +1,128 @@
----
-import { landing } from "../../content/landing";
-const h = landing.hero;
----
+<section class="hero sec">
+  <div class="hero-mesh" aria-hidden="true"></div>
+  <div class="hero-dots" aria-hidden="true"></div>
 
-<section class="lp-hero" aria-labelledby="lp-hero-h">
-  <div class="lp-hero-grain" aria-hidden="true"></div>
+  <div class="lc hero-inner">
+    <!-- Text content -->
+    <div class="hero-content">
+      <span class="eyebrow rv">Strategic Personal Branding</span>
 
-  <div class="lp-hero-content">
-    <h1 id="lp-hero-h" class="lp-anim" data-anim>{h.headline}</h1>
+      <h1 class="display hero-headline rv" style="transition-delay: 0.08s">
+        Your expertise<br>closes deals.<br>
+        <span class="hl-accent">Your brand</span><br>should open them.
+      </h1>
 
-    <p class="lp-hero-sub lp-anim" data-anim style="transition-delay: 0.2s;">{h.sub}</p>
+      <p class="hero-sub rv" style="transition-delay: 0.18s">
+        Strategic personal branding for entrepreneurs who've outgrown word of mouth,
+        and need the market to catch up with what their clients already know.
+      </p>
 
-    <ul class="lp-hero-advantages">
-      {h.advantages.map((line, i) => (
-        <li class="lp-anim" data-anim style={`transition-delay: ${0.4 + i * 0.1}s;`}>{line}</li>
-      ))}
-    </ul>
+      <ul class="hero-adv rv" style="transition-delay: 0.26s" aria-label="Key advantages">
+        <li>
+          <span class="hero-adv-dot" aria-hidden="true"></span>
+          Inbound leads from markets that have never heard your name
+        </li>
+        <li>
+          <span class="hero-adv-dot" aria-hidden="true"></span>
+          A brand position that sells before you enter the room
+        </li>
+        <li>
+          <span class="hero-adv-dot" aria-hidden="true"></span>
+          Shorter sales cycles with prospects who arrive pre-sold
+        </li>
+        <li>
+          <span class="hero-adv-dot" aria-hidden="true"></span>
+          Authority that compounds like equity
+        </li>
+      </ul>
 
-    <div class="lp-anim" data-anim style="transition-delay: 0.9s;">
-      <a class="lp-btn-accent" href={h.ctaHref}>{h.ctaLabel}</a>
+      <div class="hero-cta rv" style="transition-delay: 0.34s">
+        <a href="/contact" class="btn btn--primary">
+          Book a Strategy Call
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+            <path d="M2 7.5h11M8.5 3l4.5 4.5L8.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Orbital brand diagram -->
+    <div class="hero-visual-wrap rv rv--r" style="transition-delay: 0.22s" aria-hidden="true">
+      <svg class="orbit-svg" viewBox="0 0 480 480">
+        <defs>
+          <radialGradient id="hero-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#4F8FF7" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#4F8FF7" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+
+        <!-- Ambient center glow -->
+        <circle cx="240" cy="240" r="180" class="orbit-bg-fill"/>
+
+        <!-- Orbital rings -->
+        <circle cx="240" cy="240" r="95" class="orbit-ring"/>
+        <circle cx="240" cy="240" r="152" class="orbit-ring"/>
+        <circle cx="240" cy="240" r="205" class="orbit-ring"/>
+
+        <!-- Dashed accent on innermost ring -->
+        <circle cx="240" cy="240" r="95" class="orbit-ring-dash"/>
+
+        <!-- Center node: the brand -->
+        <circle cx="240" cy="240" r="38" class="orbit-center-glass"/>
+        <circle cx="240" cy="240" r="22" class="orbit-center-halo"/>
+        <circle cx="240" cy="240" r="11" class="orbit-center-dot"/>
+        <text x="240" y="292" text-anchor="middle" class="orbit-label" style="font-size:9px;opacity:0.5;letter-spacing:0.12em;text-transform:uppercase">YOUR BRAND</text>
+
+        <!-- NODE 1: Strategic Positioning — inner ring r=95 -->
+        <g class="on1">
+          <line x1="240" y1="240" x2="335" y2="240" class="orbit-node-line"/>
+          <circle cx="335" cy="240" r="6" class="orbit-node-dot"/>
+          <g transform="translate(335,240)">
+            <g class="ol1">
+              <rect x="-66" y="-30" width="132" height="22" rx="11" class="orbit-pill"/>
+              <text x="0" y="-15" text-anchor="middle" class="orbit-label">Strategic Positioning</text>
+            </g>
+          </g>
+        </g>
+
+        <!-- NODE 2: Narrative & Messaging — middle ring r=152 -->
+        <g class="on2">
+          <line x1="240" y1="240" x2="392" y2="240" class="orbit-node-line"/>
+          <circle cx="392" cy="240" r="5.5" class="orbit-node-dot" style="opacity:0.75"/>
+          <g transform="translate(392,240)">
+            <g class="ol2">
+              <rect x="-68" y="-30" width="136" height="22" rx="11" class="orbit-pill"/>
+              <text x="0" y="-15" text-anchor="middle" class="orbit-label">Narrative & Messaging</text>
+            </g>
+          </g>
+        </g>
+
+        <!-- NODE 3: Visibility Architecture — middle ring r=152, opposite -->
+        <g class="on3">
+          <line x1="240" y1="240" x2="392" y2="240" class="orbit-node-line"/>
+          <circle cx="392" cy="240" r="5.5" class="orbit-node-dot" style="opacity:0.75"/>
+          <g transform="translate(392,240)">
+            <g class="ol3">
+              <rect x="-66" y="-30" width="132" height="22" rx="11" class="orbit-pill"/>
+              <text x="0" y="-15" text-anchor="middle" class="orbit-label">Visibility Architecture</text>
+            </g>
+          </g>
+        </g>
+
+        <!-- NODE 4: Conversion Infrastructure — outer ring r=205 -->
+        <g class="on4">
+          <line x1="240" y1="240" x2="445" y2="240" class="orbit-node-line"/>
+          <circle cx="445" cy="240" r="5" class="orbit-node-dot" style="opacity:0.65"/>
+          <g transform="translate(445,240)">
+            <g class="ol4">
+              <rect x="-74" y="-30" width="148" height="22" rx="11" class="orbit-pill"/>
+              <text x="0" y="-15" text-anchor="middle" class="orbit-label">Conversion Infrastructure</text>
+            </g>
+          </g>
+        </g>
+      </svg>
     </div>
   </div>
 
-  <div class="lp-hero-scroll" aria-hidden="true">
-    <span class="lp-hero-scroll-line"></span>
-  </div>
+  <div class="hero-scroll" aria-hidden="true"></div>
 </section>

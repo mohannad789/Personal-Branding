@@ -1,28 +1,72 @@
----
-import { landing } from "../../content/landing";
-
-const s = landing.process;
----
-
-<section class="lp-section" id="process" aria-labelledby="lp-process-h">
-  <div class="lp-container">
-    <div class="lp-process-header lp-anim" data-anim>
-      <span class="lp-eyebrow">The Process</span>
-      <h2 id="lp-process-h" class="lp-h2" style="margin-inline: auto; max-width: 22ch; text-align: center;">{s.title}</h2>
+<section class="sec" id="process" aria-labelledby="proc-h">
+  <div class="lc">
+    <div class="process-header">
+      <span class="eyebrow rv">How We Work</span>
+      <h2 id="proc-h" class="h2 rv" style="transition-delay:0.08s">
+        How it works. Plainly.
+      </h2>
     </div>
 
-    <div class="lp-process-timeline lp-anim" data-anim style="transition-delay: 0.3s;">
-      <div class="lp-process-line" aria-hidden="true">
-        <div class="lp-process-line-fill"></div>
+    <div class="process-timeline" data-process-wrap>
+      <div class="process-line" aria-hidden="true">
+        <div class="process-line-fill"></div>
       </div>
 
-      {s.steps.map((step, i) => (
-        <div class="lp-step">
-          <div class="lp-step-circle">{i + 1}</div>
-          <h3 class="lp-step-title">{step.title}</h3>
-          <p class="lp-step-body">{step.body}</p>
+      <div class="process-steps">
+
+        <div class="ps" data-ps>
+          <div class="ps-circle">1</div>
+          <div class="ps-body">
+            <span class="ps-step">Step One</span>
+            <h3 class="ps-title">Diagnosis</h3>
+            <p class="ps-desc">
+              A forensic look at where you stand today: market perception, competitive positioning,
+              digital footprint, missed opportunities. No fluff. Expect candour. This is where we
+              find the gap between what you've built and what the market can see.
+            </p>
+          </div>
         </div>
-      ))}
+
+        <div class="ps" data-ps>
+          <div class="ps-circle">2</div>
+          <div class="ps-body">
+            <span class="ps-step">Step Two</span>
+            <h3 class="ps-title">Strategy</h3>
+            <p class="ps-desc">
+              We define your target position — the specific perception that drives revenue — and map
+              the distance between where you are and where you need to be. This becomes the blueprint
+              everything else is built on. Nothing moves without it.
+            </p>
+          </div>
+        </div>
+
+        <div class="ps" data-ps>
+          <div class="ps-circle">3</div>
+          <div class="ps-body">
+            <span class="ps-step">Step Three</span>
+            <h3 class="ps-title">Build</h3>
+            <p class="ps-desc">
+              Messaging, content, media strategy, platform architecture. Everything is custom.
+              Nothing is templated. Every asset is engineered to feel so precisely like you that it
+              could never be mistaken for anyone else.
+            </p>
+          </div>
+        </div>
+
+        <div class="ps" data-ps>
+          <div class="ps-circle">4</div>
+          <div class="ps-body">
+            <span class="ps-step">Step Four</span>
+            <h3 class="ps-title">Compound</h3>
+            <p class="ps-desc">
+              Personal brands don't launch — they compound. We refine, adapt, and accelerate as
+              results come in. The goal isn't a campaign. It's a market position that appreciates
+              like equity: one that becomes more valuable the longer it exists.
+            </p>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>

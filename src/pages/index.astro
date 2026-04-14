@@ -4,80 +4,58 @@ import ThemeSwitch from "../components/ThemeSwitch.astro";
 import LandingHero from "../components/landing/LandingHero.astro";
 import LandingProblem from "../components/landing/LandingProblem.astro";
 import LandingShift from "../components/landing/LandingShift.astro";
-import InfographicRings from "../components/landing/infographics/InfographicRings.astro";
 import LandingWho from "../components/landing/LandingWho.astro";
-import LandingCounterStrip from "../components/landing/LandingCounterStrip.astro";
 import LandingServices from "../components/landing/LandingServices.astro";
-import InfographicAuthority from "../components/landing/infographics/InfographicAuthority.astro";
+import LandingCounterStrip from "../components/landing/LandingCounterStrip.astro";
 import LandingDifferentiation from "../components/landing/LandingDifferentiation.astro";
 import LandingProcess from "../components/landing/LandingProcess.astro";
 import LandingProof from "../components/landing/LandingProof.astro";
 import LandingFaq from "../components/landing/LandingFaq.astro";
-import InfographicFunnel from "../components/landing/infographics/InfographicFunnel.astro";
 import LandingFinalCta from "../components/landing/LandingFinalCta.astro";
-import { landing } from "../content/landing";
 import { site } from "../content/home";
+import { landing } from "../content/landing";
 import "../styles/landing.css";
 
-const title = "Home";
 const fc = landing.footer;
 ---
 
 <BaseLayout
-  title={title}
+  title="Home"
   description={landing.metaDescription}
   navMode="landing"
   mainClass="main--landing"
 >
+  <!-- ── Nav ── -->
   <nav class="lp-nav" id="lp-nav" aria-label="Primary">
     <div class="lp-nav-inner">
-      <a class="lp-nav-logo" href="/">{site.logoInitials}</a>
+      <a class="lp-logo" href="/">{site.logoInitials}</a>
+      <ul class="lp-nav-links">
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="/contact" class="btn btn--outline">Book a Strategy Call</a></li>
+      </ul>
       <div class="lp-nav-right">
-        <ul class="lp-nav-links">
-          <li><a href="#approach">Approach</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#process">Process</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a class="lp-btn-accent-outline" href="/contact">Book a Strategy Call</a></li>
-        </ul>
         <ThemeSwitch />
       </div>
     </div>
   </nav>
 
+  <!-- ── Sections ── -->
   <LandingHero />
   <LandingProblem />
   <LandingShift />
-
-  <section class="lp-section lp-section-bridge" aria-label="Visibility and revenue">
-    <div class="lp-container">
-      <InfographicRings />
-    </div>
-  </section>
-
   <LandingWho />
-  <LandingCounterStrip />
   <LandingServices />
-
-  <section class="lp-section" aria-label="Authority indicators">
-    <div class="lp-container">
-      <InfographicAuthority />
-    </div>
-  </section>
-
+  <LandingCounterStrip />
   <LandingDifferentiation />
   <LandingProcess />
   <LandingProof />
   <LandingFaq />
-
-  <section class="lp-section" aria-label="The decision maker journey" style="padding-bottom: 2rem;">
-    <div class="lp-container">
-      <InfographicFunnel />
-    </div>
-  </section>
-
   <LandingFinalCta />
 
+  <!-- ── Footer ── -->
   <footer class="lp-footer">
     <div class="lp-footer-inner">
       <a class="lp-footer-logo" href="/">{site.logoInitials}</a>
@@ -85,6 +63,8 @@ const fc = landing.footer;
         <a href={`mailto:${fc.email}`}>{fc.email}</a>
         <span aria-hidden="true">·</span>
         <a href={`tel:${fc.phoneTel}`}>{fc.phoneDisplay}</a>
+        <span aria-hidden="true">·</span>
+        <span>Dubai, UAE</span>
       </div>
       <nav class="lp-footer-legal" aria-label="Legal">
         <a href="/legal/privacy">Privacy Policy</a>
@@ -93,100 +73,106 @@ const fc = landing.footer;
     </div>
   </footer>
 
+  <!-- ── Scripts ── -->
   <script is:inline>
-    (function () {
-      var animNodes = document.querySelectorAll("[data-anim]");
-      if ("IntersectionObserver" in window) {
-        var io = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting) {
-                e.target.classList.add("lp-anim-visible");
-                io.unobserve(e.target);
-              }
-            });
-          },
-          { threshold: 0.15, rootMargin: "0px 0px -5% 0px" }
-        );
-        animNodes.forEach(function (n) {
-          io.observe(n);
-        });
-      } else {
-        animNodes.forEach(function (n) {
-          n.classList.add("lp-anim-visible");
-        });
-      }
+  (function () {
+    /* ─── Scroll-reveal (rv elements) ─── */
+    var revEls = document.querySelectorAll(".rv");
+    if ("IntersectionObserver" in window) {
+      var rvIO = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              rvIO.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -4% 0px" }
+      );
+      revEls.forEach(function (el) { rvIO.observe(el); });
+    } else {
+      revEls.forEach(function (el) { el.classList.add("in"); });
+    }
 
-      var igNodes = document.querySelectorAll("[data-ig]");
-      if ("IntersectionObserver" in window) {
-        var igIo = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting) {
-                e.target.classList.add("ig--visible");
-                igIo.unobserve(e.target);
-              }
-            });
-          },
-          { threshold: 0.18, rootMargin: "0px 0px -6% 0px" }
-        );
-        igNodes.forEach(function (n) {
-          igIo.observe(n);
-        });
-      } else {
-        igNodes.forEach(function (n) {
-          n.classList.add("ig--visible");
-        });
-      }
-
-      var nav = document.getElementById("lp-nav");
-      if (nav) {
-        var scrolled = false;
-        function checkScroll() {
-          var isScrolled = window.scrollY > 60;
-          if (isScrolled !== scrolled) {
-            scrolled = isScrolled;
-            nav.classList.toggle("lp-nav--scrolled", scrolled);
-          }
+    /* ─── Nav glass-on-scroll ─── */
+    var nav = document.getElementById("lp-nav");
+    if (nav) {
+      var navSolid = false;
+      function checkNav() {
+        var s = window.scrollY > 60;
+        if (s !== navSolid) {
+          navSolid = s;
+          nav.classList.toggle("lp-nav--solid", s);
         }
-        window.addEventListener("scroll", checkScroll, { passive: true });
-        checkScroll();
       }
+      window.addEventListener("scroll", checkNav, { passive: true });
+      checkNav();
+    }
 
-      var counterWrap = document.querySelector("[data-counters]");
-      if (counterWrap && "IntersectionObserver" in window) {
-        var counted = false;
-        var counterIO = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting && !counted) {
-                counted = true;
-                counterIO.unobserve(e.target);
-                var nums = e.target.querySelectorAll("[data-target]");
-                nums.forEach(function (el) {
-                  var target = parseFloat(el.getAttribute("data-target"));
-                  var suffix = el.getAttribute("data-suffix") || "";
-                  var isFloat = target % 1 !== 0;
-                  var duration = 2000;
-                  var start = performance.now();
-                  function tick(now) {
-                    var elapsed = now - start;
-                    var progress = Math.min(elapsed / duration, 1);
-                    var eased = 1 - Math.pow(1 - progress, 3);
-                    var current = target * eased;
-                    el.textContent =
-                      (isFloat ? current.toFixed(1) : Math.round(current)) + suffix;
-                    if (progress < 1) requestAnimationFrame(tick);
-                  }
-                  requestAnimationFrame(tick);
-                });
-              }
+    /* ─── Counter strip ─── */
+    var strip = document.querySelector("[data-stat-strip]");
+    if (strip && "IntersectionObserver" in window) {
+      var counted = false;
+      var cIO = new IntersectionObserver(
+        function (entries) {
+          if (entries[0].isIntersecting && !counted) {
+            counted = true;
+            cIO.disconnect();
+            strip.querySelectorAll("[data-count]").forEach(function (el) {
+              var target = parseInt(el.getAttribute("data-count"), 10);
+              var suffix = el.getAttribute("data-suffix") || "";
+              var dur = 1800;
+              var start = performance.now();
+              (function tick(now) {
+                var p = Math.min((now - start) / dur, 1);
+                var eased = 1 - Math.pow(1 - p, 3);
+                el.textContent = Math.round(target * eased) + suffix;
+                if (p < 1) requestAnimationFrame(tick);
+              })(start);
             });
-          },
-          { threshold: 0.3 }
-        );
-        counterIO.observe(counterWrap);
-      }
-    })();
+          }
+        },
+        { threshold: 0.4 }
+      );
+      cIO.observe(strip);
+    }
+
+    /* ─── Process timeline fill ─── */
+    var procWrap = document.querySelector("[data-process-wrap]");
+    if (procWrap && "IntersectionObserver" in window) {
+      var procIO = new IntersectionObserver(
+        function (entries) {
+          if (entries[0].isIntersecting) {
+            procWrap.classList.add("in-view");
+            procIO.disconnect();
+            procWrap.querySelectorAll("[data-ps]").forEach(function (el, i) {
+              el.style.transitionDelay = (i * 0.14) + "s";
+              el.classList.add("in");
+            });
+          }
+        },
+        { threshold: 0.1 }
+      );
+      procIO.observe(procWrap);
+    }
+
+    /* ─── Problem stats in-view trigger ─── */
+    var statsCols = document.querySelectorAll("[data-anim-stats]");
+    if ("IntersectionObserver" in window) {
+      var statIO = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add("in-view");
+              statIO.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      statsCols.forEach(function (el) { statIO.observe(el); });
+    }
+  })();
   </script>
 </BaseLayout>
