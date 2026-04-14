@@ -166,6 +166,7 @@ main#main.main--landing {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
 }
+.lp-viz--visible.lp-path-draw,
 .lp-viz--visible .lp-path-draw {
   stroke-dashoffset: 0;
   transition: stroke-dashoffset 2s cubic-bezier(0.22, 1, 0.36, 1);
@@ -175,6 +176,7 @@ main#main.main--landing {
   opacity: 0;
   transform: translateY(10px);
 }
+.lp-viz--visible.lp-fade-in,
 .lp-viz--visible .lp-fade-in {
   opacity: 1;
   transform: translateY(0);
@@ -185,6 +187,7 @@ main#main.main--landing {
   transform: scaleX(0);
   transform-origin: left;
 }
+.lp-viz--visible.lp-scale-x,
 .lp-viz--visible .lp-scale-x {
   transform: scaleX(1);
   transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);

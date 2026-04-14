@@ -35,31 +35,31 @@ const title = "Home";
   <LandingProof />
   <LandingFaq />
   <LandingFinalCta />
-</BaseLayout>
 
-<script is:inline>
-  (function () {
-    var nodes = document.querySelectorAll("[data-viz]");
-    if (!nodes.length) return;
-    if (!("IntersectionObserver" in window)) {
-      nodes.forEach(function (n) {
-        n.classList.add("lp-viz--visible");
-      });
-      return;
-    }
-    var io = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            e.target.classList.add("lp-viz--visible");
-            io.unobserve(e.target);
-          }
+  <script is:inline>
+    (function () {
+      var nodes = document.querySelectorAll("[data-viz]");
+      if (!nodes.length) return;
+      if (!("IntersectionObserver" in window)) {
+        nodes.forEach(function (n) {
+          n.classList.add("lp-viz--visible");
         });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
-    );
-    nodes.forEach(function (n) {
-      io.observe(n);
-    });
-  })();
-</script>
+        return;
+      }
+      var io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add("lp-viz--visible");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
+      );
+      nodes.forEach(function (n) {
+        io.observe(n);
+      });
+    })();
+  </script>
+</BaseLayout>
