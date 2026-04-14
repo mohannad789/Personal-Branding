@@ -55,7 +55,14 @@
   text-align: center;
 }
 
-/* Vanta injects its own canvas into .lp-hero — ensure it fills behind content */
+/* Vanta injects its own canvas — reduce opacity so it never competes with text */
+.lp-hero canvas {
+  opacity: 0.55;
+}
+
+:root[data-theme="dark"] .lp-hero canvas {
+  opacity: 0.45;  /* even more recessed in dark mode */
+}
 
 /* Content column — max-width just controls line length, section is still 100% wide */
 .lp-hero-body {
@@ -212,17 +219,17 @@
 
   var vantaInstance = null;
 
-  /* Colour palettes per theme */
+  /* Colour palettes per theme — kept very close to bg so the net is subtle */
   var THEMES = {
     dark: {
       backgroundColor: 0x05080f,
-      color:           0x4f8ff7,
-      color2:          0x818cf8
+      color:           0x0e1f3d,   /* near-bg dark blue — barely visible */
+      color2:          0x0a1528
     },
     light: {
       backgroundColor: 0xf2f5ff,
-      color:           0x2563eb,
-      color2:          0x6366f1
+      color:           0xbed0ef,   /* pale blue — washes into the light bg */
+      color2:          0xd2e0f6
     }
   };
 
@@ -253,9 +260,9 @@
       minWidth:      200,
       scale:         1.00,
       scaleMobile:   1.00,
-      points:        10.00,
-      maxDistance:   18.00,
-      spacing:       18.00,
+      points:        9.00,
+      maxDistance:   16.00,
+      spacing:       20.00,
       backgroundColor: palette.backgroundColor,
       color:           palette.color,
       color2:          palette.color2
