@@ -383,17 +383,24 @@ main.main--landing {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: clamp(2rem, 5vw, 5rem);
+  gap: clamp(2rem, 5vw, 4rem);
   position: relative;
   z-index: 1;
+  min-height: calc(100svh - 10rem);
 }
 
-@media (max-width: 920px) {
-  .hero-inner { grid-template-columns: 1fr; }
+@media (max-width: 960px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
   .hero-visual-wrap { display: none; }
 }
 
-.hero-content { max-width: 580px; }
+.hero-content {
+  max-width: 620px;
+  width: 100%;
+}
 
 .hero-headline { margin-bottom: 1.5rem; }
 
@@ -522,7 +529,7 @@ main.main--landing {
 
 .problem-inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 3fr 2fr;
   gap: clamp(3rem, 6vw, 7rem);
   align-items: start;
 }
@@ -607,7 +614,7 @@ main.main--landing {
 .pvp-card {
   margin: 3.5rem 0;
   padding: clamp(2rem, 4vw, 3rem);
-  text-align: left;
+  text-align: center;
 }
 
 .pvp-grid {
@@ -615,6 +622,7 @@ main.main--landing {
   grid-template-columns: 1fr 48px 1fr;
   gap: 0;
   align-items: start;
+  justify-items: center;
 }
 
 .pvp-col-label {
@@ -624,6 +632,8 @@ main.main--landing {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   margin-bottom: 1.5rem;
+  text-align: center;
+  width: 100%;
 }
 
 .pvp-col-label--muted { color: var(--t3); }
@@ -636,6 +646,8 @@ main.main--landing {
   display: flex;
   flex-direction: column;
   gap: 0.875rem;
+  align-items: center;
+  width: 100%;
 }
 
 .pvp-item {
@@ -751,8 +763,12 @@ main.main--landing {
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
+}
+
+@media (max-width: 680px) {
+  .services-grid { grid-template-columns: 1fr; }
 }
 
 .svc-card {
@@ -819,6 +835,20 @@ main.main--landing {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   background: var(--bg3);
+}
+
+.stats-header {
+  text-align: center;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.stats-title {
+  font-family: var(--fH);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  letter-spacing: -0.03em;
+  color: var(--t1);
+  margin: 0;
 }
 
 .stats-grid {
@@ -963,11 +993,14 @@ main.main--landing {
 .process-header {
   max-width: 48rem;
   margin-bottom: 4rem;
+  text-align: center;
 }
 
 .process-timeline {
   position: relative;
   padding-left: 2.5rem;
+  max-width: 680px;
+  margin-inline: auto;
 }
 
 .process-line {
