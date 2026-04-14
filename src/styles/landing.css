@@ -3,12 +3,8 @@
    Satoshi · Inter · Glassmorphism · Blue accent · Light + Dark
    ═══════════════════════════════════════════════════════════════════ */
 
-/* ── DARK THEME ── */
-:root[data-theme="dark"] body:has(main.main--landing) {
-  background: #05080F;
-  background-image: none;
-}
-:root[data-theme="dark"] main.main--landing {
+/* ── DARK THEME — scoped to body.is-landing (LandingLayout) ── */
+:root[data-theme="dark"] body.is-landing {
   --bg:          #05080F;
   --bg2:         #0B0E1C;
   --bg3:         #10142A;
@@ -35,11 +31,7 @@
 }
 
 /* ── LIGHT THEME ── */
-:root[data-theme="light"] body:has(main.main--landing) {
-  background: #F2F5FF;
-  background-image: none;
-}
-:root[data-theme="light"] main.main--landing {
+:root[data-theme="light"] body.is-landing {
   --bg:          #F2F5FF;
   --bg2:         #FFFFFF;
   --bg3:         #E8EEFF;
@@ -65,8 +57,9 @@
   --strikeClr:   rgba(8, 13, 40, 0.35);
 }
 
-/* ── BASE ── */
-main.main--landing {
+/* ── BASE — body.is-landing has no max-width; sections and their children
+   inherit all tokens via CSS cascade. ── */
+body.is-landing {
   --fH: "Satoshi", "DM Sans", system-ui, sans-serif;
   --fB: "Inter", system-ui, sans-serif;
   --maxW: 1200px;
@@ -75,17 +68,12 @@ main.main--landing {
   --r:   14px;
   --rL:  24px;
 
-  max-width: none !important;
-  width: 100% !important;
-  padding: 0 !important;
+  margin: 0;
+  padding: 0;
   background: var(--bg);
   color: var(--t1);
   min-height: 100vh;
   font-family: var(--fB);
-}
-
-:root[data-theme="dark"] body:has(main.main--landing),
-:root[data-theme="light"] body:has(main.main--landing) {
   overflow-x: hidden;
 }
 
@@ -354,11 +342,8 @@ main.main--landing {
    HERO
    ═══════════════════════════════════════ */
 
-/* Break-out technique — hero is always 100vw regardless of any parent container */
 .hero {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  box-sizing: border-box;
+  width: 100%;
   min-height: 100svh;
   display: flex;
   flex-direction: column;

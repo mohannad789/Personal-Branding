@@ -1,5 +1,5 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import LandingLayout from "../layouts/LandingLayout.astro";
 import ThemeSwitch from "../components/ThemeSwitch.astro";
 import LandingHero from "../components/landing/LandingHero.astro";
 import LandingProblem from "../components/landing/LandingProblem.astro";
@@ -19,13 +19,14 @@ import "../styles/landing.css";
 const fc = landing.footer;
 ---
 
-<BaseLayout
-  title="Home"
-  description={landing.metaDescription}
-  navMode="landing"
-  mainClass="main--landing"
->
-  <!-- ── Nav ── -->
+<!--
+  LandingLayout renders content directly inside <body class="is-landing">.
+  There is NO <main> element with a max-width constraint.
+  Every section is a full-width direct child of <body>.
+-->
+<LandingLayout title="Home" description={landing.metaDescription}>
+
+  <!-- ── Fixed nav ── -->
   <nav class="lp-nav" id="lp-nav" aria-label="Primary">
     <div class="lp-nav-inner">
       <a class="lp-logo" href="/">{site.logoInitials}</a>
@@ -42,18 +43,20 @@ const fc = landing.footer;
     </div>
   </nav>
 
-  <!-- ── Sections ── -->
-  <LandingHero />
-  <LandingProblem />
-  <LandingShift />
-  <LandingWho />
-  <LandingServices />
-  <LandingCounterStrip />
-  <LandingDifferentiation />
-  <LandingProcess />
-  <LandingProof />
-  <LandingFaq />
-  <LandingFinalCta />
+  <!-- ── Page content (landmark for a11y) ── -->
+  <div id="lp-content" role="main">
+    <LandingHero />
+    <LandingProblem />
+    <LandingShift />
+    <LandingWho />
+    <LandingServices />
+    <LandingCounterStrip />
+    <LandingDifferentiation />
+    <LandingProcess />
+    <LandingProof />
+    <LandingFaq />
+    <LandingFinalCta />
+  </div>
 
   <!-- ── Footer ── -->
   <footer class="lp-footer">
