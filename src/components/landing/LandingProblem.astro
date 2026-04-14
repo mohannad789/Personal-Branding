@@ -1,10 +1,12 @@
 ---
 import { landing } from "../../content/landing";
+import InfographicTrustGap from "./infographics/InfographicTrustGap.astro";
+
 const s = landing.problem;
 const bodyParagraphs = s.paragraphs;
 ---
 
-<section class="lp-section lp-section--light" aria-labelledby="lp-problem-h">
+<section class="lp-section" aria-labelledby="lp-problem-h">
   <div class="lp-container">
     <div class="lp-problem-grid">
       <div class="lp-problem-left lp-anim--slide-left" data-anim>
@@ -12,7 +14,9 @@ const bodyParagraphs = s.paragraphs;
         <h2 id="lp-problem-h" class="lp-h2">{s.title}</h2>
       </div>
       <div class="lp-problem-right lp-body lp-anim--slide-right" data-anim>
-        {bodyParagraphs.map((p) => <p>{p}</p>)}
+        {bodyParagraphs.map((p) => (
+          <p>{p}</p>
+        ))}
       </div>
     </div>
 
@@ -20,5 +24,7 @@ const bodyParagraphs = s.paragraphs;
       <p>{s.pullQuote}</p>
       <span class="lp-pull-quote-line" aria-hidden="true"></span>
     </div>
+
+    <InfographicTrustGap />
   </div>
 </section>

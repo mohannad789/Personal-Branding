@@ -1,0 +1,107 @@
+---
+const cards = [
+  {
+    pct: 77,
+    label: "of B2B buyers are more likely to purchase when the leadership team has a visible personal brand",
+    pill: "Strategic positioning",
+  },
+  {
+    mult: "3×",
+    label: "higher engagement on thought leadership content vs. corporate brand content",
+    pill: "Narrative & messaging",
+  },
+  {
+    pct: 52,
+    label: "of a company's market value is attributed to executive reputation",
+    pill: "Visibility architecture",
+  },
+  {
+    pct: 47,
+    label: "shorter sales cycle when buyers encounter the seller's thought leadership before the first meeting",
+    pill: "Conversion infrastructure",
+  },
+];
+---
+
+<div class="ig" data-ig>
+  <div class="ig-stats">
+    {
+      cards.map((c) => (
+        <article class="ig-stat-card">
+          {c.mult ? (
+            <>
+              <p class="ig-stat-hero">{c.mult}</p>
+              <p class="ig-stat-label">{c.label}</p>
+              <span class="ig-stat-pill">{c.pill}</span>
+            </>
+          ) : (
+            <>
+              <div class="ig-stat-radial">
+                <svg viewBox="0 0 120 120" width="120" height="120" aria-hidden="true">
+                  <circle
+                    cx="60"
+                    cy="60"
+                    r="52"
+                    fill="none"
+                    stroke="var(--lp-ig-track)"
+                    stroke-width="6"
+                    pathLength="100"
+                  />
+                  <circle
+                    class="ig-stat-arc"
+                    cx="60"
+                    cy="60"
+                    r="52"
+                    fill="none"
+                    stroke="var(--lp-accent)"
+                    stroke-width="6"
+                    stroke-linecap="round"
+                    pathLength="100"
+                    stroke-dasharray="100"
+                    stroke-dashoffset="100"
+                    style={`--ig-end: ${"pct" in c && c.pct != null ? 100 - c.pct : 0}`}
+                    transform="rotate(-90 60 60)"
+                    filter="drop-shadow(0 0 10px var(--lp-accent-glow))"
+                  />
+                  <text
+                    x="60"
+                    y="68"
+                    text-anchor="middle"
+                    font-size="26"
+                    font-weight="700"
+                    fill="var(--lp-accent)"
+                    font-family="Satoshi, Inter, sans-serif"
+                  >
+                    {c.pct}%
+                  </text>
+                </svg>
+              </div>
+              <p class="ig-stat-label">{c.label}</p>
+              <span class="ig-stat-pill">{c.pill}</span>
+            </>
+          )}
+        </article>
+      ))
+    }
+  </div>
+  <p class="ig-source" style="text-align: center; margin-top: 1.5rem;">
+    Sources: Edelman, LinkedIn, Weber Shandwick / KRC Executive Reputation Study (illustrative).
+  </p>
+</div>
+
+<style is:global>
+  .ig-stat-arc {
+    transition: stroke-dashoffset 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .ig--visible .ig-stat-arc {
+    stroke-dashoffset: var(--ig-end);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ig-stat-arc {
+      transition: none !important;
+      stroke-dashoffset: var(--ig-end) !important;
+    }
+  }
+</style>

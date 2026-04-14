@@ -1,11 +1,13 @@
 ---
 import { landing } from "../../content/landing";
+import InfographicTransform from "./infographics/InfographicTransform.astro";
+
 const s = landing.who;
 const lastP = s.paragraphs[s.paragraphs.length - 1];
 const bodyPs = s.paragraphs.slice(0, -1);
 ---
 
-<section class="lp-section lp-section--light" aria-labelledby="lp-who-h">
+<section class="lp-section" aria-labelledby="lp-who-h">
   <div class="lp-container">
     <div class="lp-who-grid">
       <div class="lp-who-left lp-anim--slide-left" data-anim>
@@ -16,9 +18,13 @@ const bodyPs = s.paragraphs.slice(0, -1);
       <div class="lp-who-divider" aria-hidden="true"></div>
 
       <div class="lp-who-right lp-body lp-anim--slide-right" data-anim>
-        {bodyPs.map((p) => <p>{p}</p>)}
+        {bodyPs.map((p) => (
+          <p>{p}</p>
+        ))}
         <p class="lp-who-closing">{lastP}</p>
       </div>
     </div>
+
+    <InfographicTransform />
   </div>
 </section>

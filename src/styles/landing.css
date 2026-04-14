@@ -1,100 +1,120 @@
-/* ============================================================
-   LANDING — Luxury Editorial Design
-   Aesop meets McKinsey. Private members' club.
-   Playfair Display (serif headlines) + Inter (sans body).
-   #0C0F14 / #F7F5F2 / #C9A96E gold accent.
-   ============================================================ */
+@import "./landing-infographics.css";
 
-/* ── Design Tokens (Landing-specific) ── */
-:root {
-  --lp-dark: #0C0F14;
-  --lp-dark-alt: #1A1D24;
-  --lp-light: #F7F5F2;
-  --lp-gold: #C9A96E;
-  --lp-gold-hover: #D4B87A;
-  --lp-gold-20: rgba(201, 169, 110, 0.2);
-  --lp-text-on-dark: #F7F5F2;
-  --lp-text-on-dark-muted: #8A8A8A;
-  --lp-text-on-light: #1A1D24;
-  --lp-text-on-light-muted: #6B6B6B;
-  --lp-footer-bg: #080A0E;
-  --lp-font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
-  --lp-font-sans: "Inter", system-ui, -apple-system, sans-serif;
+/* Landing — full-page light/dark from system + toggle. Satoshi + Inter. Blue accent. */
+
+:root[data-theme="dark"] main#main.main--landing {
+  --lp-bg: #0c0f14;
+  --lp-bg-elevated: #12151b;
+  --lp-text-primary: #f7f5f2;
+  --lp-text-muted: #8a8a8a;
+  --lp-border-subtle: rgba(255, 255, 255, 0.08);
+  --lp-footer-bg: #080a0e;
+  --lp-accent: #4f8ff7;
+  --lp-accent-hover: #6ba3ff;
+  --lp-accent-glow: rgba(79, 143, 247, 0.38);
+  --lp-accent-glow-strong: rgba(79, 143, 247, 0.55);
+  --lp-ig-surface: #12151b;
+  --lp-ig-track: #1a1d24;
+  --lp-ig-border: rgba(79, 143, 247, 0.14);
+  --lp-ig-border-hover: rgba(79, 143, 247, 0.32);
+  --lp-ig-ambient: rgba(79, 143, 247, 0.09);
+  --lp-ig-ambient-strong: rgba(79, 143, 247, 0.14);
+  --lp-ig-source: #6b7a8c;
+  --lp-ig-node-muted: #3a4556;
+  --lp-ig-ring-muted: #2a3444;
+}
+
+:root[data-theme="light"] main#main.main--landing {
+  --lp-bg: #f7f5f2;
+  --lp-bg-elevated: #ffffff;
+  --lp-text-primary: #1a1d24;
+  --lp-text-muted: #6b6b6b;
+  --lp-border-subtle: rgba(26, 29, 36, 0.1);
+  --lp-footer-bg: #e8e6e1;
+  --lp-accent: #2563eb;
+  --lp-accent-hover: #3b82f6;
+  --lp-accent-glow: rgba(37, 99, 235, 0.35);
+  --lp-accent-glow-strong: rgba(37, 99, 235, 0.5);
+  --lp-ig-surface: #ffffff;
+  --lp-ig-track: #e2e8f0;
+  --lp-ig-border: rgba(37, 99, 235, 0.15);
+  --lp-ig-border-hover: rgba(37, 99, 235, 0.35);
+  --lp-ig-ambient: rgba(37, 99, 235, 0.06);
+  --lp-ig-ambient-strong: rgba(37, 99, 235, 0.1);
+  --lp-ig-source: #7a8494;
+  --lp-ig-node-muted: #cbd5e1;
+  --lp-ig-ring-muted: #94a3b8;
+}
+
+:root[data-theme="dark"] body:has(main#main.main--landing) {
+  background: #0c0f14;
+  background-image: none;
+}
+
+:root[data-theme="light"] body:has(main#main.main--landing) {
+  background: #f7f5f2;
+  background-image: none;
+}
+
+main#main.main--landing {
+  --lp-font-heading: "Satoshi", system-ui, sans-serif;
+  --lp-font-sans: "Inter", system-ui, sans-serif;
   --lp-max: 1200px;
   --lp-text-max: 680px;
   --lp-section-pad: clamp(80px, 12vw, 180px);
   --lp-element-gap: clamp(48px, 6vw, 64px);
-}
-
-/* ── Reset for full-bleed landing ── */
-main#main.main--landing {
   max-width: none;
   width: 100%;
   padding: 0;
-  background: none;
+  background: var(--lp-bg);
+  color: var(--lp-text-primary);
+  min-height: 100vh;
 }
 
-/* ── Shared Utilities ── */
 .lp-container {
   max-width: var(--lp-max);
   margin-inline: auto;
   padding-inline: clamp(1.5rem, 5vw, 3rem);
 }
 
-/* ── Section Bands ── */
 .lp-section {
   position: relative;
   padding-block: var(--lp-section-pad);
+  border-top: 1px solid var(--lp-border-subtle);
 }
 
-.lp-section--dark {
-  background: var(--lp-dark);
-  color: var(--lp-text-on-dark);
+.lp-section:first-of-type {
+  border-top: none;
 }
 
-.lp-section--dark-alt {
-  background: var(--lp-dark-alt);
-  color: var(--lp-text-on-dark);
-}
-
-.lp-section--light {
-  background: var(--lp-light);
-  color: var(--lp-text-on-light);
-}
-
-/* ── Typography ── */
 .lp-eyebrow {
   font-family: var(--lp-font-sans);
   font-size: 0.6875rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--lp-gold);
+  color: var(--lp-accent);
   margin: 0 0 2rem;
   display: block;
 }
 
 .lp-h2 {
-  font-family: var(--lp-font-serif);
+  font-family: var(--lp-font-heading);
   font-weight: 700;
   font-size: clamp(2rem, 4.5vw, 3.25rem);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
   margin: 0 0 2rem;
+  color: var(--lp-text-primary);
 }
-
-.lp-section--dark .lp-h2 { color: var(--lp-text-on-dark); }
-.lp-section--light .lp-h2 { color: var(--lp-text-on-light); }
 
 .lp-body {
   font-family: var(--lp-font-sans);
   font-size: 1.0625rem;
   line-height: 1.7;
   max-width: var(--lp-text-max);
+  color: var(--lp-text-muted);
 }
-
-.lp-section--dark .lp-body { color: var(--lp-text-on-dark-muted); }
-.lp-section--light .lp-body { color: var(--lp-text-on-light-muted); }
 
 .lp-body p {
   margin: 0 0 1.5rem;
@@ -104,28 +124,25 @@ main#main.main--landing {
   margin-bottom: 0;
 }
 
-/* Pull quote */
 .lp-pull-quote {
-  font-family: var(--lp-font-serif);
+  font-family: var(--lp-font-heading);
   font-style: italic;
-  font-weight: 400;
-  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  font-weight: 500;
+  font-size: clamp(1.35rem, 3.2vw, 2.35rem);
   line-height: 1.3;
   text-align: center;
   max-width: 48rem;
   margin: var(--lp-element-gap) auto;
   position: relative;
   padding-bottom: 1.5rem;
+  color: var(--lp-text-primary);
 }
-
-.lp-section--light .lp-pull-quote { color: var(--lp-text-on-light); }
-.lp-section--dark .lp-pull-quote { color: var(--lp-text-on-dark); }
 
 .lp-pull-quote-line {
   display: block;
   width: 0;
   height: 2px;
-  background: var(--lp-gold);
+  background: var(--lp-accent);
   margin: 1.5rem auto 0;
   transition: width 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
@@ -134,8 +151,7 @@ main#main.main--landing {
   width: 120px;
 }
 
-/* ── Buttons ── */
-.lp-btn-gold {
+.lp-btn-accent {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -147,19 +163,19 @@ main#main.main--landing {
   text-decoration: none;
   border: none;
   border-radius: 0;
-  background: var(--lp-gold);
-  color: var(--lp-dark);
+  background: var(--lp-accent);
+  color: #fff;
   cursor: pointer;
   transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
-.lp-btn-gold:hover {
-  background: var(--lp-gold-hover);
+.lp-btn-accent:hover {
+  background: var(--lp-accent-hover);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(201, 169, 110, 0.25);
+  box-shadow: 0 8px 28px var(--lp-accent-glow);
 }
 
-.lp-btn-gold-outline {
+.lp-btn-accent-outline {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -169,28 +185,27 @@ main#main.main--landing {
   font-weight: 600;
   letter-spacing: 0.02em;
   text-decoration: none;
-  border: 1px solid var(--lp-gold);
+  border: 1px solid var(--lp-accent);
   background: transparent;
-  color: var(--lp-gold);
+  color: var(--lp-accent);
   cursor: pointer;
   transition: background 0.3s, color 0.3s;
 }
 
-.lp-btn-gold-outline:hover {
-  background: var(--lp-gold);
-  color: var(--lp-dark);
+.lp-btn-accent-outline:hover {
+  background: var(--lp-accent);
+  color: #fff;
 }
 
-.lp-btn-gold--lg {
+.lp-btn-accent--lg {
   padding: 1.125rem 3.5rem;
   font-size: 1rem;
 }
 
-.lp-btn-gold--lg:hover {
-  box-shadow: 0 0 40px rgba(201, 169, 110, 0.3), 0 8px 24px rgba(201, 169, 110, 0.2);
+.lp-btn-accent--lg:hover {
+  box-shadow: 0 0 40px var(--lp-accent-glow), 0 8px 24px var(--lp-accent-glow);
 }
 
-/* ── Scroll Animations ── */
 .lp-anim {
   opacity: 0;
   transform: translateY(30px);
@@ -231,9 +246,7 @@ main#main.main--landing {
   transform: scale(1);
 }
 
-/* ============================================================
-   SECTION 1 — HERO
-   ============================================================ */
+/* Hero */
 .lp-hero {
   position: relative;
   min-height: 100vh;
@@ -242,14 +255,15 @@ main#main.main--landing {
   justify-content: center;
   text-align: center;
   overflow: hidden;
+  padding-top: 4rem;
 }
 
 .lp-hero-grain {
   position: absolute;
   inset: 0;
-  opacity: 0.04;
+  opacity: 0.035;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 256px;
 }
 
@@ -261,12 +275,12 @@ main#main.main--landing {
 }
 
 .lp-hero h1 {
-  font-family: var(--lp-font-serif);
+  font-family: var(--lp-font-heading);
   font-weight: 700;
   font-size: clamp(2.25rem, 6vw, 5rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: var(--lp-text-on-dark);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--lp-text-primary);
   margin: 0 0 1.5rem;
 }
 
@@ -274,7 +288,7 @@ main#main.main--landing {
   font-family: var(--lp-font-sans);
   font-size: clamp(1.0625rem, 2vw, 1.25rem);
   line-height: 1.7;
-  color: #C9C9C9;
+  color: var(--lp-text-muted);
   max-width: 640px;
   margin: 0 auto 3rem;
 }
@@ -300,7 +314,7 @@ main#main.main--landing {
   font-family: var(--lp-font-sans);
   font-size: 0.9375rem;
   line-height: 1.5;
-  color: var(--lp-text-on-dark-muted);
+  color: var(--lp-text-muted);
   display: flex;
   align-items: baseline;
   gap: 0.75rem;
@@ -311,7 +325,7 @@ main#main.main--landing {
   display: block;
   width: 16px;
   height: 1px;
-  background: var(--lp-gold);
+  background: var(--lp-accent);
   flex-shrink: 0;
   margin-top: 0.7em;
 }
@@ -328,18 +342,25 @@ main#main.main--landing {
   display: block;
   width: 1px;
   height: 40px;
-  background: linear-gradient(to bottom, var(--lp-gold), transparent);
+  background: linear-gradient(to bottom, var(--lp-accent), transparent);
   animation: lp-scroll-pulse 2s ease-in-out infinite;
 }
 
 @keyframes lp-scroll-pulse {
-  0%, 100% { opacity: 0.3; transform: scaleY(0.6); transform-origin: top; }
-  50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scaleY(0.65);
+    transform-origin: top;
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: top;
+  }
 }
 
-/* ============================================================
-   SECTION 2 — PROBLEM
-   ============================================================ */
+/* Problem */
 .lp-problem-grid {
   display: grid;
   gap: 4rem;
@@ -360,13 +381,11 @@ main#main.main--landing {
   max-width: var(--lp-text-max);
 }
 
-/* ============================================================
-   SECTION 3 — SHIFT
-   ============================================================ */
+/* Shift */
 .lp-shift {
   text-align: center;
-  border-top: 1px solid var(--lp-gold-20);
-  border-bottom: 1px solid var(--lp-gold-20);
+  border-top: 1px solid var(--lp-border-subtle);
+  border-bottom: 1px solid var(--lp-border-subtle);
 }
 
 .lp-shift .lp-h2 {
@@ -380,11 +399,11 @@ main#main.main--landing {
 }
 
 .lp-shift-key {
-  font-family: var(--lp-font-serif);
+  font-family: var(--lp-font-heading);
   font-style: italic;
-  font-weight: 700;
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
-  color: var(--lp-gold);
+  font-weight: 600;
+  font-size: clamp(1.35rem, 3vw, 2.1rem);
+  color: var(--lp-accent);
   margin: 3rem auto;
   max-width: 30ch;
 }
@@ -393,9 +412,7 @@ main#main.main--landing {
   margin-top: 3rem;
 }
 
-/* ============================================================
-   SECTION 4 — WHO
-   ============================================================ */
+/* Who */
 .lp-who-grid {
   display: grid;
   gap: 4rem;
@@ -415,7 +432,7 @@ main#main.main--landing {
 @media (min-width: 900px) {
   .lp-who-divider {
     display: block;
-    background: var(--lp-gold-20);
+    background: var(--lp-border-subtle);
     width: 1px;
   }
 }
@@ -430,15 +447,16 @@ main#main.main--landing {
 
 .lp-who-closing {
   font-weight: 600;
-  color: var(--lp-text-on-light) !important;
+  color: var(--lp-text-primary) !important;
   font-size: 1.125rem;
 }
 
-/* ============================================================
-   COUNTER STRIP
-   ============================================================ */
+/* Counter strip */
 .lp-counter-strip {
   padding-block: clamp(3rem, 5vw, 5rem);
+  background: var(--lp-bg-elevated);
+  border-top: 1px solid var(--lp-border-subtle);
+  border-bottom: 1px solid var(--lp-border-subtle);
 }
 
 .lp-counters {
@@ -458,10 +476,10 @@ main#main.main--landing {
 }
 
 .lp-counter-num {
-  font-family: var(--lp-font-serif);
+  font-family: var(--lp-font-heading);
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 700;
-  color: var(--lp-gold);
+  color: var(--lp-accent);
   line-height: 1;
   margin-bottom: 0.75rem;
   display: block;
@@ -473,7 +491,7 @@ main#main.main--landing {
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--lp-text-on-dark-muted);
+  color: var(--lp-text-muted);
   line-height: 1.4;
   display: block;
   opacity: 0;
@@ -484,9 +502,7 @@ main#main.main--landing {
   opacity: 1;
 }
 
-/* ============================================================
-   SECTION 5 — SERVICES
-   ============================================================ */
+/* Services */
 .lp-services-header {
   text-align: center;
   margin-bottom: var(--lp-element-gap);
@@ -509,33 +525,33 @@ main#main.main--landing {
 }
 
 .lp-service-card {
-  background: var(--lp-dark-alt);
-  border: 1px solid var(--lp-gold-20);
+  background: var(--lp-bg-elevated);
+  border: 1px solid var(--lp-ig-border);
   padding: clamp(2rem, 4vw, 3rem);
   transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
 .lp-service-card:hover {
-  border-color: var(--lp-gold);
+  border-color: var(--lp-ig-border-hover);
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 12px 40px var(--lp-ig-ambient-strong);
 }
 
 .lp-service-num {
   font-family: var(--lp-font-sans);
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 2px;
-  color: var(--lp-gold);
+  color: var(--lp-accent);
   display: block;
   margin-bottom: 2rem;
 }
 
 .lp-service-title {
-  font-family: var(--lp-font-serif);
+  font-family: var(--lp-font-heading);
   font-size: 1.375rem;
   font-weight: 600;
-  color: var(--lp-text-on-dark);
+  color: var(--lp-text-primary);
   margin: 0 0 1rem;
 }
 
@@ -543,13 +559,11 @@ main#main.main--landing {
   font-family: var(--lp-font-sans);
   font-size: 1rem;
   line-height: 1.7;
-  color: var(--lp-text-on-dark-muted);
+  color: var(--lp-text-muted);
   margin: 0;
 }
 
-/* ============================================================
-   SECTION 6 — DIFFERENTIATION
-   ============================================================ */
+/* Differentiation */
 .lp-diff-statements {
   display: flex;
   flex-direction: column;
@@ -558,10 +572,10 @@ main#main.main--landing {
 }
 
 .lp-diff-statement {
-  font-family: var(--lp-font-serif);
-  font-size: clamp(1.25rem, 2.8vw, 1.75rem);
+  font-family: var(--lp-font-heading);
+  font-size: clamp(1.15rem, 2.6vw, 1.65rem);
   line-height: 1.4;
-  color: var(--lp-text-on-light);
+  color: var(--lp-text-primary);
   margin: 0;
 }
 
@@ -575,14 +589,12 @@ main#main.main--landing {
 
 .lp-diff-signature {
   font-size: 0.9375rem;
-  color: var(--lp-text-on-light-muted);
+  color: var(--lp-text-muted);
   margin: 0;
   font-style: italic;
 }
 
-/* ============================================================
-   SECTION 7 — PROCESS
-   ============================================================ */
+/* Process */
 .lp-process-header {
   text-align: center;
   margin-bottom: var(--lp-element-gap);
@@ -613,13 +625,13 @@ main#main.main--landing {
     left: calc(12.5% + 20px);
     right: calc(12.5% + 20px);
     height: 1px;
-    background: var(--lp-gold-20);
+    background: var(--lp-border-subtle);
     z-index: 1;
   }
 
   .lp-process-line-fill {
     height: 100%;
-    background: var(--lp-gold);
+    background: var(--lp-accent);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 2s cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -640,23 +652,23 @@ main#main.main--landing {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid var(--lp-gold);
+  border: 1px solid var(--lp-accent);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1.5rem;
-  font-family: var(--lp-font-serif);
+  font-family: var(--lp-font-heading);
   font-size: 1rem;
   font-weight: 600;
-  color: var(--lp-gold);
-  background: var(--lp-dark);
+  color: var(--lp-accent);
+  background: var(--lp-bg);
 }
 
 .lp-step-title {
-  font-family: var(--lp-font-serif);
+  font-family: var(--lp-font-heading);
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--lp-text-on-dark);
+  color: var(--lp-text-primary);
   margin: 0 0 1rem;
 }
 
@@ -664,15 +676,13 @@ main#main.main--landing {
   font-family: var(--lp-font-sans);
   font-size: 0.9375rem;
   line-height: 1.7;
-  color: var(--lp-text-on-dark-muted);
+  color: var(--lp-text-muted);
   margin: 0;
   max-width: 260px;
   margin-inline: auto;
 }
 
-/* ============================================================
-   SECTION 8 — PROOF / TESTIMONIALS
-   ============================================================ */
+/* Proof */
 .lp-proof-header {
   text-align: center;
   margin-bottom: var(--lp-element-gap);
@@ -701,15 +711,16 @@ main#main.main--landing {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: var(--lp-gold);
+  background: var(--lp-accent);
 }
 
 .lp-testimonial-quote {
-  font-family: var(--lp-font-serif);
+  font-family: var(--lp-font-heading);
   font-style: italic;
-  font-size: clamp(1.0625rem, 1.8vw, 1.25rem);
+  font-weight: 500;
+  font-size: clamp(1.0625rem, 1.8vw, 1.2rem);
   line-height: 1.6;
-  color: var(--lp-text-on-light);
+  color: var(--lp-text-primary);
   margin: 0 0 2rem;
 }
 
@@ -717,7 +728,7 @@ main#main.main--landing {
   font-family: var(--lp-font-sans);
   font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--lp-text-on-light);
+  color: var(--lp-text-primary);
   display: block;
   margin-bottom: 0.25rem;
 }
@@ -725,13 +736,11 @@ main#main.main--landing {
 .lp-testimonial-role {
   font-family: var(--lp-font-sans);
   font-size: 0.75rem;
-  color: var(--lp-text-on-light-muted);
+  color: var(--lp-text-muted);
   display: block;
 }
 
-/* ============================================================
-   SECTION 9 — FAQ
-   ============================================================ */
+/* FAQ */
 .lp-faq-header {
   margin-bottom: 3rem;
 }
@@ -741,16 +750,16 @@ main#main.main--landing {
 }
 
 .lp-faq-item {
-  border-bottom: 1px solid rgba(26, 29, 36, 0.1);
+  border-bottom: 1px solid var(--lp-border-subtle);
 }
 
 .lp-faq-q {
   cursor: pointer;
   padding: 1.75rem 0;
-  font-family: var(--lp-font-serif);
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: var(--lp-text-on-light);
+  font-family: var(--lp-font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--lp-text-primary);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -758,7 +767,9 @@ main#main.main--landing {
   list-style: none;
 }
 
-.lp-faq-q::-webkit-details-marker { display: none; }
+.lp-faq-q::-webkit-details-marker {
+  display: none;
+}
 
 .lp-faq-icon {
   width: 24px;
@@ -767,7 +778,7 @@ main#main.main--landing {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: var(--lp-gold);
+  color: var(--lp-accent);
   font-family: var(--lp-font-sans);
   font-size: 1.5rem;
   font-weight: 300;
@@ -779,7 +790,7 @@ main#main.main--landing {
 }
 
 .lp-faq-item[open] .lp-faq-q {
-  border-left: 2px solid var(--lp-gold);
+  border-left: 2px solid var(--lp-accent);
   padding-left: 1.5rem;
   margin-left: -1.5rem;
 }
@@ -789,25 +800,26 @@ main#main.main--landing {
   font-family: var(--lp-font-sans);
   font-size: 1rem;
   line-height: 1.7;
-  color: var(--lp-text-on-light-muted);
+  color: var(--lp-text-muted);
   margin: 0;
   max-width: var(--lp-text-max);
 }
 
-/* ============================================================
-   SECTION 10 — FINAL CTA
-   ============================================================ */
+/* Final CTA */
 .lp-final-cta {
   min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  position: relative;
 }
 
 .lp-final-cta-inner {
   max-width: 48rem;
   padding-inline: 1.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 .lp-final-cta .lp-h2 {
@@ -820,14 +832,13 @@ main#main.main--landing {
   margin-inline: auto;
   text-align: center;
   max-width: 560px;
-  color: var(--lp-text-on-dark-muted);
   margin-bottom: 3rem;
 }
 
 .lp-final-support {
   font-family: var(--lp-font-sans);
   font-size: 0.8125rem;
-  color: var(--lp-text-on-dark-muted);
+  color: var(--lp-text-muted);
   margin: 1.5rem 0 0;
   letter-spacing: 1px;
 }
@@ -836,25 +847,28 @@ main#main.main--landing {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 50%, rgba(201, 169, 110, 0.06), transparent 60%);
+  background: radial-gradient(circle at 50% 50%, var(--lp-ig-ambient-strong), transparent 55%);
 }
 
-/* CTA pulse attention */
 .lp-btn-pulse {
   animation: lp-cta-pulse 3s ease-in-out infinite;
 }
 
 @keyframes lp-cta-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
 }
 
-/* ============================================================
-   FOOTER (overrides for landing)
-   ============================================================ */
+/* Footer */
 .lp-footer {
   background: var(--lp-footer-bg);
   padding: 2.5rem 0;
+  border-top: 1px solid var(--lp-border-subtle);
 }
 
 .lp-footer-inner {
@@ -869,27 +883,27 @@ main#main.main--landing {
 }
 
 .lp-footer-logo {
-  font-family: var(--lp-font-sans);
+  font-family: var(--lp-font-heading);
   font-weight: 600;
   font-size: 1rem;
-  color: var(--lp-text-on-dark-muted);
+  color: var(--lp-text-muted);
   text-decoration: none;
 }
 
 .lp-footer-contact {
   font-family: var(--lp-font-sans);
   font-size: 0.8125rem;
-  color: var(--lp-text-on-dark-muted);
+  color: var(--lp-text-muted);
 }
 
 .lp-footer-contact a {
-  color: var(--lp-text-on-dark-muted);
+  color: var(--lp-text-muted);
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .lp-footer-contact a:hover {
-  color: var(--lp-gold);
+  color: var(--lp-accent);
 }
 
 .lp-footer-contact span {
@@ -904,31 +918,29 @@ main#main.main--landing {
 .lp-footer-legal a {
   font-family: var(--lp-font-sans);
   font-size: 0.8125rem;
-  color: var(--lp-text-on-dark-muted);
+  color: var(--lp-text-muted);
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .lp-footer-legal a:hover {
-  color: var(--lp-gold);
+  color: var(--lp-accent);
 }
 
-/* ============================================================
-   NAV (Landing-specific overlay)
-   ============================================================ */
+/* Nav */
 .lp-nav {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 1.25rem 0;
+  padding: 1rem 0;
   transition: background 0.3s, backdrop-filter 0.3s;
 }
 
 .lp-nav--scrolled {
-  background: rgba(12, 15, 20, 0.92);
-  backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--lp-bg) 88%, transparent);
+  backdrop-filter: blur(14px);
 }
 
 .lp-nav-inner {
@@ -938,27 +950,35 @@ main#main.main--landing {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .lp-nav-logo {
-  font-family: var(--lp-font-sans);
+  font-family: var(--lp-font-heading);
   font-weight: 600;
   font-size: 1.125rem;
-  color: var(--lp-text-on-dark);
+  color: var(--lp-text-primary);
   text-decoration: none;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+}
+
+.lp-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
 }
 
 .lp-nav-links {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .lp-nav-links li:not(:last-child) {
     display: none;
   }
@@ -968,27 +988,40 @@ main#main.main--landing {
   font-family: var(--lp-font-sans);
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--lp-text-on-dark-muted);
+  color: var(--lp-text-muted);
   text-decoration: none;
   letter-spacing: 0.02em;
   transition: color 0.2s;
 }
 
 .lp-nav-links a:hover {
-  color: var(--lp-text-on-dark);
+  color: var(--lp-text-primary);
 }
 
-/* ── Gold Rule Separator ── */
-.lp-gold-rule {
-  display: block;
-  width: 60px;
-  height: 1px;
-  background: var(--lp-gold);
-  border: none;
-  margin: 0;
+main#main.main--landing .theme-switch {
+  border-color: var(--lp-border-subtle);
+  background: var(--lp-bg-elevated);
 }
 
-/* ── Reduced Motion ── */
+main#main.main--landing .theme-switch button {
+  color: var(--lp-text-muted);
+}
+
+main#main.main--landing .theme-switch button:hover {
+  color: var(--lp-text-primary);
+}
+
+main#main.main--landing .theme-switch button[aria-pressed="true"] {
+  background: var(--lp-accent);
+  color: #fff;
+}
+
+/* Section bridge (rings between shift & who) */
+.lp-section-bridge {
+  padding-block: clamp(3rem, 8vw, 5rem);
+  border-top: 1px solid var(--lp-border-subtle);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .lp-anim,
   .lp-anim--slide-left,
@@ -1015,7 +1048,6 @@ main#main.main--landing {
   }
 }
 
-/* ── Mobile Refinements ── */
 @media (max-width: 600px) {
   .lp-hero h1 {
     font-size: 2.25rem;
@@ -1023,10 +1055,6 @@ main#main.main--landing {
 
   .lp-step-body {
     max-width: none;
-  }
-
-  .lp-services-grid {
-    grid-template-columns: 1fr;
   }
 
   .lp-testimonials {

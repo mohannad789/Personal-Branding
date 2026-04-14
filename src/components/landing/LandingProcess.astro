@@ -1,13 +1,15 @@
 ---
 import { landing } from "../../content/landing";
+import InfographicCompound from "./infographics/InfographicCompound.astro";
+
 const s = landing.process;
 ---
 
-<section class="lp-section lp-section--dark" id="process" aria-labelledby="lp-process-h">
+<section class="lp-section" id="process" aria-labelledby="lp-process-h">
   <div class="lp-container">
     <div class="lp-process-header lp-anim" data-anim>
       <span class="lp-eyebrow">The Process</span>
-      <h2 id="lp-process-h" class="lp-h2" style="margin-inline: auto; max-width: 22ch;">{s.title}</h2>
+      <h2 id="lp-process-h" class="lp-h2" style="margin-inline: auto; max-width: 22ch; text-align: center;">{s.title}</h2>
     </div>
 
     <div class="lp-process-timeline lp-anim" data-anim style="transition-delay: 0.3s;">
@@ -23,5 +25,7 @@ const s = landing.process;
         </div>
       ))}
     </div>
+
+    <InfographicCompound />
   </div>
 </section>

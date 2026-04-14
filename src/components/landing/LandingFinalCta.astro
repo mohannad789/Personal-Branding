@@ -3,7 +3,7 @@ import { landing } from "../../content/landing";
 const s = landing.finalCta;
 ---
 
-<section class="lp-section lp-section--dark lp-final-cta" aria-labelledby="lp-final-h">
+<section class="lp-section lp-final-cta" aria-labelledby="lp-final-h">
   <div class="lp-final-glow" aria-hidden="true"></div>
 
   <div class="lp-final-cta-inner">
@@ -13,7 +13,7 @@ const s = landing.finalCta;
       <p>{s.body}</p>
     </div>
     <div class="lp-anim" data-anim style="transition-delay: 0.45s;">
-      <a class="lp-btn-gold lp-btn-gold--lg lp-btn-pulse" href={s.ctaHref}>{s.ctaLabel}</a>
+      <a class="lp-btn-accent lp-btn-accent--lg lp-btn-pulse" href={s.ctaHref}>{s.ctaLabel}</a>
       <p class="lp-final-support">{s.supportingLine}</p>
     </div>
   </div>

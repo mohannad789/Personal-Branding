@@ -1,0 +1,128 @@
+<div class="ig ig-card ig-rings" data-ig>
+  <span class="ig-eyebrow">Visibility &amp; revenue</span>
+  <div class="ig-rings-wrap">
+    <svg class="ig-rings-svg" viewBox="0 0 260 260" aria-hidden="true">
+      <defs>
+        <filter id="ig-ring-glow" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="4" result="b" />
+          <feMerge>
+            <feMergeNode in="b" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      <g transform="translate(130,130) rotate(-90)">
+        <circle
+          class="ig-ring-track"
+          r="88"
+          pathLength="100"
+          stroke-width="10"
+          fill="none"
+          stroke="var(--lp-ig-track)"
+        />
+        <circle
+          class="ig-ring-outer-fill"
+          r="88"
+          pathLength="100"
+          stroke-width="10"
+          fill="none"
+          stroke="var(--lp-ig-ring-muted)"
+          stroke-dasharray="100"
+          stroke-dashoffset="0"
+        />
+        <circle
+          class="ig-ring-mid-stroke"
+          r="66"
+          pathLength="100"
+          stroke-width="10"
+          fill="none"
+          stroke="#4a6fa5"
+          stroke-dasharray="100"
+          stroke-dashoffset="100"
+          stroke-linecap="round"
+          filter="url(#ig-ring-glow)"
+        />
+        <circle
+          class="ig-ring-inner-stroke"
+          r="44"
+          pathLength="100"
+          stroke-width="10"
+          fill="none"
+          stroke="var(--lp-accent)"
+          stroke-dasharray="100"
+          stroke-dashoffset="100"
+          stroke-linecap="round"
+          filter="url(#ig-ring-glow)"
+        />
+      </g>
+      <text class="ig-rings-center" x="130" y="118">ROI</text>
+      <text class="ig-rings-sub" x="130" y="142">starts here</text>
+    </svg>
+  </div>
+  <div class="ig-rings-legend">
+    <span>Outer: visibility alone</span>
+    <span>Middle: positioned visibility (~64%)</span>
+    <span>Inner: strategic brand position (~38%)</span>
+  </div>
+  <p class="ig-source">
+    Methodology: comparative analysis of brand positioning vs. revenue correlation across B2B
+    service firms (illustrative).
+  </p>
+</div>
+
+<style is:global>
+  .ig-ring-mid-stroke,
+  .ig-ring-inner-stroke {
+    transition: stroke-dashoffset 1.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .ig--visible .ig-ring-inner-stroke {
+    stroke-dashoffset: 62;
+    transition-delay: 0s;
+  }
+
+  .ig--visible .ig-ring-mid-stroke {
+    stroke-dashoffset: 36;
+    transition-delay: 0.35s;
+  }
+
+  .ig-rings-svg text.ig-rings-center {
+    font-family: var(--lp-font-heading), system-ui, sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    fill: var(--lp-accent);
+    filter: drop-shadow(0 0 18px var(--lp-accent-glow));
+    opacity: 0;
+    transition: opacity 0.55s ease 1.75s;
+  }
+
+  .ig-rings-svg text.ig-rings-sub {
+    font-family: var(--lp-font-sans), system-ui, sans-serif;
+    font-size: 13px;
+    fill: var(--lp-text-muted);
+  }
+
+  .ig--visible .ig-rings-center {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ig-ring-mid-stroke,
+    .ig-ring-inner-stroke {
+      transition: none !important;
+    }
+
+    .ig--visible .ig-ring-inner-stroke {
+      stroke-dashoffset: 62 !important;
+    }
+
+    .ig--visible .ig-ring-mid-stroke {
+      stroke-dashoffset: 36 !important;
+    }
+
+    .ig-rings-svg text.ig-rings-center {
+      opacity: 1 !important;
+      transition: none !important;
+    }
+  }
+</style>

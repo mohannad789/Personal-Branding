@@ -3,7 +3,7 @@ import { landing } from "../../content/landing";
 const s = landing.shift;
 ---
 
-<section class="lp-section lp-section--dark lp-shift" id="approach" aria-labelledby="lp-shift-h">
+<section class="lp-section lp-shift" id="approach" aria-labelledby="lp-shift-h">
   <div class="lp-container">
     <div class="lp-anim" data-anim>
       <span class="lp-eyebrow" style="text-align: center; display: block;">The Shift</span>
@@ -13,11 +13,13 @@ const s = landing.shift;
     <div class="lp-shift-key lp-anim--scale" data-anim>{s.keyPhrase}</div>
 
     <div class="lp-body lp-anim" data-anim style="max-width: var(--lp-text-max); margin-inline: auto;">
-      {s.paragraphs.slice(1).map((p) => <p>{p}</p>)}
+      {s.paragraphs.map((p) => (
+        <p>{p}</p>
+      ))}
     </div>
 
     <div class="lp-shift-cta lp-anim" data-anim style="text-align: center;">
-      <a class="lp-btn-gold" href={s.ctaHref}>{s.ctaLabel}</a>
+      <a class="lp-btn-accent" href={s.ctaHref}>{s.ctaLabel}</a>
     </div>
   </div>
 </section>
