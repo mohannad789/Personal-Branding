@@ -13,9 +13,9 @@ const s = landing.finalCta;
       <h2 id="lp-final-h" class="lp-h2">{s.headline}</h2>
       <p>{s.body}</p>
       
-      <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-top: 2.5rem;">
-        <a class="btn lp-btn-lg lp-btn-ink" href={s.ctaHref}>{s.ctaLabel}</a>
-        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.4); letter-spacing: 0.05em;">{s.supportingLine}</p>
+      <div class="lp-final-actions">
+        <a class="btn btn-primary lp-btn-lg" href={s.ctaHref}>{s.ctaLabel}</a>
+        <p class="lp-final-support">{s.supportingLine}</p>
       </div>
     </div>
   </div>

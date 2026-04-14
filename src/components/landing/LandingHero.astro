@@ -18,33 +18,34 @@ const h = landing.hero;
           <feComposite in="SourceGraphic" in2="blur" operator="over" />
         </filter>
       </defs>
-      
-      <!-- Abstract compounding curve -->
-      <path 
-        class="lp-path-breathe" 
-        d="M -100 700 C 300 700, 600 650, 900 400 S 1200 100, 1600 50" 
-        fill="none" 
-        stroke="url(#hero-grad)" 
-        stroke-width="4" 
-        filter="url(#hero-glow)"
-      />
-      <!-- Secondary framing lines -->
-      <path 
-        class="lp-path-breathe" 
-        style="animation-delay: -3s; animation-duration: 12s;"
-        d="M -100 750 C 400 750, 700 700, 1000 500 S 1300 200, 1600 150" 
-        fill="none" 
-        stroke="var(--border)" 
-        stroke-width="1"
-      />
-      <path 
-        class="lp-path-breathe" 
-        style="animation-delay: -7s; animation-duration: 18s;"
-        d="M 100 800 C 200 600, 500 500, 800 200 S 1100 -50, 1500 -100" 
-        fill="none" 
-        stroke="var(--border)" 
-        stroke-width="1"
-      />
+
+      <g class="lp-hero-curves">
+        <!-- Main curve: quick draw on enter, then moves with the group -->
+        <path
+          class="lp-hero-path-main"
+          d="M -100 700 C 300 700, 600 650, 900 400 S 1200 100, 1600 50"
+          fill="none"
+          stroke="url(#hero-grad)"
+          stroke-width="4"
+          filter="url(#hero-glow)"
+        />
+        <path
+          class="lp-hero-path-secondary"
+          d="M -100 750 C 400 750, 700 700, 1000 500 S 1300 200, 1600 150"
+          fill="none"
+          stroke="var(--text-muted)"
+          stroke-opacity="0.28"
+          stroke-width="1"
+        />
+        <path
+          class="lp-hero-path-secondary"
+          d="M 100 800 C 200 600, 500 500, 800 200 S 1100 -50, 1500 -100"
+          fill="none"
+          stroke="var(--text-muted)"
+          stroke-opacity="0.22"
+          stroke-width="1"
+        />
+      </g>
     </svg>
   </div>
 
@@ -57,8 +58,8 @@ const h = landing.hero;
       </div>
 
       <h1 id="lp-hero-h" class="lp-hero-h1">
-        <span class="lp-hero-h1-serif">Your expertise</span> closes deals.<br/>
-        <span class="lp-hero-h1-serif">Your brand</span> should open them.
+        <span class="lp-hero-em">Your expertise</span> closes deals.<br/>
+        <span class="lp-hero-em">Your brand</span> should open them.
       </h1>
 
       <p class="lp-hero-sub">{h.sub}</p>
@@ -76,7 +77,7 @@ const h = landing.hero;
         }
       </ul>
 
-      <a class="btn lp-btn-lg lp-btn-ink" href={h.ctaHref}>{h.ctaLabel}</a>
+      <a class="btn btn-primary lp-btn-lg" href={h.ctaHref}>{h.ctaLabel}</a>
     </div>
   </div>
 </section>
