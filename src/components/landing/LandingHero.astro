@@ -1,10 +1,6 @@
 <section class="lp-hero" id="hero">
 
-  <!-- Layered background: gradient mesh + dot grid -->
-  <div class="lp-hero-bg" aria-hidden="true">
-    <div class="lp-hero-mesh"></div>
-    <div class="lp-hero-dots"></div>
-  </div>
+  <!-- Vanta NET canvas is injected here by the script below -->
 
   <!-- Single centered content column -->
   <div class="lp-hero-body">
@@ -59,24 +55,7 @@
   text-align: center;
 }
 
-/* Background layers */
-.lp-hero-bg { position: absolute; inset: 0; pointer-events: none; }
-
-.lp-hero-mesh {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 65% 55% at 80% 10%, var(--mesh1, rgba(79,143,247,0.22)) 0%, transparent 65%),
-    radial-gradient(ellipse 55% 50% at 10% 85%, var(--mesh2, rgba(129,140,248,0.14)) 0%, transparent 60%);
-}
-
-.lp-hero-dots {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(var(--dot, rgba(79,143,247,0.06)) 1px, transparent 1px);
-  background-size: 28px 28px;
-  opacity: 0.5;
-}
+/* Vanta injects its own canvas into .lp-hero — ensure it fills behind content */
 
 /* Content column — max-width just controls line length, section is still 100% wide */
 .lp-hero-body {
@@ -218,8 +197,95 @@
   50%       { opacity: 0.55; }
 }
 
+.lp-hero-mesh,
+.lp-hero-dots { display: none; } /* kept in case JS is unavailable */
+
 @media (prefers-reduced-motion: reduce) {
   .lp-hero-body { animation: none; opacity: 1; transform: none; }
   .lp-hero-cue  { animation: none; }
 }
 </style>
+
+<script is:inline>
+(function () {
+  /* ── Vanta NET hero background ─────────────────────────────────────────── */
+
+  var vantaInstance = null;
+
+  /* Colour palettes per theme */
+  var THEMES = {
+    dark: {
+      backgroundColor: 0x05080f,
+      color:           0x4f8ff7,
+      color2:          0x818cf8
+    },
+    light: {
+      backgroundColor: 0xf2f5ff,
+      color:           0x2563eb,
+      color2:          0x6366f1
+    }
+  };
+
+  function currentTheme() {
+    return document.documentElement.getAttribute("data-theme") === "light"
+      ? "light"
+      : "dark";
+  }
+
+  function initVanta() {
+    if (typeof VANTA === "undefined" || !VANTA.NET) return;
+
+    /* Destroy previous instance before re-creating (theme switch) */
+    if (vantaInstance) {
+      vantaInstance.destroy();
+      vantaInstance = null;
+    }
+
+    var palette = THEMES[currentTheme()];
+
+    vantaInstance = VANTA.NET({
+      el:            "#hero",
+      THREE:         THREE,
+      mouseControls: true,
+      touchControls: true,
+      gyroControls:  false,
+      minHeight:     200,
+      minWidth:      200,
+      scale:         1.00,
+      scaleMobile:   1.00,
+      points:        10.00,
+      maxDistance:   18.00,
+      spacing:       18.00,
+      backgroundColor: palette.backgroundColor,
+      color:           palette.color,
+      color2:          palette.color2
+    });
+  }
+
+  /* Init once Three.js + Vanta are ready */
+  function tryInit() {
+    if (typeof THREE !== "undefined" && typeof VANTA !== "undefined" && VANTA.NET) {
+      initVanta();
+    } else {
+      setTimeout(tryInit, 80);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", tryInit);
+  } else {
+    tryInit();
+  }
+
+  /* Re-init when theme changes so colours stay in sync */
+  var prevTheme = currentTheme();
+  var obs = new MutationObserver(function () {
+    var t = currentTheme();
+    if (t !== prevTheme) {
+      prevTheme = t;
+      initVanta();
+    }
+  });
+  obs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+})();
+</script>
