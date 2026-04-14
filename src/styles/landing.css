@@ -75,9 +75,9 @@ main.main--landing {
   --r:   14px;
   --rL:  24px;
 
-  max-width: none;
-  width: 100%;
-  padding: 0;
+  max-width: none !important;
+  width: 100% !important;
+  padding: 0 !important;
   background: var(--bg);
   color: var(--t1);
   min-height: 100vh;
@@ -354,7 +354,11 @@ main.main--landing {
    HERO
    ═══════════════════════════════════════ */
 
+/* Break-out technique — hero is always 100vw regardless of any parent container */
 .hero {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  box-sizing: border-box;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
@@ -1068,6 +1072,10 @@ main.main--landing {
 
 .diff-item--no {
   color: var(--strikeClr);
+  /* text-decoration applied only to the text span, never the icon */
+}
+
+.diff-item--no .diff-text {
   text-decoration: line-through;
   text-decoration-color: var(--strikeClr);
   text-decoration-thickness: 1px;
@@ -1090,9 +1098,6 @@ main.main--landing {
   border: 1px solid var(--strikeClr);
   color: var(--strikeClr);
   font-size: 0.75rem;
-  /* Prevent text-decoration line-through from the parent from painting over this icon */
-  display: inline-flex;
-  text-decoration: none;
 }
 
 .diff-marker--yes {
