@@ -4,6 +4,7 @@ import LandingHero from "../components/landing/LandingHero.astro";
 import LandingProblem from "../components/landing/LandingProblem.astro";
 import LandingShift from "../components/landing/LandingShift.astro";
 import LandingWho from "../components/landing/LandingWho.astro";
+import LandingCounterStrip from "../components/landing/LandingCounterStrip.astro";
 import LandingServices from "../components/landing/LandingServices.astro";
 import LandingDifferentiation from "../components/landing/LandingDifferentiation.astro";
 import LandingProcess from "../components/landing/LandingProcess.astro";
@@ -11,24 +12,38 @@ import LandingProof from "../components/landing/LandingProof.astro";
 import LandingFaq from "../components/landing/LandingFaq.astro";
 import LandingFinalCta from "../components/landing/LandingFinalCta.astro";
 import { landing } from "../content/landing";
+import { site } from "../content/home";
 import "../styles/landing.css";
 
 const title = "Home";
+const fc = landing.footer;
 ---
 
 <BaseLayout
   title={title}
   description={landing.metaDescription}
   navMode="landing"
-  ctaHref="/contact"
-  ctaLabel="Book a Strategy Call"
   mainClass="main--landing"
-  footerContact={landing.footer}
 >
+  <!-- Landing Nav -->
+  <nav class="lp-nav" id="lp-nav" aria-label="Primary">
+    <div class="lp-nav-inner">
+      <a class="lp-nav-logo" href="/">{site.logoInitials}</a>
+      <ul class="lp-nav-links">
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a class="lp-btn-gold-outline" href="/contact">Book a Strategy Call</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <LandingHero />
   <LandingProblem />
   <LandingShift />
   <LandingWho />
+  <LandingCounterStrip />
   <LandingServices />
   <LandingDifferentiation />
   <LandingProcess />
@@ -36,30 +51,89 @@ const title = "Home";
   <LandingFaq />
   <LandingFinalCta />
 
+  <!-- Landing Footer -->
+  <footer class="lp-footer">
+    <div class="lp-footer-inner">
+      <a class="lp-footer-logo" href="/">{site.logoInitials}</a>
+      <div class="lp-footer-contact">
+        <a href={`mailto:${fc.email}`}>{fc.email}</a>
+        <span aria-hidden="true">·</span>
+        <a href={`tel:${fc.phoneTel}`}>{fc.phoneDisplay}</a>
+      </div>
+      <nav class="lp-footer-legal" aria-label="Legal">
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/imprint">Imprint</a>
+      </nav>
+    </div>
+  </footer>
+
   <script is:inline>
     (function () {
-      var nodes = document.querySelectorAll("[data-viz]");
-      if (!nodes.length) return;
-      if (!("IntersectionObserver" in window)) {
-        nodes.forEach(function (n) {
-          n.classList.add("lp-viz--visible");
-        });
-        return;
+      // 1. Scroll animations (IntersectionObserver)
+      var animNodes = document.querySelectorAll("[data-anim]");
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add("lp-anim-visible");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -5% 0px" }
+        );
+        animNodes.forEach(function (n) { io.observe(n); });
+      } else {
+        animNodes.forEach(function (n) { n.classList.add("lp-anim-visible"); });
       }
-      var io = new IntersectionObserver(
-        function (entries) {
+
+      // 2. Nav scroll background
+      var nav = document.getElementById("lp-nav");
+      if (nav) {
+        var scrolled = false;
+        function checkScroll() {
+          var isScrolled = window.scrollY > 60;
+          if (isScrolled !== scrolled) {
+            scrolled = isScrolled;
+            nav.classList.toggle("lp-nav--scrolled", scrolled);
+          }
+        }
+        window.addEventListener("scroll", checkScroll, { passive: true });
+        checkScroll();
+      }
+
+      // 3. Counter animation
+      var counterWrap = document.querySelector("[data-counters]");
+      if (counterWrap) {
+        var counted = false;
+        var counterIO = new IntersectionObserver(function (entries) {
           entries.forEach(function (e) {
-            if (e.isIntersecting) {
-              e.target.classList.add("lp-viz--visible");
-              io.unobserve(e.target);
+            if (e.isIntersecting && !counted) {
+              counted = true;
+              counterIO.unobserve(e.target);
+              var nums = e.target.querySelectorAll("[data-target]");
+              nums.forEach(function (el) {
+                var target = parseFloat(el.getAttribute("data-target"));
+                var suffix = el.getAttribute("data-suffix") || "";
+                var isFloat = target % 1 !== 0;
+                var duration = 2000;
+                var start = performance.now();
+                function tick(now) {
+                  var elapsed = now - start;
+                  var progress = Math.min(elapsed / duration, 1);
+                  var eased = 1 - Math.pow(1 - progress, 3);
+                  var current = target * eased;
+                  el.textContent = (isFloat ? current.toFixed(1) : Math.round(current)) + suffix;
+                  if (progress < 1) requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+              });
             }
           });
-        },
-        { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
-      );
-      nodes.forEach(function (n) {
-        io.observe(n);
-      });
+        }, { threshold: 0.3 });
+        counterIO.observe(counterWrap);
+      }
     })();
   </script>
 </BaseLayout>

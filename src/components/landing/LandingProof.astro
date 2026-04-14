@@ -1,68 +1,25 @@
 ---
 import { landing } from "../../content/landing";
-
 const s = landing.proof;
-
-function initialsFromAttribution(attribution: string) {
-  return attribution
-    .split("·")
-    .map((p) => p.trim().charAt(0))
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-}
 ---
 
-<section
-  class="lp-band lp-proof"
-  id="testimonials"
-  aria-labelledby="lp-proof-h"
->
+<section class="lp-section lp-section--light" aria-labelledby="lp-proof-h">
   <div class="lp-container">
-    <div class="lp-proof-header lp-fade-in" data-viz>
-      <span class="lp-eyebrow">Client outcomes</span>
-      <h2 id="lp-proof-h" class="lp-h2">{s.title}</h2>
-      <p class="lp-proof-intro">
-        <strong>Placeholder quotes</strong> — {s.intro} Each card includes an illustrative before/after metric
-        tied to the story (not real data).
-      </p>
+    <div class="lp-proof-header lp-anim" data-anim>
+      <span class="lp-eyebrow">Client Outcomes</span>
+      <h2 id="lp-proof-h" class="lp-h2" style="margin-inline: auto; max-width: 28ch;">{s.title}</h2>
     </div>
 
     <div class="lp-testimonials">
-      {
-        s.placeholderCards.map((card, i) => (
-          <article class="lp-testimonial-card lp-fade-in" data-viz style={`transition-delay: ${i * 0.15}s;`}>
-            <blockquote class="lp-quote-text">
-              <p>{card.quote}</p>
-            </blockquote>
-            
-            <div class="lp-mini-chart">
-              <span class="lp-mini-label">{card.chart.label}</span>
-              <div class="lp-mini-bar-row">
-                <span class="lp-mini-tag">Before</span>
-                <div class="lp-mini-track">
-                  <div class="lp-mini-fill lp-mini-fill--before lp-scale-x" style={`--w: ${card.chart.before}%`} />
-                </div>
-                <span class="lp-mini-val">{card.chart.before}%</span>
-              </div>
-              <div class="lp-mini-bar-row">
-                <span class="lp-mini-tag">After</span>
-                <div class="lp-mini-track">
-                  <div class="lp-mini-fill lp-mini-fill--after lp-scale-x" style={`--w: ${card.chart.after}%`} />
-                </div>
-                <span class="lp-mini-val">{card.chart.after}%</span>
-              </div>
-            </div>
-
-            <div style="display: flex; align-items: center; gap: 1rem; border-top: 1px solid var(--border); padding-top: 1.5rem;">
-              <div style="width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: linear-gradient(145deg, var(--accent), var(--accent-dim)); color: #fff; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.05em; flex-shrink: 0;">
-                {initialsFromAttribution(card.attribution)}
-              </div>
-              <cite class="lp-quote-author">{card.attribution}</cite>
-            </div>
-          </article>
-        ))
-      }
+      {s.placeholderCards.map((card, i) => (
+        <article class="lp-testimonial lp-anim" data-anim style={`transition-delay: ${i * 0.15}s;`}>
+          <blockquote class="lp-testimonial-quote">{card.quote}</blockquote>
+          <footer>
+            <span class="lp-testimonial-name">{card.attribution}</span>
+            <span class="lp-testimonial-role">{card.company}</span>
+          </footer>
+        </article>
+      ))}
     </div>
   </div>
 </section>

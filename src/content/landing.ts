@@ -1,6 +1,6 @@
 /**
  * Landing page copy — Personal Branding Agency (English, Draft 2).
- * Charts: inline SVG in `src/components/landing/viz/`. Testimonial placeholder metrics: `proof.placeholderCards[].chart`.
+ * Luxury editorial design. Playfair Display + Inter. Gold accent.
  */
 export const landing = {
   metaDescription:
@@ -8,8 +8,7 @@ export const landing = {
 
   hero: {
     headline: "Your expertise closes deals. Your brand should open them.",
-    sub:
-      "Strategic personal branding for entrepreneurs who've outgrown word of mouth, and need the market to catch up with what their clients already know.",
+    sub: "Strategic personal branding for entrepreneurs who've outgrown word of mouth, and need the market to catch up with what their clients already know.",
     advantages: [
       "Inbound leads from markets that have never heard your name",
       "A brand position that sells before you enter the room",
@@ -29,16 +28,20 @@ export const landing = {
       "And here's what makes it personal: you watch founders with half your track record close the deals you should be closing. Not because they're better. Because they're positioned. Their market has already decided they're the obvious choice before the conversation starts.",
       "That gap between what you've built and what the market sees? That's not a marketing problem. That's a strategic one.",
     ],
+    pullQuote:
+      "You have a reputation, but not a brand. One requires proximity. The other works while you sleep.",
   },
 
   shift: {
-    title: "Reputation gets you in the room. Brand gets the room to come to you.",
+    title:
+      "Reputation gets you in the room. Brand gets the room to come to you.",
     paragraphs: [
       "Most agencies will build you a presence. We build you a position.",
       "The difference matters. Presence is volume: more posts, more pixels, more platforms. Position is precision: the right perception, in the right markets, with the right people. The kind that makes a prospect feel like they already know you before the first handshake. The kind that shortens sales cycles, inflates deal sizes, and turns inbound enquiries from strangers into conversations that sound like referrals.",
       "But this isn't really about visibility. It's about becoming the version of yourself the market can't ignore. The founder whose expertise is finally matched by their market standing. The one who stops chasing opportunities because opportunities start arriving with intent.",
       "We don't manufacture personas. We clarify what's already true about you, then make sure the market can see it clearly. The result isn't a louder you. It's a more legible one.",
     ],
+    keyPhrase: "We build you a position.",
     ctaLabel: "Book a Strategy Call",
     ctaHref: "/contact",
   },
@@ -53,41 +56,55 @@ export const landing = {
     ],
   },
 
+  counters: [
+    { value: 15, suffix: "+", label: "Years of strategic advisory" },
+    { value: 6, suffix: "", label: "Markets served across DACH & Gulf" },
+    {
+      value: 94,
+      suffix: "%",
+      label: "Average client retention year-over-year",
+    },
+    {
+      value: 3.2,
+      suffix: "x",
+      label: "Average inbound lead increase within 12 months",
+    },
+  ],
+
   services: {
     title: "The architecture behind authority.",
-    intro:
-      "Every engagement starts with strategy. Not templates. Not tactics. A clear-eyed diagnosis of where you stand, where you should stand, and the shortest line between the two.",
+    intro: "Every engagement starts with strategy. Not templates. Not tactics. A clear-eyed diagnosis of where you stand, where you should stand, and the shortest line between the two.",
     pillars: [
       {
         title: "Strategic Positioning",
-        body:
-          "We define how you should be perceived, by whom, in what context, and to what end. This isn't a \"brand essence workshop.\" It's a commercial positioning exercise with one question at its centre: what does your brand need to make true for revenue to follow?",
+        body: 'We define how you should be perceived, by whom, in what context, and to what end. This isn\'t a "brand essence workshop." It\'s a commercial positioning exercise with one question at its centre: what does your brand need to make true for revenue to follow?',
       },
       {
         title: "Narrative & Messaging",
-        body:
-          "We build the story the market tells about you, and make sure it's the right one. Sharp messaging frameworks, thought leadership angles, and a point of view that's worth having. An actual edge. The kind that makes people remember what you said at dinner, not just that you were there.",
+        body: "We build the story the market tells about you, and make sure it's the right one. Sharp messaging frameworks, thought leadership angles, and a point of view that's worth having. An actual edge. The kind that makes people remember what you said at dinner, not just that you were there.",
       },
       {
         title: "Visibility Architecture",
-        body:
-          "The right content, on the right platforms, aimed at the right rooms. Media placements, keynote positioning, strategic publishing, LinkedIn done with intent. Every asset earns its place. Nothing goes out that doesn't serve the strategy.",
+        body: "The right content, on the right platforms, aimed at the right rooms. Media placements, keynote positioning, strategic publishing, LinkedIn done with intent. Every asset earns its place. Nothing goes out that doesn't serve the strategy.",
       },
       {
         title: "Conversion Infrastructure",
-        body:
-          "Visibility without conversion is vanity. We build the bridge between \"I've seen your name\" and \"I want to work with you,\" from inbound funnels and authority assets to the subtle signals that turn a warm lead into a closed deal. The kind of details only another strategist would notice, and exactly the kind your prospects feel without being able to name.",
+        body: 'Visibility without conversion is vanity. We build the bridge between "I\'ve seen your name" and "I want to work with you," from inbound funnels and authority assets to the subtle signals that turn a warm lead into a closed deal. The kind of details only another strategist would notice, and exactly the kind your prospects feel without being able to name.',
       },
     ],
   },
 
   differentiation: {
     title: "What you won't find here.",
-    paragraphs: [
+    negatives: [
       "Templated strategies. Recycled playbooks. The same \"thought leadership framework\" they sold the founder down the hall.",
-      "You won't find a team of twenty where your account lives with the most junior person in the room. You won't find a retainer that prioritises activity metrics because real outcomes are harder to report on. And you won't find us telling you what you want to hear, because that's a more expensive problem than the one you came to solve.",
-      "What you will find: a deliberately small, senior-led operation that treats your brand position with the same precision you'd expect from any strategic investment. Dubai-based. DACH focused. Obsessive about the details that most people never see, because those are the ones that do the real work.",
+      "You won't find a team of twenty where your account lives with the most junior person in the room.",
+      "You won't find a retainer that prioritises activity metrics because real outcomes are harder to report on.",
+      "And you won't find us telling you what you want to hear, because that's a more expensive problem than the one you came to solve.",
     ],
+    positive:
+      "What you will find: a deliberately small, senior-led operation that treats your brand position with the same precision you'd expect from any strategic investment.",
+    signature: "Dubai-based. DACH focused. Obsessive about the details that most people never see, because those are the ones that do the real work.",
   },
 
   process: {
@@ -95,61 +112,46 @@ export const landing = {
     steps: [
       {
         title: "Diagnosis",
-        body:
-          "A forensic look at where you stand today: market perception, competitive positioning, digital footprint, missed opportunities. No fluff. Expect candour. This is the part where we find the gap between what you've built and what the market can see.",
+        body: "A forensic look at where you stand today: market perception, competitive positioning, digital footprint, missed opportunities. No fluff. Expect candour. This is the part where we find the gap between what you've built and what the market can see.",
       },
       {
         title: "Strategy",
-        body:
-          "We define your target position, the specific perception that drives revenue, and map the distance between where you are and where you need to be. This becomes the blueprint everything else is built on. Nothing moves without it.",
+        body: "We define your target position, the specific perception that drives revenue, and map the distance between where you are and where you need to be. This becomes the blueprint everything else is built on. Nothing moves without it.",
       },
       {
         title: "Build",
-        body:
-          "Messaging, content, media strategy, platform architecture. Everything is custom. Nothing is templated. Every asset is engineered to move you closer to the position we've defined, and to feel so precisely like you that it could never be mistaken for anyone else.",
+        body: "Messaging, content, media strategy, platform architecture. Everything is custom. Nothing is templated. Every asset is engineered to move you closer to the position we've defined, and to feel so precisely like you that it could never be mistaken for anyone else.",
       },
       {
         title: "Compound",
-        body:
-          "Personal brands don't launch, they compound. We refine, adapt, and accelerate as results come in. The goal isn't a campaign. It's a market position that appreciates like equity, one that becomes more valuable the longer it exists.",
+        body: "Personal brands don't launch, they compound. We refine, adapt, and accelerate as results come in. The goal isn't a campaign. It's a market position that appreciates like equity, one that becomes more valuable the longer it exists.",
       },
     ],
   },
 
   proof: {
-    title: "Don't take our word for it. (That would rather defeat the point.)",
+    title:
+      "Don't take our word for it. (That would rather defeat the point.)",
     intro:
-      "Replace these with real quotes when you have them — short, specific, outcome-led (pipeline, time-to-close, inbound, fundraising).",
+      "Replace these with real quotes when you have them — short, specific, outcome-led.",
     placeholderCards: [
       {
         quote:
-          "Placeholder: inbound qualified conversations roughly doubled within a quarter after we tightened positioning and narrative.",
-        attribution: "Founder · Professional services",
-        chart: {
-          label: "Qualified inbound index (illustrative)",
-          before: 38,
-          after: 82,
-        },
+          "Inbound qualified conversations roughly doubled within a quarter after we tightened positioning and narrative.",
+        attribution: "Founder",
+        company: "Professional Services",
       },
       {
         quote:
-          "Placeholder: enterprise deals stopped stalling in legal review once our authority assets matched how the firm actually shows up in the room.",
-        attribution: "Managing partner · Advisory",
-        chart: {
-          label: "Deal velocity through review (illustrative)",
-          before: 44,
-          after: 76,
-        },
+          "Enterprise deals stopped stalling in legal review once our authority assets matched how the firm actually shows up in the room.",
+        attribution: "Managing Partner",
+        company: "Advisory",
       },
       {
         quote:
-          "Placeholder: we cut average time-to-close by leaning on a single sharp point of view instead of a generic content calendar.",
-        attribution: "CEO · B2B SaaS",
-        chart: {
-          label: "Cycle friction (illustrative — lower is better)",
-          before: 78,
-          after: 36,
-        },
+          "We cut average time-to-close by leaning on a single sharp point of view instead of a generic content calendar.",
+        attribution: "CEO",
+        company: "B2B SaaS",
       },
     ],
   },
@@ -163,7 +165,7 @@ export const landing = {
       },
       {
         q: "How long before I see results?",
-        a: "The honest answer: it depends on where you're starting. Some clients see inbound shift within 8–12 weeks. Market repositioning at scale takes 6–12 months. We'll tell you what's realistic in the strategy call, not what you want to hear.",
+        a: "The honest answer: it depends on where you're starting. Some clients see inbound shift within 8\u201312 weeks. Market repositioning at scale takes 6\u201312 months. We'll tell you what's realistic in the strategy call, not what you want to hear.",
       },
       {
         q: "Do you manage my social media?",
@@ -185,9 +187,9 @@ export const landing = {
   },
 
   finalCta: {
-    headline: "Your next client is forming an opinion about you right now. Make sure it's the right one.",
-    body:
-      "A 30-minute strategy call. No pitch deck. No pressure. Just a clear-eyed look at where your personal brand stands today, and what the gap between your reputation and your revenue is actually costing you.",
+    headline:
+      "Your next client is forming an opinion about you right now. Make sure it's the right one.",
+    body: "A 30-minute strategy call. No pitch deck. No pressure. Just a clear-eyed look at where your personal brand stands today, and what the gap between your reputation and your revenue is actually costing you.",
     ctaLabel: "Book Your Strategy Call",
     supportingLine: "Dubai-based. Serving the DACH region and the Gulf.",
     ctaHref: "/contact",

@@ -1,46 +1,23 @@
 ---
 import { landing } from "../../content/landing";
 const s = landing.shift;
-const [first, ...rest] = s.paragraphs;
 ---
 
-<section class="lp-band lp-shift" aria-labelledby="lp-shift-h">
+<section class="lp-section lp-section--dark lp-shift" id="approach" aria-labelledby="lp-shift-h">
   <div class="lp-container">
-    <div class="lp-shift-content lp-fade-in" data-viz>
-      <span class="lp-eyebrow">The shift</span>
-      <h2 id="lp-shift-h" class="lp-h2 lp-shift-h2">{s.title}</h2>
+    <div class="lp-anim" data-anim>
+      <span class="lp-eyebrow" style="text-align: center; display: block;">The Shift</span>
+      <h2 id="lp-shift-h" class="lp-h2" style="text-align: center; max-width: 22ch; margin-inline: auto;">{s.title}</h2>
+    </div>
 
-      <div class="lp-viz-presence-wrap">
-        <!-- Integrated Presence vs Position Bar Chart -->
-        <div class="lp-inline-chart lp-inline-chart--center">
-          <p class="lp-chart-kicker">
-            Where the budget actually goes.
-          </p>
+    <div class="lp-shift-key lp-anim--scale" data-anim>{s.keyPhrase}</div>
 
-          <div class="lp-chart-row">
-            <p class="lp-chart-label">Posts · pixels · platforms <span class="lp-chart-meta">(Volume & Activity)</span></p>
-            <div class="lp-chart-track">
-              <div class="lp-scale-x lp-chart-fill lp-chart-fill--muted" style="width: 95%; transition-delay: 0.1s;"></div>
-            </div>
-          </div>
+    <div class="lp-body lp-anim" data-anim style="max-width: var(--lp-text-max); margin-inline: auto;">
+      {s.paragraphs.slice(1).map((p) => <p>{p}</p>)}
+    </div>
 
-          <div class="lp-chart-row">
-            <p class="lp-chart-label">Right perception · right rooms · right people <span class="lp-chart-meta">(Precision & Leverage)</span></p>
-            <div class="lp-chart-track">
-              <div class="lp-scale-x lp-chart-fill lp-chart-fill--accent" style="width: 45%; transition-delay: 0.3s;"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="lp-shift-cols">
-        <p class="lp-shift-lead">{first}</p>
-        {rest.map((p) => <p>{p}</p>)}
-      </div>
-
-      <div class="lp-shift-cta">
-        <a class="btn btn-primary lp-btn-lg" href={s.ctaHref}>{s.ctaLabel}</a>
-      </div>
+    <div class="lp-shift-cta lp-anim" data-anim style="text-align: center;">
+      <a class="lp-btn-gold" href={s.ctaHref}>{s.ctaLabel}</a>
     </div>
   </div>
 </section>

@@ -3,68 +3,24 @@ import { landing } from "../../content/landing";
 const s = landing.services;
 ---
 
-<section class="lp-band lp-services" aria-labelledby="lp-services-h">
-  <div class="lp-services-bg-grid"></div>
+<section class="lp-section lp-section--dark" id="services" aria-labelledby="lp-services-h">
   <div class="lp-container">
-    <div class="lp-services-header lp-fade-in" data-viz>
-      <span class="lp-eyebrow">What we do</span>
-      <h2 id="lp-services-h" class="lp-h2">{s.title}</h2>
-      <p>{s.intro}</p>
-
-      <!-- Authority Stack Visualization -->
-      <div style="margin-top: 3rem; max-width: 32rem;" class="lp-fade-in" style="transition-delay: 0.2s;" data-viz>
-        <p class="lp-serif-illustrative lp-serif-illustrative--lg">
-          How the layers stack
-        </p>
-        <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 2rem;">
-          Nothing in visibility or conversion moves until positioning and narrative define what must be true for revenue.
-        </p>
-        
-        <ol class="lp-stack-list" role="list">
-          <li class="lp-stack-item lp-fade-in" style="--i: 0" data-viz>
-            <span class="lp-stack-num">04</span>
-            <div class="lp-stack-copy">
-              <span class="lp-stack-label">Conversion infrastructure</span>
-              <span class="lp-stack-hint">Bridge from “seen” to “signed”</span>
-            </div>
-          </li>
-          <li class="lp-stack-item lp-fade-in" style="--i: 1" data-viz>
-            <span class="lp-stack-num">03</span>
-            <div class="lp-stack-copy">
-              <span class="lp-stack-label">Visibility architecture</span>
-              <span class="lp-stack-hint">Every asset earns its place</span>
-            </div>
-          </li>
-          <li class="lp-stack-item lp-fade-in" style="--i: 2" data-viz>
-            <span class="lp-stack-num">02</span>
-            <div class="lp-stack-copy">
-              <span class="lp-stack-label">Narrative & messaging</span>
-              <span class="lp-stack-hint">What the market repeats about you</span>
-            </div>
-          </li>
-          <li class="lp-stack-item lp-stack-item--base lp-fade-in" style="--i: 3" data-viz>
-            <span class="lp-stack-num">01</span>
-            <div class="lp-stack-copy">
-              <span class="lp-stack-label">Strategic positioning</span>
-              <span class="lp-stack-hint">Blueprint — nothing moves without it</span>
-            </div>
-          </li>
-        </ol>
+    <div class="lp-services-header lp-anim" data-anim>
+      <span class="lp-eyebrow">What We Do</span>
+      <h2 id="lp-services-h" class="lp-h2" style="margin-inline: auto; max-width: 24ch;">{s.title}</h2>
+      <div class="lp-body">
+        <p>{s.intro}</p>
       </div>
     </div>
 
-    <div class="lp-services-stack">
-      {
-        s.pillars.map((pillar, i) => (
-          <div class="lp-service-card lp-fade-in" data-viz style={`transition-delay: ${i * 0.1}s;`}>
-            <span class="lp-service-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-            <div>
-              <h3 class="lp-service-title">{pillar.title}</h3>
-              <p class="lp-service-body">{pillar.body}</p>
-            </div>
-          </div>
-        ))
-      }
+    <div class="lp-services-grid">
+      {s.pillars.map((pillar, i) => (
+        <article class="lp-service-card lp-anim" data-anim style={`transition-delay: ${i * 0.15}s;`}>
+          <span class="lp-service-num">0{i + 1}</span>
+          <h3 class="lp-service-title">{pillar.title}</h3>
+          <p class="lp-service-body">{pillar.body}</p>
+        </article>
+      ))}
     </div>
   </div>
 </section>

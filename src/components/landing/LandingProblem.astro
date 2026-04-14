@@ -1,47 +1,24 @@
 ---
 import { landing } from "../../content/landing";
 const s = landing.problem;
-const [first, second, ...rest] = s.paragraphs;
+const bodyParagraphs = s.paragraphs;
 ---
 
-<section class="lp-band lp-problem" aria-labelledby="lp-problem-h">
+<section class="lp-section lp-section--light" aria-labelledby="lp-problem-h">
   <div class="lp-container">
     <div class="lp-problem-grid">
-      <div class="lp-problem-text lp-fade-in" data-viz>
-        <span class="lp-eyebrow">The problem</span>
+      <div class="lp-problem-left lp-anim--slide-left" data-anim>
+        <span class="lp-eyebrow">The Problem</span>
         <h2 id="lp-problem-h" class="lp-h2">{s.title}</h2>
-        <p class="lp-prose-lead">{first}</p>
-        <p>{second}</p>
-        {rest.map((p) => <p>{p}</p>)}
       </div>
+      <div class="lp-problem-right lp-body lp-anim--slide-right" data-anim>
+        {bodyParagraphs.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
 
-      <aside class="lp-viz-reputation lp-fade-in" aria-label="Illustrative chart" data-viz>
-        <p class="lp-pull-quote-text">
-          "You're the best-kept secret in your industry. And that's not the compliment it sounds like."
-        </p>
-
-        <!-- Integrated Bar Chart (No Box) -->
-        <div class="lp-inline-chart">
-          <p class="lp-chart-kicker">
-            The Gap: Who can buy from you?
-          </p>
-
-          <div class="lp-chart-row">
-            <p class="lp-chart-label">Inside your existing network (Reputation)</p>
-            <div class="lp-chart-track">
-              <div class="lp-scale-x lp-chart-fill lp-chart-fill--muted" style="width: 25%; transition-delay: 0.2s;"></div>
-            </div>
-          </div>
-
-          <div class="lp-chart-row">
-            <p class="lp-chart-label">Markets that have never heard your name (Brand Position)</p>
-            <div class="lp-chart-track">
-              <div class="lp-scale-x lp-chart-fill lp-chart-fill--accent" style="width: 90%; transition-delay: 0.4s;"></div>
-            </div>
-          </div>
-        </div>
-      </aside>
+    <div class="lp-pull-quote lp-anim" data-anim>
+      <p>{s.pullQuote}</p>
+      <span class="lp-pull-quote-line" aria-hidden="true"></span>
     </div>
   </div>
 </section>
-

@@ -1,44 +1,23 @@
 ---
 import { landing } from "../../content/landing";
 const s = landing.who;
+const lastP = s.paragraphs[s.paragraphs.length - 1];
+const bodyPs = s.paragraphs.slice(0, -1);
 ---
 
-<section class="lp-band lp-who" aria-labelledby="lp-who-h">
+<section class="lp-section lp-section--light" aria-labelledby="lp-who-h">
   <div class="lp-container">
     <div class="lp-who-grid">
-      <div class="lp-who-content lp-fade-in" data-viz>
-        <span class="lp-eyebrow">Who this is for</span>
+      <div class="lp-who-left lp-anim--slide-left" data-anim>
+        <span class="lp-eyebrow">Who This Is For</span>
         <h2 id="lp-who-h" class="lp-h2">{s.title}</h2>
-        <div class="lp-prose-text">
-          {s.paragraphs.map((p) => <p>{p}</p>)}
-        </div>
       </div>
 
-      <div class="lp-who-features lp-fade-in" style="transition-delay: 0.2s;" data-viz>
-        <div class="lp-inline-chart lp-inline-chart--no-border">
-          <p class="lp-chart-kicker" style="text-transform: none; letter-spacing: 0;">
-            Followers vs Pipeline <span style="font-family: var(--font-sans); font-size: 1rem; font-style: normal; color: var(--text-muted);">(A typical failure mode)</span>
-          </p>
+      <div class="lp-who-divider" aria-hidden="true"></div>
 
-          <p class="lp-chart-subtitle">
-            If the work optimises for reach, you get charts that look good in a deck — not conversations that sound like referrals.
-          </p>
-
-          <!-- Embedded Chart -->
-          <div class="lp-chart-row">
-            <p class="lp-chart-label">Follower / activity scorecard <span class="lp-chart-meta">(Vanity)</span></p>
-            <div class="lp-chart-track">
-              <div class="lp-scale-x lp-chart-fill lp-chart-fill--warn" style="width: 88%; transition-delay: 0.1s;"></div>
-            </div>
-          </div>
-
-          <div class="lp-chart-row">
-            <p class="lp-chart-label">Qualified conversations tied to offer <span class="lp-chart-meta" style="color: var(--accent)">(Pipeline)</span></p>
-            <div class="lp-chart-track">
-              <div class="lp-scale-x lp-chart-fill lp-chart-fill--accent" style="width: 36%; transition-delay: 0.3s;"></div>
-            </div>
-          </div>
-        </div>
+      <div class="lp-who-right lp-body lp-anim--slide-right" data-anim>
+        {bodyPs.map((p) => <p>{p}</p>)}
+        <p class="lp-who-closing">{lastP}</p>
       </div>
     </div>
   </div>

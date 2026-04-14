@@ -3,81 +3,26 @@ import { landing } from "../../content/landing";
 const h = landing.hero;
 ---
 
-<section class="lp-hero" aria-labelledby="lp-hero-h">
-  <!-- Giant integrated background chart -->
-  <div class="lp-hero-bg-viz" aria-hidden="true" data-viz>
-    <svg viewBox="0 0 1440 800" preserveAspectRatio="none">
-      <defs>
-        <linearGradient id="hero-grad" x1="0" y1="1" x2="1" y2="0">
-          <stop offset="0%" stop-color="var(--accent)" stop-opacity="0"></stop>
-          <stop offset="40%" stop-color="var(--accent)" stop-opacity="0.1"></stop>
-          <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.8"></stop>
-        </linearGradient>
-        <filter id="hero-glow" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="12" result="blur" />
-          <feComposite in="SourceGraphic" in2="blur" operator="over" />
-        </filter>
-      </defs>
+<section class="lp-hero lp-section--dark" aria-labelledby="lp-hero-h">
+  <div class="lp-hero-grain" aria-hidden="true"></div>
 
-      <g class="lp-hero-curves">
-        <!-- Main curve: quick draw on enter, then moves with the group -->
-        <path
-          class="lp-hero-path-main"
-          d="M -100 700 C 300 700, 600 650, 900 400 S 1200 100, 1600 50"
-          fill="none"
-          stroke="url(#hero-grad)"
-          stroke-width="4"
-          filter="url(#hero-glow)"
-        />
-        <path
-          class="lp-hero-path-secondary"
-          d="M -100 750 C 400 750, 700 700, 1000 500 S 1300 200, 1600 150"
-          fill="none"
-          stroke="var(--text-muted)"
-          stroke-opacity="0.28"
-          stroke-width="1"
-        />
-        <path
-          class="lp-hero-path-secondary"
-          d="M 100 800 C 200 600, 500 500, 800 200 S 1100 -50, 1500 -100"
-          fill="none"
-          stroke="var(--text-muted)"
-          stroke-opacity="0.22"
-          stroke-width="1"
-        />
-      </g>
-    </svg>
+  <div class="lp-hero-content">
+    <h1 id="lp-hero-h" class="lp-anim" data-anim>{h.headline}</h1>
+
+    <p class="lp-hero-sub lp-anim" data-anim style="transition-delay: 0.2s;">{h.sub}</p>
+
+    <ul class="lp-hero-advantages">
+      {h.advantages.map((line, i) => (
+        <li class="lp-anim" data-anim style={`transition-delay: ${0.4 + i * 0.1}s;`}>{line}</li>
+      ))}
+    </ul>
+
+    <div class="lp-anim" data-anim style="transition-delay: 0.9s;">
+      <a class="lp-btn-gold" href={h.ctaHref}>{h.ctaLabel}</a>
+    </div>
   </div>
 
-  <div class="lp-container">
-    <div class="lp-hero-content lp-fade-in" data-viz>
-      <div class="lp-hero-tags">
-        <span class="lp-hero-tag">Positioning</span>
-        <span class="lp-hero-tag">Authority</span>
-        <span class="lp-hero-tag">Revenue</span>
-      </div>
-
-      <h1 id="lp-hero-h" class="lp-hero-h1">
-        <span class="lp-hero-em">Your expertise</span> closes deals.<br/>
-        <span class="lp-hero-em">Your brand</span> should open them.
-      </h1>
-
-      <p class="lp-hero-sub">{h.sub}</p>
-
-      <ul class="lp-hero-adv-list">
-        {
-          h.advantages.map((line) => (
-            <li class="lp-hero-adv-item">
-              <span class="lp-hero-adv-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              </span>
-              {line}
-            </li>
-          ))
-        }
-      </ul>
-
-      <a class="btn btn-primary lp-btn-lg" href={h.ctaHref}>{h.ctaLabel}</a>
-    </div>
+  <div class="lp-hero-scroll" aria-hidden="true">
+    <span class="lp-hero-scroll-line"></span>
   </div>
 </section>

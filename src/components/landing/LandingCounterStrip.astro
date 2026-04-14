@@ -1,0 +1,17 @@
+---
+import { landing } from "../../content/landing";
+const counters = landing.counters;
+---
+
+<section class="lp-section--dark-alt lp-counter-strip" aria-label="Key metrics">
+  <div class="lp-container">
+    <ul class="lp-counters lp-anim" data-anim data-counters>
+      {counters.map((c) => (
+        <li>
+          <span class="lp-counter-num" data-target={String(c.value)} data-suffix={c.suffix}>0</span>
+          <span class="lp-counter-label">{c.label}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

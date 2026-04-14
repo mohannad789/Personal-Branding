@@ -3,27 +3,18 @@ import { landing } from "../../content/landing";
 const s = landing.finalCta;
 ---
 
-<section class="lp-band lp-final" aria-labelledby="lp-final-h">
-  <!-- Subtly pulsing glow background -->
-  <div style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 50%, rgba(94, 164, 252, 0.1), transparent 70%); animation: pulse 4s ease-in-out infinite alternate;"></div>
-  
-  <div class="lp-container lp-fade-in" data-viz>
-    <div class="lp-final-inner">
-      <span class="lp-eyebrow">Next step</span>
-      <h2 id="lp-final-h" class="lp-h2">{s.headline}</h2>
+<section class="lp-section lp-section--dark lp-final-cta" aria-labelledby="lp-final-h">
+  <div class="lp-final-glow" aria-hidden="true"></div>
+
+  <div class="lp-final-cta-inner">
+    <span class="lp-eyebrow lp-anim" data-anim>Next Step</span>
+    <h2 id="lp-final-h" class="lp-h2 lp-anim" data-anim style="transition-delay: 0.15s;">{s.headline}</h2>
+    <div class="lp-body lp-anim" data-anim style="transition-delay: 0.3s;">
       <p>{s.body}</p>
-      
-      <div class="lp-final-actions">
-        <a class="btn btn-primary lp-btn-lg" href={s.ctaHref}>{s.ctaLabel}</a>
-        <p class="lp-final-support">{s.supportingLine}</p>
-      </div>
+    </div>
+    <div class="lp-anim" data-anim style="transition-delay: 0.45s;">
+      <a class="lp-btn-gold lp-btn-gold--lg lp-btn-pulse" href={s.ctaHref}>{s.ctaLabel}</a>
+      <p class="lp-final-support">{s.supportingLine}</p>
     </div>
   </div>
-  
-  <style>
-    @keyframes pulse {
-      0% { opacity: 0.5; transform: scale(0.95); }
-      100% { opacity: 1; transform: scale(1.05); }
-    }
-  </style>
 </section>

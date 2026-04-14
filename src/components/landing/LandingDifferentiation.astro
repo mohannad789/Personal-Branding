@@ -3,47 +3,19 @@ import { landing } from "../../content/landing";
 const s = landing.differentiation;
 ---
 
-<section class="lp-band lp-diff" aria-labelledby="lp-diff-h">
+<section class="lp-section lp-section--light" aria-labelledby="lp-diff-h">
   <div class="lp-container">
-    <div class="lp-diff-grid">
-      <div class="lp-diff-left lp-fade-in" data-viz>
-        <span class="lp-eyebrow">Differentiation</span>
-        <h2 id="lp-diff-h" class="lp-h2">{s.title}</h2>
-        <p class="lp-diff-crossed">{s.paragraphs[0]}</p>
-        
-        <div class="lp-diff-affirm">
-          {s.paragraphs.slice(1).map((p) => <p>{p}</p>)}
-        </div>
-      </div>
-      
-      <div class="lp-diff-right lp-fade-in" style="transition-delay: 0.2s;" data-viz>
-        <div class="lp-inline-chart lp-inline-chart--no-border" style="height: 100%;">
-          <p class="lp-chart-kicker" style="text-transform: none; letter-spacing: 0;">
-            What most retainers optimise for
-          </p>
+    <span class="lp-eyebrow lp-anim" data-anim>The Difference</span>
 
-          <p class="lp-chart-subtitle">
-            Activity is easy to report. Revenue outcomes are harder — which is exactly why the wrong incentives produce the wrong work.
-          </p>
+    <div class="lp-diff-statements">
+      {s.negatives.map((stmt, i) => (
+        <p class="lp-diff-statement lp-anim" data-anim style={`transition-delay: ${i * 0.3}s;`}>{stmt}</p>
+      ))}
+    </div>
 
-          <!-- Embedded Chart -->
-          <div class="lp-chart-row">
-            <p class="lp-chart-label">Dashboards: posts, reach, cadence</p>
-            <div class="lp-chart-track">
-              <div class="lp-scale-x lp-chart-fill lp-chart-fill--muted" style="width: 96%; transition-delay: 0.1s;"></div>
-            </div>
-            <p class="lp-chart-meta" style="margin-left: 0; margin-top: 0.5rem; display: block;">Activity</p>
-          </div>
-
-          <div class="lp-chart-row">
-            <p class="lp-chart-label" style="color: var(--accent);">Proof tied to pipeline &amp; close rate</p>
-            <div class="lp-chart-track">
-              <div class="lp-scale-x lp-chart-fill lp-chart-fill--accent" style="width: 34%; transition-delay: 0.3s;"></div>
-            </div>
-            <p class="lp-chart-meta" style="margin-left: 0; margin-top: 0.5rem; display: block; color: var(--accent);">Outcome</p>
-          </div>
-        </div>
-      </div>
+    <div class="lp-diff-positive lp-body lp-anim" data-anim>
+      <p>{s.positive}</p>
+      <p class="lp-diff-signature">{s.signature}</p>
     </div>
   </div>
 </section>

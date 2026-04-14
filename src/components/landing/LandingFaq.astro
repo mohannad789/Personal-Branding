@@ -3,21 +3,23 @@ import { landing } from "../../content/landing";
 const s = landing.faq;
 ---
 
-<section class="lp-band lp-faq-section" aria-labelledby="lp-faq-h">
-  <div class="lp-container lp-container--narrow">
-    <div class="lp-faq-header lp-fade-in" data-viz>
+<section class="lp-section lp-section--light" id="faq" aria-labelledby="lp-faq-h">
+  <div class="lp-container">
+    <div class="lp-faq-header lp-anim" data-anim>
       <span class="lp-eyebrow">Questions</span>
-      <h2 id="lp-faq-h" class="lp-h2">FAQ</h2>
+      <h2 id="lp-faq-h" class="lp-h2">{s.title}</h2>
     </div>
-    <div class="lp-faq-list lp-fade-in" data-viz style="transition-delay: 0.1s;">
-      {
-        s.items.map((item) => (
-          <details class="lp-faq-item" name="landing-faq">
-            <summary class="lp-faq-q">{item.q}</summary>
-            <p class="lp-faq-a">{item.a}</p>
-          </details>
-        ))
-      }
+
+    <div class="lp-faq-list">
+      {s.items.map((item, i) => (
+        <details class="lp-faq-item lp-anim" data-anim style={`transition-delay: ${i * 0.08}s;`}>
+          <summary class="lp-faq-q">
+            {item.q}
+            <span class="lp-faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <p class="lp-faq-a">{item.a}</p>
+        </details>
+      ))}
     </div>
   </div>
 </section>
