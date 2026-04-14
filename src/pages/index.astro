@@ -138,17 +138,15 @@ const fc = landing.footer;
       cIO.observe(strip);
     }
 
-    /* ─── Process timeline fill ─── */
+    /* ─── Process card grid ─── */
     var procWrap = document.querySelector("[data-process-wrap]");
     if (procWrap && "IntersectionObserver" in window) {
       var procIO = new IntersectionObserver(
         function (entries) {
           if (entries[0].isIntersecting) {
-            procWrap.classList.add("in-view");
             procIO.disconnect();
             procWrap.querySelectorAll("[data-ps]").forEach(function (el, i) {
-              el.style.transitionDelay = (i * 0.14) + "s";
-              el.classList.add("in");
+              setTimeout(function () { el.classList.add("in"); }, i * 120);
             });
           }
         },

@@ -2,8 +2,9 @@
   <div class="hero-mesh" aria-hidden="true"></div>
   <div class="hero-dots" aria-hidden="true"></div>
 
-  <div class="lc hero-inner">
-    <!-- Text content — animates in on load (not scroll-triggered) -->
+  <!-- hero-inner deliberately NOT inside .lc — uses its own wide padding -->
+  <div class="hero-inner">
+    <!-- Text content -->
     <div class="hero-content">
       <span class="eyebrow hero-el" style="--d:0s">Strategic Personal Branding</span>
 
@@ -46,77 +47,80 @@
       </div>
     </div>
 
-    <!-- Orbital brand diagram -->
-    <div class="hero-visual-wrap hero-el" style="--d:0.28s" aria-hidden="true">
+    <!-- Orbital brand diagram — uses explicit CSS vars with fallbacks on each element -->
+    <div class="hero-visual-wrap hero-el" style="--d:0.18s" aria-hidden="true">
       <svg class="orbit-svg" viewBox="0 0 480 480">
         <defs>
           <radialGradient id="hero-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#4F8FF7" stop-opacity="0.22"/>
+            <stop offset="0%" stop-color="#4F8FF7" stop-opacity="0.3"/>
             <stop offset="100%" stop-color="#4F8FF7" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="hero-glow-l" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#2563EB" stop-opacity="0.18"/>
+            <stop offset="100%" stop-color="#2563EB" stop-opacity="0"/>
           </radialGradient>
         </defs>
 
-        <!-- Ambient center glow -->
-        <circle cx="240" cy="240" r="180" class="orbit-bg-fill"/>
+        <!-- Ambient glow -->
+        <circle cx="240" cy="240" r="190" fill="url(#hero-glow)" class="orbit-bg-fill"/>
 
-        <!-- Orbital rings -->
-        <circle cx="240" cy="240" r="95" class="orbit-ring"/>
-        <circle cx="240" cy="240" r="152" class="orbit-ring"/>
-        <circle cx="240" cy="240" r="205" class="orbit-ring"/>
+        <!-- Orbital rings — accent colour, very subtle -->
+        <circle cx="240" cy="240" r="95" fill="none" style="stroke: var(--accentRim, rgba(37,99,235,0.22)); stroke-width:1"/>
+        <circle cx="240" cy="240" r="152" fill="none" style="stroke: var(--accentRim, rgba(37,99,235,0.22)); stroke-width:1; opacity:0.7"/>
+        <circle cx="240" cy="240" r="205" fill="none" style="stroke: var(--accentRim, rgba(37,99,235,0.22)); stroke-width:1; opacity:0.4"/>
 
-        <!-- Dashed accent on innermost ring -->
-        <circle cx="240" cy="240" r="95" class="orbit-ring-dash"/>
+        <!-- Dashed ring on inner -->
+        <circle cx="240" cy="240" r="95" fill="none" style="stroke: var(--accent, #2563EB); stroke-width:0.8; stroke-dasharray:5 18; opacity:0.35"/>
 
         <!-- Center node -->
-        <circle cx="240" cy="240" r="38" class="orbit-center-glass"/>
-        <circle cx="240" cy="240" r="22" class="orbit-center-halo"/>
-        <circle cx="240" cy="240" r="11" class="orbit-center-dot"/>
-        <text x="240" y="292" text-anchor="middle" class="orbit-label" style="font-size:8.5px;opacity:0.45;letter-spacing:0.12em">YOUR BRAND</text>
+        <circle cx="240" cy="240" r="36" style="fill: var(--accentSoft, rgba(37,99,235,0.1)); stroke: var(--accent, #2563EB); stroke-width:1.5; stroke-opacity:0.5"/>
+        <circle cx="240" cy="240" r="20" style="fill: var(--accent, #2563EB); opacity:0.15"/>
+        <circle cx="240" cy="240" r="10" style="fill: var(--accent, #2563EB)"/>
 
         <!-- NODE 1: Strategic Positioning — inner ring r=95 -->
         <g class="on1">
-          <line x1="240" y1="240" x2="335" y2="240" class="orbit-node-line"/>
-          <circle cx="335" cy="240" r="6" class="orbit-node-dot"/>
+          <line x1="240" y1="240" x2="335" y2="240" style="stroke: var(--accent, #2563EB); stroke-opacity:0.2; stroke-width:0.75; fill:none"/>
+          <circle cx="335" cy="240" r="6" style="fill: var(--accent, #2563EB)"/>
           <g transform="translate(335,240)">
             <g class="ol1">
-              <rect x="-66" y="-30" width="132" height="22" rx="11" class="orbit-pill"/>
-              <text x="0" y="-15" text-anchor="middle" class="orbit-label">Strategic Positioning</text>
+              <rect x="-68" y="-32" width="136" height="24" rx="12" style="fill: var(--bg2, #fff); stroke: var(--accentRim, rgba(37,99,235,0.22)); stroke-width:1"/>
+              <text x="0" y="-16" text-anchor="middle" style="fill: var(--t1, #080D28); font-family: Inter, system-ui, sans-serif; font-size:10.5px; font-weight:500">Strategic Positioning</text>
             </g>
           </g>
         </g>
 
         <!-- NODE 2: Narrative & Messaging — middle ring r=152 -->
         <g class="on2">
-          <line x1="240" y1="240" x2="392" y2="240" class="orbit-node-line"/>
-          <circle cx="392" cy="240" r="5.5" class="orbit-node-dot" style="opacity:0.75"/>
+          <line x1="240" y1="240" x2="392" y2="240" style="stroke: var(--accent, #2563EB); stroke-opacity:0.18; stroke-width:0.75; fill:none"/>
+          <circle cx="392" cy="240" r="5.5" style="fill: var(--accent, #2563EB); opacity:0.8"/>
           <g transform="translate(392,240)">
             <g class="ol2">
-              <rect x="-68" y="-30" width="136" height="22" rx="11" class="orbit-pill"/>
-              <text x="0" y="-15" text-anchor="middle" class="orbit-label">Narrative &amp; Messaging</text>
+              <rect x="-72" y="-32" width="144" height="24" rx="12" style="fill: var(--bg2, #fff); stroke: var(--accentRim, rgba(37,99,235,0.22)); stroke-width:1"/>
+              <text x="0" y="-16" text-anchor="middle" style="fill: var(--t1, #080D28); font-family: Inter, system-ui, sans-serif; font-size:10.5px; font-weight:500">Narrative &amp; Messaging</text>
             </g>
           </g>
         </g>
 
         <!-- NODE 3: Visibility Architecture — middle ring r=152, offset -->
         <g class="on3">
-          <line x1="240" y1="240" x2="392" y2="240" class="orbit-node-line"/>
-          <circle cx="392" cy="240" r="5.5" class="orbit-node-dot" style="opacity:0.75"/>
+          <line x1="240" y1="240" x2="392" y2="240" style="stroke: var(--accent, #2563EB); stroke-opacity:0.18; stroke-width:0.75; fill:none"/>
+          <circle cx="392" cy="240" r="5.5" style="fill: var(--accent, #2563EB); opacity:0.8"/>
           <g transform="translate(392,240)">
             <g class="ol3">
-              <rect x="-66" y="-30" width="132" height="22" rx="11" class="orbit-pill"/>
-              <text x="0" y="-15" text-anchor="middle" class="orbit-label">Visibility Architecture</text>
+              <rect x="-68" y="-32" width="136" height="24" rx="12" style="fill: var(--bg2, #fff); stroke: var(--accentRim, rgba(37,99,235,0.22)); stroke-width:1"/>
+              <text x="0" y="-16" text-anchor="middle" style="fill: var(--t1, #080D28); font-family: Inter, system-ui, sans-serif; font-size:10.5px; font-weight:500">Visibility Architecture</text>
             </g>
           </g>
         </g>
 
         <!-- NODE 4: Conversion Infrastructure — outer ring r=205 -->
         <g class="on4">
-          <line x1="240" y1="240" x2="445" y2="240" class="orbit-node-line"/>
-          <circle cx="445" cy="240" r="5" class="orbit-node-dot" style="opacity:0.65"/>
+          <line x1="240" y1="240" x2="445" y2="240" style="stroke: var(--accent, #2563EB); stroke-opacity:0.15; stroke-width:0.75; fill:none"/>
+          <circle cx="445" cy="240" r="5" style="fill: var(--accent, #2563EB); opacity:0.65"/>
           <g transform="translate(445,240)">
             <g class="ol4">
-              <rect x="-74" y="-30" width="148" height="22" rx="11" class="orbit-pill"/>
-              <text x="0" y="-15" text-anchor="middle" class="orbit-label">Conversion Infrastructure</text>
+              <rect x="-76" y="-32" width="152" height="24" rx="12" style="fill: var(--bg2, #fff); stroke: var(--accentRim, rgba(37,99,235,0.22)); stroke-width:1"/>
+              <text x="0" y="-16" text-anchor="middle" style="fill: var(--t1, #080D28); font-family: Inter, system-ui, sans-serif; font-size:10.5px; font-weight:500">Conversion Infrastructure</text>
             </g>
           </g>
         </g>
@@ -128,7 +132,6 @@
 </section>
 
 <style>
-/* Hero-specific entrance: fire immediately on page load, no IO needed */
 .hero-el {
   opacity: 0;
   transform: translateY(24px);
