@@ -162,17 +162,16 @@ main#main.main--landing {
   letter-spacing: 0.02em;
   text-decoration: none;
   border: none;
-  border-radius: 0;
+  border-radius: 999px;
   background: var(--lp-accent);
   color: #fff;
   cursor: pointer;
-  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  transition: background 0.3s, transform 0.3s;
 }
 
 .lp-btn-accent:hover {
   background: var(--lp-accent-hover);
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px var(--lp-accent-glow);
 }
 
 .lp-btn-accent-outline {
@@ -186,6 +185,7 @@ main#main.main--landing {
   letter-spacing: 0.02em;
   text-decoration: none;
   border: 1px solid var(--lp-accent);
+  border-radius: 999px;
   background: transparent;
   color: var(--lp-accent);
   cursor: pointer;
@@ -203,7 +203,7 @@ main#main.main--landing {
 }
 
 .lp-btn-accent--lg:hover {
-  box-shadow: 0 0 40px var(--lp-accent-glow), 0 8px 24px var(--lp-accent-glow);
+  transform: translateY(-2px);
 }
 
 .lp-anim {
@@ -743,10 +743,14 @@ main#main.main--landing {
 /* FAQ */
 .lp-faq-header {
   margin-bottom: 3rem;
+  text-align: center;
+  max-width: 48rem;
+  margin-inline: auto;
 }
 
 .lp-faq-list {
   max-width: 48rem;
+  margin-inline: auto;
 }
 
 .lp-faq-item {
@@ -761,9 +765,11 @@ main#main.main--landing {
   font-weight: 600;
   color: var(--lp-text-primary);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap;
+  text-align: center;
   list-style: none;
 }
 
@@ -790,9 +796,9 @@ main#main.main--landing {
 }
 
 .lp-faq-item[open] .lp-faq-q {
-  border-left: 2px solid var(--lp-accent);
-  padding-left: 1.5rem;
-  margin-left: -1.5rem;
+  border-bottom: 2px solid var(--lp-accent);
+  padding-bottom: 1.25rem;
+  margin-bottom: 0.25rem;
 }
 
 .lp-faq-a {
@@ -801,8 +807,9 @@ main#main.main--landing {
   font-size: 1rem;
   line-height: 1.7;
   color: var(--lp-text-muted);
-  margin: 0;
-  max-width: var(--lp-text-max);
+  margin: 0 auto;
+  max-width: 42rem;
+  text-align: center;
 }
 
 /* Final CTA */
@@ -841,13 +848,6 @@ main#main.main--landing {
   color: var(--lp-text-muted);
   margin: 1.5rem 0 0;
   letter-spacing: 1px;
-}
-
-.lp-final-glow {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(circle at 50% 50%, var(--lp-ig-ambient-strong), transparent 55%);
 }
 
 .lp-btn-pulse {
@@ -935,12 +935,16 @@ main#main.main--landing {
   right: 0;
   z-index: 100;
   padding: 1rem 0;
+  background: color-mix(in srgb, var(--lp-bg) 38%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   transition: background 0.3s, backdrop-filter 0.3s;
 }
 
 .lp-nav--scrolled {
-  background: color-mix(in srgb, var(--lp-bg) 88%, transparent);
+  background: color-mix(in srgb, var(--lp-bg) 62%, transparent);
   backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .lp-nav-inner {
@@ -1000,7 +1004,7 @@ main#main.main--landing {
 
 main#main.main--landing .theme-switch {
   border-color: var(--lp-border-subtle);
-  background: var(--lp-bg-elevated);
+  background: color-mix(in srgb, var(--lp-bg-elevated) 55%, transparent);
 }
 
 main#main.main--landing .theme-switch button {

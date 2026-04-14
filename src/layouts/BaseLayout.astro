@@ -39,15 +39,18 @@ const pageTitle = `${title} — ${site.name}`;
     <meta charset="UTF-8" />
     <script is:inline>
       (function () {
+        function resolve(pref) {
+          if (pref === "light" || pref === "dark") return pref;
+          return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        }
         try {
           var s = localStorage.getItem("theme");
-          if (s === "light" || s === "dark") {
-            document.documentElement.setAttribute("data-theme", s);
+          if (s === "light" || s === "dark" || s === "system") {
+            document.documentElement.setAttribute("data-theme", resolve(s));
             return;
           }
         } catch (_) {}
-        var light = window.matchMedia("(prefers-color-scheme: light)").matches;
-        document.documentElement.setAttribute("data-theme", light ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", resolve("system"));
       })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -126,29 +129,45 @@ const pageTitle = `${title} — ${site.name}`;
     <script is:inline>
       (function () {
         var root = document.documentElement;
-        function current() {
-          return root.getAttribute("data-theme") === "light" ? "light" : "dark";
-        }
-        function apply(theme) {
-          root.setAttribute("data-theme", theme);
+        function getPreference() {
           try {
-            localStorage.setItem("theme", theme);
+            var s = localStorage.getItem("theme");
+            if (s === "light" || s === "dark" || s === "system") return s;
+          } catch (_) {}
+          return "system";
+        }
+        function resolve(pref) {
+          if (pref === "light" || pref === "dark") return pref;
+          return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        }
+        function applyPreference(pref) {
+          root.setAttribute("data-theme", resolve(pref));
+          try {
+            localStorage.setItem("theme", pref);
           } catch (_) {}
           syncButtons();
         }
         function syncButtons() {
-          var t = current();
+          var p = getPreference();
           document.querySelectorAll("[data-theme-pick]").forEach(function (btn) {
             var v = btn.getAttribute("data-theme-pick");
-            btn.setAttribute("aria-pressed", v === t ? "true" : "false");
+            btn.setAttribute("aria-pressed", v === p ? "true" : "false");
           });
         }
         document.querySelectorAll("[data-theme-pick]").forEach(function (btn) {
           btn.addEventListener("click", function () {
             var v = btn.getAttribute("data-theme-pick");
-            if (v === "light" || v === "dark") apply(v);
+            if (v === "light" || v === "dark" || v === "system") applyPreference(v);
           });
         });
+        var mql = window.matchMedia("(prefers-color-scheme: light)");
+        function onScheme() {
+          if (getPreference() === "system") {
+            root.setAttribute("data-theme", resolve("system"));
+          }
+        }
+        if (mql.addEventListener) mql.addEventListener("change", onScheme);
+        else if (mql.addListener) mql.addListener(onScheme);
         syncButtons();
       })();
     </script>

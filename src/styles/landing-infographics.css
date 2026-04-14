@@ -1,25 +1,25 @@
-/* Infographics — blue accent replaces gold; glow on shapes only */
+/* Infographics — flat, no glow; sit on section surface (no lifted cards). */
 
 .ig {
   position: relative;
 }
 
 .ig-card {
-  background: var(--lp-ig-surface);
-  border: 1px solid var(--lp-ig-border);
-  border-radius: 12px;
-  padding: clamp(1.5rem, 4vw, 3rem);
-  box-shadow: 0 0 80px var(--lp-ig-ambient);
-  transition: border-color 0.4s, box-shadow 0.4s;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: clamp(2rem, 5vw, 3rem) 0;
+  box-shadow: none;
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
 }
 
 .ig-card:hover {
-  border-color: var(--lp-ig-border-hover);
-  box-shadow: 0 0 100px var(--lp-ig-ambient-strong);
+  border-color: transparent;
+  box-shadow: none;
 }
 
 .ig-eyebrow {
-  font-family: var(--lp-font-sans);
+  font-family: var(--lp-font-heading);
   font-size: 0.625rem;
   font-weight: 600;
   letter-spacing: 3px;
@@ -27,6 +27,7 @@
   color: var(--lp-accent);
   margin: 0 0 1.5rem;
   display: block;
+  text-align: center;
 }
 
 .ig-source {
@@ -35,12 +36,14 @@
   color: var(--lp-ig-source);
   margin: 1.25rem 0 0;
   line-height: 1.45;
+  text-align: center;
 }
 
 /* ── 1 Trust Gap bars ── */
 .ig-trust {
-  max-width: 600px;
-  margin-top: 3rem;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .ig-trust-rows {
@@ -77,6 +80,7 @@
   color: var(--lp-text-muted);
   margin: 0 0 0.5rem;
   line-height: 1.4;
+  text-align: left;
 }
 
 .ig-trust-bar-row {
@@ -92,7 +96,7 @@
   height: 8px;
   border-radius: 99px;
   background: var(--lp-ig-track);
-  overflow: visible;
+  overflow: hidden;
 }
 
 .ig-trust-fill {
@@ -100,7 +104,6 @@
   border-radius: 99px;
   width: 0;
   background: linear-gradient(90deg, var(--lp-accent), var(--lp-accent-hover));
-  filter: drop-shadow(0 0 8px var(--lp-accent-glow));
   transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -118,21 +121,11 @@
   transform: translate(-50%, -50%);
   left: var(--ig-pct);
   opacity: 0;
-  box-shadow: 0 0 16px var(--lp-accent-glow-strong);
   transition: opacity 0.3s ease 1s, left 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .ig--visible .ig-trust-dot {
   opacity: 1;
-}
-
-.ig-trust-dot-pulse {
-  animation: ig-dot-pulse 2s ease-in-out infinite;
-}
-
-@keyframes ig-dot-pulse {
-  0%, 100% { opacity: 0.65; }
-  50% { opacity: 1; }
 }
 
 .ig-trust-num {
@@ -143,7 +136,6 @@
   font-size: 1.65rem;
   font-weight: 700;
   color: var(--lp-accent);
-  text-shadow: 0 0 20px var(--lp-accent-glow);
   opacity: 0;
   transition: opacity 0.4s ease 1.1s;
 }
@@ -153,9 +145,13 @@
 }
 
 /* ── 2 Concentric rings ── */
+.ig-rings {
+  text-align: center;
+}
+
 .ig-rings-wrap {
   max-width: 520px;
-  margin: 3rem auto 0;
+  margin: 0 auto;
   aspect-ratio: 1;
 }
 
@@ -163,6 +159,7 @@
   width: 100%;
   height: auto;
   display: block;
+  overflow: visible;
 }
 
 .ig-rings-legend {
@@ -173,11 +170,14 @@
   font-size: 0.75rem;
   color: var(--lp-text-muted);
   text-align: center;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ── 3 Transformation path ── */
 .ig-path-card {
-  margin-top: 3rem;
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
   max-width: 100%;
 }
 
@@ -211,12 +211,11 @@
   align-items: center;
   justify-content: center;
   border: 2px solid var(--lp-ig-node-muted);
-  background: var(--lp-ig-surface);
+  background: transparent;
 }
 
 .ig-path-circle--end {
   border-color: var(--lp-accent);
-  box-shadow: 0 0 24px var(--lp-accent-glow);
 }
 
 .ig-path-mid {
@@ -225,8 +224,14 @@
   height: 4px;
   min-width: 80px;
   border-radius: 2px;
-  background: linear-gradient(90deg, var(--lp-ig-track) 0%, var(--lp-ig-track) 45%, var(--lp-accent) 55%, var(--lp-accent) 100%);
-  filter: drop-shadow(0 0 6px var(--lp-accent-glow));
+  background: linear-gradient(
+    90deg,
+    var(--lp-ig-track) 0%,
+    var(--lp-ig-track) 42%,
+    var(--lp-accent) 58%,
+    var(--lp-accent) 100%
+  );
+  overflow: hidden;
 }
 
 .ig-path-orb {
@@ -238,7 +243,6 @@
   top: 50%;
   left: 0;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 16px var(--lp-accent-glow-strong);
   opacity: 0;
 }
 
@@ -248,8 +252,12 @@
 }
 
 @keyframes ig-orb-travel {
-  0% { left: 0; }
-  100% { left: 100%; }
+  0% {
+    left: 0;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 .ig-path-title {
@@ -290,36 +298,24 @@
   text-align: center;
 }
 
-/* ── 4 Compound line chart ── */
-.ig-chart-wrap {
-  max-width: 680px;
-  margin: 3rem auto 0;
-}
-
-.ig-chart-svg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
 /* ── 5 Authority stat cards ── */
 .ig-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
-  margin-top: 3rem;
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
 }
 
 .ig-stat-card {
-  background: var(--lp-ig-surface);
-  border: 1px solid var(--lp-ig-border);
+  background: transparent;
+  border: 1px solid var(--lp-border-subtle);
   border-radius: 12px;
   padding: 2rem 1.5rem;
-  box-shadow: 0 0 80px var(--lp-ig-ambient);
+  box-shadow: none;
   text-align: center;
   opacity: 0;
   transform: translateY(12px);
-  transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s, box-shadow 0.3s;
+  transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s;
 }
 
 .ig--visible .ig-stats > .ig-stat-card:nth-child(1) {
@@ -344,7 +340,8 @@
 }
 
 .ig-stat-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--lp-accent) 35%, var(--lp-border-subtle));
 }
 
 .ig-stat-radial {
@@ -360,7 +357,6 @@
   color: var(--lp-accent);
   line-height: 1;
   margin: 0 0 1rem;
-  text-shadow: 0 0 30px var(--lp-accent-glow);
   opacity: 0;
   transform: scale(0.92);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -386,7 +382,7 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--lp-accent);
-  border: 1px solid var(--lp-ig-border);
+  border: 1px solid var(--lp-border-subtle);
   padding: 0.35rem 0.65rem;
   border-radius: 999px;
 }
@@ -423,7 +419,7 @@
   height: 56px;
   margin: 0 auto;
   background: var(--lp-ig-track);
-  border-radius: 4px;
+  border-radius: 8px;
   position: relative;
   overflow: hidden;
 }
@@ -443,7 +439,7 @@
 .ig-funnel-fill {
   height: 100%;
   width: 0;
-  border-radius: 4px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -464,17 +460,14 @@
 
 .ig-funnel-fill--gold {
   background: linear-gradient(90deg, var(--lp-accent), var(--lp-accent-hover));
-  box-shadow: 0 4px 16px var(--lp-accent-glow);
 }
 
 .ig-funnel-fill--blue {
   background: #4a6fa5;
-  box-shadow: 0 4px 12px rgba(74, 111, 165, 0.25);
 }
 
 .ig-funnel-fill--full {
   background: linear-gradient(90deg, var(--lp-accent), var(--lp-accent-hover));
-  box-shadow: 0 4px 24px var(--lp-accent-glow-strong);
 }
 
 .ig-funnel-bar-label {
@@ -497,10 +490,7 @@
 @media (prefers-reduced-motion: reduce) {
   .ig-trust-fill,
   .ig-trust-dot,
-  .ig-trust-dot-pulse,
   .ig-path-orb,
-  .ig-line-campaign,
-  .ig-line-brand,
   .ig-funnel-fill {
     transition: none !important;
     animation: none !important;
@@ -514,14 +504,7 @@
     opacity: 1 !important;
   }
 
-  .ig-line-campaign,
-  .ig-line-brand {
-    stroke-dashoffset: 0 !important;
-  }
-
-  .ig--visible .ig-funnel-row--1 .ig-funnel-fill,
-  .ig--visible .ig-funnel-row--2 .ig-funnel-fill,
-  .ig--visible .ig-funnel-row--3 .ig-funnel-fill {
+  .ig--visible .ig-funnel-row--1 .ig-funnel-fill {
     width: 70% !important;
   }
 

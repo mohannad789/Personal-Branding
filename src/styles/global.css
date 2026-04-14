@@ -163,6 +163,24 @@ body {
   flex-shrink: 0;
 }
 
+.theme-switch--icons {
+  padding: 2px;
+  gap: 0;
+}
+
+.theme-switch--icons button {
+  padding: 0.42rem;
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-switch--icons button svg {
+  display: block;
+}
+
 .theme-switch button {
   border: none;
   background: transparent;
