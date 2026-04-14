@@ -1,37 +1,68 @@
 ---
 import { landing } from "../../content/landing";
-import VizProcessTimeline from "./viz/VizProcessTimeline.astro";
-import VizCompoundCurve from "./viz/VizCompoundCurve.astro";
 const s = landing.process;
 ---
 
 <section class="lp-band lp-band--paper lp-process" aria-labelledby="lp-process-h">
   <div class="lp-container">
-    <div class="lp-process-header">
-      <span class="lp-rule-label">How it works</span>
-      <h2 id="lp-process-h" class="lp-editorial-h2">{s.title}</h2>
+    <div class="lp-process-header lp-fade-in" data-viz>
+      <span class="lp-eyebrow">How it works</span>
+      <h2 id="lp-process-h" class="lp-h2">{s.title}</h2>
     </div>
 
-    <div class="lp-process-viz-row">
-      <VizProcessTimeline />
-      <VizCompoundCurve />
-    </div>
-
-    <div class="lp-process-track">
+    <!-- Timeline chart integrated with the steps -->
+    <div class="lp-process-steps lp-fade-in" data-viz style="transition-delay: 0.2s;">
+      <div class="lp-process-line">
+        <div class="lp-process-line-fill lp-scale-x" style="transition-delay: 0.4s;"></div>
+      </div>
+      
       {
         s.steps.map((step, i) => (
-          <div class="lp-process-step">
-            <div class="lp-process-step-top">
-              <span class="lp-process-step-num">{i + 1}</span>
-              {i < s.steps.length - 1 && (
-                <span class="lp-process-connector" aria-hidden="true" />
-              )}
-            </div>
-            <h3 class="lp-process-step-title">{step.title}</h3>
-            <p class="lp-process-step-text">{step.body}</p>
+          <div class="lp-step">
+            <div class="lp-step-dot">{i + 1}</div>
+            <h3 class="lp-step-title">{step.title}</h3>
+            <p class="lp-step-body">{step.body}</p>
           </div>
         ))
       }
+    </div>
+
+    <!-- Compounding curve abstract visual below the process -->
+    <div class="lp-fade-in" data-viz style="margin-top: 6rem; position: relative;">
+      <div style="max-width: 32rem; margin-bottom: 2rem;">
+        <p style="font-family: var(--font-accent); font-style: italic; font-size: 1.5rem; margin-bottom: 1rem; color: var(--text);">
+          Market position value (illustrative)
+        </p>
+        <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 1rem;">
+          Personal brands compound. The asset appreciates like equity rather than resetting after a “campaign”.
+        </p>
+      </div>
+
+      <svg viewBox="0 0 800 200" preserveAspectRatio="none" style="width: 100%; height: 200px; display: block;">
+        <defs>
+          <linearGradient id="compound-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.3"></stop>
+            <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"></stop>
+          </linearGradient>
+        </defs>
+        <!-- Grid -->
+        <g stroke="var(--border)" stroke-width="1" stroke-dasharray="4 4">
+          <line x1="0" y1="40" x2="800" y2="40" />
+          <line x1="0" y1="100" x2="800" y2="100" />
+          <line x1="0" y1="160" x2="800" y2="160" />
+        </g>
+        <!-- X Axis Labels -->
+        <text x="50" y="190" fill="var(--text-muted)" font-size="12" font-family="sans-serif">Q1</text>
+        <text x="250" y="190" fill="var(--text-muted)" font-size="12" font-family="sans-serif">Q2</text>
+        <text x="500" y="190" fill="var(--text-muted)" font-size="12" font-family="sans-serif">Q3</text>
+        <text x="750" y="190" fill="var(--text-muted)" font-size="12" font-family="sans-serif">Q4</text>
+        
+        <!-- Fill -->
+        <path class="lp-fade-in" style="transition-delay: 0.4s; opacity: 0;" data-viz fill="url(#compound-grad)" d="M 0 160 L 200 130 C 400 100, 600 50, 800 20 L 800 160 Z" />
+        
+        <!-- Line -->
+        <path class="lp-path-draw" d="M 0 160 L 200 130 C 400 100, 600 50, 800 20" fill="none" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" />
+      </svg>
     </div>
   </div>
 </section>

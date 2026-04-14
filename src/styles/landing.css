@@ -1,75 +1,68 @@
 /* ============================================================
-   LANDING — full editorial redesign
-   Design principles:
-     · Each section has a distinct visual logic — no repeat beat
-     · Typography IS the design: Fraunces serif for impact moments
-     · Generous whitespace; sections breathe
-     · No "stock photo next to text" templates
-     · Dark (--ink) and light sections alternate for rhythm
+   LANDING — Data-driven Editorial Redesign
+   Concept:
+     · No boxes. Data and typography merge.
+     · Charts bleed into backgrounds or act as layout anchors.
+     · High contrast, minimal borders, asymmetric alignments.
+     · Fraunces (serif) for emotional hooks, Satoshi (sans) for data.
+     · Every graphic is an animated SVG tied to the copy.
    ============================================================ */
 
 /* ── Reset for full-bleed landing ── */
-
 main#main.main--landing {
   max-width: none;
   width: 100%;
   padding: 0;
+  overflow-x: hidden;
 }
 
 /* ── Nav ── */
-
 .nav--landing {
   justify-content: space-between;
   align-items: center;
 }
-
 .nav--landing .nav-cta {
   flex-shrink: 0;
 }
 
-/* ── Footer (landing contact mode) ── */
-
+/* ── Footer ── */
 .site-footer--contact .footer-inner {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.4rem;
 }
-
 .site-footer--contact .theme-switch {
   margin-left: 0;
   margin-top: 0.35rem;
 }
-
 .footer-contact {
   font-size: 0.875rem;
 }
-
 .footer-contact-sep {
   margin: 0 0.35rem;
   color: var(--text-muted);
 }
-
 .footer-locations {
   font-size: 0.8125rem;
   color: var(--text-muted);
 }
 
-/* ── Tokens ── */
-
+/* ── Typography & Structural Tokens ── */
 .lp-container {
-  max-width: 74rem;
+  max-width: 80rem;
   margin-inline: auto;
-  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+  padding-inline: clamp(1.5rem, 5vw, 3rem);
+  position: relative;
+  z-index: 2;
 }
 
 .lp-container--narrow {
-  max-width: 46rem;
+  max-width: 52rem;
 }
 
-/* ── Band backgrounds ── */
-
 .lp-band {
-  padding-block: clamp(3.5rem, 9vw, 6rem);
+  position: relative;
+  padding-block: clamp(5rem, 12vw, 8rem);
 }
 
 .lp-band--paper {
@@ -78,1518 +71,743 @@ main#main.main--landing {
 
 .lp-band--dim {
   background: var(--bg-elevated);
-  border-block: 1px solid var(--border);
 }
 
+/* 
+  We use 'ink' for high-contrast dark sections. 
+  It always forces a dark theme regardless of user preference, 
+  creating a cinematic break.
+*/
 .lp-band--ink {
-  background: #080a0d;
-  color: #e8eaed;
-  background-image:
-    radial-gradient(ellipse 80% 60% at 15% 0%, rgba(94, 164, 252, 0.13), transparent),
-    radial-gradient(ellipse 70% 50% at 90% 100%, rgba(20, 184, 166, 0.07), transparent);
+  background: #06080A;
+  color: #f8fafc;
 }
-
 :root[data-theme="light"] .lp-band--ink {
-  background: #0f1419;
-  background-image:
-    radial-gradient(ellipse 80% 60% at 15% 0%, rgba(94, 164, 252, 0.15), transparent),
-    radial-gradient(ellipse 70% 50% at 90% 100%, rgba(20, 184, 166, 0.09), transparent);
+  background: #0B0E14;
 }
 
-/* ── Shared typography ── */
-
-.lp-rule-label {
+.lp-eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
-  font-size: 0.6875rem;
+  gap: 0.75rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--accent-dim);
-  margin-bottom: 0.85rem;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
 }
 
-.lp-rule-label::before {
+.lp-eyebrow::before {
   content: "";
   display: block;
-  width: 1.75rem;
-  height: 1px;
-  background: var(--accent-dim);
-  flex-shrink: 0;
+  width: 2rem;
+  height: 2px;
+  background: var(--accent);
 }
 
-.lp-rule-label--light {
-  color: rgba(147, 197, 253, 0.85);
+.lp-band--ink .lp-eyebrow {
+  color: rgba(147, 197, 253, 0.9);
+}
+.lp-band--ink .lp-eyebrow::before {
+  background: rgba(147, 197, 253, 0.6);
 }
 
-.lp-rule-label--light::before {
-  background: rgba(147, 197, 253, 0.55);
-}
-
-.lp-editorial-h2 {
-  font-family: var(--font-sans);
-  font-size: clamp(1.65rem, 3.8vw, 2.4rem);
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.038em;
+.lp-h2 {
+  font-family: var(--font-accent);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   margin: 0 0 2rem;
   color: var(--text);
+  max-width: 28ch;
 }
 
-/* ── Buttons ── */
+.lp-band--ink .lp-h2 {
+  color: #ffffff;
+}
 
-.lp-btn-hero {
-  padding: 0.9rem 2rem;
-  font-size: 1rem;
+/* Buttons */
+.lp-btn-lg {
+  padding: 1rem 2.5rem;
+  font-size: 1.0625rem;
+  letter-spacing: 0.02em;
+  border-radius: 99px;
 }
 
 .lp-btn-ink {
-  background: #e8eaed;
-  color: #080a0d;
-}
-
-.lp-btn-ink:hover {
   background: #ffffff;
+  color: #06080A;
+}
+.lp-btn-ink:hover {
+  background: #e2e8f0;
 }
 
 /* ============================================================
-   SECTION 1 — HERO
-   Layout: full-bleed dark with large editorial headline +
-   image in its own framed pane + stat row below
+   DATA VISUALIZATION BASE
+   Charts are now borderless, integrated layout elements
    ============================================================ */
 
-.lp-hero {
-  padding-block: 0;
-  overflow: hidden;
-}
-
-.lp-hero-wrap {
-  max-width: 74rem;
-  margin-inline: auto;
-  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
-  padding-block: clamp(3.5rem, 8vw, 5.5rem) 0;
-  display: grid;
-  gap: 0;
-}
-
-/* Top row: copy block */
-
-.lp-hero-eyebrow-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.75rem;
-}
-
-.lp-chip {
-  display: inline-block;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  padding: 0.35rem 0.8rem;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: rgba(232, 234, 237, 0.7);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.lp-hero-stage {
-  display: grid;
-  gap: clamp(2rem, 4vw, 3rem);
-  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
-}
-
-@media (min-width: 900px) {
-  .lp-hero-stage {
-    grid-template-columns: 1fr auto;
-    align-items: end;
-  }
-
-  .lp-hero-eyebrow-row {
-    grid-column: 1 / -1;
-  }
-}
-
-.lp-hero-headline {
-  font-family: var(--font-sans);
-  font-size: clamp(2.5rem, 6vw, 4.25rem);
-  font-weight: 700;
-  line-height: 1.04;
-  letter-spacing: -0.045em;
-  margin: 0;
-  color: #f0f4f8;
-  display: flex;
-  flex-direction: column;
-  gap: 0.05em;
-}
-
-.lp-hero-headline-serif {
-  font-family: var(--font-accent);
-  font-style: italic;
-  font-weight: 400;
-  color: rgba(232, 234, 237, 0.72);
-  letter-spacing: -0.025em;
-}
-
-.lp-hero-headline-weight {
-  font-weight: 800;
-  letter-spacing: -0.05em;
-}
-
-.lp-hero-headline-serif--indent {
-  padding-left: 0.55em;
-}
-
-.lp-hero-body {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  justify-content: flex-end;
-  min-width: 14rem;
-  max-width: 26rem;
-}
-
-.lp-hero-sub {
-  font-size: 1.0rem;
-  line-height: 1.6;
-  color: rgba(232, 234, 237, 0.68);
-  margin: 0;
-}
-
-.lp-hero-action {
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-}
-
-.lp-hero-meta {
-  margin: 0;
-  font-size: 0.775rem;
-  letter-spacing: 0.04em;
-  color: rgba(232, 234, 237, 0.4);
-}
-
-/* Advantages strip */
-
-.lp-hero-advantages {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 14px;
-  overflow: hidden;
-  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
-  background: rgba(255, 255, 255, 0.04);
-}
-
-@media (max-width: 860px) {
-  .lp-hero-advantages {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .lp-hero-advantages {
-    grid-template-columns: 1fr;
-  }
-}
-
-.lp-adv-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.7rem;
-  padding: 1.1rem 1.15rem;
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.lp-adv-item + .lp-adv-item {
-  border-left: 1px solid rgba(255, 255, 255, 0.07);
-}
-
-@media (max-width: 860px) {
-  .lp-adv-item:nth-child(2n + 1) {
-    border-left: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .lp-adv-item {
-    border-left: none !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.07);
-  }
-
-  .lp-adv-item:first-child {
-    border-top: none;
-  }
-}
-
-.lp-adv-icon {
-  flex-shrink: 0;
-  margin-top: 1px;
-  color: rgba(147, 197, 253, 0.85);
-}
-
-.lp-icon-check {
-  display: block;
-  width: 16px;
-  height: 16px;
-}
-
-.lp-adv-text {
-  font-size: 0.875rem;
-  line-height: 1.45;
-  color: rgba(232, 234, 237, 0.8);
-}
-
-/* Hero chart pane (no photography) */
-
-.lp-hero-visual {
-  padding-bottom: clamp(2.5rem, 5vw, 4rem);
-}
-
-.lp-hero-chart-frame {
-  border-radius: 20px 20px 0 0;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-bottom: none;
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.lp-hero-stat-row {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-top: none;
-  border-radius: 0 0 20px 20px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 1rem 1.5rem;
-}
-
-.lp-hero-stat {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  text-align: center;
-}
-
-.lp-hero-stat-num {
-  font-size: 1.45rem;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  color: #f0f4f8;
-  line-height: 1;
-}
-
-.lp-hero-stat-num small {
-  font-size: 0.65em;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  opacity: 0.75;
-}
-
-.lp-hero-stat-label {
-  font-size: 0.675rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(232, 234, 237, 0.45);
-}
-
-.lp-hero-stat-div {
-  width: 1px;
-  height: 2rem;
-  background: rgba(255, 255, 255, 0.1);
-  flex-shrink: 0;
-}
-
-/* ============================================================
-   SECTION 2 — PROBLEM
-   Pull quote front and centre; two-column body beneath
-   ============================================================ */
-
-.lp-problem-top {
-  margin-bottom: 3rem;
-}
-
-.lp-problem-split {
-  display: grid;
-  gap: clamp(2rem, 4vw, 3rem);
-  align-items: start;
-}
-
-@media (min-width: 960px) {
-  .lp-problem-split {
-    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.55fr);
-  }
-}
-
-.lp-problem-aside {
-  position: sticky;
-  top: 5.5rem;
-}
-
-@media (max-width: 959px) {
-  .lp-problem-aside {
-    position: static;
-  }
-}
-
-.lp-pull-quote {
-  margin: 0 0 3rem;
-  padding: 0;
-  border: none;
-}
-
-.lp-pull-quote p {
-  font-family: var(--font-accent);
-  font-style: italic;
-  font-size: clamp(1.55rem, 3.5vw, 2.4rem);
-  font-weight: 400;
-  line-height: 1.28;
-  letter-spacing: -0.02em;
-  color: var(--text);
-  margin: 0;
-  padding-left: 2rem;
-  border-left: 3px solid var(--accent);
-  max-width: 32ch;
-}
-
-.lp-two-col-prose {
-  display: grid;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
-}
-
-@media (min-width: 800px) {
-  .lp-two-col-prose {
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-  }
-}
-
-.lp-prose-lead {
-  font-size: 1.125rem;
-  line-height: 1.68;
-  font-weight: 500;
-  color: var(--text);
-  margin: 0;
-}
-
-.lp-prose-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 1.15rem;
-}
-
-.lp-prose-stack p {
-  margin: 0;
-  font-size: 1.015rem;
-  line-height: 1.72;
-  color: var(--text-muted);
-}
-
-/* ============================================================
-   SECTION 3 — SHIFT (dark band)
-   Centered editorial headline; two-column body
-   ============================================================ */
-
-.lp-shift-header {
-  max-width: 52rem;
-  margin-inline: auto;
-  text-align: center;
-  margin-bottom: 2.5rem;
-}
-
-.lp-shift-chart-wrap {
-  max-width: 40rem;
-  margin: 0 auto 2.5rem;
-}
-
-.lp-shift-headline {
-  font-family: var(--font-accent);
-  font-style: italic;
-  font-size: clamp(1.75rem, 4vw, 2.75rem);
-  font-weight: 400;
-  line-height: 1.18;
-  letter-spacing: -0.02em;
-  color: rgba(240, 244, 248, 0.96);
-  margin: 0;
-}
-
-.lp-shift-body {
-  max-width: 60rem;
-  margin-inline: auto;
-  margin-bottom: 3rem;
-}
-
-.lp-shift-lead {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #f0f4f8;
-  margin: 0 0 2rem;
-  letter-spacing: -0.01em;
-  text-align: center;
-}
-
-.lp-shift-cols {
-  display: grid;
-  gap: 1.25rem;
-  column-gap: 3rem;
-}
-
-@media (min-width: 720px) {
-  .lp-shift-cols {
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-  }
-}
-
-.lp-shift-cols p {
-  margin: 0;
-  font-size: 1rem;
-  line-height: 1.72;
-  color: rgba(232, 234, 237, 0.68);
-}
-
-.lp-shift-cta-row {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.lp-shift-cta-note {
-  font-size: 0.875rem;
-  color: rgba(232, 234, 237, 0.42);
-}
-
-/* ============================================================
-   SECTION 4 — WHO IT'S FOR
-   Icon + bold feature title + body — four rows
-   ============================================================ */
-
-.lp-who-header {
-  margin-bottom: 2.5rem;
-}
-
-.lp-who-chart-wrap {
-  margin-bottom: 2.5rem;
-  max-width: 44rem;
-}
-
-.lp-who-features {
-  display: grid;
-  gap: 0;
-}
-
-.lp-who-feature {
-  display: grid;
-  grid-template-columns: 3rem 1fr;
-  gap: 1.25rem 1.5rem;
-  align-items: start;
-  padding: 1.75rem 0;
-  border-top: 1px solid var(--border);
-}
-
-.lp-who-feature:last-child {
-  border-bottom: 1px solid var(--border);
-}
-
-@media (min-width: 860px) {
-  .lp-who-features {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .lp-who-feature:nth-child(odd) {
-    padding-right: 3rem;
-    border-right: 1px solid var(--border);
-  }
-
-  .lp-who-feature:nth-child(even) {
-    padding-left: 3rem;
-    border-left: none;
-  }
-
-  .lp-who-feature:nth-child(3),
-  .lp-who-feature:nth-child(4) {
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-.lp-who-feature-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 14px;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  color: var(--accent);
-  flex-shrink: 0;
-  margin-top: 0.15rem;
-}
-
-.lp-who-feature-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--text);
-  margin: 0 0 0.5rem;
-  letter-spacing: -0.01em;
-}
-
-.lp-who-feature-body {
-  font-size: 0.9375rem;
-  line-height: 1.65;
-  color: var(--text-muted);
-  margin: 0;
-}
-
-/* ============================================================
-   SECTION 5 — SERVICES
-   Large numbered editorial list — full-width rows
-   ============================================================ */
-
-.lp-services-header {
-  display: grid;
-  gap: 1.25rem;
-  margin-bottom: 3rem;
-  align-items: start;
-}
-
-@media (min-width: 860px) {
-  .lp-services-header {
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem 4rem;
-  }
-}
-
-.lp-services-intro-text {
-  margin: 0;
-  font-size: 1.0625rem;
-  line-height: 1.72;
-  color: var(--text-muted);
-  padding-top: 0.25rem;
-}
-
-.lp-services-viz-wrap {
-  margin-bottom: 2.5rem;
-  max-width: 48rem;
-}
-
-.lp-services-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.lp-service-row {
-  display: grid;
-  grid-template-columns: 4rem 1fr;
-  gap: 0 2rem;
-  align-items: start;
-  padding: 2rem 0;
-  border-top: 1px solid var(--border);
-  transition: background 0.18s;
-}
-
-.lp-service-row:last-child {
-  border-bottom: 1px solid var(--border);
-}
-
-@media (min-width: 800px) {
-  .lp-service-row {
-    grid-template-columns: 5rem 1fr 2fr;
-    gap: 0 2.5rem;
-    align-items: start;
-    padding: 2.5rem 0;
-  }
-}
-
-.lp-service-num {
-  font-family: var(--font-accent);
-  font-style: italic;
-  font-size: clamp(1.8rem, 4vw, 2.75rem);
-  font-weight: 400;
-  color: var(--border);
-  line-height: 1;
-  padding-top: 0.1em;
-  transition: color 0.18s;
-  user-select: none;
-}
-
-.lp-service-row:hover .lp-service-num {
-  color: var(--accent);
-}
-
-.lp-service-content {
-  display: contents; /* children participate in parent grid */
-}
-
-.lp-service-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin: 0;
-  color: var(--text);
-  padding-top: 0.25rem;
-}
-
-.lp-service-body {
-  margin: 0.65rem 0 0;
-  font-size: 0.9375rem;
-  line-height: 1.68;
-  color: var(--text-muted);
-  grid-column: 2;
-}
-
-@media (min-width: 800px) {
-  .lp-service-body {
-    grid-column: 3;
-    margin-top: 0;
-    padding-top: 0.25rem;
-  }
-}
-
-/* ============================================================
-   SECTION 6 — DIFFERENTIATION (dark band)
-   Two-column: crossed-out text left / card right
-   ============================================================ */
-
-.lp-diff-grid {
-  display: grid;
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: start;
-}
-
-@media (min-width: 860px) {
-  .lp-diff-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.lp-diff-headline {
-  font-family: var(--font-sans);
-  font-size: clamp(1.65rem, 3.8vw, 2.4rem);
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.038em;
-  margin: 0 0 1.5rem;
-  color: rgba(240, 244, 248, 0.96);
-}
-
-.lp-diff-crossed {
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  color: rgba(232, 234, 237, 0.45);
-  margin: 0;
-  text-decoration: line-through;
-  text-decoration-color: rgba(147, 197, 253, 0.45);
-  text-decoration-thickness: 1.5px;
-}
-
-.lp-diff-card {
-  background: rgba(255, 255, 255, 0.055);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: clamp(1.5rem, 3vw, 2.25rem);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.lp-diff-card-label {
-  display: block;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(147, 197, 253, 0.7);
-  margin-bottom: 0.25rem;
-}
-
-.lp-diff-card p {
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.68;
-  color: rgba(232, 234, 237, 0.72);
-}
-
-/* ============================================================
-   SECTION 7 — PROCESS
-   Horizontal connected step cards
-   ============================================================ */
-
-.lp-process-header {
-  margin-bottom: 2.5rem;
-}
-
-.lp-process-viz-row {
-  display: grid;
-  gap: 1.25rem;
-  margin-bottom: 2rem;
-}
-
-@media (min-width: 900px) {
-  .lp-process-viz-row {
-    grid-template-columns: 1fr 1fr;
-    align-items: stretch;
-  }
-}
-
-.lp-diff-viz-wrap {
-  margin-top: 1.25rem;
-}
-
-.lp-process-track {
-  display: grid;
-  gap: 1px;
-  background: var(--border);
-  border-radius: 18px;
-  overflow: hidden;
-}
-
-@media (min-width: 700px) {
-  .lp-process-track {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.lp-process-step {
-  background: var(--bg-elevated);
-  padding: 1.75rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-  transition: background 0.18s;
-}
-
-.lp-process-step:hover {
-  background: var(--bg);
-}
-
-.lp-process-step-top {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.lp-process-step-num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  font-size: 0.8125rem;
-  font-weight: 800;
-  border-radius: 12px;
-  background: linear-gradient(145deg, var(--accent), var(--accent-dim));
-  color: var(--on-accent);
-  flex-shrink: 0;
-}
-
-.lp-process-connector {
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-  display: none;
-}
-
-@media (min-width: 700px) {
-  .lp-process-connector {
-    display: block;
-  }
-}
-
-.lp-process-step-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin: 0;
-  color: var(--text);
-  letter-spacing: -0.01em;
-}
-
-.lp-process-step-text {
-  margin: 0;
-  font-size: 0.9rem;
-  line-height: 1.65;
-  color: var(--text-muted);
-}
-
-/* ============================================================
-   SECTION 8 — PROOF
-   Large quotemark + clean quote cards
-   ============================================================ */
-
-.lp-proof-header {
-  margin-bottom: 2rem;
-}
-
-.lp-proof-intro-callout {
-  margin: 1.25rem 0 0;
-  padding: 1.1rem 1.25rem;
-  border-radius: 14px;
-  border: 1px solid var(--border);
-  background: var(--bg-elevated);
-  font-size: 0.9375rem;
-  line-height: 1.62;
-  color: var(--text-muted);
-  max-width: 62rem;
-}
-
-.lp-proof-intro-callout strong {
-  color: var(--text);
-}
-
-.lp-testimonial-grid {
-  display: grid;
-  gap: 1.25rem;
-}
-
-@media (min-width: 800px) {
-  .lp-testimonial-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.lp-testimonial {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  padding: 1.75rem 1.5rem;
-  border-radius: 18px;
-  border: 1px solid var(--border);
-  background: var(--bg);
-}
-
-.lp-testimonial-qmark {
-  font-family: var(--font-accent);
-  font-size: 4rem;
-  line-height: 0.9;
-  color: var(--accent);
-  opacity: 0.55;
-  font-style: italic;
-  user-select: none;
-  flex-shrink: 0;
-}
-
-.lp-testimonial-quote {
-  margin: 0;
-  flex: 1;
-}
-
-.lp-testimonial-quote p {
-  font-family: var(--font-accent);
-  font-style: italic;
-  font-size: 1.05rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: var(--text);
-  margin: 0;
-}
-
-.lp-testimonial-fig {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
-}
-
-.lp-testimonial-initials {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  font-size: 0.8125rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  color: var(--on-accent);
-  background: linear-gradient(145deg, var(--accent), var(--accent-dim));
-  border: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.lp-mini-chart {
-  padding: 1rem 0 0;
-  border-top: 1px dashed var(--border);
-}
-
-.lp-mini-chart-label {
-  display: block;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 0.65rem;
-}
-
-.lp-mini-chart-rows {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-}
-
-.lp-mini-row {
-  display: grid;
-  grid-template-columns: 3.25rem 1fr 2.25rem;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.lp-mini-tag {
-  font-size: 0.6875rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.lp-mini-track {
-  height: 8px;
-  border-radius: 999px;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  overflow: hidden;
-}
-
-.lp-mini-fill {
-  height: 100%;
-  width: 0;
-  border-radius: 999px;
-  transform-origin: left center;
-  transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.lp-testimonial.lp-viz--visible .lp-mini-fill--before,
-.lp-testimonial.lp-viz--visible .lp-mini-fill--after {
-  width: var(--w);
-}
-
-.lp-mini-fill--before {
-  background: rgba(100, 116, 139, 0.55);
-}
-
-.lp-mini-fill--after {
-  background: linear-gradient(90deg, var(--accent-dim), var(--accent));
-}
-
-.lp-mini-val {
-  font-size: 0.75rem;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  color: var(--text-muted);
-  text-align: right;
-}
-
-.lp-testimonial-by {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  line-height: 1.35;
-}
-
-/* ============================================================
-   SECTION 9 — FAQ
-   ============================================================ */
-
-.lp-faq-header {
-  margin-bottom: 2.5rem;
-}
-
-.lp-faq-list {
-  display: flex;
-  flex-direction: column;
-}
-
-.lp-faq-item {
-  border-top: 1px solid var(--border);
-  background: transparent;
-}
-
-.lp-faq-item:last-child {
-  border-bottom: 1px solid var(--border);
-}
-
-.lp-faq-q {
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.45;
-  padding: 1.15rem 0;
-  list-style: none;
-  color: var(--text);
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1.5rem;
-}
-
-.lp-faq-q::-webkit-details-marker {
-  display: none;
-}
-
-.lp-faq-q::after {
-  content: "";
-  flex-shrink: 0;
-  width: 0.45rem;
-  height: 0.45rem;
-  margin-top: 0.4rem;
-  border-right: 2px solid var(--text-muted);
-  border-bottom: 2px solid var(--text-muted);
-  transform: rotate(45deg);
-  transition: transform 0.18s ease;
-}
-
-.lp-faq-item[open] .lp-faq-q::after {
-  transform: rotate(-135deg);
-  margin-top: 0.55rem;
-}
-
-.lp-faq-a {
-  margin: 0 0 1.25rem;
-  padding-right: 2rem;
-  font-size: 0.9375rem;
-  line-height: 1.68;
-  color: var(--text-muted);
-}
-
-/* ============================================================
-   SECTION 10 — FINAL CTA (dark band)
-   Left-aligned editorial with large headline
-   ============================================================ */
-
-.lp-final-inner {
-  max-width: 54rem;
-}
-
-.lp-final-headline {
-  font-family: var(--font-sans);
-  font-size: clamp(1.75rem, 4.5vw, 3rem);
-  font-weight: 800;
-  line-height: 1.08;
-  letter-spacing: -0.045em;
-  color: rgba(240, 244, 248, 0.98);
-  margin: 0 0 1.25rem;
-}
-
-.lp-final-body {
-  font-size: 1.0625rem;
-  line-height: 1.68;
-  color: rgba(232, 234, 237, 0.6);
-  max-width: 48ch;
-  margin: 0 0 2.5rem;
-}
-
-.lp-final-action {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem 1.5rem;
-}
-
-.lp-final-support {
-  margin: 0;
-  font-size: 0.8125rem;
-  color: rgba(232, 234, 237, 0.38);
-  letter-spacing: 0.02em;
-}
-
-/* ============================================================
-   DATA VIZ — SVG + bars (animate in when [data-viz] is visible)
-   ============================================================ */
-
-.lp-hero-chart-frame .lp-viz {
-  border: none;
-  background: transparent;
-  padding: 1rem 1.1rem 1.15rem;
-}
-
-.lp-viz {
-  border-radius: 16px;
-  padding: 1.25rem 1.35rem;
-  border: 1px solid var(--border);
-  background: var(--bg-elevated);
-}
-
-.lp-viz--on-dark {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-.lp-viz-head {
-  margin-bottom: 0.85rem;
-}
-
-.lp-viz-kicker {
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent-dim);
-  margin: 0 0 0.35rem;
-}
-
-.lp-viz--on-dark .lp-viz-kicker {
-  color: rgba(147, 197, 253, 0.88);
-}
-
-.lp-viz-title {
-  font-size: 1.02rem;
-  font-weight: 700;
-  margin: 0 0 0.4rem;
-  color: var(--text);
-  letter-spacing: -0.02em;
-}
-
-.lp-viz--on-dark .lp-viz-title {
-  color: #f0f4f8;
-}
-
-.lp-viz-note {
-  font-size: 0.8125rem;
-  line-height: 1.52;
-  margin: 0;
-  color: var(--text-muted);
-}
-
-.lp-viz--on-dark .lp-viz-note {
-  color: rgba(232, 234, 237, 0.55);
-}
-
-.lp-viz-surface {
-  margin-top: 0.35rem;
-}
-
-.lp-viz-surface--light {
-  border-radius: 12px;
-  padding: 0.35rem 0 0;
-  border: 1px solid var(--border);
-  background: var(--bg);
+.lp-integrated-viz {
+  position: relative;
+  width: 100%;
 }
 
 .lp-viz-svg {
   width: 100%;
   height: auto;
   display: block;
+  overflow: visible;
 }
 
-.lp-viz-line {
-  stroke-dasharray: 520;
-  stroke-dashoffset: 520;
+.lp-path-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
 }
-
-.lp-viz--visible .lp-viz-line {
+.lp-viz--visible .lp-path-draw {
   stroke-dashoffset: 0;
-  transition: stroke-dashoffset 1.35s cubic-bezier(0.33, 1, 0.68, 1);
+  transition: stroke-dashoffset 2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.lp-viz-area {
-  opacity: 0;
-}
-
-.lp-viz--visible .lp-viz-area {
-  opacity: 1;
-  transition: opacity 0.75s ease 0.12s;
-}
-
-.lp-viz-marker-line {
-  opacity: 0;
-}
-
-.lp-viz--visible .lp-viz-marker-line {
-  opacity: 1;
-  transition: opacity 0.45s ease 0.85s;
-}
-
-.lp-viz-bars .lp-hbar + .lp-hbar {
-  margin-top: 1rem;
-}
-
-.lp-hbar-label {
-  display: block;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-bottom: 0.35rem;
-}
-
-.lp-viz--on-dark .lp-hbar-label {
-  color: rgba(232, 234, 237, 0.55);
-}
-
-.lp-hbar-track {
-  height: 10px;
-  border-radius: 999px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  overflow: hidden;
-}
-
-.lp-hbar-track--dark {
-  background: rgba(0, 0, 0, 0.35);
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-.lp-hbar-fill {
-  height: 100%;
-  width: var(--w);
-  border-radius: 999px;
-  transform: scaleX(0);
-  transform-origin: left center;
-}
-
-.lp-viz--visible .lp-hbar-fill {
-  transform: scaleX(1);
-  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.lp-viz-bars .lp-hbar:nth-child(2) .lp-hbar-fill {
-  transition-delay: 0.14s;
-}
-
-.lp-hbar-fill--muted {
-  background: rgba(100, 116, 139, 0.5);
-}
-
-.lp-hbar-fill--accent {
-  background: linear-gradient(90deg, var(--accent-dim), var(--accent));
-}
-
-.lp-hbar-fill--ghost {
-  background: rgba(255, 255, 255, 0.14);
-}
-
-.lp-hbar-fill--warn {
-  background: rgba(251, 113, 133, 0.55);
-}
-
-.lp-hbar-cap {
-  display: block;
-  margin-top: 0.35rem;
-  font-size: 0.72rem;
-  color: var(--text-muted);
-}
-
-.lp-hbar-cap--light {
-  color: rgba(232, 234, 237, 0.5);
-}
-
-/* Authority stack */
-
-.lp-stack-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.lp-stack-item {
-  display: grid;
-  grid-template-columns: 2.75rem 1fr;
-  gap: 0.65rem 1rem;
-  align-items: center;
-  padding: 0.85rem 1rem;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: var(--bg);
+.lp-fade-in {
   opacity: 0;
   transform: translateY(10px);
 }
-
-.lp-stack-copy {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  min-width: 0;
-}
-
-.lp-stack-item--base {
-  border-color: rgba(94, 164, 252, 0.35);
-  box-shadow: 0 0 0 1px rgba(94, 164, 252, 0.06);
-}
-
-.lp-viz--visible .lp-stack-item {
+.lp-viz--visible .lp-fade-in {
   opacity: 1;
   transform: translateY(0);
-  transition:
-    opacity 0.55s ease,
-    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: calc(var(--i) * 0.1s);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.lp-stack-num {
+.lp-scale-x {
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.lp-viz--visible .lp-scale-x {
+  transform: scaleX(1);
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* ============================================================
+   SECTION 1 — HERO
+   Text floating over/around a massive, abstract data curve
+   ============================================================ */
+
+.lp-hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border: none;
+}
+
+/* The hero chart acts as a massive background element */
+.lp-hero-bg-viz {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lp-hero-bg-viz svg {
+  width: 120%;
+  min-width: 1000px;
+  height: auto;
+  transform: translate(5%, 10%);
+  opacity: 0.6;
+}
+
+:root[data-theme="light"] .lp-hero-bg-viz svg {
+  opacity: 0.3;
+}
+
+.lp-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 50rem;
+  margin-top: -5vh; /* Visual optical center */
+}
+
+.lp-hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.lp-hero-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.lp-hero-h1 {
+  font-family: var(--font-sans);
+  font-size: clamp(2.75rem, 7vw, 5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin: 0 0 1.5rem;
+  color: #ffffff;
+}
+
+.lp-hero-h1-serif {
   font-family: var(--font-accent);
   font-style: italic;
-  font-size: 1.15rem;
-  color: var(--accent);
-  line-height: 1;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  display: block;
 }
 
-.lp-stack-label {
+.lp-hero-sub {
+  font-size: clamp(1.125rem, 2.5vw, 1.35rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 42ch;
+  margin: 0 0 2.5rem;
+}
+
+.lp-hero-adv-list {
+  list-style: none;
+  margin: 0 0 3rem;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 600px) {
+  .lp-hero-adv-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.lp-hero-adv-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.lp-hero-adv-icon {
+  color: var(--accent);
+}
+
+/* ============================================================
+   SECTION 2 — PROBLEM
+   Asymmetric. Left: minimal text. Right: Integrated Reputation vs Brand chart
+   ============================================================ */
+
+.lp-problem-grid {
+  display: grid;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .lp-problem-grid {
+    grid-template-columns: 1fr 1.2fr;
+  }
+}
+
+.lp-problem-text .lp-prose-lead {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.lp-problem-text p {
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+/* The visualization is not in a box, it floats in the layout */
+.lp-viz-reputation {
+  padding-left: clamp(0rem, 5vw, 4rem);
+}
+
+/* ============================================================
+   SECTION 3 — SHIFT (Dark)
+   Centralized narrative. Huge typography.
+   ============================================================ */
+
+.lp-shift-content {
+  max-width: 56rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.lp-shift-content .lp-eyebrow {
+  justify-content: center;
+}
+.lp-shift-content .lp-eyebrow::before {
+  display: none; /* Remove line for centered alignment */
+}
+
+.lp-shift-content .lp-h2 {
+  max-width: none;
+  margin-inline: auto;
+  margin-bottom: 4rem;
+}
+
+/* The chart sits between the headline and the body */
+.lp-viz-presence-wrap {
+  margin: 0 auto 4rem;
+  max-width: 48rem;
+}
+
+.lp-shift-cols {
+  display: grid;
+  gap: 2rem;
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .lp-shift-cols {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+.lp-shift-cols p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.lp-shift-cta {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+/* ============================================================
+   SECTION 4 — WHO
+   Clean typographic grid with an embedded data metric
+   ============================================================ */
+
+.lp-who-grid {
+  display: grid;
+  gap: 4rem;
+}
+
+@media (min-width: 900px) {
+  .lp-who-grid {
+    grid-template-columns: 0.8fr 1fr;
+  }
+}
+
+.lp-who-features {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.lp-who-feature h3 {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
   font-weight: 700;
-  font-size: 0.92rem;
+  margin: 0 0 0.75rem;
   color: var(--text);
 }
 
-.lp-stack-hint {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-}
-
-/* Process timeline */
-
-.lp-timeline {
-  position: relative;
-  padding-top: 0.5rem;
-}
-
-.lp-timeline-rail {
-  position: absolute;
-  left: 1.25rem;
-  right: 1.25rem;
-  top: 1.35rem;
-  height: 2px;
-  pointer-events: none;
-}
-
-.lp-timeline-line {
-  display: block;
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent-dim), var(--accent));
-  border-radius: 2px;
-  transform: scaleX(0);
-  transform-origin: left center;
-}
-
-.lp-viz--visible .lp-timeline-line {
-  transform: scaleX(1);
-  transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.08s;
-}
-
-.lp-timeline-steps {
-  list-style: none;
+.lp-who-feature p {
   margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.35rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   SECTION 5 — SERVICES
+   Staggered cards that flow over a background architectural grid
+   ============================================================ */
+
+.lp-services {
   position: relative;
+  overflow: hidden;
+}
+
+.lp-services-bg-grid {
+  position: absolute;
+  inset: 0;
   z-index: 1;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: 
+    linear-gradient(var(--text) 1px, transparent 1px),
+    linear-gradient(90deg, var(--text) 1px, transparent 1px);
+  background-size: 100px 100px;
 }
 
-@media (max-width: 640px) {
-  .lp-timeline-steps {
-    grid-template-columns: repeat(2, 1fr);
-    row-gap: 1.25rem;
-  }
-
-  .lp-timeline-rail {
-    display: none;
-  }
+.lp-services-header {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 4rem;
+  max-width: 40rem;
 }
 
-.lp-timeline-step {
-  text-align: center;
+.lp-services-header p {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.lp-services-stack {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.45rem;
+  gap: 2rem;
 }
 
-.lp-timeline-dot {
-  display: inline-flex;
+.lp-service-card {
+  display: grid;
+  gap: 1.5rem;
+  background: var(--bg);
+  padding: 3rem;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 40px -20px rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .lp-service-card {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 4rem;
+    width: 85%;
+  }
+  
+  .lp-service-card:nth-child(even) {
+    align-self: flex-end;
+  }
+}
+
+.lp-service-num {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.2;
+}
+
+.lp-service-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+  color: var(--text);
+}
+
+.lp-service-body {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   SECTION 6 — DIFFERENTIATION (Dark)
+   ============================================================ */
+
+.lp-diff-grid {
+  display: grid;
+  gap: 4rem;
+}
+
+@media (min-width: 900px) {
+  .lp-diff-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.lp-diff-crossed {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.3);
+  text-decoration: line-through;
+  text-decoration-color: rgba(251, 113, 133, 0.6);
+  margin-bottom: 2rem;
+}
+
+.lp-diff-affirm p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1.5rem;
+}
+
+/* ============================================================
+   SECTION 7 — PROCESS
+   A horizontal scrolling timeline or clean step layout
+   ============================================================ */
+
+.lp-process-header {
+  margin-bottom: 4rem;
+  text-align: center;
+}
+.lp-process-header .lp-eyebrow { justify-content: center; }
+.lp-process-header .lp-eyebrow::before { display: none; }
+.lp-process-header .lp-h2 { margin-inline: auto; }
+
+.lp-process-steps {
+  display: grid;
+  gap: 2rem;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .lp-process-steps {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* The connecting line */
+.lp-process-line {
+  position: absolute;
+  top: 1.5rem;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border);
+  z-index: 1;
+  display: none;
+}
+@media (min-width: 768px) {
+  .lp-process-line { display: block; }
+}
+
+.lp-process-line-fill {
+  height: 100%;
+  background: var(--accent);
+  transform-origin: left;
+}
+
+.lp-step {
+  position: relative;
+  z-index: 2;
+  padding-top: 3rem;
+}
+@media (max-width: 767px) {
+  .lp-step { padding-top: 0; padding-left: 3rem; }
+}
+
+.lp-step-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 800;
-  color: var(--on-accent);
-  background: linear-gradient(145deg, var(--accent), var(--accent-dim));
-  border: 2px solid var(--bg-elevated);
-  box-shadow: 0 0 0 1px var(--border);
-  transform: scale(0.6);
-  opacity: 0;
-}
-
-.lp-viz--visible .lp-timeline-dot {
-  transform: scale(1);
-  opacity: 1;
-  transition:
-    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
-    opacity 0.35s ease;
-  transition-delay: calc(0.15s + var(--ti) * 0.12s);
-}
-
-.lp-timeline-label {
-  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.lp-step-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+  color: var(--text);
+}
+
+.lp-step-body {
+  font-size: 0.95rem;
+  line-height: 1.6;
   color: var(--text-muted);
-  line-height: 1.25;
+  margin: 0;
 }
 
-.lp-testimonial.lp-viz--visible .lp-mini-row:nth-child(2) .lp-mini-fill {
-  transition-delay: 0.14s;
+/* ============================================================
+   SECTION 8 — PROOF
+   Integrated data and quotes
+   ============================================================ */
+
+.lp-proof-header {
+  margin-bottom: 4rem;
+  max-width: 40rem;
 }
 
-/* ── Motion reductions ── */
+.lp-proof-intro {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
 
+.lp-testimonials {
+  display: grid;
+  gap: 2rem;
+}
+@media (min-width: 900px) {
+  .lp-testimonials {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.lp-testimonial-card {
+  background: var(--bg-elevated);
+  border-radius: 16px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+.lp-testimonial-card:hover {
+  border-color: var(--border);
+}
+
+.lp-quote-text {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--text);
+  margin: 0;
+}
+
+.lp-quote-author {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+/* Minimal inline chart for testimonials */
+.lp-mini-chart {
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+}
+.lp-mini-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  display: block;
+}
+.lp-mini-bar-row {
+  display: grid;
+  grid-template-columns: 3rem 1fr 2.5rem;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.lp-mini-tag {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+.lp-mini-track {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.lp-mini-fill {
+  height: 100%;
+  transform-origin: left;
+}
+.lp-mini-val {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text);
+  text-align: right;
+}
+
+/* ============================================================
+   SECTION 9 — FAQ
+   Clean, minimal
+   ============================================================ */
+
+.lp-faq-header {
+  margin-bottom: 3rem;
+}
+
+.lp-faq-list {
+  border-top: 1px solid var(--border);
+}
+
+.lp-faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.lp-faq-q {
+  cursor: pointer;
+  padding: 1.5rem 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+}
+.lp-faq-q::-webkit-details-marker { display: none; }
+
+.lp-faq-q::after {
+  content: "+";
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--accent);
+  transition: transform 0.3s;
+}
+.lp-faq-item[open] .lp-faq-q::after {
+  transform: rotate(45deg);
+}
+
+.lp-faq-a {
+  padding-bottom: 1.5rem;
+  padding-right: 2rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ============================================================
+   SECTION 10 — FINAL CTA
+   ============================================================ */
+
+.lp-final {
+  text-align: center;
+  padding-block: 8rem;
+}
+.lp-final .lp-eyebrow { justify-content: center; }
+.lp-final .lp-eyebrow::before { display: none; }
+.lp-final .lp-h2 { margin-inline: auto; max-width: 20ch; }
+.lp-final p {
+  color: rgba(255,255,255,0.7);
+  font-size: 1.15rem;
+  max-width: 40ch;
+  margin: 0 auto 3rem;
+}
+
+/* ── Motion Reductions ── */
 @media (prefers-reduced-motion: reduce) {
-  .lp-process-step,
-  .lp-service-row {
-    transition: none;
-  }
-
-  .lp-viz-line,
-  .lp-viz-area,
-  .lp-viz-marker-line,
-  .lp-hbar-fill,
-  .lp-stack-item,
-  .lp-timeline-line,
-  .lp-timeline-dot,
-  .lp-mini-fill {
+  .lp-path-draw, .lp-fade-in, .lp-scale-x, .lp-mini-fill, .lp-process-line-fill {
     transition: none !important;
-  }
-
-  [data-viz] {
-    opacity: 1 !important;
-  }
-
-  .lp-viz-line {
-    stroke-dashoffset: 0 !important;
-  }
-
-  .lp-viz-area,
-  .lp-viz-marker-line,
-  .lp-stack-item,
-  .lp-timeline-dot {
     opacity: 1 !important;
     transform: none !important;
-  }
-
-  .lp-hbar-fill,
-  .lp-timeline-line {
-    transform: scaleX(1) !important;
-  }
-
-  .lp-mini-fill--before,
-  .lp-mini-fill--after {
-    width: var(--w) !important;
+    stroke-dashoffset: 0 !important;
   }
 }

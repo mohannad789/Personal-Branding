@@ -1,33 +1,45 @@
 ---
 import { landing } from "../../content/landing";
-import VizReputationBrand from "./viz/VizReputationBrand.astro";
 const s = landing.problem;
 const [first, second, ...rest] = s.paragraphs;
 ---
 
 <section class="lp-band lp-band--paper lp-problem" aria-labelledby="lp-problem-h">
   <div class="lp-container">
-    <div class="lp-problem-top">
-      <div class="lp-problem-label">
-        <span class="lp-rule-label">The problem</span>
-      </div>
-      <h2 id="lp-problem-h" class="lp-editorial-h2">{s.title}</h2>
-    </div>
-
-    <blockquote class="lp-pull-quote">
-      <p>"You're the best-kept secret in your industry. And that's not the compliment it sounds like."</p>
-    </blockquote>
-
-    <div class="lp-problem-split">
-      <div class="lp-two-col-prose">
+    <div class="lp-problem-grid">
+      <div class="lp-problem-text lp-fade-in" data-viz>
+        <span class="lp-eyebrow">The problem</span>
+        <h2 id="lp-problem-h" class="lp-h2">{s.title}</h2>
         <p class="lp-prose-lead">{first}</p>
-        <div class="lp-prose-stack">
-          <p>{second}</p>
-          {rest.map((p) => <p>{p}</p>)}
-        </div>
+        <p>{second}</p>
+        {rest.map((p) => <p>{p}</p>)}
       </div>
-      <aside class="lp-problem-aside" aria-label="Illustrative chart">
-        <VizReputationBrand />
+
+      <aside class="lp-viz-reputation lp-fade-in" aria-label="Illustrative chart" data-viz>
+        <p style="font-family: var(--font-accent); font-style: italic; font-size: 2.5rem; line-height: 1.2; margin-bottom: 2rem; color: var(--text);">
+          "You're the best-kept secret in your industry. And that's not the compliment it sounds like."
+        </p>
+
+        <!-- Integrated Bar Chart -->
+        <div style="margin-top: 3rem; border-left: 2px solid var(--border); padding-left: 1.5rem;">
+          <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 1.5rem;">
+            The Gap: Who can buy from you?
+          </p>
+
+          <div style="margin-bottom: 1.5rem;">
+            <p style="font-size: 0.9rem; font-weight: 600; margin: 0 0 0.5rem; color: var(--text);">Inside your existing network (Reputation)</p>
+            <div style="height: 12px; background: var(--bg-elevated); border-radius: 99px; overflow: hidden; width: 100%; max-width: 400px; border: 1px solid var(--border);">
+              <div class="lp-scale-x" style="height: 100%; width: 25%; background: var(--text-muted); transform-origin: left; transition-delay: 0.2s;"></div>
+            </div>
+          </div>
+
+          <div>
+            <p style="font-size: 0.9rem; font-weight: 600; margin: 0 0 0.5rem; color: var(--text);">Markets that have never heard your name (Brand Position)</p>
+            <div style="height: 12px; background: var(--bg-elevated); border-radius: 99px; overflow: hidden; width: 100%; max-width: 400px; border: 1px solid var(--border);">
+              <div class="lp-scale-x" style="height: 100%; width: 90%; background: linear-gradient(90deg, var(--accent-dim), var(--accent)); transform-origin: left; transition-delay: 0.4s;"></div>
+            </div>
+          </div>
+        </div>
       </aside>
     </div>
   </div>

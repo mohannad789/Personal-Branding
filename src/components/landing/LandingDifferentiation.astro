@@ -1,24 +1,47 @@
 ---
 import { landing } from "../../content/landing";
-import VizActivityVsOutcome from "./viz/VizActivityVsOutcome.astro";
 const s = landing.differentiation;
 ---
 
 <section class="lp-band lp-band--ink lp-diff" aria-labelledby="lp-diff-h">
   <div class="lp-container">
     <div class="lp-diff-grid">
-      <div class="lp-diff-left">
-        <span class="lp-rule-label lp-rule-label--light">Differentiation</span>
-        <h2 id="lp-diff-h" class="lp-diff-headline">{s.title}</h2>
+      <div class="lp-diff-left lp-fade-in" data-viz>
+        <span class="lp-eyebrow">Differentiation</span>
+        <h2 id="lp-diff-h" class="lp-h2">{s.title}</h2>
         <p class="lp-diff-crossed">{s.paragraphs[0]}</p>
-      </div>
-      <div class="lp-diff-right">
-        <div class="lp-diff-card">
-          <span class="lp-diff-card-label">What you won't get elsewhere</span>
+        
+        <div class="lp-diff-affirm">
           {s.paragraphs.slice(1).map((p) => <p>{p}</p>)}
         </div>
-        <div class="lp-diff-viz-wrap">
-          <VizActivityVsOutcome />
+      </div>
+      
+      <div class="lp-diff-right lp-fade-in" style="transition-delay: 0.2s;" data-viz>
+        <div style="background: rgba(255,255,255,0.03); padding: 3rem; border-radius: 24px; border: 1px solid rgba(255,255,255,0.05); height: 100%;">
+          <p style="font-family: var(--font-accent); font-style: italic; font-size: 1.75rem; margin-bottom: 2rem; color: rgba(255,255,255,0.9);">
+            What most retainers optimise for
+          </p>
+
+          <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); margin-bottom: 2.5rem;">
+            Activity is easy to report. Revenue outcomes are harder — which is exactly why the wrong incentives produce the wrong work.
+          </p>
+
+          <!-- Embedded Chart -->
+          <div style="margin-bottom: 2rem;">
+            <p style="font-size: 0.9rem; font-weight: 600; margin: 0 0 0.5rem; color: rgba(255,255,255,0.8);">Dashboards: posts, reach, cadence</p>
+            <div style="height: 12px; background: rgba(0,0,0,0.3); border-radius: 99px; overflow: hidden; width: 100%; border: 1px solid rgba(255,255,255,0.1);">
+              <div class="lp-scale-x" style="height: 100%; width: 96%; background: rgba(255,255,255,0.15); transform-origin: left; transition-delay: 0.1s;"></div>
+            </div>
+            <p style="font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.4); margin: 0.5rem 0 0; text-transform: uppercase;">Activity</p>
+          </div>
+
+          <div>
+            <p style="font-size: 0.9rem; font-weight: 600; margin: 0 0 0.5rem; color: var(--accent);">Proof tied to pipeline &amp; close rate</p>
+            <div style="height: 12px; background: rgba(0,0,0,0.3); border-radius: 99px; overflow: hidden; width: 100%; border: 1px solid rgba(255,255,255,0.1);">
+              <div class="lp-scale-x" style="height: 100%; width: 34%; background: linear-gradient(90deg, var(--accent-dim), var(--accent)); transform-origin: left; transition-delay: 0.3s;"></div>
+            </div>
+            <p style="font-size: 0.75rem; font-weight: 600; color: var(--accent); margin: 0.5rem 0 0; text-transform: uppercase;">Outcome</p>
+          </div>
         </div>
       </div>
     </div>

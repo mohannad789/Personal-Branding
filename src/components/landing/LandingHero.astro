@@ -1,70 +1,80 @@
 ---
 import { landing } from "../../content/landing";
-import LandingIconCheck from "./LandingIconCheck.astro";
-import VizInboundChart from "./viz/VizInboundChart.astro";
 const h = landing.hero;
 ---
 
-<section class="lp-hero lp-band--hero" aria-labelledby="lp-hero-h">
-  <div class="lp-hero-wrap">
-    <div class="lp-hero-stage">
-      <div class="lp-hero-eyebrow-row">
-        <span class="lp-chip">Personal Branding</span>
-        <span class="lp-chip">Strategic Positioning</span>
-        <span class="lp-chip">Revenue Architecture</span>
+<section class="lp-hero lp-band--ink" aria-labelledby="lp-hero-h">
+  <!-- Giant integrated background chart -->
+  <div class="lp-hero-bg-viz" aria-hidden="true" data-viz>
+    <svg viewBox="0 0 1440 800" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="hero-grad" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0%" stop-color="var(--accent)" stop-opacity="0"></stop>
+          <stop offset="40%" stop-color="var(--accent)" stop-opacity="0.1"></stop>
+          <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.8"></stop>
+        </linearGradient>
+        <filter id="hero-glow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="12" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+      </defs>
+      
+      <!-- Abstract compounding curve -->
+      <path 
+        class="lp-path-draw" 
+        d="M -100 700 C 300 700, 600 650, 900 400 S 1200 100, 1600 50" 
+        fill="none" 
+        stroke="url(#hero-grad)" 
+        stroke-width="4" 
+        filter="url(#hero-glow)"
+      />
+      <!-- Secondary framing lines -->
+      <path 
+        class="lp-path-draw" 
+        d="M -100 750 C 400 750, 700 700, 1000 500 S 1300 200, 1600 150" 
+        fill="none" 
+        stroke="rgba(255,255,255,0.05)" 
+        stroke-width="1"
+      />
+      <path 
+        class="lp-path-draw" 
+        d="M 100 800 C 200 600, 500 500, 800 200 S 1100 -50, 1500 -100" 
+        fill="none" 
+        stroke="rgba(255,255,255,0.03)" 
+        stroke-width="1"
+      />
+    </svg>
+  </div>
+
+  <div class="lp-container">
+    <div class="lp-hero-content lp-fade-in" data-viz>
+      <div class="lp-hero-tags">
+        <span class="lp-hero-tag">Positioning</span>
+        <span class="lp-hero-tag">Authority</span>
+        <span class="lp-hero-tag">Revenue</span>
       </div>
 
-      <h1 id="lp-hero-h" class="lp-hero-headline">
-        <span class="lp-hero-headline-serif">Your expertise</span>
-        <span class="lp-hero-headline-weight">closes deals.</span>
-        <span class="lp-hero-headline-serif lp-hero-headline-serif--indent">Your brand</span>
-        <span class="lp-hero-headline-weight">should open them.</span>
+      <h1 id="lp-hero-h" class="lp-hero-h1">
+        <span class="lp-hero-h1-serif">Your expertise</span> closes deals.<br/>
+        <span class="lp-hero-h1-serif">Your brand</span> should open them.
       </h1>
 
-      <div class="lp-hero-body">
-        <p class="lp-hero-sub">
-          {h.sub}
-        </p>
-        <div class="lp-hero-action">
-          <a class="btn btn-primary lp-btn-hero" href={h.ctaHref}>{h.ctaLabel}</a>
-          <p class="lp-hero-meta">Dubai-based · DACH & Gulf</p>
-        </div>
-      </div>
-    </div>
+      <p class="lp-hero-sub">{h.sub}</p>
 
-    <div class="lp-hero-advantages">
-      {
-        h.advantages.map((line) => (
-          <div class="lp-adv-item">
-            <span class="lp-adv-icon" aria-hidden="true">
-              <LandingIconCheck />
-            </span>
-            <span class="lp-adv-text">{line}</span>
-          </div>
-        ))
-      }
-    </div>
+      <ul class="lp-hero-adv-list">
+        {
+          h.advantages.map((line) => (
+            <li class="lp-hero-adv-item">
+              <span class="lp-hero-adv-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              {line}
+            </li>
+          ))
+        }
+      </ul>
 
-    <div class="lp-hero-visual">
-      <div class="lp-hero-chart-frame">
-        <VizInboundChart />
-      </div>
-      <div class="lp-hero-stat-row">
-        <div class="lp-hero-stat">
-          <span class="lp-hero-stat-num">8–12<small>wk</small></span>
-          <span class="lp-hero-stat-label">Inbound shift</span>
-        </div>
-        <div class="lp-hero-stat-div" aria-hidden="true"></div>
-        <div class="lp-hero-stat">
-          <span class="lp-hero-stat-num">100%</span>
-          <span class="lp-hero-stat-label">Custom strategy</span>
-        </div>
-        <div class="lp-hero-stat-div" aria-hidden="true"></div>
-        <div class="lp-hero-stat">
-          <span class="lp-hero-stat-num">0</span>
-          <span class="lp-hero-stat-label">Recycled playbooks</span>
-        </div>
-      </div>
+      <a class="btn lp-btn-lg lp-btn-ink" href={h.ctaHref}>{h.ctaLabel}</a>
     </div>
   </div>
 </section>
