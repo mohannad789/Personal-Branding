@@ -3,42 +3,40 @@ import { landing } from "../../content/landing";
 const s = landing.who;
 ---
 
-<section class="lp-band lp-band--paper lp-who" aria-labelledby="lp-who-h">
+<section class="lp-band lp-who" aria-labelledby="lp-who-h">
   <div class="lp-container">
     <div class="lp-who-grid">
       <div class="lp-who-content lp-fade-in" data-viz>
         <span class="lp-eyebrow">Who this is for</span>
         <h2 id="lp-who-h" class="lp-h2">{s.title}</h2>
-        <div style="font-size: 1.15rem; line-height: 1.7; color: var(--text-muted); margin-bottom: 2rem;">
-          {s.paragraphs.map((p) => <p style="margin-bottom: 1.5rem;">{p}</p>)}
+        <div class="lp-prose-text">
+          {s.paragraphs.map((p) => <p>{p}</p>)}
         </div>
       </div>
 
       <div class="lp-who-features lp-fade-in" style="transition-delay: 0.2s;" data-viz>
-        <div style="background: var(--bg-elevated); padding: 3rem; border-radius: 24px; border: 1px solid var(--border);">
-          <p style="font-family: var(--font-accent); font-style: italic; font-size: 1.75rem; margin-bottom: 2rem; color: var(--text);">
-            Followers vs Pipeline (A typical failure mode)
+        <div class="lp-inline-chart lp-inline-chart--no-border">
+          <p class="lp-chart-kicker" style="text-transform: none; letter-spacing: 0;">
+            Followers vs Pipeline <span style="font-family: var(--font-sans); font-size: 1rem; font-style: normal; color: var(--text-muted);">(A typical failure mode)</span>
           </p>
 
-          <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 2rem;">
+          <p class="lp-chart-subtitle">
             If the work optimises for reach, you get charts that look good in a deck — not conversations that sound like referrals.
           </p>
 
           <!-- Embedded Chart -->
-          <div style="margin-bottom: 2rem;">
-            <p style="font-size: 0.9rem; font-weight: 600; margin: 0 0 0.5rem; color: var(--text);">Follower / activity scorecard</p>
-            <div style="height: 12px; background: var(--bg); border-radius: 99px; overflow: hidden; width: 100%; border: 1px solid var(--border);">
-              <div class="lp-scale-x" style="height: 100%; width: 88%; background: rgba(251, 113, 133, 0.5); transform-origin: left; transition-delay: 0.1s;"></div>
+          <div class="lp-chart-row">
+            <p class="lp-chart-label">Follower / activity scorecard <span class="lp-chart-meta">(Vanity)</span></p>
+            <div class="lp-chart-track">
+              <div class="lp-scale-x lp-chart-fill lp-chart-fill--warn" style="width: 88%; transition-delay: 0.1s;"></div>
             </div>
-            <p style="font-size: 0.75rem; font-weight: 600; color: rgba(251, 113, 133, 0.8); margin: 0.5rem 0 0; text-transform: uppercase;">Vanity</p>
           </div>
 
-          <div>
-            <p style="font-size: 0.9rem; font-weight: 600; margin: 0 0 0.5rem; color: var(--text);">Qualified conversations tied to offer</p>
-            <div style="height: 12px; background: var(--bg); border-radius: 99px; overflow: hidden; width: 100%; border: 1px solid var(--border);">
-              <div class="lp-scale-x" style="height: 100%; width: 36%; background: linear-gradient(90deg, var(--accent-dim), var(--accent)); transform-origin: left; transition-delay: 0.3s;"></div>
+          <div class="lp-chart-row">
+            <p class="lp-chart-label">Qualified conversations tied to offer <span class="lp-chart-meta" style="color: var(--accent)">(Pipeline)</span></p>
+            <div class="lp-chart-track">
+              <div class="lp-scale-x lp-chart-fill lp-chart-fill--accent" style="width: 36%; transition-delay: 0.3s;"></div>
             </div>
-            <p style="font-size: 0.75rem; font-weight: 600; color: var(--accent); margin: 0.5rem 0 0; text-transform: uppercase;">Pipeline</p>
           </div>
         </div>
       </div>

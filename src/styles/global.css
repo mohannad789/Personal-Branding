@@ -50,6 +50,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -63,6 +64,7 @@ body {
   background-image:
     radial-gradient(ellipse 80% 50% at 50% -20%, var(--glow-a), transparent),
     radial-gradient(ellipse 60% 40% at 100% 0%, var(--glow-b), transparent);
+  overflow-x: hidden;
 }
 
 .skip-link {

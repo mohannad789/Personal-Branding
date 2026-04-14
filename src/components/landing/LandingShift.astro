@@ -4,48 +4,42 @@ const s = landing.shift;
 const [first, ...rest] = s.paragraphs;
 ---
 
-<section class="lp-band lp-band--ink lp-shift" aria-labelledby="lp-shift-h">
+<section class="lp-band lp-shift" aria-labelledby="lp-shift-h">
   <div class="lp-container">
     <div class="lp-shift-content lp-fade-in" data-viz>
       <span class="lp-eyebrow">The shift</span>
-      <h2 id="lp-shift-h" class="lp-h2" style="font-size: clamp(2.5rem, 6vw, 4rem); max-width: 32ch; margin-bottom: 2rem;">{s.title}</h2>
+      <h2 id="lp-shift-h" class="lp-h2 lp-shift-h2">{s.title}</h2>
 
       <div class="lp-viz-presence-wrap">
         <!-- Integrated Presence vs Position Bar Chart -->
-        <div style="text-align: left; background: rgba(255,255,255,0.03); padding: 2rem; border-radius: 24px; border: 1px solid rgba(255,255,255,0.05);">
-          <p style="font-family: var(--font-accent); font-style: italic; font-size: 1.5rem; margin-bottom: 2rem; color: rgba(255,255,255,0.9);">
+        <div class="lp-inline-chart lp-inline-chart--center">
+          <p class="lp-chart-kicker">
             Where the budget actually goes.
           </p>
 
-          <div style="margin-bottom: 2rem;">
-            <p style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 0.5rem;">
-              Posts · pixels · platforms
-            </p>
-            <div style="height: 6px; background: rgba(255,255,255,0.1); border-radius: 99px; overflow: hidden; width: 100%; margin-bottom: 0.5rem;">
-              <div class="lp-scale-x" style="height: 100%; width: 95%; background: rgba(255,255,255,0.2); transform-origin: left; transition-delay: 0.1s;"></div>
+          <div class="lp-chart-row">
+            <p class="lp-chart-label">Posts · pixels · platforms <span class="lp-chart-meta">(Volume & Activity)</span></p>
+            <div class="lp-chart-track">
+              <div class="lp-scale-x lp-chart-fill lp-chart-fill--muted" style="width: 95%; transition-delay: 0.1s;"></div>
             </div>
-            <p style="font-size: 0.75rem; color: rgba(255,255,255,0.3); margin: 0;">Presence (Volume & Activity)</p>
           </div>
 
-          <div>
-            <p style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;">
-              Right perception · right rooms · right people
-            </p>
-            <div style="height: 6px; background: rgba(255,255,255,0.1); border-radius: 99px; overflow: hidden; width: 100%; margin-bottom: 0.5rem;">
-              <div class="lp-scale-x" style="height: 100%; width: 45%; background: var(--accent); transform-origin: left; transition-delay: 0.3s;"></div>
+          <div class="lp-chart-row">
+            <p class="lp-chart-label">Right perception · right rooms · right people <span class="lp-chart-meta">(Precision & Leverage)</span></p>
+            <div class="lp-chart-track">
+              <div class="lp-scale-x lp-chart-fill lp-chart-fill--accent" style="width: 45%; transition-delay: 0.3s;"></div>
             </div>
-            <p style="font-size: 0.75rem; color: rgba(255,255,255,0.5); margin: 0;">Position (Precision & Leverage)</p>
           </div>
         </div>
       </div>
 
       <div class="lp-shift-cols">
-        <p style="font-size: 1.25rem; font-weight: 700; color: #fff; line-height: 1.5; grid-column: 1 / -1; margin-bottom: 1rem;">{first}</p>
+        <p class="lp-shift-lead">{first}</p>
         {rest.map((p) => <p>{p}</p>)}
       </div>
 
       <div class="lp-shift-cta">
-        <a class="btn lp-btn-lg lp-btn-ink" href={s.ctaHref}>{s.ctaLabel}</a>
+        <a class="btn btn-primary lp-btn-lg" href={s.ctaHref}>{s.ctaLabel}</a>
       </div>
     </div>
   </div>

@@ -3,7 +3,7 @@ import { landing } from "../../content/landing";
 const h = landing.hero;
 ---
 
-<section class="lp-hero lp-band--ink" aria-labelledby="lp-hero-h">
+<section class="lp-hero" aria-labelledby="lp-hero-h">
   <!-- Giant integrated background chart -->
   <div class="lp-hero-bg-viz" aria-hidden="true" data-viz>
     <svg viewBox="0 0 1440 800" preserveAspectRatio="none">
@@ -21,7 +21,7 @@ const h = landing.hero;
       
       <!-- Abstract compounding curve -->
       <path 
-        class="lp-path-draw" 
+        class="lp-path-breathe" 
         d="M -100 700 C 300 700, 600 650, 900 400 S 1200 100, 1600 50" 
         fill="none" 
         stroke="url(#hero-grad)" 
@@ -30,17 +30,19 @@ const h = landing.hero;
       />
       <!-- Secondary framing lines -->
       <path 
-        class="lp-path-draw" 
+        class="lp-path-breathe" 
+        style="animation-delay: -3s; animation-duration: 12s;"
         d="M -100 750 C 400 750, 700 700, 1000 500 S 1300 200, 1600 150" 
         fill="none" 
-        stroke="rgba(255,255,255,0.05)" 
+        stroke="var(--border)" 
         stroke-width="1"
       />
       <path 
-        class="lp-path-draw" 
+        class="lp-path-breathe" 
+        style="animation-delay: -7s; animation-duration: 18s;"
         d="M 100 800 C 200 600, 500 500, 800 200 S 1100 -50, 1500 -100" 
         fill="none" 
-        stroke="rgba(255,255,255,0.03)" 
+        stroke="var(--border)" 
         stroke-width="1"
       />
     </svg>

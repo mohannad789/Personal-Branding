@@ -13,7 +13,6 @@ main#main.main--landing {
   max-width: none;
   width: 100%;
   padding: 0;
-  overflow-x: hidden;
 }
 
 /* ── Nav ── */
@@ -150,6 +149,102 @@ main#main.main--landing {
    Charts are now borderless, integrated layout elements
    ============================================================ */
 
+.lp-inline-chart {
+  margin-top: 3rem;
+  border-left: 2px solid var(--accent);
+  padding-left: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.lp-inline-chart--no-border {
+  border-left: none;
+  padding-left: 0;
+}
+
+.lp-inline-chart--center {
+  border-left: none;
+  padding-left: 0;
+}
+
+.lp-chart-kicker {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  margin-bottom: 2rem;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.lp-inline-chart--center .lp-chart-kicker {
+  color: var(--text);
+}
+
+.lp-chart-subtitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  line-height: 1.5;
+}
+
+.lp-chart-row {
+  margin-bottom: 1.5rem;
+}
+
+.lp-chart-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: var(--text);
+}
+
+.lp-inline-chart--center .lp-chart-label {
+  color: var(--text);
+}
+
+.lp-chart-meta {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-left: 0.5rem;
+}
+
+.lp-chart-track {
+  height: 8px;
+  background: var(--bg-elevated);
+  border-radius: 99px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid var(--border);
+}
+
+.lp-inline-chart--center .lp-chart-track {
+  background: var(--bg);
+  border-color: var(--border);
+}
+
+.lp-chart-fill {
+  height: 100%;
+}
+
+.lp-chart-fill--muted {
+  background: var(--text-muted);
+}
+.lp-inline-chart--center .lp-chart-fill--muted {
+  background: var(--text-muted);
+}
+
+.lp-chart-fill--accent {
+  background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+}
+
+.lp-chart-fill--warn {
+  background: rgba(251, 113, 133, 0.55);
+}
+
 .lp-integrated-viz {
   position: relative;
   width: 100%;
@@ -170,6 +265,15 @@ main#main.main--landing {
 .lp-viz--visible .lp-path-draw {
   stroke-dashoffset: 0;
   transition: stroke-dashoffset 2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lp-path-breathe {
+  animation: path-breathe 15s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+@keyframes path-breathe {
+  0% { transform: translateY(0) scaleY(1); opacity: 0.6; }
+  100% { transform: translateY(-15px) scaleY(1.05); opacity: 1; }
 }
 
 .lp-fade-in {
