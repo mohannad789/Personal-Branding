@@ -63,7 +63,6 @@ export function initV2HeroIntro() {
   const run = () => {
     stage.setAttribute("aria-busy", "true");
 
-    gsap.set([eyebrow, title], { opacity: 1 });
     gsap.set(rest, { autoAlpha: 0 });
     gsap.set(cycleBlock, { autoAlpha: 0 });
     gsap.set(revenueEl, { autoAlpha: 0 });
@@ -102,7 +101,6 @@ export function initV2HeroIntro() {
       onComplete: () => {
         stage.removeAttribute("aria-busy");
         gsap.set(shell, { clearProps: "scale,transform" });
-        gsap.set([eyebrow, title], { clearProps: "opacity" });
         ScrollTrigger.refresh();
       },
     });
@@ -148,9 +146,28 @@ export function initV2HeroIntro() {
     tl.to(rest, { autoAlpha: 1, duration: 0.62, ease: "power2.out" });
   };
 
-  if (document.fonts?.ready) {
-    void document.fonts.ready.then(run);
-  } else {
-    run();
-  }
+  let ran = false;
+  const runOnce = () => {
+    if (ran) return;
+    ran = true;
+    try {
+      run();
+    } catch (e) {
+      console.error(e);
+      stage.removeAttribute("aria-busy");
+      eyebrow.textContent = eyebrowPlain;
+      title.textContent = titlePlain;
+      eyebrow.classList.remove("v2-eyebrow--intro");
+      gsap.set([rest, cycleBlock, revenueEl, shell], { clearProps: "all" });
+      revenueEl.setAttribute("hidden", "");
+      cycleBlock.style.display = "";
+      gsap.set(rest, { autoAlpha: 1 });
+    }
+  };
+
+  /* Run on the next frame — do not wait on fonts.ready (it can stall and left the old CSS hiding the whole hero). */
+  requestAnimationFrame(() => {
+    runOnce();
+    void document.fonts?.ready?.then(() => ScrollTrigger.refresh());
+  });
 }
