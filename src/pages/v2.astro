@@ -115,7 +115,10 @@ const fc = landing.footer;
       min-height: 4.5rem;
       margin-bottom: 0.5rem;
     }
+    /* Keep “Not …” above the absolutely positioned Revenue layer (fixes missing word / compositing). */
     .v2-hero-cycle-line {
+      position: relative;
+      z-index: 2;
       font-family: var(--fb);
       font-size: clamp(1.05rem, 2.2vw, 1.2rem);
       color: var(--muted);
@@ -132,6 +135,7 @@ const fc = landing.footer;
       left: 0;
       right: 0;
       top: 0;
+      z-index: 1;
       margin: 0 auto;
       text-align: center;
       font-family: var(--ft);
@@ -141,6 +145,21 @@ const fc = landing.footer;
       color: var(--accent);
       line-height: 1.15;
       pointer-events: none;
+    }
+    .v2-hero-revenue-word[hidden] {
+      visibility: hidden;
+    }
+    /* Hero clears sticky nav; --v2-nav-pad is synced from JS (fallback matches #v2-nav). */
+    [data-v2-hero-stage] {
+      padding-top: max(1rem, var(--v2-nav-pad, 5.75rem));
+    }
+    .v2-tw-char {
+      display: inline;
+      opacity: 0;
+      will-change: opacity;
+    }
+    .v2-tw-word {
+      will-change: opacity;
     }
     .v2-h2 {
       font-family: var(--ft); font-weight: 700; font-size: clamp(1.5rem, 3.2vw, 2.15rem);
