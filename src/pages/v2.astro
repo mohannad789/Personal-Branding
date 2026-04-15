@@ -36,7 +36,7 @@ const fc = landing.footer;
       --max:        680px;
       --max-wide:   920px;
       --nav-h:      4.5rem;
-      /* Set by script from real nav height + gap */
+      /* Measured nav height for scroll-padding / anchors only */
       --v2-nav-pad: 5.75rem;
     }
 
@@ -48,18 +48,23 @@ const fc = landing.footer;
       font-family: var(--fb);
       font-size: 1rem;
       line-height: 1.65;
-      padding-top: calc(var(--v2-nav-pad) + 2rem);
     }
 
     #v2-nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      display: flex; align-items: center; justify-content: space-between;
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       gap: 1rem;
       min-height: var(--nav-h);
       padding: 0.75rem var(--pad);
       padding-top: max(0.75rem, env(safe-area-inset-top, 0px));
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
+      background: #fff;
+      box-shadow: 0 1px 0 rgba(15, 23, 42, 0.08);
       border-bottom: 1px solid rgba(15, 23, 42, 0.08);
     }
     .v2-logo { font-family: var(--ft); font-size: 1.0625rem; font-weight: 700; color: var(--text); text-decoration: none; flex-shrink: 0; }
@@ -81,7 +86,7 @@ const fc = landing.footer;
       padding-block: var(--sec);
       border-top: 1px solid rgba(15, 23, 42, 0.06);
     }
-    section:first-of-type { border-top: none; padding-top: 0.25rem; }
+    section:first-of-type { border-top: none; }
 
     .v2-center { text-align: center; }
     .v2-eyebrow {
@@ -655,9 +660,8 @@ const fc = landing.footer;
   function syncNavPad() {
     var nav = document.getElementById("v2-nav");
     if (!nav) return;
-    var h = nav.getBoundingClientRect().height;
-    var gap = 20;
-    document.documentElement.style.setProperty("--v2-nav-pad", Math.ceil(h + gap) + "px");
+    var h = nav.offsetHeight || nav.getBoundingClientRect().height;
+    document.documentElement.style.setProperty("--v2-nav-pad", Math.ceil(h + 8) + "px");
   }
 
   function initRevealTitles() {
