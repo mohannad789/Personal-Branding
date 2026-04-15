@@ -36,9 +36,11 @@ const fc = landing.footer;
       --max:        680px;
       --max-wide:   920px;
       --nav-h:      4.5rem;
+      /* Set by script from real nav height + gap */
+      --v2-nav-pad: 5.75rem;
     }
 
-    html { overflow-x: hidden; scroll-padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px) + 12px); }
+    html { overflow-x: hidden; scroll-padding-top: calc(var(--v2-nav-pad) + env(safe-area-inset-top, 0px)); }
 
     body {
       background: var(--bg);
@@ -46,7 +48,7 @@ const fc = landing.footer;
       font-family: var(--fb);
       font-size: 1rem;
       line-height: 1.65;
-      padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px) + 2.25rem);
+      padding-top: calc(var(--v2-nav-pad) + 2rem);
     }
 
     #v2-nav {
@@ -54,8 +56,8 @@ const fc = landing.footer;
       display: flex; align-items: center; justify-content: space-between;
       gap: 1rem;
       min-height: var(--nav-h);
-      padding: 0.65rem var(--pad);
-      padding-top: max(0.65rem, env(safe-area-inset-top, 0px));
+      padding: 0.75rem var(--pad);
+      padding-top: max(0.75rem, env(safe-area-inset-top, 0px));
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(15, 23, 42, 0.08);
@@ -92,6 +94,7 @@ const fc = landing.footer;
       line-height: 1.28; letter-spacing: -0.02em; margin-bottom: 1rem;
       max-width: 42rem; margin-left: auto; margin-right: auto;
       text-wrap: balance;
+      text-align: center;
     }
     .v2-h3 { font-family: var(--ft); font-weight: 600; font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--text); }
     .v2-p { color: var(--muted); margin-bottom: 1rem; max-width: var(--max); margin-inline: auto; }
@@ -101,10 +104,19 @@ const fc = landing.footer;
     .v2-strong { color: var(--text); font-weight: 600; }
     .v2-accent { color: var(--accent); }
 
+    /* Titles: normal wrapping (do NOT use nbsp between words in JS) */
+    [data-v2-reveal-title] {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
     [data-v2-reveal-title] .v2-word {
       font-family: var(--ft);
       color: var(--title-dim);
-      transition: color 0.45s ease;
+      transition: color 0.5s ease;
     }
     [data-v2-reveal-title] .v2-word.v2-word--on { color: var(--title-on); }
 
@@ -115,6 +127,7 @@ const fc = landing.footer;
       margin-bottom: 1.25rem;
       max-width: min(100%, 38rem);
       margin-left: auto; margin-right: auto;
+      text-align: center;
     }
 
     .v2-btn {
@@ -163,6 +176,8 @@ const fc = landing.footer;
       text-align: center;
       margin: 2rem auto 0;
       max-width: 42rem;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .v2-obj { margin-bottom: 2.5rem; }
@@ -214,6 +229,8 @@ const fc = landing.footer;
       text-align: center;
       max-width: 40rem;
       margin-inline: auto;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .v2-svc-card {
@@ -618,6 +635,7 @@ const fc = landing.footer;
 
 <script is:inline>
 (function () {
+  /** Use normal spaces so lines wrap; nbsp was forcing one long line off-screen */
   function wrapWords(block) {
     var text = (block.textContent || "").replace(/\s+/g, " ").trim();
     if (!text) return;
@@ -626,9 +644,20 @@ const fc = landing.footer;
     words.forEach(function (w, idx) {
       var span = document.createElement("span");
       span.className = "v2-word";
-      span.textContent = w + (idx < words.length - 1 ? "\u00a0" : "");
+      span.textContent = w;
       block.appendChild(span);
+      if (idx < words.length - 1) {
+        block.appendChild(document.createTextNode(" "));
+      }
     });
+  }
+
+  function syncNavPad() {
+    var nav = document.getElementById("v2-nav");
+    if (!nav) return;
+    var h = nav.getBoundingClientRect().height;
+    var gap = 20;
+    document.documentElement.style.setProperty("--v2-nav-pad", Math.ceil(h + gap) + "px");
   }
 
   function initRevealTitles() {
@@ -639,16 +668,17 @@ const fc = landing.footer;
     });
   }
 
-  /** 0 = all dim, 1 = all "on", words fill in between by index */
-  function progressForBlock(rect) {
+  /** 0 = all dim, 1 = all on; words turn on in order */
+  function progressForBlock(rect, block) {
     var H = window.innerHeight || 600;
     var sy = window.scrollY || document.documentElement.scrollTop || 0;
     var top = rect.top;
     var doneY = H * 0.3;
     var enterY = H * 0.88;
+    var isHero = block.classList && block.classList.contains("v2-hero-title");
 
-    if (top < H * 0.52 && sy < 420) {
-      return Math.min(1, sy / 300);
+    if (isHero && top < H * 0.65 && sy < 520) {
+      return Math.min(1, sy / 380);
     }
     if (top >= enterY) return 0;
     if (top <= doneY) return 1;
@@ -659,7 +689,7 @@ const fc = landing.footer;
     document.querySelectorAll("[data-v2-reveal-title]").forEach(function (block) {
       var words = block.querySelectorAll(".v2-word");
       if (!words.length) return;
-      var p = progressForBlock(block.getBoundingClientRect());
+      var p = progressForBlock(block.getBoundingClientRect(), block);
       var n = words.length;
       for (var i = 0; i < n; i++) {
         words[i].classList.toggle("v2-word--on", p >= (i + 1) / n);
@@ -672,14 +702,19 @@ const fc = landing.footer;
     if (raf) return;
     raf = requestAnimationFrame(function () {
       raf = 0;
+      syncNavPad();
       updateReveals();
     });
   }
 
   function boot() {
+    syncNavPad();
     initRevealTitles();
-    tick();
-    requestAnimationFrame(tick);
+    updateReveals();
+    requestAnimationFrame(function () {
+      syncNavPad();
+      updateReveals();
+    });
   }
 
   if (document.readyState === "loading") {
@@ -690,9 +725,15 @@ const fc = landing.footer;
 
   window.addEventListener("scroll", tick, { passive: true });
   window.addEventListener("resize", tick, { passive: true });
-  window.addEventListener("load", tick);
+  window.addEventListener("load", function () {
+    syncNavPad();
+    tick();
+  });
   if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(tick);
+    document.fonts.ready.then(function () {
+      syncNavPad();
+      tick();
+    });
   }
 })();
 </script>
