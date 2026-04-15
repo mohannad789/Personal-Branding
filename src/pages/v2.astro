@@ -27,7 +27,7 @@ const fc = landing.footer;
       --accent-dim: #1d4ed8;
       --accent-soft: rgba(37, 99, 235, 0.12);
       --accent-border: rgba(37, 99, 235, 0.35);
-      --title-dim:  #b8bcc4;
+      --title-dim:  #adb5c9;
       --title-on:   #0a0a0a;
       --ft:         "Raleway", system-ui, sans-serif;
       --fb:         "Inter", system-ui, sans-serif;
@@ -35,10 +35,10 @@ const fc = landing.footer;
       --sec:        clamp(2.5rem, 5vw, 3.5rem);
       --max:        680px;
       --max-wide:   920px;
-      --nav-h:      4.25rem;
+      --nav-h:      4.5rem;
     }
 
-    html { overflow-x: hidden; scroll-padding-top: calc(var(--nav-h) + 1rem); }
+    html { overflow-x: hidden; scroll-padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px) + 12px); }
 
     body {
       background: var(--bg);
@@ -46,20 +46,22 @@ const fc = landing.footer;
       font-family: var(--fb);
       font-size: 1rem;
       line-height: 1.65;
-      padding-top: calc(var(--nav-h) + 1.25rem);
+      padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px) + 2.25rem);
     }
 
     #v2-nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem;
       min-height: var(--nav-h);
-      padding: 0.75rem var(--pad);
-      background: color-mix(in srgb, var(--bg) 94%, transparent);
+      padding: 0.65rem var(--pad);
+      padding-top: max(0.65rem, env(safe-area-inset-top, 0px));
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(15, 23, 42, 0.08);
     }
-    .v2-logo { font-family: var(--ft); font-size: 1.0625rem; font-weight: 700; color: var(--text); text-decoration: none; }
-    .v2-nav-right { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .v2-logo { font-family: var(--ft); font-size: 1.0625rem; font-weight: 700; color: var(--text); text-decoration: none; flex-shrink: 0; }
+    .v2-nav-right { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; justify-content: flex-end; }
     .v2-ver-link {
       font-size: 0.8125rem; color: var(--muted); text-decoration: none;
       border: 1px solid rgba(15, 23, 42, 0.12); border-radius: 999px; padding: 0.4rem 1rem;
@@ -77,17 +79,19 @@ const fc = landing.footer;
       padding-block: var(--sec);
       border-top: 1px solid rgba(15, 23, 42, 0.06);
     }
-    section:first-of-type { border-top: none; padding-top: 0.5rem; }
+    section:first-of-type { border-top: none; padding-top: 0.25rem; }
 
     .v2-center { text-align: center; }
     .v2-eyebrow {
       font-family: var(--fb);
       font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 1.25rem; display: block;
+      color: var(--accent); margin-bottom: 1rem; display: block;
     }
     .v2-h2 {
-      font-family: var(--ft); font-weight: 700; font-size: clamp(1.5rem, 3.8vw, 2.35rem);
-      line-height: 1.18; letter-spacing: -0.02em; margin-bottom: 1rem;
+      font-family: var(--ft); font-weight: 700; font-size: clamp(1.5rem, 3.2vw, 2.15rem);
+      line-height: 1.28; letter-spacing: -0.02em; margin-bottom: 1rem;
+      max-width: 42rem; margin-left: auto; margin-right: auto;
+      text-wrap: balance;
     }
     .v2-h3 { font-family: var(--ft); font-weight: 600; font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--text); }
     .v2-p { color: var(--muted); margin-bottom: 1rem; max-width: var(--max); margin-inline: auto; }
@@ -97,25 +101,21 @@ const fc = landing.footer;
     .v2-strong { color: var(--text); font-weight: 600; }
     .v2-accent { color: var(--accent); }
 
-    /* Scroll-reveal titles: words start dim, turn black when .v2-word--on */
     [data-v2-reveal-title] .v2-word {
       font-family: var(--ft);
       color: var(--title-dim);
-      transition: color 0.35s ease;
+      transition: color 0.45s ease;
     }
     [data-v2-reveal-title] .v2-word.v2-word--on { color: var(--title-on); }
-    .v2-pull .v2-title-line.v2-accent .v2-word.v2-word--on,
-    .v2-keyline .v2-title-line.v2-accent .v2-word.v2-word--on,
-    .v2-manifesto-line.v2-accent .v2-word.v2-word--on { color: var(--accent); }
 
-    .v2-hero-lines {
+    .v2-hero-title {
       font-family: var(--ft); font-weight: 700;
-      font-size: clamp(2.35rem, 6.5vw, 3.75rem);
-      line-height: 1.05; letter-spacing: -0.03em;
+      font-size: clamp(2rem, 5.5vw, 3.25rem);
+      line-height: 1.18; letter-spacing: -0.03em;
       margin-bottom: 1.25rem;
+      max-width: min(100%, 38rem);
+      margin-left: auto; margin-right: auto;
     }
-    .v2-hero-lines .v2-title-line { display: block; }
-    .v2-hero-lines .v2-title-line .v2-word { font-weight: 700; }
 
     .v2-btn {
       display: inline-block; margin-top: 1.25rem; padding: 0.875rem 2rem;
@@ -126,7 +126,6 @@ const fc = landing.footer;
       transition: filter 0.2s, box-shadow 0.2s;
     }
     .v2-btn:hover { filter: brightness(1.05); box-shadow: 0 6px 28px rgba(37, 99, 235, 0.32); }
-
     .v2-btn-lg { padding: 1rem 2.25rem; font-size: 1rem; }
 
     .v2-pain-grid {
@@ -159,14 +158,12 @@ const fc = landing.footer;
 
     .v2-pull {
       font-family: var(--ft); font-weight: 700;
-      font-size: clamp(1.35rem, 3.2vw, 2rem);
-      line-height: 1.25;
+      font-size: clamp(1.35rem, 2.8vw, 1.85rem);
+      line-height: 1.35;
       text-align: center;
-      max-width: 24rem;
       margin: 2rem auto 0;
+      max-width: 42rem;
     }
-    .v2-pull .v2-title-line { display: block; }
-    .v2-pull .v2-accent { margin-top: 0.35em; }
 
     .v2-obj { margin-bottom: 2.5rem; }
     .v2-obj:last-child { margin-bottom: 0; }
@@ -209,15 +206,15 @@ const fc = landing.footer;
     .v2-step-right { font-family: var(--ft); font-size: 1.125rem; color: var(--accent); font-weight: 600; margin-bottom: 0.75rem; }
     .v2-step-body { font-size: 0.9375rem; color: var(--muted); line-height: 1.65; max-width: 52rem; }
 
-    .v2-manifesto-line {
+    .v2-manifesto-block {
       font-family: var(--ft); font-weight: 700;
-      font-size: clamp(1.35rem, 3.5vw, 2.15rem);
-      line-height: 1.2;
+      font-size: clamp(1.2rem, 2.8vw, 1.85rem);
+      line-height: 1.45;
       letter-spacing: -0.02em;
       text-align: center;
-      margin-bottom: 0.35rem;
+      max-width: 40rem;
+      margin-inline: auto;
     }
-    .v2-manifesto-line--accent { margin-top: 0.75rem; }
 
     .v2-svc-card {
       background: var(--bg2);
@@ -260,23 +257,10 @@ const fc = landing.footer;
     .v2-faq-q { font-family: var(--ft); font-size: 1.0625rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
     .v2-faq-a { font-size: 0.9375rem; color: var(--muted); line-height: 1.65; }
 
-    .v2-keyline {
-      font-family: var(--ft); font-weight: 700;
-      font-size: clamp(1.5rem, 3.8vw, 2.35rem);
-      line-height: 1.2;
-      text-align: center;
-      margin: 2rem auto 0;
-      max-width: 22ch;
-    }
-    .v2-keyline .v2-title-line { display: block; }
-    .v2-keyline .v2-accent { margin-top: 0.2em; }
-
     .v2-sr-only {
       position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
       overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
     }
-
-    .v2-h2 .v2-title-line, .v2-keyline .v2-title-line, .v2-pull .v2-title-line { display: block; }
 
     #s19 {
       background: var(--bg2); padding: 2rem var(--pad);
@@ -304,14 +288,8 @@ const fc = landing.footer;
 
   <section class="v2-center">
     <span class="v2-eyebrow">For founders who've outgrown word of mouth</span>
-    <h1 class="v2-hero-lines" data-v2-reveal-title>
-      <span class="v2-title-line">We</span>
-      <span class="v2-title-line">Build</span>
-      <span class="v2-title-line">Personal Brand</span>
-      <span class="v2-title-line">Positions</span>
-      <span class="v2-title-line">That</span>
-      <span class="v2-title-line">Generate</span>
-      <span class="v2-title-line">Revenue.</span>
+    <h1 class="v2-hero-title" data-v2-reveal-title>
+      We build personal brand positions that generate revenue.
     </h1>
     <p class="v2-p v2-p--wide">
       Not followers. Not impressions. Not "visibility." Revenue. The kind where strangers contact you pre-sold, sales cycles halve, and your pipeline stops depending on who you had dinner with last quarter.
@@ -326,9 +304,7 @@ const fc = landing.footer;
     <div class="v2-center" style="margin-bottom:2rem">
       <span class="v2-eyebrow">The Invisible Authority Trap</span>
       <h2 class="v2-h2" data-v2-reveal-title>
-        <span class="v2-title-line">You've Built A Business</span>
-        <span class="v2-title-line">That Proves You're Exceptional.</span>
-        <span class="v2-title-line">Your Market Hasn't Noticed Yet.</span>
+        You've built a business that proves you're exceptional. Your market hasn't noticed yet.
       </h2>
       <p class="v2-p v2-p--wide">
         Your track record should be doing the selling. Instead, you're still the one doing the explaining.
@@ -361,9 +337,7 @@ const fc = landing.footer;
       </article>
     </div>
     <p class="v2-pull" data-v2-reveal-title>
-      <span class="v2-title-line">You don't have a marketing problem.</span>
-      <span class="v2-title-line">You have a positioning problem.</span>
-      <span class="v2-title-line v2-accent">And it's costing you more than you think.</span>
+      You don't have a marketing problem. You have a positioning problem. And it's costing you more than you think.
     </p>
     <p class="v2-center" style="margin-top:2rem">
       <a href="/contact" class="v2-btn">Book a Strategy Call</a>
@@ -374,9 +348,7 @@ const fc = landing.footer;
     <div class="v2-center" style="margin-bottom:1.5rem">
       <span class="v2-eyebrow">The Position-First Method</span>
       <h2 class="v2-h2" data-v2-reveal-title>
-        <span class="v2-title-line">The Market Doesn't Buy Expertise.</span>
-        <span class="v2-title-line">It Buys The Perception Of Expertise.</span>
-        <span class="v2-title-line">We Engineer That Perception.</span>
+        The market doesn't buy expertise. It buys the perception of expertise. We engineer that perception.
       </h2>
     </div>
     <div class="v2-p--wide" style="max-width:40rem;margin-inline:auto">
@@ -394,10 +366,9 @@ const fc = landing.footer;
         This isn't content marketing with a strategy label. It's commercial positioning with content as one of several tools.
       </p>
     </div>
-    <p class="v2-keyline" data-v2-reveal-title>
-      <span class="v2-title-line">We don't make you louder.</span>
-      <span class="v2-title-line v2-accent">We make you inevitable.</span>
-    </p>
+    <h2 class="v2-h2 v2-center" data-v2-reveal-title style="margin-top:2rem;margin-bottom:0">
+      We don't make you louder. We make you inevitable.
+    </h2>
     <p class="v2-center" style="margin-top:2rem">
       <a href="/contact" class="v2-btn">Book a Strategy Call</a>
     </p>
@@ -436,10 +407,7 @@ const fc = landing.footer;
   <section>
     <div class="v2-center" style="margin-bottom:1.5rem">
       <span class="v2-eyebrow">Who we work with</span>
-      <h2 class="v2-h2" data-v2-reveal-title>
-        <span class="v2-title-line">This Isn't For Everyone.</span>
-        <span class="v2-title-line">That's The Point.</span>
-      </h2>
+      <h2 class="v2-h2" data-v2-reveal-title>This isn't for everyone. That's the point.</h2>
     </div>
     <div class="v2-split">
       <div class="v2-split-col v2-split-col--for">
@@ -469,10 +437,7 @@ const fc = landing.footer;
     <div class="v2-center" style="margin-bottom:1.75rem">
       <span class="v2-eyebrow">The Position-First Method</span>
       <h2 class="v2-h2" data-v2-reveal-title>
-        <span class="v2-title-line">Why Most Personal Brands</span>
-        <span class="v2-title-line">Fail Before They Start.</span>
-        <span class="v2-title-line">And What The Ones That</span>
-        <span class="v2-title-line">Generate Revenue Do Differently.</span>
+        Why most personal brands fail before they start — and what the ones that generate revenue do differently.
       </h2>
     </div>
     <div class="v2-p--wide" style="max-width:42rem;margin-inline:auto;margin-bottom:2rem">
@@ -509,11 +474,8 @@ const fc = landing.footer;
         <p class="v2-step-body">Inbound enquiries. Deal velocity. Average deal size. Pipeline from non-referral sources. Source attribution. These are the numbers we watch. If it doesn't move revenue, it doesn't survive the next quarter's strategy review.</p>
       </div>
     </div>
-    <p class="v2-manifesto-line" data-v2-reveal-title style="margin-top:2.5rem;max-width:28ch;margin-inline:auto;line-height:1.22">
-      <span class="v2-title-line">Personal brands don't launch.</span>
-      <span class="v2-title-line">They compound.</span>
-      <span class="v2-title-line">The goal isn't a campaign.</span>
-      <span class="v2-title-line">It's a market position that appreciates like equity.</span>
+    <p class="v2-manifesto-block v2-center" data-v2-reveal-title style="margin-top:2.5rem">
+      Personal brands don't launch. They compound. The goal isn't a campaign. It's a market position that appreciates like equity.
     </p>
     <p class="v2-center" style="margin-top:2rem">
       <a href="/contact" class="v2-btn">Book a Strategy Call</a>
@@ -523,7 +485,7 @@ const fc = landing.footer;
   <section style="background:var(--bg2)">
     <div class="v2-center" style="margin-bottom:1.25rem">
       <span class="v2-eyebrow">What we build</span>
-      <h2 class="v2-h2" data-v2-reveal-title>The Architecture Behind Authority.</h2>
+      <h2 class="v2-h2" data-v2-reveal-title>The architecture behind authority.</h2>
     </div>
     <p class="v2-p v2-p--wide" style="margin-bottom:1.75rem">
       Every engagement begins with diagnosis. Not templates. Not a kickoff deck we used for the last client. A forensic analysis of where you stand, where you should stand, and the shortest line between the two.
@@ -561,10 +523,7 @@ const fc = landing.footer;
   <section>
     <div class="v2-center" style="margin-bottom:1.5rem">
       <span class="v2-eyebrow">Client outcomes</span>
-      <h2 class="v2-h2" data-v2-reveal-title>
-        <span class="v2-title-line">There's A Reason Founders</span>
-        <span class="v2-title-line">Stay With Us.</span>
-      </h2>
+      <h2 class="v2-h2" data-v2-reveal-title>There's a reason founders stay with us.</h2>
     </div>
     <article class="v2-t-card">
       <p class="v2-t-desc">SaaS Founder, B2B enterprise</p>
@@ -587,20 +546,9 @@ const fc = landing.footer;
   </section>
 
   <section class="v2-center" style="background:var(--bg3);padding-block:clamp(3rem,6vw,4rem)">
-    <div style="max-width:32rem;margin-inline:auto">
-      <p class="v2-manifesto-line" data-v2-reveal-title>The market is not rational.</p>
-      <p class="v2-manifesto-line" data-v2-reveal-title>It is perceptual.</p>
-      <p class="v2-manifesto-line" data-v2-reveal-title style="margin-top:1rem">People don't choose</p>
-      <p class="v2-manifesto-line" data-v2-reveal-title>the most qualified expert.</p>
-      <p class="v2-manifesto-line" data-v2-reveal-title style="margin-top:1rem">They choose</p>
-      <p class="v2-manifesto-line" data-v2-reveal-title>the one they already trust.</p>
-      <p class="v2-manifesto-line" data-v2-reveal-title style="margin-top:1rem">Trust is not earned</p>
-      <p class="v2-manifesto-line" data-v2-reveal-title>in the meeting.</p>
-      <p class="v2-manifesto-line" data-v2-reveal-title style="margin-top:1rem">It is engineered</p>
-      <p class="v2-manifesto-line" data-v2-reveal-title>before the meeting</p>
-      <p class="v2-manifesto-line" data-v2-reveal-title>ever happens.</p>
-      <p class="v2-manifesto-line v2-manifesto-line--accent v2-accent" data-v2-reveal-title>That's what we build.</p>
-    </div>
+    <p class="v2-manifesto-block" data-v2-reveal-title>
+      The market is not rational. It is perceptual. People don't choose the most qualified expert. They choose the one they already trust. Trust is not earned in the meeting. It is engineered before the meeting ever happens. That's what we build.
+    </p>
   </section>
 
   <section>
@@ -636,9 +584,7 @@ const fc = landing.footer;
   <section class="v2-center">
     <span class="v2-eyebrow">For future market leaders only</span>
     <h2 class="v2-h2" data-v2-reveal-title>
-      <span class="v2-title-line">Your Next Client Is</span>
-      <span class="v2-title-line">Forming An Opinion</span>
-      <span class="v2-title-line">About You Right Now.</span>
+      Your next client is forming an opinion about you right now.
     </h2>
     <p class="v2-p v2-p--wide">
       Not tomorrow. Now. They're reading your LinkedIn. Googling your name. Asking a colleague what they know about you. And the answer they're getting is either silence, noise, or someone else's narrative.
@@ -672,18 +618,16 @@ const fc = landing.footer;
 
 <script is:inline>
 (function () {
-  var TH = 0.3;
-
-  function wrapWordsInLine(lineEl) {
-    var text = (lineEl.textContent || "").trim();
+  function wrapWords(block) {
+    var text = (block.textContent || "").replace(/\s+/g, " ").trim();
     if (!text) return;
-    var words = text.split(/\s+/).filter(Boolean);
-    lineEl.textContent = "";
+    var words = text.split(" ");
+    block.textContent = "";
     words.forEach(function (w, idx) {
       var span = document.createElement("span");
       span.className = "v2-word";
       span.textContent = w + (idx < words.length - 1 ? "\u00a0" : "");
-      lineEl.appendChild(span);
+      block.appendChild(span);
     });
   }
 
@@ -691,27 +635,31 @@ const fc = landing.footer;
     document.querySelectorAll("[data-v2-reveal-title]").forEach(function (block) {
       if (block.dataset.v2RevealInit) return;
       block.dataset.v2RevealInit = "1";
-      var lines = block.querySelectorAll(".v2-title-line");
-      if (lines.length) {
-        lines.forEach(wrapWordsInLine);
-      } else {
-        wrapWordsInLine(block);
-      }
+      wrapWords(block);
     });
   }
 
+  /** 0 = all dim, 1 = all "on", words fill in between by index */
+  function progressForBlock(rect) {
+    var H = window.innerHeight || 600;
+    var sy = window.scrollY || document.documentElement.scrollTop || 0;
+    var top = rect.top;
+    var doneY = H * 0.3;
+    var enterY = H * 0.88;
+
+    if (top < H * 0.52 && sy < 420) {
+      return Math.min(1, sy / 300);
+    }
+    if (top >= enterY) return 0;
+    if (top <= doneY) return 1;
+    return (enterY - top) / (enterY - doneY);
+  }
+
   function updateReveals() {
-    var h = window.innerHeight;
-    var thresholdY = h * TH;
-    var start = h * 0.92;
     document.querySelectorAll("[data-v2-reveal-title]").forEach(function (block) {
       var words = block.querySelectorAll(".v2-word");
       if (!words.length) return;
-      var rect = block.getBoundingClientRect();
-      var top = rect.top;
-      var p = (start - top) / (start - thresholdY);
-      if (p < 0) p = 0;
-      if (p > 1) p = 1;
+      var p = progressForBlock(block.getBoundingClientRect());
       var n = words.length;
       for (var i = 0; i < n; i++) {
         words[i].classList.toggle("v2-word--on", p >= (i + 1) / n);
@@ -719,22 +667,33 @@ const fc = landing.footer;
     });
   }
 
+  var raf = 0;
   function tick() {
-    updateReveals();
+    if (raf) return;
+    raf = requestAnimationFrame(function () {
+      raf = 0;
+      updateReveals();
+    });
+  }
+
+  function boot() {
+    initRevealTitles();
+    tick();
+    requestAnimationFrame(tick);
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () {
-      initRevealTitles();
-      tick();
-    });
+    document.addEventListener("DOMContentLoaded", boot);
   } else {
-    initRevealTitles();
-    tick();
+    boot();
   }
 
   window.addEventListener("scroll", tick, { passive: true });
   window.addEventListener("resize", tick, { passive: true });
+  window.addEventListener("load", tick);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(tick);
+  }
 })();
 </script>
 
