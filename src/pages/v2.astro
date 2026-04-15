@@ -120,13 +120,10 @@ const fc = landing.footer;
       overflow-wrap: break-word;
       word-wrap: break-word;
     }
+    /* Initial colour before GSAP runs; GSAP tweens inline color (no !important) */
     [data-v2-reveal-title] .v2-word {
       font-family: var(--ft);
-      color: var(--title-dim) !important;
-      transition: color 0.55s ease;
-    }
-    [data-v2-reveal-title] .v2-word.v2-word--on {
-      color: var(--title-on) !important;
+      color: var(--title-dim);
     }
 
     .v2-hero-title {
@@ -642,135 +639,9 @@ const fc = landing.footer;
   </nav>
 </footer>
 
-<script is:inline>
-(function () {
-  /** Use normal spaces so lines wrap; nbsp was forcing one long line off-screen */
-  function wrapWords(block) {
-    var text = (block.textContent || "").replace(/\s+/g, " ").trim();
-    if (!text) return;
-    var words = text.split(" ");
-    block.textContent = "";
-    words.forEach(function (w, idx) {
-      var span = document.createElement("span");
-      span.className = "v2-word";
-      span.textContent = w;
-      block.appendChild(span);
-      if (idx < words.length - 1) {
-        block.appendChild(document.createTextNode(" "));
-      }
-    });
-  }
-
-  function syncNavPad() {
-    var nav = document.getElementById("v2-nav");
-    if (!nav) return;
-    var h = nav.offsetHeight || nav.getBoundingClientRect().height;
-    document.documentElement.style.setProperty("--v2-nav-pad", Math.ceil(h + 8) + "px");
-  }
-
-  function initRevealTitles() {
-    document.querySelectorAll("[data-v2-reveal-title]").forEach(function (block) {
-      if (block.dataset.v2RevealInit) return;
-      block.dataset.v2RevealInit = "1";
-      wrapWords(block);
-    });
-  }
-
-  /**
-   * Your spec: gray first → scroll turns words black in order → fully black once the title
-   * reaches the top 30% of the viewport (top edge at or above that line).
-   *
-   * Viewport-only math breaks for first-screen titles (they already sit above the "done"
-   * line). So we arm when the block is in play (top < ~92% of viewport), then advance p
-   * from scroll distance since arm; geometry forces p=1 when top <= 30% of viewport.
-   */
-  function progressForBlock(rect, block) {
-    var H = window.innerHeight || 640;
-    var sy = window.scrollY || document.documentElement.scrollTop || 0;
-    var top = rect.top;
-    var doneLine = H * 0.3;
-    var armLine = H * 0.92;
-
-    if (top > H + 60) {
-      block._v2RevealArmed = false;
-      block._v2RevealArmSy = undefined;
-      return 0;
-    }
-
-    if (top < armLine) {
-      if (!block._v2RevealArmed) {
-        block._v2RevealArmed = true;
-        block._v2RevealArmSy = sy;
-      }
-    }
-
-    if (!block._v2RevealArmed || block._v2RevealArmSy === undefined) {
-      return 0;
-    }
-
-    var dy = sy - block._v2RevealArmSy;
-    if (dy < 0) {
-      return 0;
-    }
-
-    var p = Math.min(1, dy / 400);
-    if (top <= doneLine) {
-      p = 1;
-    }
-    return p;
-  }
-
-  function updateReveals() {
-    document.querySelectorAll("[data-v2-reveal-title]").forEach(function (block) {
-      var words = block.querySelectorAll(".v2-word");
-      if (!words.length) return;
-      var p = progressForBlock(block.getBoundingClientRect(), block);
-      var n = words.length;
-      for (var i = 0; i < n; i++) {
-        words[i].classList.toggle("v2-word--on", p >= (i + 1) / n);
-      }
-    });
-  }
-
-  var rafId = 0;
-  function tick() {
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(function () {
-      rafId = 0;
-      syncNavPad();
-      updateReveals();
-    });
-  }
-
-  function boot() {
-    syncNavPad();
-    initRevealTitles();
-    updateReveals();
-    requestAnimationFrame(function () {
-      syncNavPad();
-      updateReveals();
-    });
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot);
-  } else {
-    boot();
-  }
-
-  window.addEventListener("scroll", tick, { passive: true });
-  window.addEventListener("resize", tick, { passive: true });
-  window.addEventListener("load", function () {
-    syncNavPad();
-    tick();
-  });
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(function () {
-      syncNavPad();
-      tick();
-    });
-  }
-})();
+<script>
+  import { initV2Reveal } from "../scripts/v2Reveal";
+  initV2Reveal();
 </script>
 
 </body>
