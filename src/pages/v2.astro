@@ -10,7 +10,7 @@ const fc = landing.footer;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Strategic Personal Branding — Version B</title>
-  <meta name="description" content="Strategic personal branding for entrepreneurs who've outgrown word of mouth." />
+  <meta name="description" content="Position-first personal branding for founders across DACH and the Gulf. Book a strategy call." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -18,20 +18,20 @@ const fc = landing.footer;
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:     #0C0F14;
-      --bg2:    #12151B;
-      --bg3:    #1A1D24;
-      --text:   #F7F5F2;
-      --muted:  #8A8A8A;
-      --accent: #4F8FF7;
-      --accent-dim: #3B7AE0;
-      --steel:  #4A6FA5;
-      --fh:     "Fraunces", Georgia, serif;
-      --fb:     "Inter", system-ui, sans-serif;
-      --pad:    clamp(1.5rem, 4vw, 2.5rem);
-      --sec:    clamp(2.5rem, 5vw, 3.5rem);
-      --max:    720px;
-      --max-wide: 900px;
+      --bg:       #0C0F14;
+      --bg2:      #12151B;
+      --bg3:      #1A1D24;
+      --text:     #F7F5F2;
+      --muted:    #8A8A8A;
+      --gold:     #C9A96E;
+      --gold-dim: rgba(201, 169, 110, 0.35);
+      --gold-glow: rgba(201, 169, 110, 0.28);
+      --fh:       "Fraunces", Georgia, serif;
+      --fb:       "Inter", system-ui, sans-serif;
+      --pad:      clamp(1.5rem, 4vw, 2.5rem);
+      --sec:      clamp(2.5rem, 5vw, 3.5rem);
+      --max:      680px;
+      --max-wide: 920px;
     }
 
     html { overflow-x: hidden; }
@@ -50,7 +50,7 @@ const fc = landing.footer;
       display: flex; align-items: center; justify-content: space-between;
       padding: 1rem var(--pad);
       background: color-mix(in srgb, var(--bg) 92%, transparent);
-      border-bottom: 1px solid rgba(79, 143, 247, 0.12);
+      border-bottom: 1px solid rgba(201, 169, 110, 0.12);
     }
     .v2-logo { font-family: var(--fh); font-size: 1.0625rem; font-weight: 600; color: var(--text); text-decoration: none; }
     .v2-nav-right { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
@@ -58,12 +58,12 @@ const fc = landing.footer;
       font-size: 0.8125rem; color: var(--muted); text-decoration: none;
       border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; padding: 0.4rem 1rem;
     }
-    .v2-ver-link:hover { color: var(--text); border-color: rgba(79,143,247,0.35); }
+    .v2-ver-link:hover { color: var(--text); border-color: var(--gold-dim); }
     .v2-cta {
-      font-size: 0.875rem; font-weight: 600; color: var(--accent);
-      border: 1px solid rgba(79,143,247,0.45); border-radius: 999px; padding: 0.5rem 1.25rem; text-decoration: none;
+      font-size: 0.875rem; font-weight: 600; color: var(--gold);
+      border: 1px solid rgba(201, 169, 110, 0.45); border-radius: 999px; padding: 0.5rem 1.25rem; text-decoration: none;
     }
-    .v2-cta:hover { background: rgba(79,143,247,0.15); }
+    .v2-cta:hover { background: rgba(201, 169, 110, 0.12); }
 
     .v2-wrap { max-width: var(--max-wide); margin: 0 auto; padding: 0 var(--pad); }
 
@@ -76,85 +76,195 @@ const fc = landing.footer;
     .v2-center { text-align: center; }
     .v2-eyebrow {
       font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 1rem; display: block;
-    }
-    .v2-h1 {
-      font-family: var(--fh); font-weight: 700; font-size: clamp(2rem, 5vw, 3.25rem);
-      line-height: 1.12; letter-spacing: -0.03em; margin-bottom: 1rem;
+      color: var(--gold); margin-bottom: 1.25rem; display: block;
     }
     .v2-h2 {
-      font-family: var(--fh); font-weight: 700; font-size: clamp(1.5rem, 3.5vw, 2.25rem);
-      line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 1rem;
+      font-family: var(--fh); font-weight: 700; font-size: clamp(1.5rem, 3.8vw, 2.35rem);
+      line-height: 1.18; letter-spacing: -0.025em; margin-bottom: 1rem;
     }
-    .v2-h3 { font-family: var(--fh); font-weight: 600; font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .v2-h3 { font-family: var(--fh); font-weight: 600; font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--text); }
     .v2-p { color: var(--muted); margin-bottom: 1rem; max-width: var(--max); margin-inline: auto; }
     .v2-p:last-child { margin-bottom: 0; }
-    .v2-p--wide { max-width: none; }
-    .v2-accent { color: var(--accent); font-weight: 600; }
+    .v2-p--wide { max-width: 52rem; margin-inline: auto; }
+    .v2-p--left { margin-inline: 0; text-align: left; max-width: 100%; }
+    .v2-strong { color: var(--text); font-weight: 600; }
+    .v2-gold { color: var(--gold); }
 
-    .v2-stats {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;
-      margin-top: 1.5rem; text-align: center;
+    /* Hero stacked headline */
+    .v2-hero-lines {
+      font-family: var(--fh); font-weight: 700;
+      font-size: clamp(2.35rem, 6.5vw, 3.75rem);
+      line-height: 1.05; letter-spacing: -0.035em;
+      margin-bottom: 1.25rem;
     }
-    @media (min-width: 640px) { .v2-stats { grid-template-columns: repeat(4, 1fr); } }
-    .v2-stat-num { font-family: var(--fh); font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; color: var(--accent); display: block; margin-bottom: 0.35rem; }
-    .v2-stat-label { font-size: 0.8125rem; color: var(--muted); line-height: 1.45; }
-
-    .v2-badge { font-size: 0.625rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-top: 1.5rem; text-align: left; }
-
-    .v2-chat { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.75rem; }
-    .v2-bubble-r, .v2-bubble-l {
-      padding: 0.875rem 1.125rem; border-radius: 14px; font-size: 0.9375rem; line-height: 1.55;
-    }
-    .v2-bubble-r { align-self: flex-end; background: #2C2C2E; max-width: 90%; }
-    .v2-bubble-l { align-self: flex-start; background: var(--bg3); max-width: 90%; }
-
-    .v2-pair { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.06); text-align: center; }
-    .v2-pair:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-    .v2-wrong { font-family: var(--fh); font-size: 1.0625rem; color: var(--muted); text-decoration: line-through; margin-bottom: 0.5rem; }
-    .v2-right { font-family: var(--fh); font-size: 1.125rem; color: var(--accent); font-weight: 600; margin-bottom: 0.5rem; }
-    .v2-pair-note { font-size: 0.9375rem; color: var(--muted); max-width: 42ch; margin-inline: auto; }
-
-    .v2-split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; text-align: left; margin-top: 1.5rem; }
-    @media (max-width: 700px) { .v2-split { grid-template-columns: 1fr; } }
-    .v2-split h3 { font-size: 0.6875rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; font-family: var(--fb); font-weight: 600; }
-    .v2-split ul { list-style: none; }
-    .v2-split li { font-size: 0.9375rem; margin-bottom: 0.65rem; color: var(--muted); display: flex; gap: 0.5rem; align-items: flex-start; }
-    .v2-split .v2-yes { color: var(--text); }
-    .v2-split .v2-yes .v2-li-mark { color: var(--accent); flex-shrink: 0; }
-
-    .v2-card {
-      background: var(--bg2); border: 1px solid rgba(79,143,247,0.15); border-radius: 12px;
-      padding: 1.5rem; margin-bottom: 1rem; text-align: left;
-    }
-    .v2-card-num { font-size: 0.625rem; font-weight: 700; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 0.5rem; }
-
-    .v2-manifesto { font-family: var(--fh); font-size: clamp(1.25rem, 3vw, 1.75rem); line-height: 1.45; text-align: center; max-width: 28ch; margin-inline: auto; }
-    .v2-manifesto p { margin-bottom: 0.75rem; color: var(--text); }
-    .v2-manifesto .v2-m-accent { color: var(--accent); font-weight: 600; }
-
-    .v2-counters { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; text-align: center; }
-    @media (min-width: 768px) { .v2-counters { grid-template-columns: repeat(4, 1fr); } }
-    .v2-cnum { font-family: var(--fh); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--accent); display: block; }
-    .v2-clabel { font-size: 0.8125rem; color: var(--muted); }
-
-    .v2-funnel .v2-bar-row { margin-bottom: 1rem; text-align: center; }
-    .v2-track { background: rgba(255,255,255,0.06); border-radius: 6px; height: 52px; margin: 0 auto; overflow: hidden; }
-    .v2-r1 .v2-track { width: 100%; max-width: 100%; }
-    .v2-r2 .v2-track { width: 70%; max-width: 420px; }
-    .v2-r3 .v2-track { width: 42%; max-width: 260px; }
-    .v2-fill { height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--fh); font-weight: 700; font-size: 1.0625rem; color: #0C0F14; }
-    .v2-fill-blue { background: linear-gradient(90deg, var(--accent), var(--accent-dim)); width: 70%; }
-    .v2-fill-steel { background: var(--steel); width: 80%; }
-    .v2-fill-full { background: linear-gradient(90deg, var(--accent), #6FA5FF); width: 100%; }
-    .v2-bar-cap { font-size: 0.8125rem; color: var(--muted); margin-top: 0.35rem; }
+    .v2-hero-lines span { display: block; }
 
     .v2-btn {
       display: inline-block; margin-top: 1.25rem; padding: 0.875rem 2rem;
       font-weight: 600; font-size: 0.9375rem; text-decoration: none; border-radius: 999px;
-      background: var(--accent); color: #fff;
+      background: var(--gold); color: var(--bg); border: 1px solid var(--gold);
+      box-shadow: 0 0 32px var(--gold-glow);
+      transition: filter 0.2s, box-shadow 0.2s;
     }
-    .v2-btn:hover { filter: brightness(1.08); }
+    .v2-btn:hover { filter: brightness(1.06); box-shadow: 0 0 44px var(--gold-glow); }
+
+    .v2-btn-lg {
+      padding: 1rem 2.25rem;
+      font-size: 1rem;
+    }
+
+    /* Pain grid */
+    .v2-pain-grid {
+      display: grid; gap: 1rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 720px) {
+      .v2-pain-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .v2-pain-card {
+      background: var(--bg2);
+      border: 1px solid rgba(201, 169, 110, 0.14);
+      border-radius: 12px;
+      padding: 1.35rem 1.5rem;
+      text-align: left;
+      transition: box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .v2-pain-card:hover {
+      border-color: rgba(201, 169, 110, 0.28);
+      box-shadow: 0 0 36px rgba(201, 169, 110, 0.08);
+    }
+    .v2-pain-card h3 { font-family: var(--fh); font-size: 1.0625rem; font-weight: 600; margin-bottom: 0.65rem; color: var(--text); }
+    .v2-pain-label {
+      font-size: 0.625rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.5rem;
+    }
+    .v2-pain-quote { font-style: italic; color: var(--text); margin-bottom: 0.65rem; font-size: 0.9375rem; line-height: 1.55; }
+    .v2-pain-body { font-size: 0.9375rem; color: var(--muted); line-height: 1.6; }
+
+    .v2-pull {
+      font-family: var(--fh); font-weight: 700;
+      font-size: clamp(1.35rem, 3.2vw, 2rem);
+      line-height: 1.25;
+      text-align: center;
+      max-width: 22ch;
+      margin: 2rem auto 0;
+    }
+    .v2-pull span { display: block; }
+    .v2-pull .v2-gold { margin-top: 0.35em; }
+
+    /* Objections */
+    .v2-obj { margin-bottom: 2.5rem; }
+    .v2-obj:last-child { margin-bottom: 0; }
+    .v2-obj-q {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-left: 3px solid var(--gold);
+      border-radius: 10px;
+      padding: 1.1rem 1.25rem;
+      font-style: italic;
+      color: rgba(247,245,242,0.92);
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      margin-bottom: 1rem;
+    }
+    .v2-obj-a .v2-p { margin-inline: 0; text-align: left; max-width: none; }
+
+    /* Who split */
+    .v2-split { display: grid; grid-template-columns: 1fr 1fr; gap: 2.25rem; text-align: left; margin-top: 1.5rem; }
+    @media (max-width: 780px) { .v2-split { grid-template-columns: 1fr; } }
+    .v2-split-col h3 {
+      font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase;
+      font-family: var(--fb); font-weight: 600; margin-bottom: 1rem;
+    }
+    .v2-split-col--for h3 { color: var(--gold); }
+    .v2-split-col--not h3 { color: var(--muted); }
+    .v2-prose p { font-size: 0.9375rem; color: var(--muted); margin-bottom: 1rem; line-height: 1.65; }
+    .v2-prose p:last-child { margin-bottom: 0; }
+    .v2-split-col--not ul { list-style: none; }
+    .v2-split-col--not li {
+      font-size: 0.9375rem; color: var(--muted); margin-bottom: 0.75rem;
+      padding-left: 0.5rem; border-left: 2px solid rgba(255,255,255,0.08);
+    }
+
+    /* Framework steps */
+    .v2-step { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.06); text-align: left; }
+    .v2-step:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .v2-step-num { font-size: 0.625rem; font-weight: 700; letter-spacing: 0.14em; color: var(--gold); margin-bottom: 0.35rem; }
+    .v2-step-wrong { font-family: var(--fh); font-size: 1.0625rem; color: var(--muted); margin-bottom: 0.35rem; }
+    .v2-step-tag { font-family: var(--fb); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(247,245,242,0.4); margin-right: 0.35rem; }
+    .v2-step-right { font-family: var(--fh); font-size: 1.125rem; color: var(--gold); font-weight: 600; margin-bottom: 0.75rem; }
+    .v2-step-body { font-size: 0.9375rem; color: var(--muted); line-height: 1.65; max-width: 52rem; }
+
+    .v2-manifesto-line {
+      font-family: var(--fh); font-weight: 700;
+      font-size: clamp(1.35rem, 3.5vw, 2.15rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      text-align: center;
+      margin-bottom: 0.35rem;
+      color: var(--text);
+    }
+    .v2-manifesto-line--gold { color: var(--gold); margin-top: 0.75rem; }
+
+    /* Service cards */
+    .v2-svc-card {
+      background: var(--bg2);
+      border: 1px solid rgba(201, 169, 110, 0.14);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      text-align: left;
+      transition: box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .v2-svc-card:hover {
+      border-color: rgba(201, 169, 110, 0.3);
+      box-shadow: 0 0 40px rgba(201, 169, 110, 0.07);
+    }
+    .v2-svc-num { font-size: 0.625rem; font-weight: 700; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 0.5rem; }
+
+    /* Testimonials */
+    .v2-t-card {
+      background: var(--bg2);
+      border: 1px solid rgba(201, 169, 110, 0.12);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+    .v2-t-desc { font-size: 0.8125rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .v2-t-metric { font-family: var(--fh); font-size: clamp(1.75rem, 4vw, 2.35rem); font-weight: 700; color: var(--gold); line-height: 1.1; margin-bottom: 0.35rem; }
+    .v2-t-stat { font-size: 0.875rem; color: var(--text); font-weight: 500; margin-bottom: 0.75rem; }
+    .v2-t-quote { font-size: 0.9375rem; color: var(--muted); font-style: italic; line-height: 1.55; }
+
+    .v2-counters {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; text-align: center;
+      margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    @media (min-width: 768px) { .v2-counters { grid-template-columns: repeat(4, 1fr); } }
+    .v2-cnum { font-family: var(--fh); font-size: clamp(1.85rem, 3.5vw, 2.75rem); font-weight: 700; color: var(--gold); display: block; }
+    .v2-clabel { font-size: 0.8125rem; color: var(--muted); }
+
+    /* FAQ */
+    .v2-faq-item { margin-bottom: 1.75rem; text-align: left; max-width: 40rem; margin-inline: auto; }
+    .v2-faq-item:last-child { margin-bottom: 0; }
+    .v2-faq-q { font-family: var(--fh); font-size: 1.0625rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
+    .v2-faq-a { font-size: 0.9375rem; color: var(--muted); line-height: 1.65; }
+
+    .v2-keyline {
+      font-family: var(--fh); font-weight: 700;
+      font-size: clamp(1.5rem, 3.8vw, 2.35rem);
+      line-height: 1.2;
+      text-align: center;
+      margin: 2rem auto 0;
+      max-width: 20ch;
+    }
+    .v2-keyline span { display: block; }
+    .v2-keyline .v2-gold { margin-top: 0.2em; }
+
+    .v2-sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
 
     #s19 {
       background: #06080C; padding: 2rem var(--pad);
@@ -162,9 +272,10 @@ const fc = landing.footer;
       border-top: 1px solid rgba(255,255,255,0.06);
     }
     .s19-logo { font-family: var(--fh); font-size: 1rem; font-weight: 600; color: rgba(247,245,242,0.35); text-decoration: none; }
-    .s19-contact, .s19-legal { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .s19-contact, .s19-legal { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+    .s19-sep { color: var(--muted); user-select: none; }
     .s19-contact a, .s19-legal a { font-size: 0.8125rem; color: var(--muted); text-decoration: none; }
-    .s19-contact a:hover, .s19-legal a:hover { color: var(--accent); }
+    .s19-contact a:hover, .s19-legal a:hover { color: var(--gold); }
   </style>
 </head>
 <body>
@@ -179,228 +290,362 @@ const fc = landing.footer;
 
 <main class="v2-wrap">
 
-  <!-- Proof stats -->
+  <!-- SECTION 1 — Hero -->
   <section class="v2-center">
-    <div class="v2-stats">
-      <div><span class="v2-stat-num">82%</span><span class="v2-stat-label">of B2B buyers trust founder-led brands over corporate ones</span></div>
-      <div><span class="v2-stat-num">70%</span><span class="v2-stat-label">of the purchase decision is made before first contact</span></div>
-      <div><span class="v2-stat-num">3.2×</span><span class="v2-stat-label">higher engagement on founder content vs. brand content</span></div>
-      <div><span class="v2-stat-num">€M+</span><span class="v2-stat-label">inbound pipeline generated for clients in DACH and the Gulf</span></div>
-    </div>
-    <p class="v2-badge">Strategic Personal Branding | Dubai</p>
-  </section>
-
-  <section class="v2-center">
-    <p class="v2-eyebrow" style="margin-bottom:0">For Entrepreneurs and Founders in DACH and the Gulf</p>
-    <p class="v2-p v2-p--wide" style="color:var(--accent);font-weight:600;letter-spacing:0.12em;text-transform:uppercase;font-size:0.75rem">
-      who've outgrown word of mouth
-    </p>
-  </section>
-
-  <section class="v2-center">
-    <h1 class="v2-h1">
-      We build personal brand positions that generate <span class="v2-accent">revenue.</span>
+    <span class="v2-eyebrow">For founders who've outgrown word of mouth</span>
+    <h1 class="v2-hero-lines">
+      <span>We</span>
+      <span>Build</span>
+      <span>Personal Brand</span>
+      <span>Positions</span>
+      <span>That</span>
+      <span>Generate</span>
+      <span>Revenue.</span>
     </h1>
-    <p class="v2-p">Not followers. Not impressions. Not visibility for its own sake. Revenue.</p>
-    <a href="/contact" class="v2-btn">Book a Strategy Call</a>
-    <p class="v2-p" style="margin-top:1rem;font-size:0.8125rem">Now accepting Q3 engagements.</p>
-  </section>
-
-  <section class="v2-center">
-    <span class="v2-eyebrow">The Invisible Authority Trap</span>
-    <h2 class="v2-h2">You've built a business that proves you're exceptional.</h2>
-    <h2 class="v2-h2 v2-accent">Your market hasn't noticed yet.</h2>
-    <p class="v2-p">Your track record should be doing the selling. Instead, you're still the one doing the explaining.</p>
-  </section>
-
-  <section>
-    <p class="v2-eyebrow v2-center">Your current reality</p>
-    <div class="v2-card">
-      <p class="v2-p v2-p--wide" style="font-style:italic;color:var(--text)">"Every major client I have came through a personal introduction."</p>
-      <p class="v2-p v2-p--wide">That's not a business model. That's a dependency with a ceiling the exact size of your personal network.</p>
-    </div>
-    <div class="v2-card">
-      <p class="v2-p v2-p--wide" style="font-style:italic;color:var(--text)">"I post content regularly. The leads are lukewarm and the brand sounds like everyone else's."</p>
-      <p class="v2-p v2-p--wide">Activity without architecture. You're feeding the algorithm. The algorithm is not feeding you back.</p>
-    </div>
-    <div class="v2-card">
-      <p class="v2-p v2-p--wide" style="font-style:italic;color:var(--text)">"I keep losing deals to founders with half my track record but twice my visibility."</p>
-      <p class="v2-p v2-p--wide">The market doesn't reward the most qualified. It rewards the most legible. Right now, you're illegible.</p>
-    </div>
-    <div class="v2-card">
-      <p class="v2-p v2-p--wide" style="font-style:italic;color:var(--text)">"People who work with me are blown away. People who haven't don't know I exist."</p>
-      <p class="v2-p v2-p--wide">Your reputation is locked behind a door that only opens from the inside.</p>
-    </div>
-  </section>
-
-  <section class="v2-center">
-    <h2 class="v2-h2">You don't have a marketing problem.</h2>
-    <h2 class="v2-h2">You have a positioning problem.</h2>
-    <h2 class="v2-h2 v2-accent" style="margin-top:0.5rem">And it's costing you more than you think.</h2>
-  </section>
-
-  <section style="background:var(--bg2)">
-    <div class="v2-chat">
-      <div class="v2-bubble-r">"Sounds compelling. But I've heard this before. The last agency gave me a content calendar and called it strategy."</div>
-      <div class="v2-bubble-l">"We know. And we know why."</div>
-    </div>
-  </section>
-
-  <section class="v2-center">
-    <p class="v2-p v2-p--wide">Most agencies sell activity because activity is easy to deliver and easy to report on.</p>
-    <p class="v2-p v2-p--wide">"We posted 12 times this week" is a metric that sounds productive. It is also completely disconnected from revenue.</p>
-    <p class="v2-p v2-p--wide" style="margin-top:1.5rem">Here's the question they never asked you:</p>
-    <h2 class="v2-h2 v2-accent" style="max-width:22ch;margin-inline:auto;margin-top:0.5rem">
-      What specific perception does your market need to hold about you for revenue to follow?
-    </h2>
-    <p class="v2-p v2-p--wide" style="margin-top:1.5rem">Not "what should we post." Not "which platforms."</p>
-    <p class="v2-p v2-p--wide">That's where we start. Everything else is built to serve that answer.</p>
+    <p class="v2-p v2-p--wide">
+      Not followers. Not impressions. Not "visibility." Revenue. The kind where strangers contact you pre-sold, sales cycles halve, and your pipeline stops depending on who you had dinner with last quarter.
+    </p>
+    <p class="v2-p v2-p--wide v2-strong" style="margin-bottom:0">
+      Serving founders across DACH and the Gulf. Book a strategy call to see how.
+    </p>
     <a href="/contact" class="v2-btn">Book a Strategy Call</a>
   </section>
 
+  <!-- SECTION 2 — Invisible Authority Trap -->
   <section>
     <div class="v2-center" style="margin-bottom:2rem">
-      <span class="v2-eyebrow">The position-first method</span>
-      <h2 class="v2-h2">Why most personal brands fail before they start.</h2>
+      <span class="v2-eyebrow">The Invisible Authority Trap</span>
+      <h2 class="v2-h2">
+        You've Built A Business<br />
+        That Proves You're Exceptional.<br />
+        Your Market Hasn't Noticed Yet.
+      </h2>
+      <p class="v2-p v2-p--wide">
+        Your track record should be doing the selling. Instead, you're still the one doing the explaining.
+      </p>
     </div>
-    <div class="v2-pair">
-      <p class="v2-wrong">Start by creating content.</p>
-      <p class="v2-right">Start by defining the perception that drives revenue.</p>
-      <p class="v2-pair-note">The blueprint. Without it, everything else is decoration.</p>
+    <div class="v2-pain-grid">
+      <article class="v2-pain-card">
+        <h3>The Referral Ceiling</h3>
+        <p class="v2-pain-label">Your current reality:</p>
+        <p class="v2-pain-quote">"Every client I have came through a warm introduction."</p>
+        <p class="v2-pain-body">That's not a strategy. That's a dependency. Your revenue has a ceiling and it's the size of your personal network.</p>
+      </article>
+      <article class="v2-pain-card">
+        <h3>The Content Treadmill</h3>
+        <p class="v2-pain-label">Your current reality:</p>
+        <p class="v2-pain-quote">"I'm posting, but the leads are lukewarm and the brand sounds like everyone else's."</p>
+        <p class="v2-pain-body">Activity without architecture. You're feeding the algorithm. The algorithm is not feeding you back.</p>
+      </article>
+      <article class="v2-pain-card">
+        <h3>The Competence Discount</h3>
+        <p class="v2-pain-label">Your current reality:</p>
+        <p class="v2-pain-quote">"I keep losing deals to people with half my experience but twice my visibility."</p>
+        <p class="v2-pain-body">The market doesn't reward the best. It rewards the most legible. Right now, you're illegible.</p>
+      </article>
+      <article class="v2-pain-card">
+        <h3>The Expertise Paradox</h3>
+        <p class="v2-pain-label">Your current reality:</p>
+        <p class="v2-pain-quote">"People who work with me are blown away. People who haven't, don't know I exist."</p>
+        <p class="v2-pain-body">Your reputation is locked behind a door that only opens from the inside. Everyone who's in the room knows. No one outside it does.</p>
+      </article>
     </div>
-    <div class="v2-pair">
-      <p class="v2-wrong">Build a presence on every platform.</p>
-      <p class="v2-right">Build authority in the rooms that matter.</p>
-      <p class="v2-pair-note">Your ideal client isn't everywhere. They're in specific rooms. We engineer your entry.</p>
-    </div>
-    <div class="v2-pair">
-      <p class="v2-wrong">Post consistently and hope for compounding.</p>
-      <p class="v2-right">Architect a system where every asset serves the position.</p>
-      <p class="v2-pair-note">Nothing is filler. Nothing is "keeping the feed alive." Each asset is a brick in a structure.</p>
-    </div>
-    <div class="v2-pair">
-      <p class="v2-wrong">Measure followers, impressions, and engagement.</p>
-      <p class="v2-right">Measure inbound leads, deal velocity, and pipeline source.</p>
-      <p class="v2-pair-note">If it doesn't move revenue, it doesn't survive the next quarter.</p>
-    </div>
-  </section>
-
-  <section style="background:var(--bg2)">
-    <div class="v2-chat">
-      <div class="v2-bubble-r">"Personal branding still sounds like self-promotion. The work should speak for itself."</div>
-      <div class="v2-bubble-l">"It should. And in a perfect market, it would."</div>
-    </div>
-  </section>
-
-  <section>
-    <div class="v2-split">
-      <div>
-        <h3 class="v2-accent">Who we work with</h3>
-        <ul>
-          <li class="v2-yes"><span class="v2-li-mark">→</span><span>Founders and entrepreneurs, 40+, revenue €1M+</span></li>
-          <li class="v2-yes"><span class="v2-li-mark">→</span><span>Established in their field, invisible outside their network</span></li>
-          <li class="v2-yes"><span class="v2-li-mark">→</span><span>Based in DACH or the Gulf</span></li>
-          <li class="v2-yes"><span class="v2-li-mark">→</span><span>Tired of agencies that delivered activity, not outcomes</span></li>
-          <li class="v2-yes"><span class="v2-li-mark">→</span><span>Ready to invest at the level the outcome requires</span></li>
-        </ul>
-      </div>
-      <div>
-        <h3 style="color:var(--muted)">Who we don't</h3>
-        <ul>
-          <li><span class="v2-li-mark">×</span><span>Looking for a social media manager with a strategy title</span></li>
-          <li><span class="v2-li-mark">×</span><span>Measuring success in followers and likes</span></li>
-          <li><span class="v2-li-mark">×</span><span>Wanting to "go viral"</span></li>
-          <li><span class="v2-li-mark">×</span><span>Businesses without a proven offer</span></li>
-        </ul>
-      </div>
-    </div>
-    <p class="v2-center v2-accent" style="font-family:var(--fh);font-style:italic;font-size:1.125rem;margin-top:2rem">
-      Virality is a lottery ticket. Positioning is a pension.
+    <p class="v2-pull">
+      <span>You don't have a marketing problem.</span>
+      <span>You have a positioning problem.</span>
+      <span class="v2-gold">And it's costing you more than you think.</span>
+    </p>
+    <p class="v2-center" style="margin-top:2rem">
+      <a href="/contact" class="v2-btn">Book a Strategy Call</a>
     </p>
   </section>
 
+  <!-- SECTION 3 — The Shift -->
+  <section style="background:var(--bg2)">
+    <div class="v2-center" style="margin-bottom:1.5rem">
+      <span class="v2-eyebrow">The Position-First Method</span>
+      <h2 class="v2-h2">
+        The Market Doesn't Buy Expertise.<br />
+        It Buys The Perception Of Expertise.<br />
+        We Engineer That Perception.
+      </h2>
+    </div>
+    <div class="v2-p--wide" style="max-width:40rem;margin-inline:auto">
+      <p class="v2-p v2-p--left" style="margin-bottom:1rem">Here's what nobody in this industry will say plainly:</p>
+      <p class="v2-p v2-p--left">
+        Your competitors aren't winning because they're better than you. They're winning because their market position does the selling before the conversation starts. By the time a prospect meets them, 70% of the decision is already made. Not by the pitch. Not by the proposal. By every signal the market absorbed before the first handshake.
+      </p>
+      <p class="v2-p v2-p--left">
+        Your LinkedIn. Your media presence. Your speaking record. The way Google answers the question "Who is [your name]?" That's where deals are won or lost. And right now, your answer to that question is either silence, noise, or someone else's narrative.
+      </p>
+      <p class="v2-p v2-p--left">
+        We reverse-engineer the exact perception that drives revenue in your specific market, then build every asset to make that perception the default. Not louder. Not more frequent. More precise.
+      </p>
+      <p class="v2-p v2-p--left" style="margin-bottom:0">
+        This isn't content marketing with a strategy label. It's commercial positioning with content as one of several tools.
+      </p>
+    </div>
+    <p class="v2-keyline">
+      <span>We don't make you louder.</span>
+      <span class="v2-gold">We make you inevitable.</span>
+    </p>
+    <p class="v2-center" style="margin-top:2rem">
+      <a href="/contact" class="v2-btn">Book a Strategy Call</a>
+    </p>
+  </section>
+
+  <!-- SECTION 4 — Objections -->
+  <section>
+    <h2 class="v2-sr-only">Objections</h2>
+    <div style="max-width:40rem;margin-inline:auto">
+      <div class="v2-obj">
+        <p class="v2-obj-q">"I've heard this before. Another agency promising 'strategic positioning.' Last one gave me a content calendar and a LinkedIn audit."</p>
+        <div class="v2-obj-a">
+          <p class="v2-p v2-p--left">We know. And we know why. Most agencies sell activity because activity is easy to deliver and easy to report on. "We posted 12 times this week" is a metric that sounds productive. It's also completely disconnected from revenue.</p>
+          <p class="v2-p v2-p--left">Here's the question they never asked you: What specific perception does your market need to hold about you for revenue to follow? Not "what should we post." Not "which platforms." What must the market believe about you, specifically, that would make your ideal clients reach out without a referral?</p>
+          <p class="v2-p v2-p--left" style="margin-bottom:0">That's where we start. Everything else is built to serve that answer.</p>
+        </div>
+      </div>
+      <div class="v2-obj">
+        <p class="v2-obj-q">"Personal branding feels like self-promotion. I'm good at what I do. The work should speak for itself."</p>
+        <div class="v2-obj-a">
+          <p class="v2-p v2-p--left">It should. And in a perfect market, it would. But you don't operate in a perfect market. You operate in one where a founder with half your depth and a better LinkedIn presence is closing the deals you should be closing.</p>
+          <p class="v2-p v2-p--left">We're not asking you to become a content creator. We're not asking you to perform. We're asking you to stop subsidising your competitors' advantage by staying invisible.</p>
+          <p class="v2-p v2-p--left" style="margin-bottom:0">The work doesn't speak for itself. Positioning does. And then the work closes.</p>
+        </div>
+      </div>
+      <div class="v2-obj">
+        <p class="v2-obj-q">"I'm not sure personal branding delivers measurable ROI."</p>
+        <div class="v2-obj-a">
+          <p class="v2-p v2-p--left">Then you've been looking at the wrong agencies. Followers aren't ROI. Impressions aren't ROI. Media mentions aren't ROI.</p>
+          <p class="v2-p v2-p--left">Inbound leads from people who have never been referred to you — that's ROI. A shorter sales cycle because the prospect already trusts you before the meeting — that's ROI. Winning a deal you didn't pitch for because your name was already in the room — that's ROI.</p>
+          <p class="v2-p v2-p--left" style="margin-bottom:0">We measure what matters. If we can't tie it to revenue, we don't do it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 — Who for / who not -->
   <section>
     <div class="v2-center" style="margin-bottom:1.5rem">
-      <span class="v2-eyebrow">What we build</span>
-      <h2 class="v2-h2">The architecture behind authority.</h2>
+      <span class="v2-eyebrow">Who we work with</span>
+      <h2 class="v2-h2">This Isn't For Everyone.<br />That's The Point.</h2>
     </div>
-    <div class="v2-card"><p class="v2-card-num">01</p><h3 class="v2-h3">Commercial positioning</h3><p class="v2-p v2-p--wide" style="margin:0;color:var(--muted)">We define how your market should perceive you — and for what commercial purpose. Not a brand deck. A revenue strategy with your name on it.</p></div>
-    <div class="v2-card"><p class="v2-card-num">02</p><h3 class="v2-h3">Narrative architecture</h3><p class="v2-p v2-p--wide" style="margin:0;color:var(--muted)">The story the market tells about you. We make sure it's the right one. Sharp frameworks, thought leadership angles, and a point of view worth having.</p></div>
-    <div class="v2-card"><p class="v2-card-num">03</p><h3 class="v2-h3">Strategic visibility</h3><p class="v2-p v2-p--wide" style="margin:0;color:var(--muted)">The right content, aimed at the right rooms. Every asset earns its place. Nothing ships that doesn't serve the position.</p></div>
-    <div class="v2-card"><p class="v2-card-num">04</p><h3 class="v2-h3">Revenue infrastructure</h3><p class="v2-p v2-p--wide" style="margin:0;color:var(--muted)">The bridge between "I've heard your name" and "I want to hire you." The invisible machinery that turns recognition into business.</p></div>
+    <div class="v2-split">
+      <div class="v2-split-col v2-split-col--for">
+        <h3>Who this is for</h3>
+        <div class="v2-prose">
+          <p>Entrepreneurs and founders, typically 40+, who've already built something that works.</p>
+          <p>Annual revenue of €1M+. Established in your field. Known within your network, invisible outside it.</p>
+          <p>Based in the DACH region or the Gulf. Operating in sectors where trust isn't a differentiator — it's the transaction.</p>
+          <p>You've probably tried some version of this before. An agency. A coach. A "brand strategist" who gave you a personal brand deck that's been gathering dust since 2022.</p>
+          <p>You're not here because you believe in personal branding. You're here because you're tired of watching less qualified founders command the market position that should be yours.</p>
+        </div>
+      </div>
+      <div class="v2-split-col v2-split-col--not">
+        <h3>Who we don't work with</h3>
+        <ul>
+          <li>Founders looking for a social media manager with a strategy title.</li>
+          <li>Anyone who measures success in followers, likes, or impressions.</li>
+          <li>Entrepreneurs who want to "go viral." (Virality is a lottery ticket. Positioning is a pension.)</li>
+          <li>Anyone not willing to invest at the level the outcome requires.</li>
+          <li>Businesses without a proven offer. We position what works. We don't fix what doesn't.</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
-  <section class="v2-center" style="background:#080A0F">
-    <div class="v2-manifesto">
-      <p>The market is not rational.</p>
-      <p>It is perceptual.</p>
-      <p>People don't choose the most qualified expert.</p>
-      <p>They choose the one they already trust.</p>
-      <p>Trust is not earned in the meeting.</p>
-      <p>It is engineered before the meeting ever happens.</p>
-      <p class="v2-m-accent">That's what we build.</p>
-    </div>
-  </section>
-
+  <!-- SECTION 6 — Method -->
   <section>
-    <div class="v2-counters">
-      <div><span class="v2-cnum">8+</span><span class="v2-clabel">Years of strategic advisory</span></div>
-      <div><span class="v2-cnum">12</span><span class="v2-clabel">Markets across DACH &amp; Gulf</span></div>
-      <div><span class="v2-cnum">94%</span><span class="v2-clabel">Client retention</span></div>
-      <div><span class="v2-cnum">3×</span><span class="v2-clabel">Average inbound increase in 12 months</span></div>
+    <div class="v2-center" style="margin-bottom:1.75rem">
+      <span class="v2-eyebrow">The Position-First Method</span>
+      <h2 class="v2-h2">
+        Why Most Personal Brands<br />
+        Fail Before They Start.<br />
+        And What The Ones That<br />
+        Generate Revenue Do Differently.
+      </h2>
     </div>
+    <div class="v2-p--wide" style="max-width:42rem;margin-inline:auto;margin-bottom:2rem">
+      <p class="v2-p v2-p--left" style="margin-bottom:1rem">Most founders approach personal branding backwards. They start with content. They start with platforms. They start with "what should I post?"</p>
+      <p class="v2-p v2-p--left" style="margin-bottom:1rem"><span class="v2-strong" style="color:var(--text)">Wrong first step. Every time.</span></p>
+      <p class="v2-p v2-p--left" style="margin-bottom:0">
+        The founders whose personal brands actually drive business — the ones who generate inbound from strangers, shorten their sales cycle, and command premium fees — they started with positioning. Not content. Not tactics. The strategic decision of how the market should perceive them, and for what commercial purpose.
+      </p>
+      <p class="v2-p v2-p--left" style="margin-top:1rem;margin-bottom:0"><span class="v2-gold" style="font-family:var(--fh);font-weight:600">That's the difference between noise and a pipeline.</span></p>
+    </div>
+    <div style="max-width:42rem;margin-inline:auto">
+      <div class="v2-step">
+        <p class="v2-step-num">Step 1</p>
+        <p class="v2-step-wrong"><span class="v2-step-tag">Wrong:</span> Start by creating content.</p>
+        <p class="v2-step-right">Right: Start by defining the perception that drives revenue.</p>
+        <p class="v2-step-body">Before a single post, article, or interview, we define the exact market position that makes your ideal client feel foolish going elsewhere. Not a tagline. Not a "brand story." A commercial positioning decision that every future asset is built to reinforce. This is the blueprint. Without it, everything else is decoration.</p>
+      </div>
+      <div class="v2-step">
+        <p class="v2-step-num">Step 2</p>
+        <p class="v2-step-wrong"><span class="v2-step-tag">Wrong:</span> Build a presence on every platform.</p>
+        <p class="v2-step-right">Right: Build authority in the rooms that matter.</p>
+        <p class="v2-step-body">Your ideal client isn't everywhere. They're in specific rooms — industry events, publications, boards, networks, decision tables. We identify those rooms and engineer your entry. Not as a participant. As the person others reference when the conversation turns to your domain.</p>
+      </div>
+      <div class="v2-step">
+        <p class="v2-step-num">Step 3</p>
+        <p class="v2-step-wrong"><span class="v2-step-tag">Wrong:</span> Post consistently and hope for compounding.</p>
+        <p class="v2-step-right">Right: Architect a system where every asset serves the position.</p>
+        <p class="v2-step-body">Every article, every interview, every speaking engagement, every LinkedIn post is reverse-engineered from your target position. Nothing is filler. Nothing is "keeping the feed alive." Each asset is a brick in a structure that's designed to be discovered by the right person at the right moment and deliver the right signal.</p>
+      </div>
+      <div class="v2-step">
+        <p class="v2-step-num">Step 4</p>
+        <p class="v2-step-wrong"><span class="v2-step-tag">Wrong:</span> Measure visibility metrics.</p>
+        <p class="v2-step-right">Right: Measure revenue impact.</p>
+        <p class="v2-step-body">Inbound enquiries. Deal velocity. Average deal size. Pipeline from non-referral sources. Source attribution. These are the numbers we watch. If it doesn't move revenue, it doesn't survive the next quarter's strategy review.</p>
+      </div>
+    </div>
+    <p class="v2-manifesto-line" style="margin-top:2.5rem;max-width:26ch;margin-inline:auto;line-height:1.22">
+      Personal brands don't launch.<br />
+      They compound.<br />
+      The goal isn't a campaign.<br />
+      It's a market position that appreciates like equity.
+    </p>
+    <p class="v2-center" style="margin-top:2rem">
+      <a href="/contact" class="v2-btn">Book a Strategy Call</a>
+    </p>
   </section>
 
+  <!-- SECTION 7 — What we build -->
   <section style="background:var(--bg2)">
-    <div class="v2-chat">
-      <div class="v2-bubble-r">"How do I know this actually delivers ROI?"</div>
-      <div class="v2-bubble-l">"Because we only measure what you'd measure."</div>
+    <div class="v2-center" style="margin-bottom:1.25rem">
+      <span class="v2-eyebrow">What we build</span>
+      <h2 class="v2-h2">The Architecture Behind Authority.</h2>
+    </div>
+    <p class="v2-p v2-p--wide" style="margin-bottom:1.75rem">
+      Every engagement begins with diagnosis. Not templates. Not a kickoff deck we used for the last client. A forensic analysis of where you stand, where you should stand, and the shortest line between the two.
+    </p>
+    <div class="v2-svc-card">
+      <p class="v2-svc-num">01</p>
+      <h3 class="v2-h3">Commercial Positioning</h3>
+      <p class="v2-p v2-p--left" style="margin:0;color:var(--muted);max-width:none">
+        We define how your market should perceive you — and for what purpose. This is not a "brand essence" exercise. It's a revenue-driven positioning strategy with one test: does this perception make the right people reach out?
+      </p>
+    </div>
+    <div class="v2-svc-card">
+      <p class="v2-svc-num">02</p>
+      <h3 class="v2-h3">Narrative Architecture</h3>
+      <p class="v2-p v2-p--left" style="margin:0;color:var(--muted);max-width:none">
+        We build the story the market tells about you. Your messaging framework. Your thought leadership angle. Your point of view. Not platitudes. Not "passionate about innovation." A position that's worth having — and worth quoting.
+      </p>
+    </div>
+    <div class="v2-svc-card">
+      <p class="v2-svc-num">03</p>
+      <h3 class="v2-h3">Strategic Visibility</h3>
+      <p class="v2-p v2-p--left" style="margin:0;color:var(--muted);max-width:none">
+        The right content, aimed at the right rooms, on the right platforms. Media, speaking, publishing, LinkedIn done with intent. Every asset earns its place. Nothing ships that doesn't serve the position.
+      </p>
+    </div>
+    <div class="v2-svc-card">
+      <p class="v2-svc-num">04</p>
+      <h3 class="v2-h3">Revenue Infrastructure</h3>
+      <p class="v2-p v2-p--left" style="margin:0;color:var(--muted);max-width:none">
+        The bridge between "I've heard of you" and "I want to hire you." Inbound architecture, authority assets, conversion signals. The invisible machinery that turns brand recognition into business.
+      </p>
     </div>
   </section>
 
+  <!-- SECTION 8 — Proof -->
   <section>
     <div class="v2-center" style="margin-bottom:1.5rem">
       <span class="v2-eyebrow">Client outcomes</span>
-      <h2 class="v2-h2">There's a reason founders stay.</h2>
+      <h2 class="v2-h2">
+        There's A Reason Founders<br />
+        Stay With Us.
+      </h2>
     </div>
-    <div class="v2-card">
-      <p class="v2-accent" style="font-family:var(--fh);font-weight:600;margin-bottom:0.75rem">Placeholder — 3.2× inbound increase</p>
-      <p class="v2-p v2-p--wide" style="font-style:italic;color:var(--text)">Replace with a real testimonial focusing on a specific commercial outcome.</p>
-      <p class="v2-p v2-p--wide" style="font-size:0.8125rem;margin:0">SaaS Founder, Munich</p>
-    </div>
-    <div class="v2-card">
-      <p class="v2-accent" style="font-family:var(--fh);font-weight:600;margin-bottom:0.75rem">Placeholder — 47% shorter sales cycle</p>
-      <p class="v2-p v2-p--wide" style="font-style:italic;color:var(--text)">Second testimonial: a specific deal closed or position shift within a timeframe.</p>
-      <p class="v2-p v2-p--wide" style="font-size:0.8125rem;margin:0">Managing Partner, Dubai</p>
-    </div>
-  </section>
-
-  <section class="v2-center v2-funnel">
-    <h2 class="v2-h2">What happens before the handshake.</h2>
-    <div class="v2-bar-row v2-r1">
-      <div class="v2-track"><div class="v2-fill v2-fill-blue">70%</div></div>
-      <p class="v2-bar-cap">of the decision is made before first contact</p>
-    </div>
-    <div class="v2-bar-row v2-r2">
-      <div class="v2-track"><div class="v2-fill v2-fill-steel">&nbsp;</div></div>
-      <p class="v2-bar-cap">Based on content, media presence, and peer perception</p>
-    </div>
-    <div class="v2-bar-row v2-r3">
-      <div class="v2-track"><div class="v2-fill v2-fill-full">Your brand</div></div>
-      <p class="v2-bar-cap v2-accent">is doing the selling</p>
+    <article class="v2-t-card">
+      <p class="v2-t-desc">SaaS Founder, DACH region</p>
+      <p class="v2-t-metric">3.2× inbound increase in 6 months</p>
+      <p class="v2-t-stat">First non-referral enterprise client within 90 days</p>
+      <p class="v2-t-quote">Replace with a real testimonial: two or three sentences on a specific commercial outcome — deals closed, inbound shift, or time-to-close — written in the client's voice.</p>
+    </article>
+    <article class="v2-t-card">
+      <p class="v2-t-desc">Managing Partner, Gulf</p>
+      <p class="v2-t-metric">47% shorter sales cycle</p>
+      <p class="v2-t-stat">Pipeline from non-referral sources exceeded referral volume by Q4</p>
+      <p class="v2-t-quote">Second testimonial here: reference a concrete position shift or fee level, with a clear timeframe.</p>
+    </article>
+    <div class="v2-counters">
+      <div><span class="v2-cnum">8+</span><span class="v2-clabel">Years of strategic advisory</span></div>
+      <div><span class="v2-cnum">12</span><span class="v2-clabel">Markets across DACH &amp; Gulf</span></div>
+      <div><span class="v2-cnum">94%</span><span class="v2-clabel">Client retention rate</span></div>
+      <div><span class="v2-cnum">3×</span><span class="v2-clabel">Average inbound increase within 12 months</span></div>
     </div>
   </section>
 
+  <!-- SECTION 9 — Manifesto (static lines, no scroll animation) -->
+  <section class="v2-center" style="background:#080A0F;padding-block:clamp(3rem,6vw,4rem)">
+    <div style="max-width:32rem;margin-inline:auto">
+      <p class="v2-manifesto-line">The market is not rational.</p>
+      <p class="v2-manifesto-line">It is perceptual.</p>
+      <p class="v2-manifesto-line" style="margin-top:1rem">People don't choose</p>
+      <p class="v2-manifesto-line">the most qualified expert.</p>
+      <p class="v2-manifesto-line" style="margin-top:1rem">They choose</p>
+      <p class="v2-manifesto-line">the one they already trust.</p>
+      <p class="v2-manifesto-line" style="margin-top:1rem">Trust is not earned</p>
+      <p class="v2-manifesto-line">in the meeting.</p>
+      <p class="v2-manifesto-line" style="margin-top:1rem">It is engineered</p>
+      <p class="v2-manifesto-line">before the meeting</p>
+      <p class="v2-manifesto-line">ever happens.</p>
+      <p class="v2-manifesto-line v2-manifesto-line--gold">That's what we build.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 10 — FAQ -->
+  <section>
+    <div class="v2-center" style="margin-bottom:2rem">
+      <span class="v2-eyebrow">Questions we hear</span>
+    </div>
+    <div class="v2-faq-item">
+      <p class="v2-faq-q">How is this different from PR?</p>
+      <p class="v2-faq-a">PR gets you mentioned. We get you chosen. A media placement is one tool inside a positioning strategy. It's never the strategy itself. If your PR agency can't tell you which specific perception their work is building toward, they're not positioning you. They're publicising you.</p>
+    </div>
+    <div class="v2-faq-item">
+      <p class="v2-faq-q">How long before results?</p>
+      <p class="v2-faq-a">Depends on where you're starting. Some clients see inbound shift within 8-12 weeks. Full market repositioning takes 6-12 months. We'll tell you what's realistic in the strategy call. We don't sell timelines that sound good and deliver disappointment.</p>
+    </div>
+    <div class="v2-faq-item">
+      <p class="v2-faq-q">Do you manage social media?</p>
+      <p class="v2-faq-a">We can. But that's the smallest part of what we do. We build the strategic architecture that makes content work. Who executes — us, your team, a combination — is a logistics decision, not a strategic one.</p>
+    </div>
+    <div class="v2-faq-item">
+      <p class="v2-faq-q">What does it cost?</p>
+      <p class="v2-faq-a">Retained engagements tailored to scope. If you want a number before a conversation, we understand, but it would be meaningless without understanding your position, your market, and your commercial objectives. Book the call. We'll scope it properly.</p>
+    </div>
+    <div class="v2-faq-item">
+      <p class="v2-faq-q">I'm already well-known in my industry.</p>
+      <p class="v2-faq-a">Known and positioned are different things. If "well-known" generated the inbound revenue you wanted, you wouldn't be reading this. Reputation is what people say when you're in the room. Brand is what they say — and do — when you're not.</p>
+    </div>
+    <div class="v2-faq-item">
+      <p class="v2-faq-q">I don't want to become a "content creator."</p>
+      <p class="v2-faq-a">Neither do we. This isn't about turning you into someone who performs for an audience. It's about making your market position so clear that the right opportunities find you. Some clients post twice a month. The positioning does the rest.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 11 — Final CTA -->
   <section class="v2-center">
     <span class="v2-eyebrow">For future market leaders only</span>
-    <h2 class="v2-h2">Your next client is forming an opinion about you right now.</h2>
-    <p class="v2-p v2-p--wide">Not tomorrow. Now. They're Googling your name. Reading your LinkedIn. Asking a colleague what they know about you.</p>
-    <p class="v2-accent" style="font-family:var(--fh);font-size:clamp(1.25rem,3vw,1.75rem);font-weight:600;margin:1rem 0">
-      Make sure the answer isn't silence.
+    <h2 class="v2-h2">
+      Your Next Client Is<br />
+      Forming An Opinion<br />
+      About You Right Now.
+    </h2>
+    <p class="v2-p v2-p--wide">
+      Not tomorrow. Now. They're reading your LinkedIn. Googling your name. Asking a colleague what they know about you. And the answer they're getting is either silence, noise, or someone else's narrative.
     </p>
-    <a href="/contact" class="v2-btn">Book your strategy call</a>
-    <p class="v2-p" style="margin-top:1rem;font-size:0.8125rem">
-      Dubai-based. Serving the DACH region and the Gulf.<br />We take on a limited number of clients per quarter.
+    <p class="v2-p v2-p--wide">
+      A 30-minute strategy call. No pitch deck. No pressure. Just a forensic look at where your personal brand stands today, and what the gap between your reputation and your revenue is actually costing you.
+    </p>
+    <a href="/contact" class="v2-btn v2-btn-lg">Book Your Strategy Call</a>
+    <p class="v2-p" style="margin-top:1.25rem;font-size:0.9375rem;margin-bottom:0.5rem">Dubai-based. Serving the DACH region and the Gulf.</p>
+    <p class="v2-p" style="font-size:0.8125rem;color:var(--muted);max-width:36rem;margin-bottom:0">
+      We take on a limited number of clients per quarter. If this page resonates, don't assume it'll still be available next month.
     </p>
   </section>
 
@@ -410,8 +655,10 @@ const fc = landing.footer;
   <a href="/" class="s19-logo">{site.logoInitials}</a>
   <div class="s19-contact">
     <a href={`mailto:${fc.email}`}>{fc.email}</a>
+    <span class="s19-sep" aria-hidden="true">|</span>
     <a href={`tel:${fc.phoneTel}`}>{fc.phoneDisplay}</a>
-    <span style="color:var(--muted)">Dubai, UAE</span>
+    <span class="s19-sep" aria-hidden="true">|</span>
+    <span style="color:var(--muted);font-size:0.8125rem">Dubai, UAE</span>
   </div>
   <nav class="s19-legal">
     <a href="/legal/privacy">Privacy Policy</a>
