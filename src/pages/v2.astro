@@ -96,6 +96,63 @@ const fc = landing.footer;
       font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--accent); margin-bottom: 1rem; display: block;
     }
+    /* Hero intro: eyebrow starts title-sized (typewriter), then tweens to normal .v2-eyebrow */
+    .v2-eyebrow.v2-eyebrow--intro {
+      font-family: var(--ft);
+      font-size: clamp(2rem, 5.5vw, 3.25rem);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      line-height: 1.12;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .v2-hero-title-shell {
+      transform-origin: 50% 0%;
+      will-change: transform;
+    }
+    .v2-hero-morph {
+      position: relative;
+      min-height: 4.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .v2-hero-cycle-line {
+      font-family: var(--fb);
+      font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+      color: var(--muted);
+      line-height: 1.5;
+      max-width: 36rem;
+      margin-inline: auto;
+    }
+    .v2-hero-cycle-em {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .v2-hero-revenue-word {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      margin: 0 auto;
+      text-align: center;
+      font-family: var(--ft);
+      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: -0.03em;
+      color: var(--accent);
+      line-height: 1.15;
+      pointer-events: none;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      [data-v2-hero-stage] [data-v2-hero-eyebrow],
+      [data-v2-hero-stage] [data-v2-hero-title] {
+        opacity: 0;
+      }
+      [data-v2-hero-stage] [data-v2-hero-rest],
+      [data-v2-hero-stage] [data-v2-hero-cycle-block] {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
     .v2-h2 {
       font-family: var(--ft); font-weight: 700; font-size: clamp(1.5rem, 3.2vw, 2.15rem);
       line-height: 1.28; letter-spacing: -0.02em; margin-bottom: 1rem;
@@ -309,18 +366,26 @@ const fc = landing.footer;
 
 <main class="v2-wrap">
 
-  <section class="v2-center">
-    <span class="v2-eyebrow">For founders who've outgrown word of mouth</span>
-    <h1 class="v2-hero-title" data-v2-reveal-title>
-      We build personal brand positions that generate revenue.
-    </h1>
-    <p class="v2-p v2-p--wide">
-      Not followers. Not impressions. Not "visibility." Revenue. The kind where strangers contact you pre-sold, sales cycles halve, and your pipeline stops depending on who you had dinner with last quarter.
-    </p>
-    <p class="v2-p v2-p--wide v2-strong" style="margin-bottom:0">
-      Book a strategy call to see how this applies to you.
-    </p>
-    <a href="/contact" class="v2-btn">Book a Strategy Call</a>
+  <section class="v2-center" data-v2-hero-stage aria-busy="true">
+    <span class="v2-eyebrow" data-v2-hero-eyebrow>For founders who've outgrown word of mouth</span>
+    <div class="v2-hero-title-shell">
+      <h1 class="v2-hero-title" data-v2-hero-title>We build personal brand positions that generate revenue.</h1>
+    </div>
+    <div class="v2-hero-morph" data-v2-hero-cycle-block>
+      <p class="v2-hero-cycle-line" data-v2-hero-cycle-line>
+        Not <span class="v2-hero-cycle-em" data-v2-hero-cycle-slot>followers</span>.
+      </p>
+      <p class="v2-hero-revenue-word" data-v2-hero-revenue hidden aria-hidden="true">Revenue.</p>
+    </div>
+    <div data-v2-hero-rest>
+      <p class="v2-p v2-p--wide">
+        The kind where strangers contact you pre-sold, sales cycles halve, and your pipeline stops depending on who you had dinner with last quarter.
+      </p>
+      <p class="v2-p v2-p--wide v2-strong" style="margin-bottom:0">
+        Book a strategy call to see how this applies to you.
+      </p>
+      <a href="/contact" class="v2-btn">Book a Strategy Call</a>
+    </div>
   </section>
 
   <section>
@@ -640,7 +705,9 @@ const fc = landing.footer;
 </footer>
 
 <script>
+  import { initV2HeroIntro } from "../scripts/v2HeroIntro";
   import { initV2Reveal } from "../scripts/v2Reveal";
+  initV2HeroIntro();
   initV2Reveal();
 </script>
 
