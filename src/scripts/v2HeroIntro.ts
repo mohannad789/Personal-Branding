@@ -1,6 +1,8 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const EYEBROW = "For founders who've outgrown word of mouth";
 const TITLE = "We build personal brand positions that generate revenue.";
 
@@ -8,7 +10,13 @@ function prefersReduced() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-/** Character-by-character reveal; duration scales with length. */
+/** Reliable timeline gap (never use `tl.to({}, {duration})` — it breaks playback in GSAP 3). */
+function addGap(tl: gsap.core.Timeline, seconds: number) {
+  const o = { _: 0 };
+  tl.to(o, { _: 1, duration: seconds, ease: "none" });
+}
+
+/** Character-by-character reveal. */
 function typewriter(el: HTMLElement, full: string, duration: number) {
   el.textContent = "";
   const state = { n: 0 };
@@ -32,6 +40,11 @@ function swapCycleWord(slot: HTMLElement, next: string) {
   return tl;
 }
 
+function parseLetterSpacing(raw: string): string {
+  const n = parseFloat(raw);
+  return Number.isFinite(n) ? `${n}px` : "0.18em";
+}
+
 export function initV2HeroIntro() {
   const stage = document.querySelector<HTMLElement>("[data-v2-hero-stage]");
   const eyebrow = stage?.querySelector<HTMLElement>("[data-v2-hero-eyebrow]");
@@ -43,15 +56,31 @@ export function initV2HeroIntro() {
   const revenueEl = stage?.querySelector<HTMLElement>("[data-v2-hero-revenue]");
   const rest = stage?.querySelector<HTMLElement>("[data-v2-hero-rest]");
 
-  if (!stage || !eyebrow || !shell || !title || !cycleBlock || !cycleLine || !slot || !revenueEl || !rest) return;
+  if (!stage || !eyebrow || !shell || !title || !cycleBlock || !cycleLine || !slot || !revenueEl || !rest) {
+    return;
+  }
 
   const eyebrowPlain = (eyebrow.textContent || "").trim() || EYEBROW;
   const titlePlain = (title.textContent || "").trim() || TITLE;
+
+  const showStaticHero = () => {
+    stage.removeAttribute("aria-busy");
+    eyebrow.textContent = eyebrowPlain;
+    title.textContent = titlePlain;
+    eyebrow.classList.remove("v2-eyebrow--intro");
+    cycleBlock.removeAttribute("hidden");
+    cycleBlock.style.removeProperty("display");
+    revenueEl.setAttribute("hidden", "");
+    revenueEl.style.removeProperty("display");
+    gsap.set([rest, cycleBlock, revenueEl, shell, eyebrow, title], { clearProps: "all" });
+    gsap.set(rest, { autoAlpha: 1 });
+  };
 
   if (prefersReduced()) {
     stage.removeAttribute("aria-busy");
     eyebrow.textContent = eyebrowPlain;
     title.textContent = titlePlain;
+    eyebrow.classList.remove("v2-eyebrow--intro");
     cycleBlock.setAttribute("hidden", "");
     cycleBlock.style.display = "none";
     revenueEl.setAttribute("hidden", "");
@@ -78,7 +107,6 @@ export function initV2HeroIntro() {
       const csIntro = getComputedStyle(eyebrow);
       const fsIntro = parseFloat(csIntro.fontSize);
       const lsIntroRaw = csIntro.letterSpacing;
-      const lsIntro = parseFloat(lsIntroRaw);
       eyebrow.classList.remove("v2-eyebrow--intro");
       const csEnd = getComputedStyle(eyebrow);
       const fsEnd = parseFloat(csEnd.fontSize);
@@ -86,11 +114,10 @@ export function initV2HeroIntro() {
       eyebrow.classList.add("v2-eyebrow--intro");
       eyebrow.textContent = "";
       return {
-        fsIntro,
-        lsIntro: Number.isFinite(lsIntro) ? lsIntro : 0,
-        fsEnd,
-        lsEndStr: Number.isFinite(parseFloat(lsEndRaw)) ? `${parseFloat(lsEndRaw)}px` : lsEndRaw || "0.18em",
-        lsIntroStr: Number.isFinite(lsIntro) ? `${lsIntro}px` : lsIntroRaw || "0.04em",
+        fsIntro: Number.isFinite(fsIntro) ? fsIntro : 32,
+        lsIntroStr: parseLetterSpacing(lsIntroRaw),
+        fsEnd: Number.isFinite(fsEnd) ? fsEnd : 11,
+        lsEndStr: parseLetterSpacing(lsEndRaw),
       };
     };
 
@@ -129,11 +156,11 @@ export function initV2HeroIntro() {
     tl.to(shell, { scale: 1, duration: 0.78, ease: "power2.inOut" }, ">-0.08");
 
     tl.to(cycleBlock, { autoAlpha: 1, duration: 0.32 });
-    tl.to({}, { duration: 0.38 });
+    addGap(tl, 0.38);
     tl.add(swapCycleWord(slot, "impressions"));
-    tl.to({}, { duration: 0.36 });
+    addGap(tl, 0.36);
     tl.add(swapCycleWord(slot, "visibility"));
-    tl.to({}, { duration: 0.4 });
+    addGap(tl, 0.4);
     tl.to(cycleLine, { autoAlpha: 0, y: -8, duration: 0.22, ease: "power2.in" });
     tl.set(cycleLine, { visibility: "hidden" });
     tl.add(() => revenueEl.removeAttribute("aria-hidden"));
@@ -142,7 +169,7 @@ export function initV2HeroIntro() {
       { autoAlpha: 0, y: 16, scale: 0.94 },
       { autoAlpha: 1, y: 0, scale: 1, duration: 0.48, ease: "power2.out" }
     );
-    tl.to({}, { duration: 0.28 });
+    addGap(tl, 0.28);
     tl.to(rest, { autoAlpha: 1, duration: 0.62, ease: "power2.out" });
   };
 
@@ -153,19 +180,11 @@ export function initV2HeroIntro() {
     try {
       run();
     } catch (e) {
-      console.error(e);
-      stage.removeAttribute("aria-busy");
-      eyebrow.textContent = eyebrowPlain;
-      title.textContent = titlePlain;
-      eyebrow.classList.remove("v2-eyebrow--intro");
-      gsap.set([rest, cycleBlock, revenueEl, shell], { clearProps: "all" });
-      revenueEl.setAttribute("hidden", "");
-      cycleBlock.style.display = "";
-      gsap.set(rest, { autoAlpha: 1 });
+      console.error("[v2HeroIntro]", e);
+      showStaticHero();
     }
   };
 
-  /* Run on the next frame — do not wait on fonts.ready (it can stall and left the old CSS hiding the whole hero). */
   requestAnimationFrame(() => {
     runOnce();
     void document.fonts?.ready?.then(() => ScrollTrigger.refresh());
