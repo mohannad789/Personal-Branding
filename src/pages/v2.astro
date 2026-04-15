@@ -677,25 +677,47 @@ const fc = landing.footer;
   }
 
   /**
-   * Progress 0..1: word i turns on when p >= (i+1)/n.
-   * Hero: always driven by scrollY (it sits under the nav so viewport math was always "done").
-   * Other titles: map block top from bottom of viewport (p≈0) to top 30% line (p=1).
+   * Your spec: gray first → scroll turns words black in order → fully black once the title
+   * reaches the top 30% of the viewport (top edge at or above that line).
+   *
+   * Viewport-only math breaks for first-screen titles (they already sit above the "done"
+   * line). So we arm when the block is in play (top < ~92% of viewport), then advance p
+   * from scroll distance since arm; geometry forces p=1 when top <= 30% of viewport.
    */
   function progressForBlock(rect, block) {
-    var H = window.innerHeight || 700;
+    var H = window.innerHeight || 640;
     var sy = window.scrollY || document.documentElement.scrollTop || 0;
     var top = rect.top;
-    var isHero = block.classList && block.classList.contains("v2-hero-title");
+    var doneLine = H * 0.3;
+    var armLine = H * 0.92;
 
-    if (isHero) {
-      return Math.min(1, Math.max(0, sy / 480));
+    if (top > H + 60) {
+      block._v2RevealArmed = false;
+      block._v2RevealArmSy = undefined;
+      return 0;
     }
 
-    var startY = H * 0.92;
-    var doneY = H * 0.3;
-    if (top >= startY) return 0;
-    if (top <= doneY) return 1;
-    return (startY - top) / (startY - doneY);
+    if (top < armLine) {
+      if (!block._v2RevealArmed) {
+        block._v2RevealArmed = true;
+        block._v2RevealArmSy = sy;
+      }
+    }
+
+    if (!block._v2RevealArmed || block._v2RevealArmSy === undefined) {
+      return 0;
+    }
+
+    var dy = sy - block._v2RevealArmSy;
+    if (dy < 0) {
+      return 0;
+    }
+
+    var p = Math.min(1, dy / 400);
+    if (top <= doneLine) {
+      p = 1;
+    }
+    return p;
   }
 
   function updateReveals() {
