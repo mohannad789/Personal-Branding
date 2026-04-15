@@ -1,0 +1,292 @@
+---
+// Self-contained GSAP patterns lab (not linked from main nav).
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>GSAP examples — motion lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b1220;
+        --panel: #111827;
+        --border: rgba(148, 163, 184, 0.2);
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --accent: #38bdf8;
+        --pad: clamp(1.25rem, 4vw, 2rem);
+        --max: 720px;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: var(--pad);
+      }
+      .top {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-block: 1.5rem 2rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .mono {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+      h1 {
+        font-size: clamp(1.35rem, 3vw, 1.75rem);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+      section {
+        padding-block: 2.75rem;
+        border-bottom: 1px solid var(--border);
+      }
+      section h2 {
+        font-size: 0.9375rem;
+        font-weight: 600;
+        margin-bottom: 0.35rem;
+      }
+      section p.desc {
+        font-size: 0.875rem;
+        color: var(--muted);
+        margin-bottom: 1.25rem;
+        max-width: 38rem;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+      [data-demo-load-card],
+      [data-demo-scroll-card] {
+        flex: 1 1 140px;
+        min-height: 4.5rem;
+        padding: 1rem;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        font-size: 0.8125rem;
+        color: var(--muted);
+      }
+      [data-demo-hover-pill] {
+        padding: 0.55rem 1rem;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: var(--panel);
+        color: var(--text);
+        font-size: 0.8125rem;
+        cursor: default;
+        user-select: none;
+      }
+      .tl-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .tl-row {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+      [data-demo-tl-box] {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 8px;
+        background: #1e293b;
+        border: 1px solid var(--border);
+      }
+      [data-demo-tl-play] {
+        font: inherit;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        border: 1px solid rgba(56, 189, 248, 0.45);
+        background: rgba(56, 189, 248, 0.12);
+        color: var(--accent);
+        cursor: pointer;
+      }
+      [data-demo-tl-play]:hover {
+        background: rgba(56, 189, 248, 0.2);
+      }
+      [data-demo-scrub-section] {
+        position: relative;
+        min-height: 200vh;
+      }
+      [data-demo-scrub-sticky] {
+        position: sticky;
+        top: 0;
+        min-height: 55vh;
+        display: flex;
+        align-items: center;
+        padding-block: 2rem;
+      }
+      [data-demo-scrub-viewport] {
+        width: 100%;
+        overflow: hidden;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: var(--panel);
+      }
+      [data-demo-scrub-inner] {
+        display: flex;
+        gap: 0.75rem;
+        padding: 1rem;
+        width: max-content;
+      }
+      .scrub-chip {
+        flex-shrink: 0;
+        width: 5.5rem;
+        height: 4rem;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        font-size: 0.6875rem;
+        font-weight: 600;
+        color: #0f172a;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap" data-gsap-lab>
+      <header class="top">
+        <div>
+          <p class="mono">/gsap-examples</p>
+          <h1>GSAP motion lab</h1>
+        </div>
+        <nav class="mono" aria-label="Back">
+          <a href="/">Home</a>
+          ·
+          <a href="/v2">Version B</a>
+        </nav>
+      </header>
+
+      <section>
+        <h2>1. Load stagger</h2>
+        <p class="desc">
+          <code class="mono">{`gsap.from(..., { stagger })`}</code> — runs once when the script runs; good for hero
+          lines, cards, or icons after navigation.
+        </p>
+        <div class="row">
+          <div data-demo-load-card>One</div>
+          <div data-demo-load-card>Two</div>
+          <div data-demo-load-card>Three</div>
+          <div data-demo-load-card>Four</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>2. Scroll-triggered reveals</h2>
+        <p class="desc">
+          <code class="mono">{`scrollTrigger: { start, toggleActions }`}</code> — play a tween when each element
+          crosses a viewport threshold; reverse when scrolling back up (optional).
+        </p>
+        <div class="row">
+          <div data-demo-scroll-card>Scroll A</div>
+          <div data-demo-scroll-card>Scroll B</div>
+          <div data-demo-scroll-card>Scroll C</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>3. Pointer hover</h2>
+        <p class="desc">
+          <code class="mono">gsap.to(el, …)</code> on <code class="mono">mouseenter</code> /
+          <code class="mono">mouseleave</code> — velocity-based easing, interruptible; useful when CSS transitions
+          fight other layout.
+        </p>
+        <div class="row">
+          <span data-demo-hover-pill>Hover</span>
+          <span data-demo-hover-pill>Motion</span>
+          <span data-demo-hover-pill>Lab</span>
+        </div>
+      </section>
+
+      <section>
+        <h2>4. Timeline (button)</h2>
+        <p class="desc">
+          <code class="mono">gsap.timeline()</code> — chain tweens with offsets (<code class="mono">"-=0.2"</code>);
+          one place to sequence UI states, loaders, or step-through stories.
+        </p>
+        <div class="tl-wrap">
+          <button type="button" data-demo-tl-play>Play sequence</button>
+          <div class="tl-row" aria-hidden="true">
+            <div data-demo-tl-box></div>
+            <div data-demo-tl-box></div>
+            <div data-demo-tl-box></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>5. Scrubbed scroll (horizontal)</h2>
+        <p class="desc">
+          <code class="mono">{`scrollTrigger: { scrub }`}</code> — ties animation progress to scroll position (like your
+          v2 title scrub). This strip moves sideways as you move through the tall section below.
+        </p>
+      </section>
+
+      <div data-demo-scrub-section>
+        <div data-demo-scrub-sticky>
+          <div data-demo-scrub-viewport>
+            <div data-demo-scrub-inner>
+              {
+                ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"].map((L, i) => (
+                  <div
+                    class="scrub-chip"
+                    style={`background: hsl(${210 + i * 12}, 70%, ${58 - i * 1.2}%);`}
+                  >
+                    {L}
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="mono" style="padding-block: 2.5rem; color: var(--muted); font-size: 0.75rem;">
+        <code>npm i gsap</code> — ScrollTrigger is included; register with <code>gsap.registerPlugin(ScrollTrigger)</code>.
+      </footer>
+    </div>
+
+    <script>
+      import { initGsapExamplesLab } from "../scripts/gsapExamplesLab";
+      initGsapExamplesLab();
+    </script>
+  </body>
+</html>
