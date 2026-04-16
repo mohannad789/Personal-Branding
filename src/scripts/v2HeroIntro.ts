@@ -3,8 +3,17 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const EYEBROW = "For founders who've outgrown word of mouth";
-const TITLE = "We build personal brand positions that generate revenue.";
+const EYEBROW_L1 = "For founders";
+const EYEBROW_L2 = "who've outgrown word of mouth";
+const TITLE_FULL = "We build personal brand positions that generate revenue.";
+const PREFIX = "We build personal brand positions that generate";
+const MORPH_PHRASES = [
+  "revenue.",
+  "Not followers.",
+  "Not impressions.",
+  "Not visibility.",
+  "Revenue",
+];
 
 function prefersReduced() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -17,16 +26,13 @@ function syncNavPad() {
   document.documentElement.style.setProperty("--v2-nav-pad", `${Math.ceil(h + 8)}px`);
 }
 
-/** Reliable timeline gap (never use `tl.to({}, {duration})` — it breaks playback in GSAP 3). */
 function addGap(tl: gsap.core.Timeline, seconds: number) {
   const o = { _: 0 };
   tl.to(o, { _: 1, duration: seconds, ease: "none" });
 }
 
-/**
- * Smooth “typewriter”: full string is in the DOM from frame one (spans), only opacity animates — no reflow / no choppy push.
- */
-function revealCharsSmooth(el: HTMLElement, full: string, staggerAmount: number) {
+/** Reading-pace character reveal (layout pre-reserved; opacity only). */
+function revealCharsReading(el: HTMLElement, full: string, staggerAmount: number) {
   el.textContent = "";
   const spans: HTMLElement[] = [];
   for (let i = 0; i < full.length; i++) {
@@ -39,18 +45,14 @@ function revealCharsSmooth(el: HTMLElement, full: string, staggerAmount: number)
   }
   return gsap.to(spans, {
     opacity: 1,
-    duration: 0.48,
+    duration: 0.55,
     ease: "power2.out",
-    stagger: {
-      amount: Math.max(0.35, staggerAmount),
-      from: "start",
-      ease: "power1.inOut",
-    },
+    stagger: { amount: Math.max(1.2, staggerAmount), from: "start", ease: "power1.inOut" },
   });
 }
 
-/** Word-by-word fade (smoother on long headlines than per-character). */
-function revealWordsSmooth(el: HTMLElement, full: string, staggerAmount: number) {
+/** Reading-pace word reveal for the headline prefix. */
+function revealWordsReading(el: HTMLElement, full: string, staggerAmount: number) {
   el.textContent = "";
   const words = full.trim().split(/\s+/);
   const spans: HTMLElement[] = [];
@@ -60,29 +62,31 @@ function revealWordsSmooth(el: HTMLElement, full: string, staggerAmount: number)
     s.textContent = w;
     s.style.opacity = "0";
     s.style.display = "inline-block";
-    s.style.marginRight = i < words.length - 1 ? "0.3em" : "0";
+    s.style.marginRight = i < words.length - 1 ? "0.32em" : "0";
     spans.push(s);
     el.appendChild(s);
   });
   return gsap.to(spans, {
     opacity: 1,
-    duration: 0.52,
+    duration: 0.62,
     ease: "power2.out",
-    stagger: {
-      amount: Math.max(0.4, staggerAmount),
-      from: "start",
-      ease: "power1.inOut",
-    },
+    stagger: { amount: Math.max(1.8, staggerAmount), from: "start", ease: "power1.inOut" },
   });
 }
 
-function swapCycleWord(slot: HTMLElement, next: string) {
+function morphCycle(el: HTMLElement, phrases: string[], fade: number, hold: number) {
   const tl = gsap.timeline();
-  tl.to(slot, { opacity: 0, y: 5, duration: 0.14, ease: "power2.in" });
-  tl.add(() => {
-    slot.textContent = next;
-  });
-  tl.fromTo(slot, { opacity: 0, y: -5 }, { opacity: 1, y: 0, duration: 0.22, ease: "power2.out" });
+  el.textContent = phrases[0];
+  tl.fromTo(el, { autoAlpha: 0 }, { autoAlpha: 1, duration: fade * 1.1, ease: "power2.out" });
+  addGap(tl, hold);
+  for (let i = 1; i < phrases.length; i++) {
+    tl.to(el, { autoAlpha: 0, duration: fade * 0.55, ease: "power2.in" });
+    tl.add(() => {
+      el.textContent = phrases[i];
+    });
+    tl.fromTo(el, { autoAlpha: 0 }, { autoAlpha: 1, duration: fade, ease: "power2.out" });
+    if (i < phrases.length - 1) addGap(tl, hold);
+  }
   return tl;
 }
 
@@ -95,44 +99,38 @@ export function initV2HeroIntro() {
   syncNavPad();
 
   const stage = document.querySelector<HTMLElement>("[data-v2-hero-stage]");
+  const inner = stage?.querySelector<HTMLElement>("[data-v2-hero-inner]");
   const eyebrow = stage?.querySelector<HTMLElement>("[data-v2-hero-eyebrow]");
+  const line1 = eyebrow?.querySelector<HTMLElement>("[data-v2-eyebrow-l1]");
+  const line2 = eyebrow?.querySelector<HTMLElement>("[data-v2-eyebrow-l2]");
   const shell = stage?.querySelector<HTMLElement>("[data-v2-hero-title-shell]");
   const title = stage?.querySelector<HTMLElement>("[data-v2-hero-title]");
-  const cycleBlock = stage?.querySelector<HTMLElement>("[data-v2-hero-cycle-block]");
-  const cycleLine = stage?.querySelector<HTMLElement>("[data-v2-hero-cycle-line]");
-  const slot = stage?.querySelector<HTMLElement>("[data-v2-hero-cycle-slot]");
-  const revenueEl = stage?.querySelector<HTMLElement>("[data-v2-hero-revenue]");
+  const prefix = title?.querySelector<HTMLElement>("[data-v2-hero-title-prefix]");
+  const morph = title?.querySelector<HTMLElement>("[data-v2-hero-morph]");
   const rest = stage?.querySelector<HTMLElement>("[data-v2-hero-rest]");
 
-  if (!stage || !eyebrow || !shell || !title || !cycleBlock || !cycleLine || !slot || !revenueEl || !rest) {
+  if (!stage || !inner || !eyebrow || !line1 || !line2 || !shell || !title || !prefix || !morph || !rest) {
     return;
   }
 
-  const eyebrowPlain = (eyebrow.textContent || "").trim() || EYEBROW;
-  const titlePlain = (title.textContent || "").trim() || TITLE;
-
   const showStaticHero = () => {
     stage.removeAttribute("aria-busy");
-    eyebrow.textContent = eyebrowPlain;
-    title.textContent = titlePlain;
+    gsap.set(inner, { autoAlpha: 1, clearProps: "opacity,visibility" });
+    line1.textContent = EYEBROW_L1;
+    line2.textContent = EYEBROW_L2;
     eyebrow.classList.remove("v2-eyebrow--intro");
-    cycleBlock.removeAttribute("hidden");
-    cycleBlock.style.removeProperty("display");
-    revenueEl.setAttribute("hidden", "");
-    revenueEl.style.removeProperty("display");
-    gsap.set([rest, cycleBlock, revenueEl, shell, eyebrow, title], { clearProps: "all" });
+    title.textContent = TITLE_FULL;
+    gsap.set([rest, shell, eyebrow, title], { clearProps: "all" });
     gsap.set(rest, { autoAlpha: 1 });
   };
 
   if (prefersReduced()) {
     stage.removeAttribute("aria-busy");
-    eyebrow.textContent = eyebrowPlain;
-    title.textContent = titlePlain;
+    gsap.set(inner, { autoAlpha: 1 });
+    line1.textContent = EYEBROW_L1;
+    line2.textContent = EYEBROW_L2;
     eyebrow.classList.remove("v2-eyebrow--intro");
-    cycleBlock.setAttribute("hidden", "");
-    cycleBlock.style.display = "none";
-    revenueEl.setAttribute("hidden", "");
-    revenueEl.style.display = "none";
+    title.textContent = TITLE_FULL;
     gsap.set(rest, { clearProps: "all" });
     return;
   }
@@ -141,20 +139,19 @@ export function initV2HeroIntro() {
     syncNavPad();
     stage.setAttribute("aria-busy", "true");
 
+    gsap.set(inner, { autoAlpha: 0 });
     gsap.set(rest, { autoAlpha: 0 });
-    gsap.set(cycleBlock, { autoAlpha: 0 });
-    gsap.set(revenueEl, { autoAlpha: 0 });
-    revenueEl.removeAttribute("hidden");
-    gsap.set(slot, { clearProps: "opacity,visibility,transform" });
-    gsap.set(cycleLine, { clearProps: "opacity,visibility,transform" });
+    line1.textContent = "";
+    line2.textContent = "";
+    prefix.textContent = "";
+    morph.textContent = "";
+    morph.style.removeProperty("opacity");
 
-    eyebrow.textContent = "";
     eyebrow.classList.add("v2-eyebrow--intro");
-    title.textContent = "";
 
     const measureEyebrow = () => {
-      eyebrow.textContent = "X";
       eyebrow.classList.add("v2-eyebrow--intro");
+      line1.textContent = "X";
       const csIntro = getComputedStyle(eyebrow);
       const fsIntro = parseFloat(csIntro.fontSize);
       const lsIntroRaw = csIntro.letterSpacing;
@@ -163,7 +160,7 @@ export function initV2HeroIntro() {
       const fsEnd = parseFloat(csEnd.fontSize);
       const lsEndRaw = csEnd.letterSpacing;
       eyebrow.classList.add("v2-eyebrow--intro");
-      eyebrow.textContent = "";
+      line1.textContent = "";
       return {
         fsIntro: Number.isFinite(fsIntro) ? fsIntro : 32,
         lsIntroStr: parseLetterSpacing(lsIntroRaw),
@@ -175,24 +172,28 @@ export function initV2HeroIntro() {
     const m = measureEyebrow();
 
     const tl = gsap.timeline({
-      delay: 0.12,
+      delay: 0.15,
       onComplete: () => {
         stage.removeAttribute("aria-busy");
-        gsap.set(shell, { clearProps: "scale,transform" });
+        gsap.set(shell, { clearProps: "transform" });
         ScrollTrigger.refresh();
       },
     });
 
-    const eyebrowStagger = Math.min(1.85, eyebrowPlain.length * 0.028);
-    tl.add(revealCharsSmooth(eyebrow, eyebrowPlain, eyebrowStagger));
-    /* No vertical slide here — it was pulling the hero up under the sticky nav. */
+    tl.to(inner, { autoAlpha: 1, duration: 0.45, ease: "power2.out" });
+
+    const l1Dur = Math.max(2.4, EYEBROW_L1.length * 0.09);
+    tl.add(revealCharsReading(line1, EYEBROW_L1, l1Dur));
+    const l2Dur = Math.max(3.2, EYEBROW_L2.length * 0.085);
+    tl.add(revealCharsReading(line2, EYEBROW_L2, l2Dur));
+
     tl.fromTo(
       eyebrow,
       { fontSize: m.fsIntro, letterSpacing: m.lsIntroStr },
       {
         fontSize: m.fsEnd,
         letterSpacing: m.lsEndStr,
-        duration: 0.95,
+        duration: 1.05,
         ease: "power2.inOut",
         onComplete: () => {
           eyebrow.classList.remove("v2-eyebrow--intro");
@@ -201,34 +202,14 @@ export function initV2HeroIntro() {
       }
     );
 
-    tl.set(shell, { transformOrigin: "50% 0%", scale: 2 });
-    const titleStagger = Math.min(1.65, titlePlain.split(/\s+/).length * 0.09);
-    tl.add(revealWordsSmooth(title, titlePlain, titleStagger));
-    tl.to(shell, { scale: 1, duration: 0.82, ease: "power2.inOut" }, ">-0.06");
+    const wordCount = PREFIX.split(/\s+/).length;
+    const prefixStagger = Math.max(3.2, wordCount * 0.28);
+    tl.add(revealWordsReading(prefix, PREFIX, prefixStagger));
 
-    tl.to(cycleBlock, {
-      autoAlpha: 1,
-      duration: 0.36,
-      ease: "power2.out",
-      onComplete: () => {
-        gsap.set([slot, cycleLine], { clearProps: "opacity,visibility,y,transform" });
-      },
-    });
-    addGap(tl, 0.42);
-    tl.add(swapCycleWord(slot, "impressions"));
-    addGap(tl, 0.38);
-    tl.add(swapCycleWord(slot, "visibility"));
-    addGap(tl, 0.42);
-    tl.to(cycleLine, { autoAlpha: 0, y: -6, duration: 0.24, ease: "power2.in" });
-    tl.set(cycleLine, { visibility: "hidden" });
-    tl.add(() => revenueEl.removeAttribute("aria-hidden"));
-    tl.fromTo(
-      revenueEl,
-      { autoAlpha: 0, y: 14, scale: 0.96 },
-      { autoAlpha: 1, y: 0, scale: 1, duration: 0.52, ease: "power2.out" }
-    );
-    addGap(tl, 0.28);
-    tl.to(rest, { autoAlpha: 1, duration: 0.65, ease: "power2.out" });
+    const morphTl = morphCycle(morph, MORPH_PHRASES, 0.42, 0.62);
+    tl.add(morphTl);
+
+    tl.to(rest, { autoAlpha: 1, duration: 0.75, ease: "power2.out" }, "+=0.2");
   };
 
   let ran = false;

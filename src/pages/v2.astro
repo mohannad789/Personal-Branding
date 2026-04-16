@@ -96,7 +96,7 @@ const fc = landing.footer;
       font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--accent); margin-bottom: 1rem; display: block;
     }
-    /* Hero intro: eyebrow starts title-sized (typewriter), then tweens to normal .v2-eyebrow */
+    /* Hero intro: eyebrow starts title-sized, then tweens to normal .v2-eyebrow */
     .v2-eyebrow.v2-eyebrow--intro {
       font-family: var(--ft);
       font-size: clamp(2rem, 5.5vw, 3.25rem);
@@ -106,52 +106,73 @@ const fc = landing.footer;
       text-transform: uppercase;
       color: var(--accent);
     }
+    .v2-hero-section {
+      min-height: min(100dvh, calc(100svh - var(--v2-nav-pad, 5.75rem)));
+      display: flex;
+      flex-direction: column;
+      padding-top: max(0.5rem, var(--v2-nav-pad, 5.75rem));
+      padding-bottom: 2rem;
+      box-sizing: border-box;
+    }
+    .v2-hero-section.v2-center { text-align: center; }
+    [data-v2-hero-inner] {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.5rem;
+      opacity: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [data-v2-hero-inner] { opacity: 1 !important; }
+    }
+    [data-v2-hero-rest] {
+      margin-top: auto;
+      width: 100%;
+    }
+    .v2-hero-eyebrow-wrap {
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .v2-hero-eyebrow-wrap .v2-hero-eyebrow-line {
+      display: block;
+    }
     .v2-hero-title-shell {
       transform-origin: 50% 0%;
-      will-change: transform;
-    }
-    .v2-hero-morph {
-      position: relative;
-      min-height: 4.5rem;
-      margin-bottom: 0.5rem;
-    }
-    /* Keep “Not …” above the absolutely positioned Revenue layer (fixes missing word / compositing). */
-    .v2-hero-cycle-line {
-      position: relative;
-      z-index: 2;
-      font-family: var(--fb);
-      font-size: clamp(1.05rem, 2.2vw, 1.2rem);
-      color: var(--muted);
-      line-height: 1.5;
-      max-width: 36rem;
+      max-width: min(100%, 44rem);
       margin-inline: auto;
     }
-    .v2-hero-cycle-em {
-      color: var(--accent);
-      font-weight: 600;
-    }
-    .v2-hero-revenue-word {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      z-index: 1;
-      margin: 0 auto;
-      text-align: center;
+    .v2-hero-title {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: baseline;
+      gap: 0.2em 0.35em;
       font-family: var(--ft);
       font-weight: 700;
-      font-size: clamp(2rem, 5vw, 3rem);
+      font-size: clamp(2rem, 5.5vw, 3.25rem);
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+      max-width: min(100%, 38rem);
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+    .v2-hero-title-prefix {
+      text-align: center;
+    }
+    /* Merged “revenue / Not… / Revenue” line — larger type, no scale-down animation */
+    [data-v2-hero-morph] {
+      display: inline-block;
+      font-family: var(--ft);
+      font-weight: 700;
+      font-size: clamp(2.35rem, 6vw, 3.75rem);
+      line-height: 1.12;
       letter-spacing: -0.03em;
       color: var(--accent);
-      line-height: 1.15;
-      pointer-events: none;
-    }
-    .v2-hero-revenue-word[hidden] {
-      visibility: hidden;
-    }
-    /* Hero clears sticky nav; --v2-nav-pad is synced from JS (fallback matches #v2-nav). */
-    [data-v2-hero-stage] {
-      padding-top: max(1rem, var(--v2-nav-pad, 5.75rem));
+      min-height: 1.15em;
+      vertical-align: baseline;
     }
     .v2-tw-char {
       display: inline;
@@ -189,16 +210,6 @@ const fc = landing.footer;
     [data-v2-reveal-title] .v2-word {
       font-family: var(--ft);
       color: var(--title-dim);
-    }
-
-    .v2-hero-title {
-      font-family: var(--ft); font-weight: 700;
-      font-size: clamp(2rem, 5.5vw, 3.25rem);
-      line-height: 1.18; letter-spacing: -0.03em;
-      margin-bottom: 1.25rem;
-      max-width: min(100%, 38rem);
-      margin-left: auto; margin-right: auto;
-      text-align: center;
     }
 
     .v2-btn {
@@ -374,16 +385,22 @@ const fc = landing.footer;
 
 <main class="v2-wrap">
 
-  <section class="v2-center" data-v2-hero-stage aria-busy="true">
-    <span class="v2-eyebrow" data-v2-hero-eyebrow>For founders who've outgrown word of mouth</span>
-    <div class="v2-hero-title-shell" data-v2-hero-title-shell>
-      <h1 class="v2-hero-title" data-v2-hero-title>We build personal brand positions that generate revenue.</h1>
-    </div>
-    <div class="v2-hero-morph" data-v2-hero-cycle-block>
-      <p class="v2-hero-cycle-line" data-v2-hero-cycle-line>
-        Not <span class="v2-hero-cycle-em" data-v2-hero-cycle-slot>followers</span>.
-      </p>
-      <p class="v2-hero-revenue-word" data-v2-hero-revenue hidden aria-hidden="true">Revenue.</p>
+  <section class="v2-center v2-hero-section" data-v2-hero-stage aria-busy="true">
+    <div data-v2-hero-inner>
+      <div class="v2-eyebrow v2-hero-eyebrow-wrap" data-v2-hero-eyebrow>
+        <span class="v2-hero-eyebrow-line" data-v2-eyebrow-l1>For founders</span>
+        <br aria-hidden="true" />
+        <span class="v2-hero-eyebrow-line" data-v2-eyebrow-l2>who've outgrown word of mouth</span>
+      </div>
+      <div class="v2-hero-title-shell" data-v2-hero-title-shell>
+        <h1
+          class="v2-hero-title"
+          data-v2-hero-title
+          aria-label="We build personal brand positions that generate revenue."
+        >
+          <span class="v2-hero-title-prefix" data-v2-hero-title-prefix></span><span data-v2-hero-morph class="v2-hero-morph-line"></span>
+        </h1>
+      </div>
     </div>
     <div data-v2-hero-rest>
       <p class="v2-p v2-p--wide">
@@ -715,8 +732,10 @@ const fc = landing.footer;
 <script>
   import { initV2HeroIntro } from "../scripts/v2HeroIntro";
   import { initV2Reveal } from "../scripts/v2Reveal";
+  import { initV2ScrollRise } from "../scripts/v2ScrollRise";
   initV2HeroIntro();
   initV2Reveal();
+  initV2ScrollRise();
 </script>
 
 </body>
