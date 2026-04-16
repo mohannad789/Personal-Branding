@@ -31,31 +31,24 @@ function addGap(tl: gsap.core.Timeline, seconds: number) {
   tl.to(o, { _: 1, duration: seconds, ease: "none" });
 }
 
-/** Reading-pace character reveal (layout pre-reserved; opacity only). */
-function revealCharsReading(el: HTMLElement, full: string, staggerAmount: number) {
-  el.textContent = "";
-  const spans: HTMLElement[] = [];
-  for (let i = 0; i < full.length; i++) {
-    const ch = full[i];
-    const s = document.createElement("span");
-    s.className = "v2-tw-char";
-    s.textContent = ch === " " ? " " : ch;
-    spans.push(s);
-    el.appendChild(s);
-  }
-  return gsap.to(spans, {
-    opacity: 1,
-    duration: 0.55,
-    ease: "power2.out",
-    stagger: { amount: Math.max(1.2, staggerAmount), from: "start", ease: "power1.inOut" },
-  });
-}
+type WordRevealOpts = {
+  /** Total time budget spread across stagger (seconds). */
+  staggerMin?: number;
+  /** Per-word opacity tween duration. */
+  wordDuration?: number;
+};
 
-/** Reading-pace word reveal for the headline prefix. */
-function revealWordsReading(el: HTMLElement, full: string, staggerAmount: number) {
+/**
+ * Word-by-word reveal (same pattern as the title prefix).
+ * `staggerAmount` is the GSAP stagger `amount` (total stagger window, seconds).
+ */
+function revealWordsReading(el: HTMLElement, full: string, staggerAmount: number, opts?: WordRevealOpts) {
   el.textContent = "";
   const words = full.trim().split(/\s+/);
   const spans: HTMLElement[] = [];
+  const staggerMin = opts?.staggerMin ?? 1.8;
+  const wordDuration = opts?.wordDuration ?? 0.62;
+
   words.forEach((w, i) => {
     const s = document.createElement("span");
     s.className = "v2-tw-word";
@@ -66,33 +59,59 @@ function revealWordsReading(el: HTMLElement, full: string, staggerAmount: number
     spans.push(s);
     el.appendChild(s);
   });
+
   return gsap.to(spans, {
     opacity: 1,
-    duration: 0.62,
+    duration: wordDuration,
     ease: "power2.out",
-    stagger: { amount: Math.max(1.8, staggerAmount), from: "start", ease: "power1.inOut" },
+    stagger: {
+      amount: Math.max(staggerMin, staggerAmount),
+      from: "start",
+      ease: "power1.inOut",
+    },
   });
 }
 
-function morphCycle(el: HTMLElement, phrases: string[], fade: number, hold: number) {
+/**
+ * Phrases sit inline after “generate …”. Each phrase wipes in **right → left** (clip uncovers from the right edge).
+ * Between phrases: quick wipe-out toward the right, swap copy, wipe-in again.
+ */
+function morphCycleRTL(el: HTMLElement, phrases: string[], wipeIn: number, wipeOut: number, hold: number) {
   const tl = gsap.timeline();
+
+  const wipeInFromRight = () =>
+    gsap.fromTo(
+      el,
+      { clipPath: "inset(0 100% 0 0)" },
+      { clipPath: "inset(0 0 0 0)", duration: wipeIn, ease: "power2.out" }
+    );
+
+  const wipeOutToRight = () =>
+    gsap.to(el, {
+      clipPath: "inset(0 100% 0 0)",
+      duration: wipeOut,
+      ease: "power2.in",
+    });
+
   el.textContent = phrases[0];
-  tl.fromTo(el, { autoAlpha: 0 }, { autoAlpha: 1, duration: fade * 1.1, ease: "power2.out" });
+  gsap.set(el, { clipPath: "inset(0 100% 0 0)" });
+  tl.add(wipeInFromRight());
   addGap(tl, hold);
+
   for (let i = 1; i < phrases.length; i++) {
-    tl.to(el, { autoAlpha: 0, duration: fade * 0.55, ease: "power2.in" });
+    tl.add(wipeOutToRight());
     tl.add(() => {
       el.textContent = phrases[i];
+      gsap.set(el, { clipPath: "inset(0 100% 0 0)" });
     });
-    tl.fromTo(el, { autoAlpha: 0 }, { autoAlpha: 1, duration: fade, ease: "power2.out" });
+    tl.add(wipeInFromRight());
     if (i < phrases.length - 1) addGap(tl, hold);
   }
-  return tl;
-}
 
-function parseLetterSpacing(raw: string): string {
-  const n = parseFloat(raw);
-  return Number.isFinite(n) ? `${n}px` : "0.18em";
+  tl.add(() => {
+    gsap.set(el, { clearProps: "clipPath" });
+  });
+  return tl;
 }
 
 export function initV2HeroIntro() {
@@ -135,6 +154,11 @@ export function initV2HeroIntro() {
     return;
   }
 
+  line1.textContent = "";
+  line2.textContent = "";
+  gsap.set(inner, { autoAlpha: 0 });
+  gsap.set(rest, { autoAlpha: 0 });
+
   const run = () => {
     syncNavPad();
     stage.setAttribute("aria-busy", "true");
@@ -146,6 +170,7 @@ export function initV2HeroIntro() {
     prefix.textContent = "";
     morph.textContent = "";
     morph.style.removeProperty("opacity");
+    gsap.set(morph, { clearProps: "clipPath" });
 
     eyebrow.classList.add("v2-eyebrow--intro");
 
@@ -154,18 +179,14 @@ export function initV2HeroIntro() {
       line1.textContent = "X";
       const csIntro = getComputedStyle(eyebrow);
       const fsIntro = parseFloat(csIntro.fontSize);
-      const lsIntroRaw = csIntro.letterSpacing;
       eyebrow.classList.remove("v2-eyebrow--intro");
       const csEnd = getComputedStyle(eyebrow);
       const fsEnd = parseFloat(csEnd.fontSize);
-      const lsEndRaw = csEnd.letterSpacing;
       eyebrow.classList.add("v2-eyebrow--intro");
       line1.textContent = "";
       return {
         fsIntro: Number.isFinite(fsIntro) ? fsIntro : 32,
-        lsIntroStr: parseLetterSpacing(lsIntroRaw),
-        fsEnd: Number.isFinite(fsEnd) ? fsEnd : 11,
-        lsEndStr: parseLetterSpacing(lsEndRaw),
+        fsEnd: Number.isFinite(fsEnd) ? fsEnd : 14,
       };
     };
 
@@ -182,22 +203,39 @@ export function initV2HeroIntro() {
 
     tl.to(inner, { autoAlpha: 1, duration: 0.45, ease: "power2.out" });
 
-    const l1Dur = Math.max(2.4, EYEBROW_L1.length * 0.09);
-    tl.add(revealCharsReading(line1, EYEBROW_L1, l1Dur));
-    const l2Dur = Math.max(3.2, EYEBROW_L2.length * 0.085);
-    tl.add(revealCharsReading(line2, EYEBROW_L2, l2Dur));
+    /* Eyebrow: word-by-word per line; stagger `amount` is total window (seconds), so keep it modest. */
+    const l1Words = EYEBROW_L1.trim().split(/\s+/).length;
+    tl.add(
+      revealWordsReading(line1, EYEBROW_L1, l1Words * 0.4, {
+        staggerMin: 0.75,
+        wordDuration: 0.4,
+      })
+    );
+    const l2Words = EYEBROW_L2.trim().split(/\s+/).length;
+    tl.add(
+      revealWordsReading(line2, EYEBROW_L2, l2Words * 0.34, {
+        staggerMin: 1.55,
+        wordDuration: 0.4,
+      })
+    );
 
+    /* Shrink + settle down only: do not tween letter-spacing (it shifts long vs short lines sideways while width changes). */
     tl.fromTo(
       eyebrow,
-      { fontSize: m.fsIntro, letterSpacing: m.lsIntroStr },
+      {
+        fontSize: m.fsIntro,
+        y: -16,
+        x: 0,
+      },
       {
         fontSize: m.fsEnd,
-        letterSpacing: m.lsEndStr,
-        duration: 1.05,
+        y: 0,
+        x: 0,
+        duration: 0.95,
         ease: "power2.inOut",
         onComplete: () => {
           eyebrow.classList.remove("v2-eyebrow--intro");
-          gsap.set(eyebrow, { clearProps: "fontSize,letterSpacing" });
+          gsap.set(eyebrow, { clearProps: "fontSize,letterSpacing,y,transform" });
         },
       }
     );
@@ -206,7 +244,7 @@ export function initV2HeroIntro() {
     const prefixStagger = Math.max(3.2, wordCount * 0.28);
     tl.add(revealWordsReading(prefix, PREFIX, prefixStagger));
 
-    const morphTl = morphCycle(morph, MORPH_PHRASES, 0.42, 0.62);
+    const morphTl = morphCycleRTL(morph, MORPH_PHRASES, 0.78, 0.38, 0.52);
     tl.add(morphTl);
 
     tl.to(rest, { autoAlpha: 1, duration: 0.75, ease: "power2.out" }, "+=0.2");

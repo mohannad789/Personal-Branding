@@ -93,18 +93,25 @@ const fc = landing.footer;
     .v2-center { text-align: center; }
     .v2-eyebrow {
       font-family: var(--fb);
-      font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 1rem; display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: block;
     }
-    /* Hero intro: eyebrow starts title-sized, then tweens to normal .v2-eyebrow */
+    /* Hero intro: large eyebrow; both lines inherit same size so shrink tween stays smooth */
     .v2-eyebrow.v2-eyebrow--intro {
       font-family: var(--ft);
-      font-size: clamp(2rem, 5.5vw, 3.25rem);
+      font-size: clamp(1.65rem, 4.5vw, 2.85rem);
       font-weight: 600;
       letter-spacing: 0.04em;
       line-height: 1.12;
       text-transform: uppercase;
       color: var(--accent);
+      transform-origin: 50% 0%;
+      will-change: transform, font-size;
     }
     .v2-hero-section {
       min-height: min(100dvh, calc(100svh - var(--v2-nav-pad, 5.75rem)));
@@ -113,6 +120,8 @@ const fc = landing.footer;
       padding-top: max(0.5rem, var(--v2-nav-pad, 5.75rem));
       padding-bottom: 2rem;
       box-sizing: border-box;
+      overflow-x: visible;
+      overflow-y: visible;
     }
     .v2-hero-section.v2-center { text-align: center; }
     [data-v2-hero-inner] {
@@ -120,59 +129,111 @@ const fc = landing.footer;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.35rem;
       opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      overflow: visible;
     }
     @media (prefers-reduced-motion: reduce) {
-      [data-v2-hero-inner] { opacity: 1 !important; }
+      [data-v2-hero-inner] {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+      }
     }
     [data-v2-hero-rest] {
       margin-top: auto;
       width: 100%;
+      opacity: 0;
+      visibility: hidden;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [data-v2-hero-rest] {
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
     }
     .v2-hero-eyebrow-wrap {
-      display: block;
-      margin-bottom: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 0.35rem;
+      line-height: 1.02;
     }
     .v2-hero-eyebrow-wrap .v2-hero-eyebrow-line {
       display: block;
+      margin: 0;
+      padding: 0;
+      line-height: 1.05;
+      width: max-content;
+      max-width: 100%;
+      text-align: center;
+    }
+    .v2-eyebrow .v2-tw-word {
+      font: inherit;
+      letter-spacing: inherit;
+      text-transform: inherit;
+      color: inherit;
+    }
+    /* Second line: one line while large and after shrink (scroll if needed on tiny screens). */
+    [data-v2-eyebrow-l2] {
+      white-space: nowrap;
+    }
+    .v2-eyebrow.v2-eyebrow--intro.v2-hero-eyebrow-wrap {
+      max-width: 100%;
+      overflow: visible;
     }
     .v2-hero-title-shell {
       transform-origin: 50% 0%;
       max-width: min(100%, 44rem);
       margin-inline: auto;
+      min-width: 0;
+      overflow-x: auto;
+      overflow-y: visible;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
     }
+    .v2-hero-title-shell::-webkit-scrollbar {
+      display: none;
+    }
+    /* One continuous line: prefix … “generate” + morph (scroll horizontally on narrow viewports). */
     .v2-hero-title {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: baseline;
-      gap: 0.2em 0.35em;
+      display: block;
+      white-space: nowrap;
+      width: max-content;
+      max-width: none;
       font-family: var(--ft);
       font-weight: 700;
       font-size: clamp(2rem, 5.5vw, 3.25rem);
       line-height: 1.18;
       letter-spacing: -0.03em;
       margin-bottom: 1.25rem;
-      max-width: min(100%, 38rem);
       margin-left: auto;
       margin-right: auto;
       text-align: center;
     }
     .v2-hero-title-prefix {
-      text-align: center;
+      display: inline;
+      text-align: inherit;
     }
-    /* Merged “revenue / Not… / Revenue” line — larger type, no scale-down animation */
+    .v2-hero-morph-clip {
+      display: inline-block;
+      margin-left: 0.14em;
+      vertical-align: baseline;
+      max-width: none;
+      overflow: visible;
+    }
+    /* Same size as the headline; accent colour. clip-path wipe is applied in JS. */
     [data-v2-hero-morph] {
       display: inline-block;
-      font-family: var(--ft);
+      font: inherit;
       font-weight: 700;
-      font-size: clamp(2.35rem, 6vw, 3.75rem);
-      line-height: 1.12;
-      letter-spacing: -0.03em;
       color: var(--accent);
-      min-height: 1.15em;
+      letter-spacing: inherit;
+      line-height: inherit;
       vertical-align: baseline;
+      will-change: clip-path;
     }
     .v2-tw-char {
       display: inline;
@@ -387,10 +448,13 @@ const fc = landing.footer;
 
   <section class="v2-center v2-hero-section" data-v2-hero-stage aria-busy="true">
     <div data-v2-hero-inner>
-      <div class="v2-eyebrow v2-hero-eyebrow-wrap" data-v2-hero-eyebrow>
-        <span class="v2-hero-eyebrow-line" data-v2-eyebrow-l1>For founders</span>
-        <br aria-hidden="true" />
-        <span class="v2-hero-eyebrow-line" data-v2-eyebrow-l2>who've outgrown word of mouth</span>
+      <div
+        class="v2-eyebrow v2-hero-eyebrow-wrap"
+        data-v2-hero-eyebrow
+        aria-label="For founders who've outgrown word of mouth"
+      >
+        <span class="v2-hero-eyebrow-line" data-v2-eyebrow-l1></span>
+        <span class="v2-hero-eyebrow-line" data-v2-eyebrow-l2></span>
       </div>
       <div class="v2-hero-title-shell" data-v2-hero-title-shell>
         <h1
@@ -398,7 +462,7 @@ const fc = landing.footer;
           data-v2-hero-title
           aria-label="We build personal brand positions that generate revenue."
         >
-          <span class="v2-hero-title-prefix" data-v2-hero-title-prefix></span><span data-v2-hero-morph class="v2-hero-morph-line"></span>
+          <span class="v2-hero-title-prefix" data-v2-hero-title-prefix></span><span class="v2-hero-morph-clip" data-v2-hero-morph-clip><span data-v2-hero-morph class="v2-hero-morph-line"></span></span>
         </h1>
       </div>
     </div>
