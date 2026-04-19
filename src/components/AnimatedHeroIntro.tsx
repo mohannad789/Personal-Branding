@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export default function AnimatedHeroIntro() {
@@ -16,11 +16,12 @@ export default function AnimatedHeroIntro() {
       setTimeout(() => setPhase(2), 1200), // "WHO'VE OUTGROWN"
       setTimeout(() => setPhase(3), 1900), // "WORD OF MOUTH"
       setTimeout(() => setPhase(4), 3000), // Eyebrow shrinks. Title appears massively (staggered).
-      setTimeout(() => setPhase(5), 7200), // Title shrinks.
+      // Title stagger takes ~3s. Revenue appears at ~6s. Rotation takes ~3.5s.
+      setTimeout(() => setPhase(5), 10500), // Title shrinks.
       setTimeout(() => {
         setPhase(6); // Rest of content fades in
         document.body.style.overflow = 'auto'; // Unlock scroll
-      }, 8000) 
+      }, 11500) 
     ];
 
     return () => {
@@ -71,18 +72,20 @@ export default function AnimatedHeroIntro() {
         }}
       >
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.3em' }}>
-          <motion.span variants={{ hidden: { opacity: 0, y: 20, filter: "blur(5px)" }, show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>We</motion.span>
-          <motion.span variants={{ hidden: { opacity: 0, y: 20, filter: "blur(5px)" }, show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Build</motion.span>
-          <motion.span variants={{ hidden: { opacity: 0, y: 20, filter: "blur(5px)" }, show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Personal</motion.span>
-          <motion.span variants={{ hidden: { opacity: 0, y: 20, filter: "blur(5px)" }, show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Brand</motion.span>
+          <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>We</motion.span>
+          <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Build</motion.span>
+          <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Personal</motion.span>
+          <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Brand</motion.span>
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.3em' }}>
-          <motion.span variants={{ hidden: { opacity: 0, y: 20, filter: "blur(5px)" }, show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Positions</motion.span>
-          <motion.span variants={{ hidden: { opacity: 0, y: 20, filter: "blur(5px)" }, show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>That</motion.span>
-          <motion.span variants={{ hidden: { opacity: 0, y: 20, filter: "blur(5px)" }, show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Generate</motion.span>
+          <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Positions</motion.span>
+          <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>That</motion.span>
+          <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Generate</motion.span>
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.3em' }}>
-          <motion.span variants={{ hidden: { opacity: 0, y: 20, filter: "blur(5px)" }, show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }} style={{ color: 'var(--accent-color)' }}>Revenue.</motion.span>
+          <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>
+            {phase >= 4 && <RotatingWord />}
+          </motion.span>
         </div>
       </motion.h1>
 
@@ -108,5 +111,49 @@ export default function AnimatedHeroIntro() {
       </motion.div>
 
     </section>
+  );
+}
+
+function RotatingWord() {
+  const [wordIndex, setWordIndex] = useState(0);
+  const words = [
+    { text: "Revenue.", color: "var(--accent-color)" },
+    { text: "Not followers", color: "#ef4444" },
+    { text: "Not visibility", color: "#ef4444" },
+    { text: "Not impressions", color: "#ef4444" },
+    { text: "Revenue.", color: "var(--accent-color)" }
+  ];
+
+  useEffect(() => {
+    let timeouts: NodeJS.Timeout[] = [];
+    const runSequence = async () => {
+      // The word staggering takes 2.8s to reach this word.
+      // Wait another 800ms for user to read "Revenue." before switching.
+      await new Promise(r => { const t = setTimeout(r, 3600); timeouts.push(t); });
+      setWordIndex(1);
+      await new Promise(r => { const t = setTimeout(r, 1000); timeouts.push(t); });
+      setWordIndex(2);
+      await new Promise(r => { const t = setTimeout(r, 1000); timeouts.push(t); });
+      setWordIndex(3);
+      await new Promise(r => { const t = setTimeout(r, 1000); timeouts.push(t); });
+      setWordIndex(4);
+    };
+    runSequence();
+    return () => timeouts.forEach(clearTimeout);
+  }, []);
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.span
+        key={wordIndex}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.3 }}
+        style={{ color: words[wordIndex].color, display: 'inline-block' }}
+      >
+        {words[wordIndex].text}
+      </motion.span>
+    </AnimatePresence>
   );
 }
