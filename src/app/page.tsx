@@ -1,13 +1,29 @@
 import AnimatedHeroIntro from "@/components/AnimatedHeroIntro";
+import HeroPillarBackdrop from "@/components/HeroPillarBackdrop";
 
 export default function Home() {
   return (
-    <main className="min-h-screen" style={{ paddingTop: '5rem' }}>
-      
+    <>
+      <HeroPillarBackdrop />
+      <main className="relative z-[15] min-h-screen">
       <AnimatedHeroIntro />
 
+      <div
+        className="relative"
+        style={{
+          backgroundImage: `linear-gradient(
+            180deg,
+            transparent 0px,
+            transparent max(72px, 11vh),
+            color-mix(in srgb, var(--bg-color) 38%, transparent) max(160px, 22vh),
+            color-mix(in srgb, var(--bg-color) 78%, transparent) max(280px, 38vh),
+            var(--bg-color) max(400px, 52vh),
+            var(--bg-color) 100%
+          )`,
+        }}
+      >
       {/* SECTION 2 — The Invisible Authority Trap */}
-      <section className="section-padding container">
+      <section id="home-section-after-hero" className="section-padding container scroll-mt-28">
         <span className="eyebrow">THE INVISIBLE AUTHORITY TRAP</span>
         <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', maxWidth: '800px', marginBottom: '1.5rem' }}>
           You've Built A Business<br />
@@ -416,6 +432,8 @@ export default function Home() {
         </div>
       </footer>
 
+      </div>
     </main>
+    </>
   );
 }

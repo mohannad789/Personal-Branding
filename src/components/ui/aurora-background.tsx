@@ -12,16 +12,8 @@ export const AuroraBackground = ({
   ...props
 }: AuroraBackgroundProps) => {
   return (
-    <main>
-      <div
-        className={cn(
-          "relative flex h-[100vh] flex-col items-center justify-center bg-[var(--bg-color)] text-[var(--text-color)]",
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </div>
-    </main>
+    <div className={cn("relative w-full text-[var(--text-color)]", className)} {...props}>
+      {children}
+    </div>
   );
 };

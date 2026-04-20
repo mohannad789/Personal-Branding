@@ -1,13 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { HERO_HEADER_DELAY_SEC } from "@/lib/heroTiming";
 
-export default function AnimatedHeader({ children }: { children: React.ReactNode }) {
+export default function AnimatedHeader({
+  children,
+  entryDelaySec = HERO_HEADER_DELAY_SEC,
+}: {
+  children: React.ReactNode;
+  /** When the nav fades in (seconds), aligned with hero `phase === 6`. */
+  entryDelaySec?: number;
+}) {
   return (
     <motion.header
       initial={{ y: -100, x: "-50%", opacity: 0 }}
       animate={{ y: 0, x: "-50%", opacity: 1 }}
-      transition={{ delay: 11.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ delay: entryDelaySec, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       style={{ 
         display: 'flex', 
         justifyContent: 'space-between', 
@@ -20,11 +28,11 @@ export default function AnimatedHeader({ children }: { children: React.ReactNode
         maxWidth: '1200px',
         zIndex: 50,
         borderRadius: '9999px',
-        backgroundColor: 'color-mix(in srgb, var(--bg-color) 70%, transparent)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        border: '1px solid color-mix(in srgb, var(--text-muted) 20%, transparent)',
-        boxShadow: '0 4px 24px -8px rgba(0,0,0,0.1)'
+        backgroundColor: 'color-mix(in srgb, var(--bg-color) 38%, transparent)',
+        backdropFilter: 'blur(14px)',
+        WebkitBackdropFilter: 'blur(14px)',
+        border: '1px solid color-mix(in srgb, var(--text-muted) 14%, transparent)',
+        boxShadow: '0 4px 24px -8px rgba(0,0,0,0.08)'
       }}
     >
       {children}

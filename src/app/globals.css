@@ -7,7 +7,7 @@
 :root {
   --bg-color: #ffffff;
   --text-color: #000000;
-  --text-muted: #666666;
+  --text-muted: #575757;
   --accent-color: #2563eb; /* Blue accent */
   --accent-invert: #ffffff;
   --font-sans: 'Satoshi', sans-serif;
@@ -17,7 +17,7 @@
 [data-theme='dark'] {
   --bg-color: #0a0a0a;
   --text-color: #ffffff;
-  --text-muted: #a1a1a1;
+  --text-muted: #d6d6d6;
   --accent-color: #3b82f6; /* Lighter blue for dark mode */
   --accent-invert: #000000;
 }
