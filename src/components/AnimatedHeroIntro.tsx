@@ -3,7 +3,7 @@
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState, useMemo } from "react";
 import { useTheme } from "next-themes";
-import AuroraBackground from "./AuroraBackground";
+
 
 export default function AnimatedHeroIntro() {
   const [phase, setPhase] = useState(0);
@@ -37,34 +37,12 @@ export default function AnimatedHeroIntro() {
 
   const { scrollY } = useScroll();
   const opacity = useTransform(scrollY, [200, 800], [1, 0]);
-  const [isBgPaused, setIsBgPaused] = useState(false);
 
-  useEffect(() => {
-    const unsubscribe = opacity.on("change", (v) => {
-      if (v <= 0 && !isBgPaused) setIsBgPaused(true);
-      if (v > 0 && isBgPaused) setIsBgPaused(false);
-    });
-    return () => unsubscribe();
-  }, [opacity, isBgPaused]);
 
   return (
     <section className="section-padding container" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", paddingTop: '8rem' }}>
       
-      {/* Aurora background */}
-      <motion.div
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
-          zIndex: -1,
-          opacity,
-          pointerEvents: isBgPaused ? 'none' : 'auto',
-        }}
-      >
-        <AuroraBackground className="w-full h-full" />
-      </motion.div>
+
 
       {/* Eyebrow */}
       <motion.div 
