@@ -3,6 +3,7 @@
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState, useMemo } from "react";
 import { useTheme } from "next-themes";
+import { AuroraBackground } from "@/components/ui/aurora-background";
 
 
 export default function AnimatedHeroIntro() {
@@ -40,85 +41,86 @@ export default function AnimatedHeroIntro() {
 
 
   return (
-    <section className="section-padding container" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", paddingTop: '8rem' }}>
-      
-
-
-      {/* Eyebrow */}
-      <motion.div 
-        layout
-        animate={{
-          fontSize: isEyebrowMassive ? 'clamp(0.875rem, 2.5vw, 3rem)' : '0.875rem',
-          marginBottom: isEyebrowMassive ? '3rem' : '1.5rem'
-        }}
-        style={{ 
-          display: 'flex', gap: '0.4em', flexWrap: 'nowrap', justifyContent: 'center', whiteSpace: 'nowrap',
-          fontWeight: 700, letterSpacing: '0.05em', color: 'var(--accent-color)',
-        }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <motion.span layout initial={{ opacity: 0, x: -20 }} animate={{ opacity: phase >= 1 ? 1 : 0, x: phase >= 1 ? 0 : -20 }}>FOR FOUNDERS</motion.span>
-        <motion.span layout initial={{ opacity: 0, x: 20 }} animate={{ opacity: phase >= 2 ? 1 : 0, x: phase >= 2 ? 0 : 20 }}>WHO'VE OUTGROWN</motion.span>
-        <motion.span layout initial={{ opacity: 0, x: 20 }} animate={{ opacity: phase >= 3 ? 1 : 0, x: phase >= 3 ? 0 : 20 }}>WORD OF MOUTH</motion.span>
-      </motion.div>
-
-      {/* Title */}
-      <motion.h1 
-        layout
-        initial="hidden"
-        animate={phase >= 4 ? "show" : "hidden"}
-        variants={{
-          hidden: { opacity: 1 },
-          show: { opacity: 1, transition: { staggerChildren: 0.4 } }
-        }}
-        style={{ 
-          fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-          marginBottom: '2rem',
-          textTransform: 'capitalize', lineHeight: 1.1,
-          pointerEvents: phase >= 6 ? 'auto' : 'none',
-          display: phase >= 4 ? 'block' : 'none'
-        }}
-      >
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.3em' }}>
-          <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>We</motion.span>
-          <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Build</motion.span>
-          <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Personal</motion.span>
-          <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Brand</motion.span>
-        </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.3em' }}>
-          <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Positions</motion.span>
-          <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>That</motion.span>
-          <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Generate</motion.span>
-        </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.3em' }}>
-          <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>
-            {phase >= 4 && <RotatingWord />}
-          </motion.span>
-        </div>
-      </motion.h1>
-
-      {/* Rest of Hero */}
-      <motion.div
-        layout
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: phase >= 6 ? 1 : 0, y: phase >= 6 ? 0 : 20 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: phase >= 6 ? 'auto' : 'none' }}
-      >
-        <p style={{ fontSize: '1.25rem', maxWidth: '700px', marginBottom: '1.5rem', color: 'var(--text-muted)' }}>
-          We build high-ticket lead generation infrastructure. The kind of asymmetric leverage where strangers contact you pre-sold, sales cycles halve, and your pipeline stops depending on who you had dinner with last quarter. Money is the consensus mechanism of your market. We engineer that consensus.
-        </p>
+    <AuroraBackground>
+      <section className="section-padding container" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", paddingTop: '8rem' }}>
         
-        <p style={{ fontWeight: 700, fontSize: '1.25rem', marginBottom: '2rem' }}>
-          Book a strategy call to see how.
-        </p>
-        
-        <button className="cta-button">
-          Book a Strategy Call
-        </button>
-      </motion.div>
+        {/* Eyebrow */}
+        <motion.div 
+          layout
+          animate={{
+            fontSize: isEyebrowMassive ? 'clamp(0.875rem, 2.5vw, 3rem)' : '0.875rem',
+            marginBottom: isEyebrowMassive ? '3rem' : '1.5rem'
+          }}
+          style={{ 
+            display: 'flex', gap: '0.4em', flexWrap: 'nowrap', justifyContent: 'center', whiteSpace: 'nowrap',
+            fontWeight: 700, letterSpacing: '0.05em', color: 'var(--accent-color)',
+          }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <motion.span layout initial={{ opacity: 0, x: -20 }} animate={{ opacity: phase >= 1 ? 1 : 0, x: phase >= 1 ? 0 : -20 }}>FOR FOUNDERS</motion.span>
+          <motion.span layout initial={{ opacity: 0, x: 20 }} animate={{ opacity: phase >= 2 ? 1 : 0, x: phase >= 2 ? 0 : 20 }}>WHO'VE OUTGROWN</motion.span>
+          <motion.span layout initial={{ opacity: 0, x: 20 }} animate={{ opacity: phase >= 3 ? 1 : 0, x: phase >= 3 ? 0 : 20 }}>WORD OF MOUTH</motion.span>
+        </motion.div>
 
-    </section>
+        {/* Title */}
+        <motion.h1 
+          layout
+          initial="hidden"
+          animate={phase >= 4 ? "show" : "hidden"}
+          variants={{
+            hidden: { opacity: 1 },
+            show: { opacity: 1, transition: { staggerChildren: 0.4 } }
+          }}
+          style={{ 
+            fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
+            marginBottom: '2rem',
+            textTransform: 'capitalize', lineHeight: 1.1,
+            pointerEvents: phase >= 6 ? 'auto' : 'none',
+            display: phase >= 4 ? 'block' : 'none'
+          }}
+        >
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.3em' }}>
+            <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>We</motion.span>
+            <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Build</motion.span>
+            <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Personal</motion.span>
+            <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Brand</motion.span>
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.3em' }}>
+            <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Positions</motion.span>
+            <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>That</motion.span>
+            <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>Generate</motion.span>
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.3em' }}>
+            <motion.span variants={{ hidden: { opacity: 0, x: 20, filter: "blur(5px)" }, show: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.3 } } }}>
+              {phase >= 4 && <RotatingWord />}
+            </motion.span>
+          </div>
+        </motion.h1>
+
+        {/* Rest of Hero */}
+        <motion.div
+          layout
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: phase >= 6 ? 1 : 0, y: phase >= 6 ? 0 : 20 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: phase >= 6 ? 'auto' : 'none' }}
+        >
+          <p style={{ fontSize: '1.25rem', maxWidth: '700px', marginBottom: '1.5rem', color: 'var(--text-muted)' }}>
+            We build high-ticket lead generation infrastructure. The kind of asymmetric leverage where strangers contact you pre-sold, sales cycles halve, and your pipeline stops depending on who you had dinner with last quarter. Money is the consensus mechanism of your market. We engineer that consensus.
+          </p>
+          
+          <p style={{ fontWeight: 700, fontSize: '1.25rem', marginBottom: '2rem' }}>
+            Book a strategy call to see how.
+          </p>
+          
+          <button className="cta-button">
+            Book a Strategy Call
+          </button>
+        </motion.div>
+
+      </section>
+    </AuroraBackground>
+
   );
 }
 
