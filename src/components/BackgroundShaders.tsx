@@ -32,20 +32,17 @@ export default function BackgroundShaders({ isPaused = false }: { isPaused?: boo
   const speed = isPaused ? 0 : 0.5;
 
   return (
-    <div style={{ width: "100%", height: "100%", position: "relative", overflow: "hidden" }}>
+    <div style={{ width: "100%", height: "100%", position: "relative", overflow: "hidden", backgroundColor: bgColor }}>
       <MeshGradient
         className="w-full h-full absolute inset-0"
         colors={meshColors}
         speed={speed}
-        backgroundColor={bgColor}
       />
       <div className="w-full h-full absolute inset-0 opacity-60">
         <DotOrbit
           className="w-full h-full"
-          dotColor={dotColor}
-          orbitColor={orbitColor}
+          colors={[dotColor, orbitColor]}
           speed={speed * 3}
-          intensity={0.8}
         />
       </div>
     </div>
