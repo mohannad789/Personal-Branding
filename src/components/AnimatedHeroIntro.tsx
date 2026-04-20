@@ -1,7 +1,9 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { useEffect, useState, useMemo } from "react";
+import { useTheme } from "next-themes";
+import BackgroundShaders from "./BackgroundShaders";
 
 export default function AnimatedHeroIntro() {
   const [phase, setPhase] = useState(0);
@@ -33,9 +35,38 @@ export default function AnimatedHeroIntro() {
   const isEyebrowMassive = phase < 4;
   const isTitleMassive = phase === 4;
 
+  const { scrollY } = useScroll();
+  const opacity = useTransform(scrollY, [200, 800], [1, 0]);
+  const [isBgPaused, setIsBgPaused] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = opacity.on("change", (v) => {
+      if (v <= 0 && !isBgPaused) setIsBgPaused(true);
+      if (v > 0 && isBgPaused) setIsBgPaused(false);
+    });
+    return () => unsubscribe();
+  }, [opacity, isBgPaused]);
+
   return (
     <section className="section-padding container" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", paddingTop: '8rem' }}>
       
+      {/* Background LiquidEther */}
+      <motion.div 
+        style={{ 
+          position: 'fixed', 
+          top: 0, left: 0, width: '100vw', height: '100vh', 
+          zIndex: -1, 
+          opacity,
+          pointerEvents: isBgPaused ? 'none' : 'auto'
+        }}
+      >
+        {phase >= 6 && (
+          <BackgroundShaders
+            isPaused={isBgPaused}
+          />
+        )}
+      </motion.div>
+
       {/* Eyebrow */}
       <motion.div 
         layout
@@ -64,8 +95,8 @@ export default function AnimatedHeroIntro() {
           show: { opacity: 1, transition: { staggerChildren: 0.4 } }
         }}
         style={{ 
-          fontSize: isTitleMassive ? 'clamp(2rem, 5vw, 6rem)' : 'clamp(2.5rem, 5vw, 4.5rem)',
-          marginBottom: isTitleMassive ? '4rem' : '2rem',
+          fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
+          marginBottom: '2rem',
           textTransform: 'capitalize', lineHeight: 1.1,
           pointerEvents: phase >= 6 ? 'auto' : 'none',
           display: phase >= 4 ? 'block' : 'none'
@@ -149,7 +180,7 @@ function RotatingWord() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.15 }}
         style={{ color: words[wordIndex].color, display: 'inline-block' }}
       >
         {words[wordIndex].text}

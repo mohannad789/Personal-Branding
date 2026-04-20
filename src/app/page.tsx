@@ -7,7 +7,7 @@ export default function Home() {
       <AnimatedHeroIntro />
 
       {/* SECTION 2 — The Invisible Authority Trap */}
-      <section className="section-padding container" style={{ backgroundColor: 'rgba(150, 150, 150, 0.05)', borderRadius: '8px' }}>
+      <section className="section-padding container">
         <span className="eyebrow">THE INVISIBLE AUTHORITY TRAP</span>
         <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', maxWidth: '800px', marginBottom: '1.5rem' }}>
           You've Built A Business<br />
@@ -88,7 +88,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 4 — Objection Block */}
-      <section className="section-padding container" style={{ backgroundColor: 'rgba(150, 150, 150, 0.05)', borderRadius: '8px' }}>
+      <section className="section-padding container">
         <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: '4rem', textAlign: 'center' }}>Real Conversations.</h2>
         
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem', maxWidth: '800px', margin: '0 auto' }}>
@@ -166,7 +166,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 6 — The Method */}
-      <section className="section-padding container" style={{ backgroundColor: 'rgba(150, 150, 150, 0.05)', borderRadius: '8px' }}>
+      <section className="section-padding container">
         <span className="eyebrow">THE POSITION-FIRST METHOD</span>
         <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', maxWidth: '800px', marginBottom: '2rem' }}>
           Why Most Personal Brands<br />
@@ -262,7 +262,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 8 — Proof */}
-      <section className="section-padding container" style={{ backgroundColor: 'rgba(150, 150, 150, 0.05)', borderRadius: '8px' }}>
+      <section className="section-padding container">
         <span className="eyebrow">CLIENT OUTCOMES</span>
         <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', marginBottom: '4rem' }}>
           There's A Reason Founders<br />
