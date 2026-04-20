@@ -3,7 +3,7 @@
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState, useMemo } from "react";
 import { useTheme } from "next-themes";
-import BackgroundShaders from "./BackgroundShaders";
+import AuroraBackground from "./AuroraBackground";
 
 export default function AnimatedHeroIntro() {
   const [phase, setPhase] = useState(0);
@@ -50,21 +50,20 @@ export default function AnimatedHeroIntro() {
   return (
     <section className="section-padding container" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", paddingTop: '8rem' }}>
       
-      {/* Background LiquidEther */}
-      <motion.div 
-        style={{ 
-          position: 'fixed', 
-          top: 0, left: 0, width: '100vw', height: '100vh', 
-          zIndex: -1, 
+      {/* Aurora background */}
+      <motion.div
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          zIndex: -1,
           opacity,
-          pointerEvents: isBgPaused ? 'none' : 'auto'
+          pointerEvents: isBgPaused ? 'none' : 'auto',
         }}
       >
-        {phase >= 6 && (
-          <BackgroundShaders
-            isPaused={isBgPaused}
-          />
-        )}
+        <AuroraBackground className="w-full h-full" />
       </motion.div>
 
       {/* Eyebrow */}
