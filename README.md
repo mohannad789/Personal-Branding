@@ -1,68 +1,36 @@
-# Personal branding site
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Astro-powered site: the **home** route is a long-form **landing** (copy in [`src/content/landing.ts`](src/content/landing.ts), layout in [`src/styles/landing.css`](src/styles/landing.css) + [`src/components/landing/`](src/components/landing/)) with **minimal nav** (logo + one CTA). Other routes still use the full header from [`src/navigation.ts`](src/navigation.ts). Deployed to **Vercel**.
+## Getting Started
 
-## Stack
-
-- [Astro](https://astro.build/) (static output)
-- [@astrojs/vercel](https://docs.astro.build/en/guides/deploy/vercel/) adapter
-- Global styles in `src/styles/global.css`; copy and navigation data in `src/content/home.ts` and `src/navigation.ts`
-
-## Typography (Satoshi + Fraunces)
-
-**Satoshi** is loaded from [Fontshare](https://www.fontshare.com/fonts/satoshi) in [`src/layouts/BaseLayout.astro`](src/layouts/BaseLayout.astro) (no font binaries in this repo). Follow Fontshare’s license for your use case.
-
-**Accent serif:** **Fraunces** (Google Fonts, open license) is loaded as `--font-accent` for occasional editorial touches (e.g. hero tagline, large pull-quote). **All titles and headings use Satoshi** (`--font-sans`). Add the utility class `font-accent` on a specific element when you want Fraunces in copy.
-
-**Using your own font files instead:** add `.woff2` under `public/fonts/`, add `@font-face` in `src/styles/global.css`, and point `--font-accent` or `--font-sans` at that family.
-
-## Local development
+First, run the development server:
 
 ```bash
-npm install
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-Open the URL shown in the terminal (usually http://localhost:4321).
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```bash
-npm run build   # production build to dist/ and .vercel/output
-npm run preview # serve the production build locally
-```
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Environment variables
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-| Variable | Where | Purpose |
-|----------|--------|---------|
-| `PUBLIC_SITE_URL` | Vercel → Project → Settings → Environment Variables (Production and Preview) | Set to your live URL with **no trailing slash** (e.g. `https://personal-branding.vercel.app`). Astro uses `site` in `astro.config.mjs` for canonical URLs and future sitemap/OG tags. |
+## Learn More
 
-Copy [.env.example](.env.example) to `.env` for local overrides if needed.
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
 ## Deploy on Vercel
 
-1. Push this repository to GitHub (e.g. `mohannad789/Personal-Branding`).
-2. In [Vercel](https://vercel.com), **Add New Project** → import the repo.
-3. Framework Preset: **Astro** (auto-detected). Build command: `npm run build`. Install command: `npm install`.
-4. Add `PUBLIC_SITE_URL` after the first deploy, using the URL Vercel assigns (or your custom domain), then redeploy.
-5. Every push to the connected branch (e.g. `main`) triggers a new production deployment; pull requests get preview URLs by default.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-No `vercel.json` is required for this static setup; add one later if you need redirects, headers, or image optimization config.
-
-## Project structure
-
-- `src/layouts/BaseLayout.astro` — document shell, nav, footer, **analytics placeholder** comment in `<head>`.
-- `src/pages/` — file-based routes (`index.astro` = `/`, `about.astro` = `/about`, etc.).
-- `src/content/home.ts` — home page copy and structured data (edit here instead of scattering strings in markup).
-- `src/pages/legal/` — privacy and terms placeholders until you add real policies.
-
-## Future extensions (not implemented yet)
-
-**Analytics** — Add a small snippet or component in `BaseLayout.astro` `<head>`, gated by an env var (for example only inject when `PUBLIC_ANALYTICS_ID` or similar is set) so previews stay clean.
-
-**Contact forms** — Options: (1) third-party form endpoints (Formspree, Basin) from a client form; (2) Astro server endpoints or Vercel serverless functions (requires switching from pure static to hybrid/SSR when you add the Vercel serverless adapter and server code).
-
-**Members area / courses / paid content** — Needs authentication, a database or headless CMS, and usually **server-side rendering or API routes**. Plan: keep content in this repo, add an auth provider (Clerk, Auth.js, Supabase Auth), then adjust `astro.config.mjs` to use the non-static Vercel adapter when you are ready. The placeholder `/members` and `/courses` pages document this direction.
-
-## Legacy note
-
-The original single-file `index.html` + `styles.css` setup was replaced by this Astro project. Use `git history` if you need the old files.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
